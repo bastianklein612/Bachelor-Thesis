@@ -8,7 +8,7 @@ mu_vth = 0.1000;
 init_height = 0.8025;
 
 %
-damping_master = 0.01;
+damping_master = 0.001;
 
 joint_damping_alpha = damping_master;
 joint_damping_beta = damping_master;
@@ -37,4 +37,17 @@ upperLimit_Gamma = 90 + 60;
 
 %HS-645MG Servo:
 %Drehmoment: 94 Ncm = 0.94 NM
-motorTorque = 0.94;
+% motor_torque = 0.94;
+motor_torque = 5;
+
+
+
+%Test PID Settings
+pid_P = 1;
+pid_I = 0.2;
+pid_D = 1;
+pid_filter_N = 100;
+
+%Fallhöhe
+drop_height = 200;
+
