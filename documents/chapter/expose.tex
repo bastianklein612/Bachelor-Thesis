@@ -1,46 +1,53 @@
 %!TEX root = ../thesis.tex
-\chapter{Introduction}
-\label{ch:intro}
-
-\blindtext
-
-\section{A Section}
-\Blindtext
-
-\section{Another Section}
-\blindmathpaper
-\Blindtext
+\chapter{Exposé}
+\label{ch:expose}
 
 
-Some cites like \cite{Hartley2004} and \cite{Bishop2006} \todo{add more TODOs}
 
-\begin{table}[ht]
-	\centering
-	\begin{tabular}{c|c|c}
-		a & b & c \\ \hline
-		1 & 2 & 3 \\
-		1 & 2 & 3 \\
-		1 & 2 & 3
-	\end{tabular}
-	\caption{Some Table}
-\end{table}
+\section{Einleitung}
 
-\begin{figure}[ht]
-	\centering
-	\includegraphics[width=0.3\textwidth]{example-image-a}
-	\caption{Some Caption}
-\end{figure}
+\section{Problem}
 
-\begin{figure}[ht]
-	\centering
-	\begin{subfigure}[b]{0.45\textwidth}
-		\includegraphics[width=\textwidth]{example-image-a}
-		\caption{Some Caption}
-	\end{subfigure} \hfill
-	\begin{subfigure}[b]{0.45\textwidth}
-		\includegraphics[width=\textwidth]{example-image-b}
-		\caption{Some Caption}
-	\end{subfigure}
-	\caption{Another Caption}
-\end{figure}
+\section{Ziel}
+Das angestrebte Ziel dieser Arbeit ist die Entwicklung des Modells eines Hexapod-Roboters innerhalb der Simulink-Umgebung.
+Konkret soll dies die Modellierung des physischen Modells mit Hilfe von SimScape, den Aufbau eines Controllers für die (geradlinige) Bewegung des Roboters sowie das Erlernen der einzelnen Beinbewegungen mittels Reinforcement Learning beinhalten.
 
+\section{Lösungsansatz}
+Zu Beginn muss ein vereinfachtes, aber physikalisch korrektes Modell des realen Hexapods mit der Simulink-Toolbox Simscape erzeugt werden.
+Dieses sollte möglichst gut parametrisiert sein, damit Eigenschaften wie Gewicht, Material, Dimension, Reibungskoeffizienten, Drehmomente, etc. der einzelnen Bestandteile auch im nach hinein noch einfach angepasst werden können.
+Des Weiteren muss jedes Bein des Hexapods aus drei Gelenken + zugehörigen Aktuatoren bestehen, wobei diese einzeln ansprechbar sein sollten und Sensordaten bezüglich ihrer Position (und Beschleunigung) zur Verfügung stellen.
+
+Nach der Fertigstellung des Simscape-Modells kann mit der kontrollierten Steuerung des Roboters in Simulink begonnen werden.
+Begonnen werden sollte diese Entwicklung mit dem Bewegungsablauf eines einzelnen Beins.
+Wenn diese Bewegung, bestehend aus Schwung- und Standphase, zuverlässig funktioniert, kann sie auf alle 6 Beine ausgeweitet werden, wobei die Koordination der Beine eine wichtige Rolle spielt, egal ob diese zentral oder verteilt ausgelegt wird.
+Es sollten hier mehrere verschiedene Gangarten(gaits) wie z.B. "tripod gait" oder "wave gait" implementiert werden und evt. könnte auch eine dezentrale Architektur wie z.B. die von Schilling et al. abgebildet werden (?).
+
+Aufbauend auf den Vorarbeiten zu Modell und Gangarten soll dann der Bewegungsablauf des einzelnen Beins mittels Reinforcement Learning 'erlernt' werden. Dies soll ebenfalls innerhalb der Simulink-Umgebung mit Hilfe der RL-Toolbox geschehen.
+
+
+
+
+
+\section{Verwandte Arbeiten}
+\begin{enumerate}
+\item SMART-HexBot: a Simulation, Modeling, Analysis and
+Research Tool for Hexapod Robot in Virtual Reality and
+Simulink
+
+\item Design, Simulation, and Control of a Hexapod Robot in
+Simscape Multibody
+
+\item Dynamic Modeling and Control of the Hexapod Robot Using Matlab SimMechanics
+
+\end{enumerate}
+
+
+\section{Zeitplan}
+\begin{enumerate}
+	\item Entwicklung des "physischen" Hexapods in Simulink/Simscape
+	\item Erzeugung des Bewegungsabläufe für Wave-, Tripod- und Tetrapod-Gait
+	\item Nutzung von Reinforcement Learning zum Erlernen der vorher sequenziell gesteuerten Beinbewegungen
+\end{enumerate}
+
+
+Ende der Arbeit hoffentlich im September.
