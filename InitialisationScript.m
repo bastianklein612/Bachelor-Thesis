@@ -20,8 +20,8 @@ joint_damping_gamma = damping_master;
 
 %Initialwinkel der Gelenke
 initial_alpha = -90;
-initial_beta = -50;
-initial_gamma = 130;
+initial_beta = -30;
+initial_gamma = 110;
 
 % Minimale und maximale Winkel der einzelnen Gelenke(erstmal geschätzt)
 lowerLimit_Alpha = -90 - 60;
@@ -38,7 +38,7 @@ upperLimit_Gamma = 90 + 60;
 %HS-645MG Servo:
 %Drehmoment: 94 Ncm = 0.94 NM
 % motor_torque = 0.94;
-motor_torque = 5;
+motor_torque = 3;
 
 
 
@@ -49,5 +49,7 @@ pid_D = 1;
 pid_filter_N = 100;
 
 %Fallhöhe
-drop_height = 200;
+drop_height = 100;
 
+
+open_system("Sandbox.slx");
