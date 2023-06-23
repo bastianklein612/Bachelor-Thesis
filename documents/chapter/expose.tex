@@ -5,20 +5,30 @@
 
 
 \section{Einleitung}
+Der Einsatz von Simulationen spielen in der Erforschung und Entwicklung von Robotern eine zunehmend wichtige Rolle. 
+Sie bieten eine kostengünstige und effiziente Methode, das Verhalten von Robotern schon vor der physischen Umsetzung untersuchen, analysieren und optimieren zu können. 
+Es lassen sich komplexe Bewegungsabläufe und verschiedenste Szenarien schnell und sicher erproben, ohne dass dabei das Risiko von Schäden an einem realen System in Kauf genommen werden müsste.
+
+Im Umfeld der Robotik sind Hexapod-Roboter von besonderem Interesse auf Grund ihrer
+
 
 \section{Problem}
-Um die Erforschung von Controllern zu Bewegungssteuerung möglichst effektiv vorantreiben zu können ist es wichtig, leistungsstarke Simulationssoftware mit in den Entwicklungsprozess einzubeziehen.
-Diese ermöglicht es getätigte Änderungen sofort zu testen, ohne dass dafür ein realer Roboter zur Verfügung stehen muss dessen Software erst aktualisiert werden muss und der womöglich gar nicht sofort einsatzbereit ist.
-Probleme oder Fehler am Controller können durch die Simulation früher und wesentlich schneller aufgedeckt und direkt behoben werden.
-Es wird ein viel kleinschrittiger Prozess ermöglicht, da jede noch so kleine Änderung direkt und ohne großen Mehraufwand simuliert werden kann.
-Durch die Simulation ist es ebenfalls möglich komplexe Aufgaben, wie das Navigieren durch unebenes Gelände vor der Erprobung auf einem realen Roboter in der Simulationsumgebung zu testen, wodurch  das Risiko einer Beschädigung minimiert werden kann.
+Um die Erforschung von Controllern zu Bewegungssteuerung möglichst effektiv vorantreiben zu können ist es wichtig, leistungsstarke Simulationssoftware in den Entwicklungsprozess einzubeziehen.
+Diese ermöglicht es Anpassungen oder Änderungen sofort zu testen, ohne dass dafür ein realer Roboter zur Verfügung stehen muss dessen Software erst aktualisiert werden müsste und der womöglich gar nicht sofort einsatzbereit ist.
+Probleme oder Fehler am Controller können durch die Simulation früher sowie schneller aufgedeckt und direkt behoben werden.
+Es wird ein wesentlich  kleinschrittiger Prozess ermöglicht, da jede noch so kleine Änderung direkt und ohne großen Mehraufwand getestet werden kann.
+
+Da auf Grund von Materialkosten, Konstruktions- und Wartungsaufwand reale Roboter oft diejenige Komponente eines Projektes sind, welche beim Erproben der neu entwickelten Software der größte zeitliche "bottleneck" sind, stellt das direkte Erproben komplexer Aufgaben in der realen Welt(z.B. Navigation auf unebenem Gelände)  ein Risiko dar.
+Sollte die Hardware des Roboters durch einen fehlerhaft agierenden Controller beschädigt werden, so würde dies oft eine längere Verzögerung im Entwicklungsprozess zur Folge haben.
+Das Testen der vom Roboter auszuführenden Bewegungen innerhalb einer Simulationsumgebung vor der Übertragung in die echte Welt kann dieses Risiko einer Beschädigung verringern.
+
 Zur Entwicklung des Controllers und der Simulation desselben auf einem Hexapod-Modell wird in dieser Arbeit das MATLAB Tool Simulink in Verbindung mit der Simulation-Toolbox SimScape verwendet werden.
-MATLAB Simulink ist eine weit verbreitete Software zur Entwicklung und Simulation von komplexen dynamischen Systemen.
+Simulink ist eine weit verbreitete Software zur Entwicklung und Simulation von komplexen dynamischen Systemen.
 Durch die Popularität der Software ist mit der Zeit eine Vielzahl von domänenspezifischen Bibliotheken(Toolboxes) entstanden, welche die einfache Modellierung verschiedenster Modelle ermöglichen.
 Der block-basierte Ansatz von Simulink ist dabei besonders hervorzuheben, da es dieser ermöglicht sehr modulare Systeme zu erzeugen, wodurch bei Anpassungen nur einzelne Subsysteme ausgetauscht werden, anstatt Änderungen am gesamten Modell vornehmen zu müssen.
 
 \section{Ziel}
-Das angestrebte Ziel dieser Arbeit ist die Entwicklung des Modells eines Hexapod-Roboters innerhalb der Simulink-Umgebung \cite{MusterPaper}.
+Das angestrebte Ziel dieser Arbeit ist die Entwicklung eines Hexapod-Modells innerhalb der Simulink-Umgebung.
 Konkret soll dies die Modellierung des physischen Modells mit Hilfe von SimScape, den Aufbau eines Controllers für die (geradlinige) Bewegung des Roboters sowie das Erlernen der einzelnen Beinbewegungen mittels Reinforcement Learning beinhalten.
 
 \section{Lösungsansatz}
