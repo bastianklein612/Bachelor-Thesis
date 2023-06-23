@@ -7,6 +7,15 @@
 \section{Einleitung}
 
 \section{Problem}
+Um die Erforschung von Controllern zu Bewegungssteuerung möglichst effektiv vorantreiben zu können ist es wichtig, leistungsstarke Simulationssoftware mit in den Entwicklungsprozess einzubeziehen.
+Diese ermöglicht es getätigte Änderungen sofort zu testen, ohne dass dafür ein realer Roboter zur Verfügung stehen muss dessen Software erst aktualisiert werden muss und der womöglich gar nicht sofort einsatzbereit ist.
+Probleme oder Fehler am Controller können durch die Simulation früher und wesentlich schneller aufgedeckt und direkt behoben werden.
+Es wird ein viel kleinschrittiger Prozess ermöglicht, da jede noch so kleine Änderung direkt und ohne großen Mehraufwand simuliert werden kann.
+Durch die Simulation ist es ebenfalls möglich komplexe Aufgaben, wie das Navigieren durch unebenes Gelände vor der Erprobung auf einem realen Roboter in der Simulationsumgebung zu testen, wodurch  das Risiko einer Beschädigung minimiert werden kann.
+Zur Entwicklung des Controllers und der Simulation desselben auf einem Hexapod-Modell wird in dieser Arbeit das MATLAB Tool Simulink in Verbindung mit der Simulation-Toolbox SimScape verwendet werden.
+MATLAB Simulink ist eine weit verbreitete Software zur Entwicklung und Simulation von komplexen dynamischen Systemen.
+Durch die Popularität der Software ist mit der Zeit eine Vielzahl von domänenspezifischen Bibliotheken(Toolboxes) entstanden, welche die einfache Modellierung verschiedenster Modelle ermöglichen.
+Der block-basierte Ansatz von Simulink ist dabei besonders hervorzuheben, da es dieser ermöglicht sehr modulare Systeme zu erzeugen, wodurch bei Anpassungen nur einzelne Subsysteme ausgetauscht werden, anstatt Änderungen am gesamten Modell vornehmen zu müssen.
 
 \section{Ziel}
 Das angestrebte Ziel dieser Arbeit ist die Entwicklung des Modells eines Hexapod-Roboters innerhalb der Simulink-Umgebung \cite{MusterPaper}.
@@ -18,7 +27,7 @@ Dieses sollte möglichst gut parametrisiert sein, damit Eigenschaften wie Gewich
 Des Weiteren muss jedes Bein des Hexapods aus drei Gelenken + zugehörigen Aktuatoren bestehen, wobei diese einzeln ansprechbar sein sollten und Sensordaten bezüglich ihrer Position (und Beschleunigung) zur Verfügung stellen.
 
 Nach der Fertigstellung des Simscape-Modells kann mit der kontrollierten Steuerung des Roboters in Simulink begonnen werden.
-Begonnen werden sollte diese Entwicklung mit dem Bewegungsablauf eines einzelnen Beins.
+Dabei sollte diese Entwicklung mit dem Bewegungsablauf eines einzelnen Beins angefangen.
 Wenn diese Bewegung, bestehend aus Schwung- und Standphase, zuverlässig funktioniert, kann sie auf alle 6 Beine ausgeweitet werden, wobei die Koordination der Beine eine wichtige Rolle spielt, egal ob diese zentral oder verteilt ausgelegt wird.
 Es sollten hier mehrere verschiedene Gangarten(gaits) wie z.B. "tripod gait" oder "wave gait" implementiert werden und evt. könnte auch eine dezentrale Architektur wie z.B. die von Schilling et al. abgebildet werden (?).
 
@@ -50,4 +59,4 @@ Simscape Multibody
 \end{enumerate}
 
 
-Ende der Arbeit hoffentlich (Ende) September.
+Abschluss der Arbeit hoffentlich (Ende) September.
