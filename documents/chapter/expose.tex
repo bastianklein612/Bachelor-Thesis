@@ -24,13 +24,9 @@ Ebenfalls kann es schwierig sein fehlerhaftes Verhalten, welches beim Test mit e
 Natürlich ist es letztendlich wichtig, den entwickelten Controller auch in der echten Welt zu testen, damit sichergestellt werden kann, dass dieser auch unter den tatsächlichen physikalischen Begebenheiten zuverlässig funktioniert.
 Die Vorteile welche eine Simulationsumgebung mit sich bringt sollten jedoch keinesfalls übersehen werden, da diese für Entwickler und Forscher ein mächtiges Werkzeug darstellen kann um vor der realen Erprobung erste Tests durchzuführen, Fehler aufzudecken und den Controller zu verbessern.
 %Um die Erforschung von Controllern zu Bewegungssteuerung möglichst effektiv vorantreiben zu können ist es wichtig, leistungsstarke Simulationssoftware in den Entwicklungsprozess einzubeziehen.
-%Diese ermöglicht es Anpassungen oder Änderungen sofort zu testen, ohne dass dafür ein realer Roboter zur Verfügung stehen muss dessen Software erst aktualisiert werden müsste und der womöglich gar nicht sofort einsatzbereit ist.
-%Probleme oder Fehler am Controller können durch die Simulation früher sowie schneller aufgedeckt und direkt behoben werden.
 %Es wird ein wesentlich  kleinschrittiger Prozess ermöglicht, da jede noch so kleine Änderung direkt und ohne großen Mehraufwand getestet werden kann.
 
 %Da auf Grund von Materialkosten, Konstruktions- und Wartungsaufwand reale Roboter oft diejenige Komponente eines Projektes sind, welche beim Erproben der neu entwickelten Software der größte zeitliche "bottleneck" sind, stellt das direkte Erproben komplexer Aufgaben in der realen Welt(z.B. Navigation auf unebenem Gelände)  ein Risiko dar.
-%Sollte die Hardware des Roboters durch einen fehlerhaft agierenden Controller beschädigt werden, so würde dies oft eine längere Verzögerung im Entwicklungsprozess zur Folge haben.
-%Das Testen der vom Roboter auszuführenden Bewegungen innerhalb einer Simulationsumgebung vor der Übertragung in die echte Welt kann dieses Risiko einer Beschädigung verringern.
 
 %Zur Entwicklung des Controllers und der Simulation desselben auf einem Hexapod-Modell wird in dieser Arbeit das MATLAB Tool Simulink in Verbindung mit der Simulation-Toolbox SimScape verwendet werden.
 %Simulink ist eine weit verbreitete Software zur Entwicklung und Simulation von komplexen dynamischen Systemen.
@@ -38,8 +34,21 @@ Die Vorteile welche eine Simulationsumgebung mit sich bringt sollten jedoch kein
 %Der block-basierte Ansatz von Simulink ist dabei besonders hervorzuheben, da es dieser ermöglicht sehr modulare Systeme zu erzeugen, wodurch bei Anpassungen nur einzelne Subsysteme ausgetauscht werden, anstatt Änderungen am gesamten Modell vornehmen zu müssen.
 
 \section{Ziel}
-Das angestrebte Ziel dieser Arbeit ist die Entwicklung eines Hexapod-Modells innerhalb der Simulink-Umgebung.
-Konkret soll dies die Modellierung des physischen Modells mit Hilfe von SimScape, den Aufbau eines Controllers für die (geradlinige) Bewegung des Roboters sowie das Erlernen der einzelnen Beinbewegungen mittels Reinforcement Learning beinhalten.
+Das angestrebte Ziel dieser Bachelorarbeit ist es, einen Hexapod-Roboter und dessen Steuerung innerhalb der MATLAB Simulink Umgebung zu entwickeln.
+Konkret soll dies die Modellierung des physischen Modells mit Hilfe von SimScape, den Aufbau eines Controllers für die Bewegungssteuerung des Roboters sowie das Erlernen der Koordination der Beine untereinander mittels Reinforcement Learning.
+
+\begin{enumerate}
+	\item \textbf{Modellierung des Hexapods + Umgebung:} Es wird ein physikalisch korrektes und maßstabsgetreues Modell eines Hexapod-Roboters mit Hilfe der Simulink Toolbox SimScape erschaffen.
+	Dies soll auch eine einfache Simulationsumgebung beinhalten, in welcher das Modell getestet werden kann. 
+	
+	\item \textbf{Entwicklung eines Bewegungscontrollers:} Der Hexapod soll durch einen Bewegungscontroller in die Lage versetzt werden, sich (geradlinig) durch eine simulierte Umgebung zu bewegen. 
+	Der Controller wird in Simulink implementiert und verwendet die Informationen aus der Simulation um den Roboter präzise zu steuern.
+	Er muss die Bewegung der einzelnen Beinsegmente sowie die Koordination der Beine untereinander steuern und dabei auch auf das Gleichgewicht des Gesamtsystems achten.
+	
+	\item \textbf{Selbstständiges Erlernen der Beinkoordination:} Durch Interaktion mit der Simulationsumgebung soll das Modell selbstständig die Koordination der 6 Beine erlernen, die Beinbewegung selbst bleibe dabei vorgegeben.
+	Modelliert werden soll der Lernprozess mit Hilfe der Reinforcement Learning Toolbox von Simulink.
+	
+\end{enumerate}
 
 \section{Lösungsansatz}
 Zu Beginn muss ein vereinfachtes, aber physikalisch korrektes Modell des realen Hexapods mit der Simulink-Toolbox Simscape erzeugt werden.
