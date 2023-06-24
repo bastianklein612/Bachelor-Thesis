@@ -5,27 +5,37 @@
 
 
 \section{Einleitung}
-Der Einsatz von Simulationen spielen in der Erforschung und Entwicklung von Robotern eine zunehmend wichtige Rolle. 
+Der Einsatz von Simulationen spielt in der Erforschung und Entwicklung von Robotern eine zunehmend wichtige Rolle. 
 Sie bieten eine kostengünstige und effiziente Methode, das Verhalten von Robotern schon vor der physischen Umsetzung untersuchen, analysieren und optimieren zu können. 
-Es lassen sich komplexe Bewegungsabläufe und verschiedenste Szenarien schnell und sicher erproben, ohne dass dabei das Risiko von Schäden an einem realen System in Kauf genommen werden müsste.
+%Es lassen sich komplexe Bewegungsabläufe und verschiedenste Szenarien schnell und sicher erproben, ohne dass dabei das Risiko von Schäden an einem realen System in Kauf genommen werden müsste.
 
-Im Umfeld der Robotik sind Hexapod-Roboter von besonderem Interesse auf Grund ihrer
-
+Auf Grund ihrer hohen Beweglichkeit sowie Vielseitigkeit sind Hexapods in der Robotik von besonderen Interesse. 
+Verglichen mit beräderten oder zweibeinigen Robotern können sie sich wesentlich zuverlässiger auf unebenem Gelände bewegen und auch komplexe Hindernisse überwinden.
+Die Simulation eines solchen Hexapods ermöglicht es sein Verhalten in verschiedensten Situationen zu erproben und die Kontroll-Algorithmen zu optimieren, noch bevor der Roboter physisch konstruiert wird.
 
 \section{Problem}
-Um die Erforschung von Controllern zu Bewegungssteuerung möglichst effektiv vorantreiben zu können ist es wichtig, leistungsstarke Simulationssoftware in den Entwicklungsprozess einzubeziehen.
-Diese ermöglicht es Anpassungen oder Änderungen sofort zu testen, ohne dass dafür ein realer Roboter zur Verfügung stehen muss dessen Software erst aktualisiert werden müsste und der womöglich gar nicht sofort einsatzbereit ist.
-Probleme oder Fehler am Controller können durch die Simulation früher sowie schneller aufgedeckt und direkt behoben werden.
-Es wird ein wesentlich  kleinschrittiger Prozess ermöglicht, da jede noch so kleine Änderung direkt und ohne großen Mehraufwand getestet werden kann.
 
-Da auf Grund von Materialkosten, Konstruktions- und Wartungsaufwand reale Roboter oft diejenige Komponente eines Projektes sind, welche beim Erproben der neu entwickelten Software der größte zeitliche "bottleneck" sind, stellt das direkte Erproben komplexer Aufgaben in der realen Welt(z.B. Navigation auf unebenem Gelände)  ein Risiko dar.
-Sollte die Hardware des Roboters durch einen fehlerhaft agierenden Controller beschädigt werden, so würde dies oft eine längere Verzögerung im Entwicklungsprozess zur Folge haben.
-Das Testen der vom Roboter auszuführenden Bewegungen innerhalb einer Simulationsumgebung vor der Übertragung in die echte Welt kann dieses Risiko einer Beschädigung verringern.
+Die Entwicklung und Erprobung von Robotern und ihren Bewegungsabläufen ist zeitaufwändig und mit hohen Kosten verbunden.
+Dabei kann die Beschädigung von einem der oft wenigen und teuren Exemplare, durch beispielsweise einen fehlerhaft agierenden Bewegungscontroller, den Entwicklungsprozess verzögern und zusätzliche Materialkosten erzeugen.
+Auch ist ein iterativer Optimierungsprozess welcher ausschließlich in einer realen Umgebung stattfindet langsamer, als wenn dieser mit Hilfe von Simulationen unterstützt wird.
+Die Steuerungssoftware muss für jede Anpassung neu auf die Hardware übertragen werden und Testaufbau sowie Roboter müssen manuell wieder in den Ausgangszustand versetzt werden.
+Ebenfalls kann es schwierig sein fehlerhaftes Verhalten, welches beim Test mit einem realen System beobachtet wurde, zu reproduzieren ohne die Möglichkeit zu haben den Testaufbau identisch wiederherzustellen.
 
-Zur Entwicklung des Controllers und der Simulation desselben auf einem Hexapod-Modell wird in dieser Arbeit das MATLAB Tool Simulink in Verbindung mit der Simulation-Toolbox SimScape verwendet werden.
-Simulink ist eine weit verbreitete Software zur Entwicklung und Simulation von komplexen dynamischen Systemen.
-Durch die Popularität der Software ist mit der Zeit eine Vielzahl von domänenspezifischen Bibliotheken(Toolboxes) entstanden, welche die einfache Modellierung verschiedenster Modelle ermöglichen.
-Der block-basierte Ansatz von Simulink ist dabei besonders hervorzuheben, da es dieser ermöglicht sehr modulare Systeme zu erzeugen, wodurch bei Anpassungen nur einzelne Subsysteme ausgetauscht werden, anstatt Änderungen am gesamten Modell vornehmen zu müssen.
+Natürlich ist es letztendlich wichtig, den entwickelten Controller auch in der echten Welt zu testen, damit sichergestellt werden kann, dass dieser auch unter den tatsächlichen physikalischen Begebenheiten zuverlässig funktioniert.
+Die Vorteile welche eine Simulationsumgebung mit sich bringt sollten jedoch keinesfalls übersehen werden, da diese für Entwickler und Forscher ein mächtiges Werkzeug darstellen kann um vor der realen Erprobung erste Tests durchzuführen, Fehler aufzudecken und den Controller zu verbessern.
+%Um die Erforschung von Controllern zu Bewegungssteuerung möglichst effektiv vorantreiben zu können ist es wichtig, leistungsstarke Simulationssoftware in den Entwicklungsprozess einzubeziehen.
+%Diese ermöglicht es Anpassungen oder Änderungen sofort zu testen, ohne dass dafür ein realer Roboter zur Verfügung stehen muss dessen Software erst aktualisiert werden müsste und der womöglich gar nicht sofort einsatzbereit ist.
+%Probleme oder Fehler am Controller können durch die Simulation früher sowie schneller aufgedeckt und direkt behoben werden.
+%Es wird ein wesentlich  kleinschrittiger Prozess ermöglicht, da jede noch so kleine Änderung direkt und ohne großen Mehraufwand getestet werden kann.
+
+%Da auf Grund von Materialkosten, Konstruktions- und Wartungsaufwand reale Roboter oft diejenige Komponente eines Projektes sind, welche beim Erproben der neu entwickelten Software der größte zeitliche "bottleneck" sind, stellt das direkte Erproben komplexer Aufgaben in der realen Welt(z.B. Navigation auf unebenem Gelände)  ein Risiko dar.
+%Sollte die Hardware des Roboters durch einen fehlerhaft agierenden Controller beschädigt werden, so würde dies oft eine längere Verzögerung im Entwicklungsprozess zur Folge haben.
+%Das Testen der vom Roboter auszuführenden Bewegungen innerhalb einer Simulationsumgebung vor der Übertragung in die echte Welt kann dieses Risiko einer Beschädigung verringern.
+
+%Zur Entwicklung des Controllers und der Simulation desselben auf einem Hexapod-Modell wird in dieser Arbeit das MATLAB Tool Simulink in Verbindung mit der Simulation-Toolbox SimScape verwendet werden.
+%Simulink ist eine weit verbreitete Software zur Entwicklung und Simulation von komplexen dynamischen Systemen.
+%Durch die Popularität der Software ist mit der Zeit eine Vielzahl von domänenspezifischen Bibliotheken(Toolboxes) entstanden, welche die einfache Modellierung verschiedenster Modelle ermöglichen.
+%Der block-basierte Ansatz von Simulink ist dabei besonders hervorzuheben, da es dieser ermöglicht sehr modulare Systeme zu erzeugen, wodurch bei Anpassungen nur einzelne Subsysteme ausgetauscht werden, anstatt Änderungen am gesamten Modell vornehmen zu müssen.
 
 \section{Ziel}
 Das angestrebte Ziel dieser Arbeit ist die Entwicklung eines Hexapod-Modells innerhalb der Simulink-Umgebung.
