@@ -1,0 +1,90 @@
+IEEE Login: "Universitaets- und Landesbibliothek Muenster"
+
+
+
+
+
+
+
+----------------------------------------
+18.05.2023
+
+Prof. Malte Schilling(Autonomous Systems AG)
+Treffen am Freitag zur Themabesprechung ?
+Thema in Richtung Robotik (oder evt. Maschinelles Lernen/Reinforcement Learning)
+
+
+----------------------------------------
+%Bossel99&2023
+Netzwerk-PW (VPN, usw.)
+
+----------------------------------------
+bis 29.05.
+Suche nach vorhandenen Modellen von Hexapods in Matlab/Simscape/Simulink
+
+----------------------------------------
+29.05. 
+Ein Hexapod-Model gefunden, dieses aber nur mit MATLAB 2014a ausführbar
+Evt. selbst Model erstellen ?
+
+----------------------------------------
+bis 06.06.
+Autoren angeschrieben, aber bisher keine Rückmeldung.
+Eigenes SimScape Modell entwickelt, dieses kann momentan stabil stehen aber noch nicht laufen.
+
+----------------------------------------
+06.06.
+Selbst kostruiertes Modell kann verwendet werden.
+Expose-Schreiben starten.
+Versuchen, Tripod-Gait zu implementieren
+
+----------------------------------------
+18.06.
+Expose-Schreiben:
+Titel: (?)Entwicklung eines Hexapod-Models in Simulink + RL Learning
+Expose-Ansatz erstellt
+
+----------------------------------------
+20.06.
+Gespäch mit Malte und Julius:
+ - jetzt schon Bibliographie/ Quellen verwalten anfangen
+ - Bachelorarbeit hat nun folgenden Verlauf:
+	- Entwicklung des Roboters mit SimScape(physikalischen Modell)
+	- Dem entstandenen Roboter das Laufen beibringen; mit inverser Kinematik die Beinbewegungen steuern
+	  (sodass Bein vorbestimmtem Pfad folgt)/ Tripod gait, Wave gait, ...
+	- Wenn der Roboter laufen kann, soll die Koordination der Beinbewegungen mit Hilfe von Reinforcement Learning erlernt werden
+	  (d.h. welches Bein darf wann bewegt werden)
+	- evt. auch die Bewegung des einzelnen Beins erlernen
+ - es gibt vom Roboter in Schillings Büro anscheinend schon ein digitales Modell(dieses evt. benutzen ?)
+ 
+ - Wieso ist das Thema interessant/ wieso wichtig daran zu arbeiten ? Welcher Nutzen kann daraus gezogen werden ?
+   --> Es ist wichtig, neu entwickelte Controller schon vor dem Einsatz in einem realen Roboter in Simulationen testen zu 
+       können. Beschleunigt den Entwicklungsprozess, da Änderungen direkt getestet werden können und nicht vom realen Robotersystem
+	   abhängig sind. 
+	   Auch schwierige Aufgaben können simuliert werden ohne wohlmöglich den realen Roboter zu beschädigen und somit den Entwicklungsprozzess
+	   zurückzuwerfen.
+	   Simulink ist dabei eine weit verbreitete Software für genau dieses Anwendungsgebiet, lässt modulare Entwicklung zu.
+	   Alles in einem Paket.
+	  
+ - Tipps zum wissenschaftlichen Schreiben durchlesen
+ 
+ 
+ 
+ 
+  - bis Montag erste version des Expose an Malte und Julius schicken.
+  
+  
+ ----------------------------------------
+ 24.06.
+  - bis jetzt noch keine Nennung von Reinforcment Learning (in der Einleitung), wie mit einbringen ?
+	-->
+  
+-----------------------------------------
+ 25.06. 
+  - Sollte man überhaupt schreiben, was man machen "könnte", oder nur was gemacht "wird" 
+	-->
+	
+  - "z.B." oder "beispielsweise" verwenden oder immer genau nennen ?
+	-->
+
+  - Grund für "Wieso MATLAB Simulink ?" einfügen !!!
