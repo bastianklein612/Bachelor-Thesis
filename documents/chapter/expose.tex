@@ -10,19 +10,20 @@ Sie bieten eine kostengünstige und effiziente Methode, das Verhalten von Robote
 Auch eine Vielzahl von Unternehmen, welche auf dem Gebiet der Robotik tätig sind, nutzten die Technologie ausgiebig im Entwicklungsprozess ihrer Systeme, so beispielsweise Boston Dynamics\cite{BostonDynamicsSimulation}, Tesla Inc.\cite{TeslaAiDay2022} oder Kuka Robotics\cite{KukaSim}.
 
 Auf Grund ihrer hohen Beweglichkeit sowie Vielseitigkeit sind Hexapods in der Robotik von besonderen Interesse. 
-Verglichen mit beräderten oder zweibeinigen Robotern können sie sich wesentlich zuverlässiger auf unebenem Gelände bewegen und auch komplexe Hindernisse überwinden\cite{barai2013smart, atifystructure}.
-%Die Simulation eines solchen Hexapods ermöglicht es sein Verhalten in verschiedensten Situationen zu erproben und die Kontroll-Algorithmen zu optimieren, noch bevor der Roboter physisch konstruiert wird.
+Verglichen mit beräderten oder zweibeinigen Robotern können sie sich zuverlässiger auf unebenem Gelände bewegen und auch komplexe Hindernisse überwinden\cite{barai2013smart, atifystructure}.
+Die Simulation eines solchen Hexapods ermöglicht es sein Verhalten in verschiedensten simulierten Umgebungen zu beobachten und erproben.
 
 \section{Problem}
 
-Die Entwicklung und Erprobung von Robotern und ihren Bewegungsabläufen ist zeitaufwändig und mit hohen Kosten verbunden.
-Dabei kann die Beschädigung von einem der oft wenigen und teuren Exemplare, durch beispielsweise einen fehlerhaft agierenden Bewegungscontroller, den Entwicklungsprozess verzögern und zusätzliche Materialkosten erzeugen.
-Auch ist ein iterativer Optimierungsprozess welcher ausschließlich in einer realen Umgebung stattfindet langsamer, als wenn dieser mit Hilfe von Simulationen unterstützt wird.
+Die Entwicklung von Robotern und ihren Bewegungsabläufen ist zeitaufwändig und mit hohen Kosten verbunden\cite{ahmadian2005model}.
+Wird die entwickelte Software direkt in der Realität getestet, so besteht die Gefahr der Beschädigung eines der oft wenigen und teuren Testexemplare.
+Dies kann den Entwicklungsprozess verzögern und zusätzliche Kosten generieren.
+Auch ist ein iterativer Optimierungsprozess, welcher ausschließlich in einer realen Umgebung stattfindet langsamer, als wenn dieser mit Hilfe von Simulationen unterstützt wird.
 Die Steuerungssoftware muss für jede Anpassung neu auf die Hardware übertragen werden und Testaufbau sowie Roboter müssen manuell wieder in den Ausgangszustand versetzt werden.
-Ebenfalls kann es schwierig sein fehlerhaftes Verhalten, welches beim Test mit einem realen System beobachtet wurde, zu reproduzieren ohne die Möglichkeit zu haben den Testaufbau identisch wiederherzustellen.
+Ebenfalls kann es schwierig sein fehlerhaftes Verhalten, welches beim Test mit einem realen System beobachtet wurde, zu reproduzieren, ohne die Möglichkeit einer exakten Wiederherstellung des Testaufbaus.
 
 Natürlich ist es letztendlich wichtig, den entwickelten Controller auch in der echten Welt zu testen, damit sichergestellt werden kann, dass dieser auch unter den tatsächlichen physikalischen Begebenheiten zuverlässig funktioniert.
-Die Vorteile welche eine Simulationsumgebung mit sich bringt sollten jedoch keinesfalls übersehen werden, da diese für Entwickler und Forscher ein mächtiges Werkzeug darstellen kann um vor der realen Erprobung erste Tests durchzuführen, Fehler aufzudecken und den Controller zu verbessern.
+Die Vorteile welche eine Simulationsumgebung mit sich bringt sollten jedoch keinesfalls übersehen werden, da diese für Entwickler und Forscher ein mächtiges Werkzeug darstellen kann um vor der realen Erprobung erste Tests durchzuführen, Fehler aufzudecken und den Controller zu optimieren.
 %Um die Erforschung von Controllern zu Bewegungssteuerung möglichst effektiv vorantreiben zu können ist es wichtig, leistungsstarke Simulationssoftware in den Entwicklungsprozess einzubeziehen.
 %Es wird ein wesentlich  kleinschrittiger Prozess ermöglicht, da jede noch so kleine Änderung direkt und ohne großen Mehraufwand getestet werden kann.
 
@@ -35,7 +36,7 @@ Die Vorteile welche eine Simulationsumgebung mit sich bringt sollten jedoch kein
 
 \section{Ziel}
 Das angestrebte Ziel dieser Bachelorarbeit ist es, einen Hexapod-Roboter und dessen Steuerung innerhalb der MATLAB Simulink Umgebung zu entwickeln.
-Konkret soll dies die Modellierung des physischen Modells mit Hilfe von SimScape, den Aufbau eines Controllers für die Bewegungssteuerung des Roboters sowie das Erlernen der Koordination der Beine untereinander mittels Reinforcement Learning.
+Konkret soll dies die Modellierung des physischen Modells mit Hilfe von SimScape, den Aufbau eines Controllers für die Bewegungssteuerung des Roboters sowie das Erlernen der Koordination der Beine untereinander mittels Reinforcement Learning beinhalten.
 
 \begin{enumerate}
 	\item \textbf{Modellierung des Hexapods + Umgebung:} Es wird ein physikalisch korrektes Modell eines Hexapod-Roboters mit Hilfe der Simulink Toolbox SimScape erschaffen.
@@ -51,7 +52,7 @@ Konkret soll dies die Modellierung des physischen Modells mit Hilfe von SimScape
 \end{enumerate}
 
 \section{Lösungsansatz}
-Zu Beginn der Arbeit muss ein vereinfachtes, jedoch physikalisch korrektes Modell des realen Hexapods mit der Simulink-Toolbox Simscape entwickelt werden.
+Zu Beginn der Arbeit wird ein vereinfachtes, jedoch physikalisch korrektes Modell des realen Hexapods mit der Simulink-Toolbox Simscape entwickelt werden.
 Dieses sollte möglichst gut parametrisiert sein, damit Eigenschaften wie Dimension, Gewicht, Reibungskoeffizienten, Drehmomente, etc. der einzelnen Bestandteile auch im nach hinein noch einfach angepasst werden können.
 Jedes der 6 Beine des Roboters soll aus drei Gelenken mit jeweils einem Aktuator bestehen.
 Diese Bein-Architektur ist bei Hexapods weit verbreitet und hat sich bewährt.
@@ -67,15 +68,14 @@ Um das SimScape-Modell ausgiebig zu testen, ist es möglich, mehrere verschieden
 
 Basierend auf den Vorarbeiten zur Modellierung und den verschiedenen Gangarten soll anschließend die Koordination der Beine mithilfe eines Reinforcement Learning-Modells selbst erlernt werden.
 Dieser Lernprozess wird ebenfalls innerhalb der Simulink-Umgebung durch die RL-Toolbox realisiert.
-Im Gegensatz zu den bisher erzeugten Gangarten wird hier nicht vorgegeben, welche Beine ihren Bewegung zu welchem Zeitpunkt ausführen sollen.
+Im Gegensatz zu den bisher erzeugten Gangarten wird hier nicht vorgegeben werden, welche Beine ihren Bewegung zu welchem Zeitpunkt ausführen sollen.
 Der Bewegungsablauf eines einzelnen Beins bleibt vorgegeben, während die Koordination untereinander erlernt werden soll. 
 Diese Herangehensweise ermöglicht es die Komplexität der zu erlernenden Fähigkeiten zunächst zu reduzieren, lässt aber gleichzeitig die Möglichkeit offen, im weiteren Verlauf zusätzliche Elemente in den Lernprozess einzubeziehen.
 
 
 \section{Verwandte Arbeiten}
+\textbf{TODO: Ausformulieren !}
 \begin{enumerate}
-
-	
 
 \item SMART-HexBot: a Simulation, Modeling, Analysis and
 Research Tool for Hexapod Robot in Virtual Reality and
