@@ -80,11 +80,26 @@ Gespäch mit Malte und Julius:
 	-->
   
 -----------------------------------------
- 25.06. 
+ 25.06. - 27.06.
   - Sollte man überhaupt schreiben, was man machen "könnte", oder nur was gemacht "wird" 
-	-->
+	--> Hauptsächlich schreiben was gemacht "wird", wenn es noch nicht feststeht ob etwas mit in die Bachelorarbeit kommt, dann ruhig otional lassen
 	
   - "z.B." oder "beispielsweise" verwenden oder immer genau nennen ?
-	-->
+	--> Um für Leser besser verständlich zu machen oder bei Erklärungen gerne
 
   - Grund für "Wieso MATLAB Simulink ?" einfügen !!!
+- - - - - - - - - - - - - - - - - - - - 
+  Gespräch mit Malte und Julius:
+	
+	- fürs Zitieren den sog. "Apa" - Style 
+	- In der Problemstellung schon näher auf Thema der Bachelorarbeit eingehen, noch recht allgemein gehalten
+	- Ziel: Abstrakter halten, eher darauf eingehen wie eine gute Lößung aussehen würde, nicht was exakt gemacht werden soll; 
+	  Bisheriger Text im Ziel-Teil kann in den Lösungsansatz-Teil überführt werden.
+	- Als Roboter-Vorlage den Roboter aus Maltes Büro: PhantomX MK4   (Modell sollte online verfügbar sein)
+	- Zeitplan ruhig granularer aufteilen, aber in Wochenform belassen
+	- TITEL-IDEE: "Leveraging MATLAB Simulink for Hexapod Robot Simulation and Control"
+	
+	
+	
+	
+-----------------------------------------
