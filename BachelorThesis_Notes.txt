@@ -103,3 +103,12 @@ Gespäch mit Malte und Julius:
 	
 	
 -----------------------------------------
+28.06 - 30.06
+ - Installation von ROS2 zum entpacken einer urdf.xacro-Datei nach .urdf 
+	- Installation macht Probleme, schlechte Anleitung bzw. nicht up-to-date
+		--> Installation nicht weiter verfolgt, anderes Modell von PhantomX als .urdf gefunden
+		
+		
+-----------------------------------------
+01.07. 
+ 
