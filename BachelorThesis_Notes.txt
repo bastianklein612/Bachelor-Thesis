@@ -91,13 +91,17 @@ Gespäch mit Malte und Julius:
 - - - - - - - - - - - - - - - - - - - - 
   Gespräch mit Malte und Julius:
 	
-	- fürs Zitieren den sog. "Apa" - Style 
+	- fürs Zitieren den sog. "Apa" - Style (erledigt)
+	- Als Roboter-Vorlage den Roboter aus Maltes Büro: PhantomX MK4   (Modell sollte online verfügbar sein) (erledigt)
+	- TITEL-IDEE: "Leveraging MATLAB Simulink for Hexapod Robot Simulation and Control" (erledigt)
+	- Ziel: Abstrakter halten, eher darauf eingehen wie eine gute Lößung aussehen würde, nicht was exakt gemacht werden soll; (erledigt)
+	- Zeitplan ruhig granularer aufteilen, aber in Wochenform belassen {erledigt}
+	- Bisheriger Text im Ziel-Teil kann in den Lösungsansatz-Teil überführt werden (erledigt)
+	
 	- In der Problemstellung schon näher auf Thema der Bachelorarbeit eingehen, noch recht allgemein gehalten
-	- Ziel: Abstrakter halten, eher darauf eingehen wie eine gute Lößung aussehen würde, nicht was exakt gemacht werden soll; 
-	  Bisheriger Text im Ziel-Teil kann in den Lösungsansatz-Teil überführt werden.
-	- Als Roboter-Vorlage den Roboter aus Maltes Büro: PhantomX MK4   (Modell sollte online verfügbar sein)
-	- Zeitplan ruhig granularer aufteilen, aber in Wochenform belassen
-	- TITEL-IDEE: "Leveraging MATLAB Simulink for Hexapod Robot Simulation and Control"
+	- Belege einfügen wo noch nicht vorhanden
+	
+	
 	
 	
 	
@@ -110,5 +114,7 @@ Gespäch mit Malte und Julius:
 		
 		
 -----------------------------------------
-01.07. 
+01.07. - 03.07.
+
+ - Anpassungen aus letztem Gespräch umsetzen
  
