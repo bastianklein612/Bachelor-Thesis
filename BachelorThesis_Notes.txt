@@ -100,6 +100,7 @@ Gespäch mit Malte und Julius:
 	
 	- In der Problemstellung schon näher auf Thema der Bachelorarbeit eingehen, noch recht allgemein gehalten
 	- Belege einfügen wo noch nicht vorhanden
+	- 'Verwandte Arbeiten' ausformulieren
 	
 	
 	
@@ -115,6 +116,9 @@ Gespäch mit Malte und Julius:
 		
 -----------------------------------------
 01.07. - 03.07.
-
- - Anpassungen aus letztem Gespräch umsetzen
+ - Anpassungen aus letztem Gespräch umgesetzt
  
+----------------------------------------- 
+04.07. - XX.XX.
+ - "URDF Primer" von MathWorks lesen
+ - PhantomX-Modell dazu bringen, seine Beine an bestimmte Positionen zu bewegen(InverseKinematics)

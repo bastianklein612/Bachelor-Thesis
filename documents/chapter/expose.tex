@@ -5,22 +5,23 @@
 
 
 \section{Einleitung}
-Der Einsatz von Simulationen spielt in der Erforschung und Entwicklung von Robotern eine zunehmend wichtige Rolle\parencite{afzal2020study}. 
-Sie bieten eine kostengünstige und effiziente Methode, das Verhalten von Robotern schon vor der physischen Umsetzung untersuchen, analysieren und optimieren zu können\parencite{de2019analysis}. 
-Auch eine Vielzahl von Unternehmen, welche auf dem Gebiet der Robotik tätig sind, nutzten die Technologie ausgiebig im Entwicklungsprozess ihrer Systeme, so beispielsweise Boston Dynamics\parencite{BostonDynamicsSimulation}, Tesla Inc.\parencite{TeslaAiDay2022} oder Kuka Robotics\parencite{KukaSim}.
+Der Einsatz von Simulationen spielt in der Erforschung und Entwicklung von Robotern eine zunehmend wichtige Rolle \parencite{afzal2020study}. 
+Sie bieten eine kostengünstige und effiziente Methode, das Verhalten von Robotern schon vor der physischen Umsetzung untersuchen, analysieren und optimieren zu können \parencite{de2019analysis}. 
+Auch eine Vielzahl von Unternehmen, welche auf dem Gebiet der Robotik tätig sind, nutzten die Technologie ausgiebig im Entwicklungsprozess ihrer Systeme, so beispielsweise Boston Dynamics \parencite{BostonDynamicsSimulation}, Tesla Inc. \parencite{TeslaAiDay2022} oder Kuka Robotics \parencite{KukaSim}.
 
 Auf Grund ihrer hohen Beweglichkeit sowie Vielseitigkeit sind Hexapods in der Robotik von besonderen Interesse. 
-Verglichen mit beräderten oder zweibeinigen Robotern können sie sich zuverlässiger auf unebenem Gelände bewegen und auch komplexe Hindernisse überwinden\parencite{barai2013smart, atifystructure}.
+Verglichen mit beräderten oder zweibeinigen Robotern können sie sich zuverlässiger auf unebenem Gelände bewegen und auch komplexe Hindernisse überwinden \parencite{barai2013smart, atifystructure}.
 Die Simulation eines solchen Hexapods ermöglicht es sein Verhalten in verschiedensten simulierten Umgebungen zu beobachten und erproben.
 
 \section{Problem}
 
-Die Entwicklung von Robotern und ihren Bewegungsabläufen ist zeitaufwändig und mit hohen Kosten verbunden\parencite{ahmadian2005model}.
-Wird die entwickelte Software direkt in der Realität getestet, so besteht die Gefahr der Beschädigung eines der oft wenigen und teuren Testexemplare.
-Dies kann den Entwicklungsprozess verzögern und zusätzliche Kosten generieren.
-Auch ist ein iterativer Optimierungsprozess, welcher ausschließlich in einer realen Umgebung stattfindet langsamer, als wenn dieser mit Hilfe von Simulationen unterstützt wird.
+Die Entwicklung von Robotern und ihren Bewegungsabläufen ist zeitaufwändig und mit hohen Kosten verbunden \parencite{ahmadian2005model}.
+Wird die entwickelte Software direkt in der Realität getestet, so besteht die Gefahr der Beschädigung eines der oft wenigen und teuren Testexemplare, wodurch der Entwicklungsprozess verzögert und zusätzliche Kosten generiert werden können.
+Ein iterativer Optimierungsprozess, welcher ausschließlich in einer realen Umgebung stattfindet langsamer, als wenn dieser mit Hilfe von Simulationen unterstützt wird.
 Die Steuerungssoftware muss für jede Anpassung neu auf die Hardware übertragen werden und Testaufbau sowie Roboter müssen manuell wieder in den Ausgangszustand versetzt werden.
 Ebenfalls kann es schwierig sein fehlerhaftes Verhalten, welches beim Test mit einem realen System beobachtet wurde, zu reproduzieren, ohne die Möglichkeit einer exakten Wiederherstellung des Testaufbaus.
+
+
 
 Natürlich ist es letztendlich wichtig, den entwickelten Controller auch in der echten Welt zu testen, damit sichergestellt werden kann, dass dieser auch unter den tatsächlichen physikalischen Begebenheiten zuverlässig funktioniert.
 Die Vorteile welche eine Simulationsumgebung mit sich bringt sollten jedoch keinesfalls übersehen werden, da diese für Entwickler und Forscher ein mächtiges Werkzeug darstellen kann um vor der realen Erprobung erste Tests durchzuführen, Fehler aufzudecken und den Controller zu optimieren.
@@ -36,6 +37,7 @@ Die Vorteile welche eine Simulationsumgebung mit sich bringt sollten jedoch kein
 
 \section{Ziel}
 Das von uns im Rahmen dieser Bachelorarbeit angestrebte Ziel ist es, die Möglichkeiten von MATLAB Simulink zur Modellierung und Simulation komplexer dynamischer Systeme zu nutzen, um ein Modell eines Hexapod-Roboters sowie dessen Steuerung zu entwickeln.
+Wir wollen mit den Ergebnissen dieser Arbeit die Vorteile eines durch Simulink gestützten Entwicklungsprozesses hervorheben und Impulse für eine ausgiebigere Nutzung derartiger Software setzen.
 
 Das Modell muss die kinematischen Eigenschaften des Roboters und der Umgebung in welcher er sich bewegt berücksichtigen.
 Es soll eine realistische Simulation des Roboterverhaltens ermöglichen und dabei Informationen bezüglich der Positionierung des Modells bereitstellen.
