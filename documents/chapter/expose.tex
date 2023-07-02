@@ -35,16 +35,26 @@ Die Vorteile welche eine Simulationsumgebung mit sich bringt sollten jedoch kein
 %Der block-basierte Ansatz von Simulink ist dabei besonders hervorzuheben, da es dieser ermöglicht sehr modulare Systeme zu erzeugen, wodurch bei Anpassungen nur einzelne Subsysteme ausgetauscht werden, anstatt Änderungen am gesamten Modell vornehmen zu müssen.
 
 \section{Ziel}
+Das von uns im Rahmen dieser Bachelorarbeit angestrebte Ziel ist es, die Möglichkeiten von MATLAB Simulink zur Modellierung und Simulation komplexer dynamischer Systeme zu nutzen, um ein Modell eines Hexapod-Roboters sowie dessen Steuerung zu entwickeln.
+
+Das Modell muss die kinematischen Eigenschaften des Roboters und der Umgebung in welcher er sich bewegt berücksichtigen.
+Es soll eine realistische Simulation des Roboterverhaltens ermöglichen und dabei Informationen bezüglich der Positionierung des Modells bereitstellen.
+Diese Daten sind entscheidend für die Steuerung des Roboters und müssen für den Controller jederzeit zur Verfügung stehen.
+Der Bewegungscontroller des Hexapods sollte in der Lage sein, den Roboter zuverlässig und präzise zu steuern.
+Dies beinhaltet die Bewegung des einzelnen Beins, die Koordination der Beine untereinander sowie das Gleichgewicht des Gesamtsystems aufrecht zu erhalten.
+Die entwickelte Lösung soll den Roboter in verschiedenen Gangarten geradlinig in der Simulationsumgebung bewegen und auch kleine Hindernisse überwinden können, ohne dass das System aus dem Gleichgewicht gebracht wird.
+Dabei darf die Steuerung nur auf vom Modell bereitgestellte Daten zugreifen, wie dies auch bei einem realen Roboter mittels Sensoren der Fall wäre.
+Es sollte zusätzlich möglich sein, Module des Bewegungscontrollers anzupassen oder Eigenschaften des Modells zu ändern, ohne den gesamten Roboter neu konfigurieren zu müssen.
+Nachdem ein robustes Modell und ein zuverlässiger Controller entwickelt wurden liegt der Fokus darauf, es dem Roboter mit Hilfe von maschinellem Lernen zu ermöglichen, die Koordination der Beine selbständig zu erlernen.
+Es wäre besonders interessant festzustellen, ob schon bekannte Gangarten erkennbar werden oder ganz neue Formen der Bewegung entstehen.
+
+
+\section{Ziel}
 Das angestrebte Ziel dieser Bachelorarbeit ist es, einen Hexapod-Roboter und dessen Steuerung innerhalb der MATLAB Simulink Umgebung zu entwickeln.
 Konkret soll dies die Modellierung des physischen Modells mit Hilfe von SimScape, den Aufbau eines Controllers für die Bewegungssteuerung des Roboters sowie das Erlernen der Koordination der Beine untereinander mittels Reinforcement Learning beinhalten.
 
 \begin{enumerate}
-	\item \textbf{Modellierung des Hexapods + Umgebung:} Es wird ein physikalisch korrektes Modell eines Hexapod-Roboters mit Hilfe der Simulink Toolbox SimScape erschaffen.
-	Dies soll auch eine einfache Simulationsumgebung beinhalten, in welcher das Modell getestet werden kann. 
 	
-	\item \textbf{Entwicklung eines Bewegungscontrollers:} Der Hexapod soll durch einen Bewegungscontroller in die Lage versetzt werden, sich (geradlinig) durch eine simulierte Umgebung zu bewegen. 
-	Der Controller wird in Simulink implementiert und verwendet die Informationen aus der Simulation um den Roboter präzise zu steuern.
-	Er muss die Bewegung der einzelnen Beinsegmente sowie die Koordination der Beine untereinander steuern können und dabei auch auf das Gleichgewicht des Gesamtsystems achten.
 	
 	\item \textbf{Selbstständiges Erlernen der Beinkoordination:} Durch Interaktion mit der Simulationsumgebung soll das Modell selbstständig die Koordination der 6 Beine erlernen, die Beinbewegung selbst bleibe dabei vorgegeben.
 	Modelliert werden soll der Lernprozess mit Hilfe der Reinforcement Learning Toolbox von Simulink.
@@ -52,24 +62,25 @@ Konkret soll dies die Modellierung des physischen Modells mit Hilfe von SimScape
 \end{enumerate}
 
 \section{Lösungsansatz}
-Zu Beginn der Arbeit wird ein vereinfachtes, jedoch physikalisch korrektes Modell des realen Hexapods mit der Simulink-Toolbox Simscape entwickelt werden.
-Dieses sollte möglichst gut parametrisiert sein, damit Eigenschaften wie Dimension, Gewicht, Reibungskoeffizienten, Drehmomente, etc. der einzelnen Bestandteile auch im nach hinein noch einfach angepasst werden können.
-Jedes der 6 Beine des Roboters soll aus drei Gelenken mit jeweils einem Aktuator bestehen.
-Diese Bein-Architektur ist bei Hexapods weit verbreitet und hat sich bewährt.
-Jeder der Aktuatoren sollte einzeln ansprechbar sein, die Gelenke sollten Sensordaten bezüglich Position (und Beschleunigung) liefern.
-Diese Daten informieren den im nächsten Schritt zu implementierenden Controller über die Lage (und Dynamik) des Roboters 
+Zu Beginn der Arbeit wird ein detailliertes, physikalisch korrektes Modell des Hexapods mithilfe der Simulink-Toolbox Simscape entwickelt, als Vorlage dient hier der \emph{PhantomX}-Hexapod von \emph{Trossen Robotics}.
+Jedes der 6 Beine besteht aus 3 Gelenken mit je einem Aktuator, eine Architektur welche weit verbreitet ist und sich bewährt hat.
+Das Modell sollte möglichst gut parametrisiert werden, damit Eigenschaften wie Gewicht, Reibungskoeffizienten, Drehmomente, etc. der einzelnen Komponenten auch im nach hinein noch einfach angepasst werden können.
+Jeder der Aktuatoren muss einzeln ansprechbar sein und die Gelenke müssen Sensordaten bezüglich Position (und Beschleunigung) liefern.
+Diese Daten informieren den im nächsten Schritt zu implementierenden Controller über die Lage (und Dynamik) des Roboters.
+Neben dem eigentlichen Modell des Hexapods wird zusätzlich noch eine einfache Testumgebung erbaut, in welcher das Robotermodell im weiteren Entwicklungsprozess ausgiebig getestet werden kann.
 
 Nachdem die Entwicklung des SimScape-Modells abgeschlossen ist, wird mit der Implementierung einer kontrollierten Steuerung des Roboters in Simulink begonnen.
 Der Fokus liegt dabei zunächst auf der Beschreibung des Bewegungsablaufs eines einzelnen Beins.
 Sobald dieser Ablauf, bestehend aus Schwung- und Standphase, zuverlässig funktioniert, wird er auf alle 6 Beine ausgeweitet.
 Hierbei spielt die Koordination der Beine eine entscheidende Rolle, unabhängig davon, ob diese zentral oder verteilt ausgelegt wird.
+Grundlegend ist es natürlich auch, dass der Roboter das Gleichgewicht hält und robust gegenüber Störungen im Bewegungsablauf ist.
 Um das SimScape-Modell ausgiebig zu testen, ist es möglich, mehrere verschiedene Gangarten wie den Tripod-, Tetrapod- und Wave-Gait abzubilden.
 %evt. könnte auch eine dezentrale Architektur wie z.B. die von Schilling et al. abgebildet werden (?).
 
 Basierend auf den Vorarbeiten zur Modellierung und den verschiedenen Gangarten soll anschließend die Koordination der Beine mithilfe eines Reinforcement Learning-Modells selbst erlernt werden.
 Dieser Lernprozess wird ebenfalls innerhalb der Simulink-Umgebung durch die RL-Toolbox realisiert.
 Im Gegensatz zu den bisher erzeugten Gangarten wird hier nicht vorgegeben werden, welche Beine ihren Bewegung zu welchem Zeitpunkt ausführen sollen.
-Der Bewegungsablauf eines einzelnen Beins bleibt vorgegeben, während die Koordination untereinander erlernt werden soll. 
+Der Bewegungsablauf eines einzelnen Beins bleibt vorgegeben, während die Koordination untereinander durch Interaktion des Modells mit der Umgebung erlernt werden soll. 
 Diese Herangehensweise ermöglicht es die Komplexität der zu erlernenden Fähigkeiten zunächst zu reduzieren, lässt aber gleichzeitig die Möglichkeit offen, im weiteren Verlauf zusätzliche Elemente in den Lernprozess einzubeziehen.
 
 
@@ -91,9 +102,31 @@ Simscape Multibody
 
 \section{Zeitplan}
 \begin{enumerate}
-	\item Entwicklung des "physischen" Hexapods in Simulink/Simscape + Testumgebung: 1-2 Wochen.
-	\item Erzeugung des Bewegungsabläufe für Wave-, Tripod- und evt. dezentrale Architektur 5-6 Wochen (?).
-	\item Nutzung von Reinforcement Learning zum Erlernen der vorher sequenziell gesteuerten Beinbewegungen 4 Wochen (?).
+	\item Erstellen des "physischen" Hexapod-Modells in Simulink/Simscape + Testumgebung:
+	\begin{enumerate}[label*=\arabic*.]
+		\item Import eines 3D-Modells in die Simulink-Umgebung
+		\item Konfigurieren eines "Inverse Kinematics Solvers" basierend auf der .urdf-Datei des 3D-Modells
+		\item Definieren der Parameter des Roboters(Drehmomente der Motoren, Reibungskoeffizienten zwischen Beinen und Boden, max. Winkel, etc.)
+		\item Erbauen einer einfachen Testumgebung
+	\end{enumerate}
+	\textbf{Geschätzte Dauer:} 2-3 Wochen
+	
+	\item Entwicklung des Bewegungscontrollers
+	\begin{enumerate}[label*=\arabic*.]
+		\item Bewegungsablauf eines einzelnen Beins
+		\item Implementierung der Gangarten(Wave-, Tripod, etc.)	
+		\item Erprobung und Optimierung der Bewegungen des Hexapods innerhalb der Simulationsumgebung
+	\end{enumerate}
+	\textbf{Geschätzte Dauer:} 3-4 Wochen
+	
+	\item Erlernen der Beinkoordination
+	\begin{enumerate}[label*=\arabic*.]
+		\item Aufstellen des Reinforcement Learning-Modells
+		\item Beobachten des Lernprozesses, ggf. Anpassungen vornehmen
+	\end{enumerate}
+	\textbf{Geschätzte Dauer:} 4 Wochen
+	
+
 \end{enumerate}
 
 
