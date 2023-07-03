@@ -7,33 +7,23 @@
 \section{Einleitung}
 Der Einsatz von Simulationen spielt in der Erforschung und Entwicklung von Robotern eine zunehmend wichtige Rolle \parencite{afzal2020study}. 
 Sie bieten eine kostengünstige und effiziente Methode, das Verhalten von Robotern schon vor der physischen Umsetzung untersuchen, analysieren und optimieren zu können \parencite{de2019analysis}. 
-Auch eine Vielzahl von Unternehmen, welche auf dem Gebiet der Robotik tätig sind, nutzten und nutzen die Technologie ausgiebig im Entwicklungsprozess ihrer Systeme, so beispielsweise Boston Dynamics \parencite{BostonDynamicsSimulation}, Tesla Inc. \parencite{TeslaAiDay2022} oder Kuka Robotics \parencite{KukaSim}.
+Auch eine Vielzahl von Unternehmen, welche auf dem Gebiet der Robotik tätig sind, nutzen die Technologie ausgiebig im Entwicklungsprozess ihrer Systeme, so beispielsweise Boston Dynamics \parencite{BostonDynamicsSimulation}, Tesla Inc. \parencite{TeslaAiDay2022} oder Kuka Robotics \parencite{KukaSim}.
 
 \section{Problem}
 Auf Grund ihrer hohen Beweglichkeit und Vielseitigkeit sind die sechsbeinigen Hexapods in der Robotik von besonderen Interesse. 
 Verglichen mit beräderten oder zweibeinigen Robotern können sie sich zuverlässiger auf unebenem Gelände bewegen und auch komplexe Hindernisse überwinden \parencite{barai2013smart, atifystructure}.
 Die Programmierung eines Bewegungscontrollers für solch einen Hexapod-Roboter ist eine anspruchsvolle, keinenfalls triviale Aufgabe.
-Zwar ist das Aufrechterhalten der Balance mit 6 Beinen offensichtlich einfacher als bei z.B. humanoiden Zweibeinern, dafür stellt die Koordination der vielen Beine während der Fortbewegung eine große Herausforderung dar.
-Die Erzeugung eines virtuellen Modells, beispielsweise mittels Simulink, kann hierbei viele Vorteile mit sich bringen.
-Es ermöglicht Designkonzepte zu testen, die Bewegung des Roboters zu analysieren und die Leistungsfähigkeit des Systems schon vor der physischen Umsetzung zu beurteilen.
-In den letzten Jahren wurden mehrere Paper veröffentlicht, welche sich mit der Simulation eines Hexapods in Simulink beschäftigen, sodass sich schließen lässt, dass die Vorteile der simulationsgestützten Entwicklung sehr wohl wahrgenommen und genutzt werden.
-Jedoch gibt es unseren Wissens nach momentan kein öffentlich verfügbares, modernes Simulink-Modell auf welchem man weitere Forschung aufbauen könnte.
+Obwohl das Aufrechterhalten der Balance bei einem Roboter mit 6 Beinen im Vergleich zu beispielsweise humanoiden Zweibeinern offensichtlich einfacher ist, stellt die Koordination der vielen Beine während der Fortbewegung eine große Herausforderung dar \parencite{azayev2020blind,schilling2013walknet}.
+Die Erzeugung eines virtuellen Modells kann hierbei viele Vorteile mit sich bringen.
+Es ermöglicht Designkonzepte zu testen, die Bewegung des Roboters zu analysieren und die Leistungsfähigkeit des Systems schon vor der physischen Umsetzung zu beurteilen \parencite{de2019analysis}.
+
+Besonders interessant für die Umsetzung eines solchen Modells ist unserer Meinung nach die Modellierungs- und Simulationsumgebung MATLAB Simulink des Unternehmens MathWorks.
+Durch die auf funktionalen Blöcken basierende, diagrammartige Entwicklungsoberfläche und eine Vielzahl sog. "Toolboxes" aus unterschiedlichsten Anwendungsgebieten ermöglicht Simulink die Erzeugung modularer und übersichtlicher Systeme, welche sofort simuliert werden können.
+In den letzten Jahren wurden mehrere wissenschaftliche Arbeiten veröffentlicht, die sich mit der Simulation eines Hexapods in Simulink beschäftigen(siehe z.B. \cite{tanaka2019development, barai2013smart, atify2019propelling}), sodass sich schließen lässt, dass die Vorteile der simulationsgestützten Entwicklung durchaus wahrgenommen und genutzt werden.
+Jedoch gibt es unseren Wissens nach derzeit kein öffentlich verfügbares, modernes Simulink-Modell auf dem weitere Forschung aufbauen könnte.
 
 Wir wollen uns in dieser Bachelorarbeit deshalb dem Problem der Entwicklung eines solchen Modells mit Hilfe von Simulink widmen.
 
-
-
-Die Entwicklung von Robotern und ihren Bewegungsabläufen ist zeitaufwändig und mit hohen Kosten verbunden \parencite{ahmadian2005model}.
-Wird die entwickelte Software direkt in der Realität getestet, so besteht die Gefahr der Beschädigung eines der oft wenigen und teuren Testexemplare, wodurch der Entwicklungsprozess verzögert und zusätzliche Kosten generiert werden können.
-Ein iterativer Optimierungsprozess, welcher ausschließlich in einer realen Umgebung stattfindet langsamer, als wenn dieser mit Hilfe von Simulationen unterstützt wird.
-Die Steuerungssoftware muss für jede Anpassung neu auf die Hardware übertragen werden und Testaufbau sowie Roboter müssen manuell wieder in den Ausgangszustand versetzt werden.
-Ebenfalls kann es schwierig sein fehlerhaftes Verhalten, welches beim Test mit einem realen System beobachtet wurde, zu reproduzieren, ohne die Möglichkeit einer exakten Wiederherstellung des Testaufbaus.
-
-
-
-
-Natürlich ist es letztendlich wichtig, den entwickelten Controller auch in der echten Welt zu testen, damit sichergestellt werden kann, dass dieser auch unter den tatsächlichen physikalischen Begebenheiten zuverlässig funktioniert.
-Die Vorteile welche eine Simulationsumgebung mit sich bringt sollten jedoch keinesfalls übersehen werden, da diese für Entwickler und Forscher ein mächtiges Werkzeug darstellen kann um vor der realen Erprobung erste Tests durchzuführen, Fehler aufzudecken und den Controller zu optimieren.
 %Um die Erforschung von Controllern zu Bewegungssteuerung möglichst effektiv vorantreiben zu können ist es wichtig, leistungsstarke Simulationssoftware in den Entwicklungsprozess einzubeziehen.
 %Es wird ein wesentlich  kleinschrittiger Prozess ermöglicht, da jede noch so kleine Änderung direkt und ohne großen Mehraufwand getestet werden kann.
 
@@ -52,25 +42,12 @@ Das Modell muss die kinematischen Eigenschaften des Roboters und der Umgebung in
 Es soll eine realistische Simulation des Roboterverhaltens ermöglichen und dabei Informationen bezüglich der Positionierung des Modells bereitstellen.
 Diese Daten sind entscheidend für die Steuerung des Roboters und müssen für den Controller jederzeit zur Verfügung stehen.
 Der Bewegungscontroller des Hexapods sollte in der Lage sein, den Roboter zuverlässig und präzise zu steuern.
-Dies beinhaltet die Bewegung des einzelnen Beins, die Koordination der Beine untereinander sowie das Gleichgewicht des Gesamtsystems aufrecht zu erhalten.
+Dies beinhaltet die Bewegung des einzelnen Beins, die Koordination der Beine untereinander sowie die Gleichgewichtserhaltung des Gesamtsystems.
 Die entwickelte Lösung soll den Roboter in verschiedenen Gangarten geradlinig in der Simulationsumgebung bewegen und auch kleine Hindernisse überwinden können, ohne dass das System aus dem Gleichgewicht gebracht wird.
 Dabei darf die Steuerung nur auf vom Modell bereitgestellte Daten zugreifen, wie dies auch bei einem realen Roboter mittels Sensoren der Fall wäre.
-Es sollte zusätzlich möglich sein, Module des Bewegungscontrollers anzupassen oder Eigenschaften des Modells zu ändern, ohne den gesamten Roboter neu konfigurieren zu müssen.
+Es sollte außerdem möglich sein, Module des Bewegungscontrollers anpassen zu können oder Eigenschaften des Modells abzuändern, ohne das gesamte System neu konfigurieren zu müssen.
 Nachdem ein robustes Modell und ein zuverlässiger Controller entwickelt wurden liegt der Fokus darauf, es dem Roboter mit Hilfe von maschinellem Lernen zu ermöglichen, die Koordination der Beine selbständig zu erlernen.
 Es wäre besonders interessant festzustellen, ob schon bekannte Gangarten erkennbar werden oder ganz neue Formen der Bewegung entstehen.
-
-
-\section{Ziel}
-Das angestrebte Ziel dieser Bachelorarbeit ist es, einen Hexapod-Roboter und dessen Steuerung innerhalb der MATLAB Simulink Umgebung zu entwickeln.
-Konkret soll dies die Modellierung des physischen Modells mit Hilfe von SimScape, den Aufbau eines Controllers für die Bewegungssteuerung des Roboters sowie das Erlernen der Koordination der Beine untereinander mittels Reinforcement Learning beinhalten.
-
-\begin{enumerate}
-	
-	
-	\item \textbf{Selbstständiges Erlernen der Beinkoordination:} Durch Interaktion mit der Simulationsumgebung soll das Modell selbstständig die Koordination der 6 Beine erlernen, die Beinbewegung selbst bleibe dabei vorgegeben.
-	Modelliert werden soll der Lernprozess mit Hilfe der Reinforcement Learning Toolbox von Simulink.
-	
-\end{enumerate}
 
 \section{Lösungsansatz}
 Die Grundlage der Arbeit liefert die in der Forschung und Industrie weit verbreite Software \textit{MATLAB\textregistered} und die enthaltene \textit{Simulink}\textregistered-Umgebung des Unternehmens \textit{MathWorks}.
@@ -80,7 +57,7 @@ Durch eine Vielzahl von sogenannten "Toolboxes" können Modelle aus den verschie
 Zu Beginn der Arbeit wird ein detailliertes, physikalisch korrektes Modell des Hexapods mithilfe der Simulink-Toolbox Simscape entwickelt, als Vorlage dient hier der \emph{PhantomX}-Hexapod von \emph{Trossen Robotics}.
 Jedes der 6 Beine besteht aus 3 Gelenken mit je einem Aktuator, eine Architektur welche weit verbreitet ist und sich bewährt hat.
 Das Modell sollte möglichst gut parametrisiert werden, damit Eigenschaften wie Gewicht, Reibungskoeffizienten, Drehmomente, etc. der einzelnen Komponenten auch im nach hinein noch einfach angepasst werden können.
-Jeder der Aktuatoren muss einzeln ansprechbar sein und die Gelenke müssen Sensordaten bezüglich Position (und Beschleunigung) liefern.
+Jeder der Aktuatoren muss einzeln ansprechbar sein und die Gelenke müssen Sensordaten bezüglich ihrer Position (und Beschleunigung) liefern.
 Diese Daten informieren den im nächsten Schritt zu implementierenden Controller über die Lage (und Dynamik) des Roboters.
 Neben dem eigentlichen Modell des Hexapods wird zusätzlich noch eine einfache Testumgebung erbaut, in welcher das Robotermodell im weiteren Entwicklungsprozess ausgiebig getestet werden kann.
 
@@ -95,7 +72,7 @@ Um das SimScape-Modell ausgiebig zu testen, ist es möglich, mehrere verschieden
 Basierend auf den Vorarbeiten zur Modellierung und den verschiedenen Gangarten soll anschließend die Koordination der Beine mithilfe eines Reinforcement Learning-Modells selbst erlernt werden.
 Dieser Lernprozess wird ebenfalls innerhalb der Simulink-Umgebung durch die RL-Toolbox realisiert.
 Im Gegensatz zu den bisher erzeugten Gangarten wird hier nicht vorgegeben werden, welche Beine ihren Bewegung zu welchem Zeitpunkt ausführen sollen.
-Der Bewegungsablauf eines einzelnen Beins bleibt vorgegeben, während die Koordination untereinander durch Interaktion des Modells mit der Umgebung erlernt werden soll. 
+Der Bewegungsablauf des einzelnen Beins bleibt fest definiert, während die Koordination untereinander durch Interaktion des Modells mit der Umgebung erlernt werden soll. 
 Diese Herangehensweise ermöglicht es die Komplexität der zu erlernenden Fähigkeiten zunächst zu reduzieren, lässt aber gleichzeitig die Möglichkeit offen, im weiteren Verlauf zusätzliche Elemente in den Lernprozess einzubeziehen.
 
 
@@ -117,7 +94,7 @@ Simscape Multibody
 
 \section{Zeitplan}
 \begin{enumerate}
-	\item Erstellen des "physischen" Hexapod-Modells in Simulink/Simscape + Testumgebung:
+	\item \textbf{Erstellen des "physischen" Hexapod-Modells in Simulink/Simscape + Testumgebung:}
 	\begin{enumerate}[label*=\arabic*.]
 		\item Import eines 3D-Modells in die Simulink-Umgebung
 		\item Konfigurieren eines "Inverse Kinematics Solvers" basierend auf der .urdf-Datei des 3D-Modells
@@ -126,7 +103,7 @@ Simscape Multibody
 	\end{enumerate}
 	\textbf{Geschätzte Dauer:} 2-3 Wochen
 	
-	\item Entwicklung des Bewegungscontrollers
+	\item \textbf{Entwicklung des Bewegungscontrollers:}
 	\begin{enumerate}[label*=\arabic*.]
 		\item Bewegungsablauf eines einzelnen Beins
 		\item Implementierung der Gangarten(Wave-, Tripod, etc.)	
@@ -134,7 +111,7 @@ Simscape Multibody
 	\end{enumerate}
 	\textbf{Geschätzte Dauer:} 3-4 Wochen
 	
-	\item Erlernen der Beinkoordination
+	\item \textbf{Erlernen der Beinkoordination:}
 	\begin{enumerate}[label*=\arabic*.]
 		\item Aufstellen des Reinforcement Learning-Modells
 		\item Beobachten des Lernprozesses, ggf. Anpassungen vornehmen
