@@ -120,5 +120,5 @@ Gespäch mit Malte und Julius:
  
 ----------------------------------------- 
 04.07. - XX.XX.
- - "URDF Primer" von MathWorks lesen
+ - "URDF Primer" von MathWorks lesen (erledigt)
  - PhantomX-Modell dazu bringen, seine Beine an bestimmte Positionen zu bewegen(InverseKinematics)
