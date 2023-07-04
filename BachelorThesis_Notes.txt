@@ -97,15 +97,10 @@ Gespäch mit Malte und Julius:
 	- Ziel: Abstrakter halten, eher darauf eingehen wie eine gute Lößung aussehen würde, nicht was exakt gemacht werden soll; (erledigt)
 	- Zeitplan ruhig granularer aufteilen, aber in Wochenform belassen {erledigt}
 	- Bisheriger Text im Ziel-Teil kann in den Lösungsansatz-Teil überführt werden (erledigt)
+	- In der Problemstellung schon näher auf Thema der Bachelorarbeit eingehen, noch recht allgemein gehalten (erledigt)
+	- Belege einfügen wo noch nicht vorhanden (erledigt)
 	
-	- In der Problemstellung schon näher auf Thema der Bachelorarbeit eingehen, noch recht allgemein gehalten
-	- Belege einfügen wo noch nicht vorhanden
 	- 'Verwandte Arbeiten' ausformulieren
-	
-	
-	
-	
-	
 	
 -----------------------------------------
 28.06 - 30.06
@@ -113,12 +108,33 @@ Gespäch mit Malte und Julius:
 	- Installation macht Probleme, schlechte Anleitung bzw. nicht up-to-date
 		--> Installation nicht weiter verfolgt, anderes Modell von PhantomX als .urdf gefunden
 		
-		
 -----------------------------------------
 01.07. - 03.07.
  - Anpassungen aus letztem Gespräch umgesetzt
  
 ----------------------------------------- 
-04.07. - XX.XX.
+04.07.
  - "URDF Primer" von MathWorks lesen (erledigt)
  - PhantomX-Modell dazu bringen, seine Beine an bestimmte Positionen zu bewegen(InverseKinematics)
+
+- Gespräch mit Malte und Julius:
+		- Nicht "Ich soll das verwenden, deswegen mach ich das" !
+		  Darauf eingehen, dass ein vielfältiges Tool mit vielen Möglichkeiten gesucht wurde
+		- Simulink soll Grundlage für weitere Forschung sein, darauf soll aufgebaut werden
+		- Modell welches ich entwickle, soll ebenfalls die Grundlage bilden, um darauf aufbauend weiter yu forschen
+		- Wir wollen ein bestimmtes Ziel erichen, nicht 'UMBEDINGT' MATLAB verwenden und damit was machen (Anfang bei Kapitel Ziel)
+		- Ziel zu konkret, eher darauf eingehen was Modell können soll(Lernalgorithmen sollen anwendbar sein, etc. --> man soll drauf aufbauen können)
+		- Tabelle oder timechart im Zeitplan verwenden ?
+		- ab Zielteil im 'Aktiv Präsenz' schreiben
+		- Lösungsansatz abstrakter, nicht so konkret
+		- Expose nicht länger machen, eher schon zu lang
+		- Do. (ab 13.07) 10:15 Uhr Oberseminar
+		- homogene Transformationen ansehen(Foto und VL./Internet)
+		
+		
+----------------------------------------- 
+		
+
+		
+		
+		
