@@ -55,15 +55,17 @@ pid_filter_N = 100;
 %Fallhöhe
 drop_height = 300;
 
-phantomX_uncovered = importrobot("phantomx_description\urdf\phantomx.urdf");
 
-%alpha         = importrobot('interbotix_xshexapod_descriptions\urdf\alpha.urdf.xacro');
-%phantomX_mk4  = importrobot('interbotix_xshexapod_descriptions\urdf\pxmark4.urdf.xacro');
-%phantomX_mk4s =importrobot('interbotix_xshexapod_descriptions\urdf\pxmark4s.urdf.xacro');
-%wx_mk4        = importrobot('interbotix_xshexapod_descriptions\urdf\wxmark4.urdf.xacro');
+
+%phantomX_uncovered = importrobot("robot_models\phantomx_description\urdf\phantomx.urdf");
+
+%alpha         = importrobot('robot_models\interbotix_xshexapod_descriptions\urdf\alpha.urdf.xacro');
+phantomX_mk4  = importrobot('robot_models\interbotix_xshexapod_descriptions\urdf\pxmark4.urdf.xacro');
+%phantomX_mk4s =importrobot('robot_models\interbotix_xshexapod_descriptions\urdf\pxmark4s.urdf.xacro');
+%wx_mk4        = importrobot('robot_models\interbotix_xshexapod_descriptions\urdf\wxmark4.urdf.xacro');
 
 
 %smimport(['phantomx_description\urdf\phantomx.urdf']);
-%smimport(phantomX_mk4);
+smimport(phantomX_mk4);
 
 %open_system("Sandbox.slx");
