@@ -4,25 +4,47 @@
 
 
 
-\section{Einleitung}
-Der Einsatz von Simulationen spielt in der Erforschung und Entwicklung von Robotern eine zunehmend wichtige Rolle \parencite{afzal2020study}. 
-Sie bieten eine kostengünstige und effiziente Methode, das Verhalten von Robotern schon vor der physischen Umsetzung untersuchen, analysieren und optimieren zu können \parencite{de2019analysis}. 
-Auch eine Vielzahl von Unternehmen, welche auf dem Gebiet der Robotik tätig sind, nutzen die Technologie ausgiebig im Entwicklungsprozess ihrer Systeme, so beispielsweise Boston Dynamics \parencite{BostonDynamicsSimulation}, Tesla Inc. \parencite{TeslaAiDay2022} oder Kuka Robotics \parencite{KukaSim}.
+\section{Introduction}
+Simulations play an increasingly important role in the research and development of robots \parencite{afzal2020study}. 
+They offer a cost-effective and efficient method of being able to investigate, analyze and optimize the behavior of robots even before they are physically implemented \parencite{en2019analysis}. 
+Many companies involved in the field of robotics are also using the technology extensively in the development process of their systems, such as Boston Dynamics \parencite{BostonDynamicsSimulation}, Tesla Inc. \parencite{TeslaAiDay2022} or Kuka Robotics \parencite{KukaSim}.
+Due to their high degree of mobility and versatility, hexapods are of particular interest in robotics. 
+Compared to wheeled or bipedal robots, their six legs make it easier for them to overcome challenging terrain and complex obstacles \parencite{barai2013smart, atifystructure}.
 
 \section{Problem}
-Auf Grund ihrer hohen Beweglichkeit und Vielseitigkeit sind die sechsbeinigen Hexapods in der Robotik von besonderen Interesse. 
-Verglichen mit beräderten oder zweibeinigen Robotern können sie sich zuverlässiger auf unebenem Gelände bewegen und auch komplexe Hindernisse überwinden \parencite{barai2013smart, atifystructure}.
-Die Programmierung eines Bewegungscontrollers für solch einen Hexapod-Roboter ist eine anspruchsvolle, keinenfalls triviale Aufgabe.
-Obwohl das Aufrechterhalten der Balance bei einem Roboter mit 6 Beinen im Vergleich zu beispielsweise humanoiden Zweibeinern offensichtlich einfacher ist, stellt die Koordination der vielen Beine während der Fortbewegung eine große Herausforderung dar \parencite{azayev2020blind,schilling2013walknet}.
-Die Erzeugung eines virtuellen Modells kann hierbei viele Vorteile mit sich bringen.
-Es ermöglicht Designkonzepte zu testen, die Bewegung des Roboters zu analysieren und die Leistungsfähigkeit des Systems schon vor der physischen Umsetzung zu beurteilen \parencite{de2019analysis}.
+The process of developing software for these hexapods is a challenging and by no means trivial task.
+While maintaining balance is evidently easier for this architecture than for example the above mentioned bipedal robots, coordinating the many legs during movement is a major challenge \parencite{azayev2020blind,schilling2013walknet}.
+To break down the complex dynamics of such a system, creating a virtual model can have many benefits.
+There is a variety of robot simulation platforms, e.g. Gazebo, V-REP or Webots. 
+Each of these simulators has its own strengths and features that researchers have utilized to explore different aspects of robotics.
+Besides these tools explicitly developed for simulating robots, there are other modeling and simulation environments which have a wider fiend of use.
+One example of these is MATLAB Simulink, a graphical programming environment used for modeling, simulation and analysis of complex, dynamic systems.
+%Simulink's diagram-like interface and extensive library of "toolboxes" facilitate the creation of modular and well-organized systems, which can also be immediately simulated.
+To support our research on hexapod robots, we aim to leverage simulation software to take advantage of the benefits these tools have to offer.
+Considering the widespread use of MATLAB Simulink in both research and industry along with its extensive libraries addressing various domains, we have chosen it as our preferred platform.
+%In our opinion, the MATLAB Simulink modeling and simulation environment from the MathWorks company is particularly interesting for implementing such a model.
+%Due to its diagram-like development interface based on functional blocks and a large number of so-called "toolboxes" from a wide variety of application areas, Simulink enables the generation of modular and clearly arranged systems, which can be simulated immediately.
+In recent years, several scientific papers have been published dealing with the simulation of a hexapod in Simulink(see e.g. \cite{tanaka2019development, barai2013smart, atify2019propelling}).
+However, to our knowledge, there is currently no publicly available, up-to-date Simulink model on which further research could build on.
 
-Besonders interessant für die Umsetzung eines solchen Modells ist unserer Meinung nach die Modellierungs- und Simulationsumgebung MATLAB Simulink des Unternehmens MathWorks.
-Durch die auf funktionalen Blöcken basierende, diagrammartige Entwicklungsoberfläche und eine Vielzahl sog. "Toolboxes" aus unterschiedlichsten Anwendungsgebieten ermöglicht Simulink die Erzeugung modularer und übersichtlicher Systeme, welche sofort simuliert werden können.
-In den letzten Jahren wurden mehrere wissenschaftliche Arbeiten veröffentlicht, die sich mit der Simulation eines Hexapods in Simulink beschäftigen(siehe z.B. \cite{tanaka2019development, barai2013smart, atify2019propelling}), sodass sich schließen lässt, dass die Vorteile der simulationsgestützten Entwicklung durchaus wahrgenommen und genutzt werden.
-Jedoch gibt es unseren Wissens nach derzeit kein öffentlich verfügbares, modernes Simulink-Modell auf dem weitere Forschung aufbauen könnte.
+Therefore, in this bachelor thesis we want to address the problem of developing such a hexapod model using MATLAB Simulink.
 
-Wir wollen uns in dieser Bachelorarbeit deshalb dem Problem der Entwicklung eines solchen Modells mit Hilfe von Simulink widmen.
+
+%Auf Grund ihrer hohen Beweglichkeit und Vielseitigkeit sind Hexapods in der Robotik von besonderen Interesse. 
+%Verglichen mit beräderten oder zweibeinigen Robotern können sie sich zuverlässiger auf unebenem Gelände bewegen und auch komplexe Hindernisse überwinden \parencite{barai2013smart, atifystructure}.
+%Die Programmierung eines Bewegungscontrollers für solch einen Hexapod-Roboter ist eine anspruchsvolle, keinenfalls triviale Aufgabe.
+%Obwohl das Aufrechterhalten der Balance bei einem Roboter mit 6 Beinen im Vergleich zu beispielsweise humanoiden Zweibeinern offensichtlich einfacher ist, stellt die Koordination der vielen Beine während der Fortbewegung eine große Herausforderung dar \parencite{azayev2020blind,schilling2013walknet}.
+%Die Erzeugung eines virtuellen Modells kann hierbei viele Vorteile mit sich bringen.
+%Es ermöglicht Designkonzepte zu testen, die Bewegung des Roboters zu analysieren und die Leistungsfähigkeit des Systems schon vor der physischen Umsetzung zu beurteilen \parencite{de2019analysis}.
+
+%Besonders interessant für die Umsetzung eines solchen Modells ist unserer Meinung nach die Modellierungs- und Simulationsumgebung MATLAB Simulink des Unternehmens MathWorks.
+%Durch die auf funktionalen Blöcken basierende, diagrammartige Entwicklungsoberfläche und eine Vielzahl sog. "Toolboxes" aus unterschiedlichsten Anwendungsgebieten ermöglicht Simulink die Erzeugung modularer und übersichtlicher Systeme, welche sofort simuliert werden können.
+%In den letzten Jahren wurden mehrere wissenschaftliche Arbeiten veröffentlicht, die sich mit der Simulation eines Hexapods in Simulink beschäftigen(siehe z.B. \cite{tanaka2019development, barai2013smart, atify2019propelling}), sodass sich schließen lässt, dass die Vorteile der simulationsgestützten Entwicklung durchaus wahrgenommen und genutzt werden.
+%Jedoch gibt es unseren Wissens nach derzeit kein öffentlich verfügbares, modernes Simulink-Modell auf dem weitere Forschung aufbauen könnte.
+
+%Wir wollen uns in dieser Bachelorarbeit deshalb dem Problem der Entwicklung eines solchen Modells mit Hilfe von Simulink widmen.
+
+
 
 %Um die Erforschung von Controllern zu Bewegungssteuerung möglichst effektiv vorantreiben zu können ist es wichtig, leistungsstarke Simulationssoftware in den Entwicklungsprozess einzubeziehen.
 %Es wird ein wesentlich  kleinschrittiger Prozess ermöglicht, da jede noch so kleine Änderung direkt und ohne großen Mehraufwand getestet werden kann.
