@@ -119,8 +119,8 @@ Gespäch mit Malte und Julius:
 
 - Gespräch mit Malte und Julius:
 		- Ziel zu konkret, eher darauf eingehen was Modell können soll(Lern-Algorithmen sollen anwendbar sein, etc. --> man soll drauf aufbauen können)  (erledigt)
-
-		- Ins Englische übersetzen und in Englisch weiterschreiben
+		- Ins Englische übersetzen und in Englisch weiterschreiben (erledigt)
+		
 		- Nicht "Ich soll das verwenden, deswegen mach ich das" !
 		- Darauf eingehen, dass ein vielfältiges Tool mit vielen Möglichkeiten gesucht wurde
 		- Simulink soll Grundlage für weitere Forschung sein, darauf soll aufgebaut werden

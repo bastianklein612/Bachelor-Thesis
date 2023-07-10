@@ -102,29 +102,26 @@ To prove its functionality, the controller has to be able to reliably control th
 %After a robust model and a reliable controller have been developed, the focus is on using machine learning to enable the robot to learn leg coordination on its own.
 %It would be particularly interesting to determine if already familiar gaits become recognizable or if entirely new forms of movement emerge.
 
-
-The basis of the work is provided by the software \textit{MATLAB\textregistered}, which is widely used in research and industry, and the included \textit{Simulink}\textregistered environment of the company \textit{MathWorks}.
+Most of our work on this thesis is supported by the software \textit{MATLAB\textsuperscript{\textregistered}} and the included \textit{Simulink\textsuperscript{\textregistered}} environment, both developed by the company \textit{MathWorks}.
 Simulink provides a modeling method based on functional blocks, which enables a very modular and visually clear development process.
 Through a multitude of so-called "toolboxes", models from a wide variety of application areas can be created.
 
-At the beginning of the work, a detailed, physically correct model of the hexapod is developed using the Simulink toolbox Simscape, the \emph{PhantomX} hexapod from \emph{Trossen Robotics} is used as a template here.
-Each of the 6 legs consists of 3 joints with one actuator each, an architecture which is widely used and proven.
-The model should be parameterized as well as possible, so that properties like weight, friction coefficients, torques, etc. of the individual components can be easily adjusted later on.
-Each of the actuators must be individually addressable and the joints must provide sensor data regarding their position (and acceleration).
-This data informs the controller to be implemented in the next step about the position (and dynamics) of the robot.
-In addition to the actual model of the Hexapod, a simple test environment will also be built, in which the robot model can be extensively tested in the further development process.
+Initially, we develop a detailed, physically correct model of the hexapod using Simulink's Toolbox \textit{Simscape\textsuperscript{\texttrademark}}, taking the \emph{PhantomX} hexapod from \emph{Trossen Robotics} as a template.
+The model is parameterized as well as possible, so that properties like weight, friction coefficients, maximum torques, etc. of the individual components can be easily adjusted later on.
+Each of the models actuators is individually addressable and provides sensor data regarding position (and acceleration).
+Additionally, a simple test environment is constructed to extensively test the robot model during the further development process.
 
-After the development of the SimScape model is completed, the implementation of a controlled control of the robot in Simulink is started.
-The initial focus is on describing the motion sequence of a single leg.
-As soon as this sequence, consisting of swing and stance phases, works reliably, it will be extended to all 6 legs.
-Here, the coordination of the legs plays a decisive role, regardless of whether this is laid out centrally or distributed.
-It is also fundamental, of course, that the robot maintains balance and is robust in the face of disturbances in the motion sequence.
-In order to extensively test the SimScape model, it is possible to model several different gaits such as the tripod, tetrapod and wave gait.
+The subsequent step focuses on the implementation of a motion controller enabling the hexapod to walk.
+Initially, the attention lies only on defining the motion of a single leg.
+When this sequence, consisting of "swing" and "stance" phase, works reliably, it is extended to all six legs.
+Here, coordinating the legs in such a way that an efficient walking motion emerges, is of special importance.
+It is also fundamental, of course, that the robot maintains balance and is robust in the face of disturbances throughout the entire movement sequence.
+In order to extensively test the Simscape model, we implement several different gaits such as the tripod, tetrapod and wave gait.
 %evt. a decentralized architecture such as that of Schilling et al. could also be represented (?).
-Based on the preliminary work on modeling and the different gaits, the coordination of the legs will then be learned itself using a reinforcement learning model.
-This learning process will also be realized within the Simulink environment by the RL toolbox.
-In contrast to the gaits generated so far, it will not be specified here which legs should execute their movement at which time.
-The motion sequence of the individual leg remains fixed, while the coordination among them is to be learned by interaction of the model with the environment. 
+
+Based on the preliminary work on the model and different gaits, the coordination of the legs is then learned using a reinforcement learning(RL) model.
+This learning process is also realized within the Simulink environment utilizing the RL toolbox.
+In contrast to the gaits generated so far, only the motion sequence of the individual leg remains fixed, while the coordination among them is learned by interaction of the model with the environment. 
 This approach makes it possible to initially reduce the complexity of the skills to be learned, but at the same time leaves open the possibility of including additional elements in the learning process as it progresses.
 
 %\section{Lösungsansatz}
@@ -153,7 +150,7 @@ This approach makes it possible to initially reduce the complexity of the skills
 %Der Bewegungsablauf des einzelnen Beins bleibt fest definiert, während die Koordination untereinander durch Interaktion des Modells mit der Umgebung erlernt werden soll. 
 %Diese Herangehensweise ermöglicht es die Komplexität der zu erlernenden Fähigkeiten zunächst zu reduzieren, lässt aber gleichzeitig die Möglichkeit offen, im weiteren Verlauf zusätzliche Elemente in den Lernprozess einzubeziehen.
 
-section{Related Works}
+\section{Related Works}
 In the field of hexapod robot simulation, numerous scientific papers have been published in recent years, also specifically using Simulink software.
 For example, \parencite{HexapodRobotSimscapeMultibody} deals with the implementation of a hexapod from simple geometric figures and its control in Simulink.
 
