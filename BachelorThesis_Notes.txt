@@ -118,13 +118,14 @@ Gespäch mit Malte und Julius:
  - PhantomX-Modell dazu bringen, seine Beine an bestimmte Positionen zu bewegen(InverseKinematics) (mit IK-Tool schon möglich, in Simulink noch nicht)
 
 - Gespräch mit Malte und Julius:
-		- Ins Englische übersetzen und englisch weiterschreiben
+		- Ziel zu konkret, eher darauf eingehen was Modell können soll(Lern-Algorithmen sollen anwendbar sein, etc. --> man soll drauf aufbauen können)  (erledigt)
+
+		- Ins Englische übersetzen und in Englisch weiterschreiben
 		- Nicht "Ich soll das verwenden, deswegen mach ich das" !
-		  Darauf eingehen, dass ein vielfältiges Tool mit vielen Möglichkeiten gesucht wurde
+		- Darauf eingehen, dass ein vielfältiges Tool mit vielen Möglichkeiten gesucht wurde
 		- Simulink soll Grundlage für weitere Forschung sein, darauf soll aufgebaut werden
 		- Modell welches ich entwickle, soll ebenfalls die Grundlage bilden, um darauf aufbauend weiter zu forschen
 		- Wir wollen ein bestimmtes Ziel erreichen, nicht 'UMBEDINGT' MATLAB verwenden und damit was machen (Anfang bei Kapitel Ziel)
-		- Ziel zu konkret, eher darauf eingehen was Modell können soll(Lern-Algorithmen sollen anwendbar sein, etc. --> man soll drauf aufbauen können)
 		- Tabelle oder timechart im Zeitplan verwenden ?
 		- ab Zielteil im 'Aktiv Präsenz' schreiben
 		- Lösungsansatz abstrakter, nicht so konkret

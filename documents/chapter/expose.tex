@@ -9,26 +9,25 @@ Simulations play an increasingly important role in robotics research and develop
 They offer a cost-effective and efficient means to investigate, analyze and optimize the behavior of robots even before they are physically implemented \parencite{de2019analysis}. 
 Notably, various companies involved in the field of robotics extensively use simulation technology in the development process of their systems, such as Boston Dynamics \parencite{BostonDynamicsSimulation}, Tesla Inc. \parencite{TeslaAiDay2022} or Kuka Robotics \parencite{KukaSim}.
 Due to their high degree of mobility and versatility, hexapods are of particular interest in robotics. 
-Compared to wheeled or bipedal architectures, the presence of six legs enables these robots to more easily overcome challenging terrain and complex obstacles \parencite{barai2013smart, atifystructure}.
-This feature makes them particularly interesting for navigating landscapes otherwise inaccessible by humans or other robotic systems.
+Compared to wheeled or bipedal architectures, the presence of six legs enables these robots to more easily overcome challenging terrain and complex obstacles \parencite{barai2013smart, atifystructure},making them particularly interesting for navigating landscapes otherwise inaccessible by humans or other robotic systems.
 
 \section{Problem}
 The process of developing software for these hexapods is a challenging and by no means trivial task.
-While maintaining balance for example, is evidently easier for this architecture than for the above mentioned bipedal robots, coordinating the many legs during movement poses a major challenge \parencite{azayev2020blind,schilling2013walknet}.
-To break down the complex dynamics of such a system, creating a virtual model can have many benefits.
-There is a variety of robot simulation platforms, e.g. Gazebo, V-REP or Webots. 
+While maintaining balance for instance, is evidently easier for this architecture than for the above mentioned bipedal robots, coordinating the many legs during movement poses a major challenge \parencite{azayev2020blind,schilling2013walknet}.
+When trying to break down the complex dynamics of such a system, creating a virtual model can offer many benefits.
+
+To support our research on hexapod robots, we aim to capitalize on these benefits.
+We seek an environment which offers a wide range of tools to enhance our understanding of the robots behavior as well as enables us to more quickly verify and optimize new ideas.
+In our search for an adequate solution, we found a variety of robot simulation platforms, e.g. Gazebo, V-REP or Webots. 
 Each of these simulators has its own strengths and features that researchers have utilized to explore different aspects of robotics.
 Besides these tools explicitly developed for simulating robots, there are other modeling and simulation environments which have a wider fiend of use.
-One example of these is MATLAB Simulink, a graphical programming environment used for modeling, simulation and analysis of complex, dynamic systems.
+One example of these is \textit{MATLAB Simulink\textsuperscript{\textregistered}}, a graphical programming environment used for modeling, simulation and analysis of complex, dynamic systems.
 %Simulink's diagram-like interface and extensive library of "toolboxes" facilitate the creation of modular and well-organized systems, which can also be immediately simulated.
-To support our research on hexapod robots, we aim to leverage simulation software to take advantage of the benefits these tools have to offer.
-Considering the widespread use of MATLAB Simulink in both research and industry along with its extensive libraries addressing various domains, we have chosen it as our preferred platform.
+Considering the widespread use of Simulink in both research and industry along with its extensive libraries addressing various domains, we have chosen it as our preferred platform.
 %In our opinion, the MATLAB Simulink modeling and simulation environment from the MathWorks company is particularly interesting for implementing such a model.
 %Due to its diagram-like development interface based on functional blocks and a large number of so-called "toolboxes" from a wide variety of application areas, Simulink enables the generation of modular and clearly arranged systems, which can be simulated immediately.
 In recent years, several scientific papers have been published dealing with the simulation of a hexapod in Simulink(see e.g. \cite{tanaka2019development, barai2013smart, atify2019propelling}).
-However, to our knowledge, there is currently no publicly available, up-to-date Simulink model on which further research could build on.
-
-Therefore, in this bachelor thesis we want to address the problem of developing such a hexapod model using MATLAB Simulink.
+However, to our knowledge, there is currently no publicly available, up-to-date Simulink-based hexapod model on which further research could build on.
 
 
 %Auf Grund ihrer hohen Beweglichkeit und Vielseitigkeit sind Hexapods in der Robotik von besonderen Interesse. 
@@ -59,13 +58,14 @@ Therefore, in this bachelor thesis we want to address the problem of developing 
 
 
 \section{Objective}
-In this thesis, we aim to develop a comprehensive virtual model of a hexapod robot.
-The framework we are developing serves as a foundation for our future research to build on.
-To facilitate flexible and easy expansions, the model requires a high level of modularity, allowing for the integration and replacement of individual subsystems without having to reconfigure the whole system.
-The simulation environment supports accurate physics simulations, including collision detection, friction modeling and dynamic interactions to realistically simulate the robots movements.
-Additionally, it provides accessible means to observe and analyze the robots behavior.
-This includes the ability to extract data from the simulation and visualize it, providing better evaluation of the systems performance.
-Furthermore, the surrounding software framework enables the future use of tools from various domains, such as control/ learning algorithm development or hardware integration.
+Therefore, our main goal for this thesis is to develop a comprehensive virtual model of a hexapod robot using the MATLAB Simulink\textsuperscript{\textregistered} environment.
+The model we are developing serves as a foundation for future research to build on.
+To facilitate flexible and easy expansions, the model requires a high level of modularity, allowing for the integration or replacement of subsystems without having to reconfigure the whole system.
+It is essential that the created model interacts with simulated surrounding in a physically correct way, giving us a testbed as close to reality as possible.
+This includes the modeling of general kinematics, friction as well as collision detection.
+Additionally, accessible means to observe and analyze the robots behavior are provided.
+This includes the ability for extraction and evaluation of data from the simulation, providing better insight into the systems performance.
+Furthermore, the surrounding MATLAB software framework enables the future use of tools from other various domains, such as control/ learning algorithm development or hardware integration.
 
 To validate the developed model, we implement a motion controller which allows the robot to navigate within the virtual environment in straight lines. This also includes the application of Reinforcement Learning, enabling the robot to learn "inter-leg" coordination from the ground up.
 To prove its functionality, the controller has to be able to reliably control the robot without losing balance and tipping over.
