@@ -120,21 +120,27 @@ Gespäch mit Malte und Julius:
 - Gespräch mit Malte und Julius:
 		- Ziel zu konkret, eher darauf eingehen was Modell können soll(Lern-Algorithmen sollen anwendbar sein, etc. --> man soll drauf aufbauen können)  (erledigt)
 		- Ins Englische übersetzen und in Englisch weiterschreiben (erledigt)
+		- Related works ausbauen (erledigt)
+		- Expose nicht länger machen, eher schon zu lang (erledigt)
+		- Darauf eingehen, dass ein vielfältiges Tool mit vielen Möglichkeiten gesucht wurde (erledigt)
+		- Modell welches ich mit Simulink entwickle, soll die Grundlage bilden um darauf aufbauend weiter zu forschen (erledigt)
+		- Nicht "Ich soll das verwenden, deswegen mach ich das" ! (erledigt)
+		- Wir wollen ein bestimmtes Ziel erreichen, nicht 'UMBEDINGT' MATLAB verwenden und damit was machen (fängt bei Kapitel Ziel an) (erledigt)
+		- ab Zielteil im 'Aktiv Präsenz' schreiben (erledigt)
+		- Lösungsansatz abstrakter, nicht so konkret (erledigt)
 		
-		- Nicht "Ich soll das verwenden, deswegen mach ich das" !
-		- Darauf eingehen, dass ein vielfältiges Tool mit vielen Möglichkeiten gesucht wurde
-		- Simulink soll Grundlage für weitere Forschung sein, darauf soll aufgebaut werden
-		- Modell welches ich entwickle, soll ebenfalls die Grundlage bilden, um darauf aufbauend weiter zu forschen
-		- Wir wollen ein bestimmtes Ziel erreichen, nicht 'UMBEDINGT' MATLAB verwenden und damit was machen (Anfang bei Kapitel Ziel)
+		
 		- Tabelle oder timechart im Zeitplan verwenden ?
-		- ab Zielteil im 'Aktiv Präsenz' schreiben
-		- Lösungsansatz abstrakter, nicht so konkret
-		- Expose nicht länger machen, eher schon zu lang
-		- Do. (ab 13.07) 10:15 Uhr Oberseminar
 		- homogene Transformationen ansehen(Foto und VL./Internet)
+		- Do. (ab 13.07) 10:15 Uhr Oberseminar
 		
 ----------------------------------------- 
-		
+04.07 - 12.07. 
+	- Umsetzung der Anmerkungen aus dem Gespräch
+
+----------------------------------------- 
+12.07.
+	
 
 		
 		
