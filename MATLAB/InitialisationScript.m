@@ -1,59 +1,35 @@
 %--------------------Initialisation Script--------------------%
 
-world_damping = 0;
+gravity_vector = [0, 0, -9.81];
 
-mu_s = 0.9000;
-mu_k = 0.8000;
-mu_vth = 0.1000;
 
-init_height = 0.8025;
-
-%
-damping_master = 0.001;
-
-joint_damping_alpha = damping_master;
-joint_damping_beta = damping_master;
-joint_damping_gamma = damping_master;
-
-% joint_damping_alpha = 1e-3;
-% joint_damping_beta = 1e-3;
-% joint_damping_gamma = 1e-3;
-
-%Initialwinkel der Gelenke
-initial_alpha = -90;
-initial_beta = -30;
-initial_gamma = 110;
+% Initialwinkel der Gelenke
+initial_alpha = 0;
+initial_beta = 0;
+initial_gamma = 0;
 
 % Minimale und maximale Winkel der einzelnen Gelenke(erstmal geschätzt)
-lowerLimit_Alpha = -90 - 60;
-upperLimit_Alpha = -90 + 60;
-
-lowerLimit_Beta = -85;
-upperLimit_Beta = 60;
-
-lowerLimit_Gamma = 90 - 120;
-upperLimit_Gamma = 90 + 60;
 
 
+% global transition region joints
+global_transition_region = 10;
 
-%HS-645MG Servo:
-%Drehmoment: 94 Ncm = 0.94 NM
-% motor_torque = 0.94;
-motor_torque = 3;
+% HS-645MG Servo:
+% Drehmoment: 94 Ncm = 0.94 NM
+max_torque_alpha = 1;
+max_torque_beta = 1;
+max_torque_gamma = 1;
 
-%Spatial friction force
+% Spatial friction force
 stiffness = 1e6;
 damping = 1e3;
 transition_region = 1e-4;
 
-%Test PID Settings
+% Test PID Settings
 pid_P = 1;
 pid_I = 0.2;
 pid_D = 1;
 pid_filter_N = 100;
-
-%Fallhöhe
-drop_height = 300;
 
 
 
@@ -66,6 +42,6 @@ phantomX_mk4  = importrobot('robot_models\interbotix_xshexapod_descriptions\urdf
 
 
 %smimport(['phantomx_description\urdf\phantomx.urdf']);
-smimport(phantomX_mk4);
+%smimport(phantomX_mk4);
 
-%open_system("Sandbox.slx");
+open_system("PhantomX_MK4.slx");
