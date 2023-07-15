@@ -12,24 +12,38 @@ initial_gamma = 0;
 
 
 % global transition region joints
-global_transition_region = 10;
+global_transition_region = 1;
 
+
+globalTorque = 1;
 % HS-645MG Servo:
 % Drehmoment: 94 Ncm = 0.94 NM
-max_torque_alpha = 1;
-max_torque_beta = 1;
-max_torque_gamma = 1;
+max_torque_alpha = globalTorque;
+max_torque_beta = globalTorque;
+max_torque_gamma = globalTorque;
 
-% Spatial friction force
+% Spatial contact force
 stiffness = 1e6;
 damping = 1e3;
 transition_region = 1e-4;
 
+mu_static = 0.5;
+mu_dynamic = 0.3;
+critical_vel = 1e-3;
+
 % Test PID Settings
-pid_P = 1;
+pid_P = 3;
 pid_I = 0.2;
 pid_D = 1;
 pid_filter_N = 100;
+
+%pid_P = 1;
+%pid_I = 0.2;
+%pid_D = 1;
+%pid_filter_N = 100;
+
+%scene
+plane_offset = 0.17;
 
 
 
