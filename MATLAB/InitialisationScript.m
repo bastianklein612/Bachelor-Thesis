@@ -43,7 +43,7 @@ pid_filter_N = 100;
 %pid_filter_N = 100;
 
 %scene
-plane_offset = 0.17;
+plane_offset = 0.47;
 
 
 
