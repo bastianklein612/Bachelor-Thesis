@@ -37,13 +37,18 @@ pid_I = 0.2;
 pid_D = 1;
 pid_filter_N = 100;
 
+
+%pattern generation
+x_offset = 0.2;
+z_offset = -0.13;
+
 %pid_P = 1;
 %pid_I = 0.2;
 %pid_D = 1;
 %pid_filter_N = 100;
 
 %scene
-plane_offset = 0.47;
+plane_offset = 0.16;
 
 
 
