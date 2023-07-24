@@ -15,7 +15,7 @@ initial_gamma = 0;
 global_transition_region = 1;
 
 
-globalTorque = 1;
+globalTorque = 0.94;
 % HS-645MG Servo:
 % Drehmoment: 94 Ncm = 0.94 NM
 max_torque_alpha = globalTorque;
