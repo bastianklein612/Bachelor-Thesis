@@ -139,9 +139,32 @@ Gespäch mit Malte und Julius:
 	- Umsetzung der Anmerkungen aus dem Gespräch
 
 ----------------------------------------- 
-12.07.
+12.07. - 19.07.
 	
+	- 13.07.: Oberseminar zu viert; Malte und Julius nicht anwesend, da in münd. Prüfungen
 
+	- Überarbeitungen am Modell und Expose
+	- Gespräch mit Malte am 19.07.:
+		- Expose noch nicht angesehen
+		- iterative inverse Kinematik, welche Simulink zur Verfügung stellt, relativ langsam --> evt. selbst analytischen Solver implementieren
+		- Anfangen, Thesis zu schreiben
+		- Aufbau:
+			-Introduction
+			-Background/ Related Works  --> Hiermit anfangen, da andere Abschnitte sich noch stark ändern könnten
+			-Methods
+			-Results
+			-Discussion/Conclusion
 		
-		
+		- Bachelorarbeit kann angemeldet werden
+	
+----------------------------------------- 
+20.07. - 25.07.
+	- Grundstruktur der Thesis aufgestellt
+	- Einfachen Tripod-gait erzeugt, Bewegungsablauf noch sehr starr festgelegt
+	- selbst implementierte analytische IK funktioniert(bis jetzt nur an einem Bein, sollte aber übertragbar sein)
+	- Malte mit Feedback zum Expose: Etwas Nachschärfen im Objective nötig, momentan sehr darauf beschränkt eine gute Simulation zu erzeugen. 
+	  Fragestellung etwas öffnen, darauf beziehen was uns dies ermöglicht(z.B. Lernen) 
+	
+----------------------------------------- 
+26.07 - 
 		
