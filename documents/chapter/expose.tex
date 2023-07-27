@@ -7,7 +7,7 @@
 \section{Introduction}
 Simulations play an increasingly important role in robotics research and development \parencite{afzal2020study}. 
 They offer a cost-effective and efficient means to investigate, analyze and optimize the behavior of robots even before they are physically implemented \parencite{de2019analysis}. 
-Notably, various companies involved in the field of robotics extensively use simulation technology in the development process of their systems, such as Boston Dynamics \parencite{BostonDynamicsSimulation}, Tesla Inc. \parencite{TeslaAiDay2022} or Kuka Robotics \parencite{KukaSim}.
+Notably, various companies involved in the field of robotics use simulation technology extensively in the development process of their systems, such as Boston Dynamics \parencite{BostonDynamicsSimulation}, Tesla Inc. \parencite{TeslaAiDay2022} or Kuka Robotics \parencite{KukaSim}.
 Due to their high degree of mobility and versatility, hexapods are of particular interest in robotics. 
 Compared to wheeled or bipedal architectures, the presence of six legs enables these robots to more easily overcome challenging terrain and complex obstacles \parencite{barai2013smart, atifystructure}, making them particularly interesting for navigating landscapes otherwise inaccessible to humans or other types of robotic systems.
 
@@ -65,7 +65,7 @@ Additionally, accessible means to observe and analyze the robots behavior are pr
 This includes the capability to extract and evaluate data from the simulation, enabling us to gain valuable insights into the systems performance.
 Furthermore, the integration with the MATLAB software framework opens up possibilities to incorporate learning algorithms into the model.
 By doing so, we will be able to optimize various aspects of the robotic system. 
-This includes fine-tuning of control algorithms using reinforcement learning, enabling the robot to autonomously learn the movement of its leg and develop coordination strategies.
+This includes fine-tuning of control algorithms using Reinforcement Learning, enabling the robot to autonomously learn efficient leg movements and develop coordination strategies.
 The model will also provide a basis for testing more advanced learning algorithms, such as vision-based path planing and terrain-navigation.
 
 To validate the developed model, we implement a motion controller which allows the robot to navigate within the virtual environment in straight lines. This also includes the application of Reinforcement Learning, enabling the robot to learn "interlimb" coordination from the ground up.
@@ -121,7 +121,7 @@ It is also fundamental of course, that the robot maintains balance and is robust
 In order to extensively test the Simscape model, we implement several different gaits such as the tripod, tetrapod and wave gait.
 %evt. a decentralized architecture such as that of Schilling et al. could also be represented (?).
 
-Based on the preliminary work on the model and different gaits, we use a reinforcement learning(RL) approach to learn the coordination of the legs.
+Based on the preliminary work done on the model and different gaits, we use a reinforcement learning(RL) approach to learn the coordination of the legs.
 This learning process is also realized within the Simulink environment utilizing the RL toolbox.
 In contrast to the gaits generated so far, only the motion sequence of the individual leg remains fixed, while the coordination among them is learned by interaction of the model with its environment. 
 This approach of keeping the individual legs motion predefined, makes it possible to initially reduce the complexity of the skills to be learned, but at the same time leaves open the possibility of including additional elements in the learning process as it progresses.
