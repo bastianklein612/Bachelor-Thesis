@@ -26,7 +26,7 @@
  * | See matlabroot/simulink/src/sfuntmpl_doc.c for a more detailed template |
  *  -------------------------------------------------------------------------
  *
- * Created: Tue Jul 25 22:46:04 2023
+ * Created: Wed Jul 26 17:24:43 2023
  */
 
 #define S_FUNCTION_LEVEL               2
@@ -34,19 +34,19 @@
 
 /*<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<*/
 /* %%%-SFUNWIZ_defines_Changes_BEGIN --- EDIT HERE TO _END */
-#define NUM_INPUTS                     4
+#define NUM_INPUTS                     2
 
 /* Input Port  0 */
-#define IN_PORT_0_NAME                 x
-#define INPUT_0_DIMS_ND                {1,1}
-#define INPUT_0_NUM_ELEMS              1
+#define IN_PORT_0_NAME                 angle_offsets
+#define INPUT_0_DIMS_ND                {1,3}
+#define INPUT_0_NUM_ELEMS              3
 #define INPUT_0_WIDTH                  1
-#define INPUT_DIMS_0_COL               1
+#define INPUT_DIMS_0_COL               3
 #define INPUT_0_DTYPE                  real_T
 #define INPUT_0_COMPLEX                COMPLEX_NO
 #define IN_0_BUS_BASED                 0
 #define IN_0_BUS_NAME
-#define IN_0_DIMS                      1-D
+#define IN_0_DIMS                      2-D
 #define INPUT_0_FEEDTHROUGH            1
 #define IN_0_ISSIGNED                  0
 #define IN_0_WORDLENGTH                8
@@ -56,16 +56,16 @@
 #define IN_0_SLOPE                     0.125
 
 /* Input Port  1 */
-#define IN_PORT_1_NAME                 y
-#define INPUT_1_DIMS_ND                {1,1}
-#define INPUT_1_NUM_ELEMS              1
+#define IN_PORT_1_NAME                 coordinates
+#define INPUT_1_DIMS_ND                {1,3}
+#define INPUT_1_NUM_ELEMS              3
 #define INPUT_1_WIDTH                  1
-#define INPUT_DIMS_1_COL               1
+#define INPUT_DIMS_1_COL               3
 #define INPUT_1_DTYPE                  real_T
 #define INPUT_1_COMPLEX                COMPLEX_NO
 #define IN_1_BUS_BASED                 0
 #define IN_1_BUS_NAME
-#define IN_1_DIMS                      1-D
+#define IN_1_DIMS                      2-D
 #define INPUT_1_FEEDTHROUGH            1
 #define IN_1_ISSIGNED                  0
 #define IN_1_WORDLENGTH                8
@@ -73,44 +73,6 @@
 #define IN_1_FRACTIONLENGTH            9
 #define IN_1_BIAS                      0
 #define IN_1_SLOPE                     0.125
-
-/* Input Port  2 */
-#define IN_PORT_2_NAME                 z
-#define INPUT_2_DIMS_ND                {1,1}
-#define INPUT_2_NUM_ELEMS              1
-#define INPUT_2_WIDTH                  1
-#define INPUT_DIMS_2_COL               1
-#define INPUT_2_DTYPE                  real_T
-#define INPUT_2_COMPLEX                COMPLEX_NO
-#define IN_2_BUS_BASED                 0
-#define IN_2_BUS_NAME
-#define IN_2_DIMS                      1-D
-#define INPUT_2_FEEDTHROUGH            1
-#define IN_2_ISSIGNED                  0
-#define IN_2_WORDLENGTH                8
-#define IN_2_FIXPOINTSCALING           1
-#define IN_2_FRACTIONLENGTH            9
-#define IN_2_BIAS                      0
-#define IN_2_SLOPE                     0.125
-
-/* Input Port  3 */
-#define IN_PORT_3_NAME                 coxa_offset
-#define INPUT_3_DIMS_ND                {1,1}
-#define INPUT_3_NUM_ELEMS              1
-#define INPUT_3_WIDTH                  1
-#define INPUT_DIMS_3_COL               1
-#define INPUT_3_DTYPE                  real_T
-#define INPUT_3_COMPLEX                COMPLEX_NO
-#define IN_3_BUS_BASED                 0
-#define IN_3_BUS_NAME
-#define IN_3_DIMS                      1-D
-#define INPUT_3_FEEDTHROUGH            1
-#define IN_3_ISSIGNED                  0
-#define IN_3_WORDLENGTH                8
-#define IN_3_FIXPOINTSCALING           1
-#define IN_3_FRACTIONLENGTH            9
-#define IN_3_BIAS                      0
-#define IN_3_SLOPE                     0.125
 #define NUM_OUTPUTS                    4
 
 /* Output Port  0 */
@@ -203,10 +165,8 @@
 /*<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<*/
 #include "simstruc.h"
 
-extern void InverseKinematics_Outputs_wrapper(const real_T *x,
-  const real_T *y,
-  const real_T *z,
-  const real_T *coxa_offset,
+extern void InverseKinematics_Outputs_wrapper(const real_T *angle_offsets,
+  const real_T *coordinates,
   real_T *alpha,
   real_T *beta,
   real_T *gamma,
@@ -236,32 +196,27 @@ static void mdlInitializeSizes(SimStruct *S)
     return;
 
   /* Input Port 0 */
-  ssSetInputPortWidth(S, 0, INPUT_0_NUM_ELEMS);
+  ssAllowSignalsWithMoreThan2D(S);
+  inputDimsInfo.numDims = 2;
+  inputDimsInfo.width = INPUT_0_NUM_ELEMS;
+  int_T in0Dims[] = INPUT_0_DIMS_ND;
+  inputDimsInfo.dims = in0Dims;
+  ssSetInputPortDimensionInfo(S, 0, &inputDimsInfo);
   ssSetInputPortDataType(S, 0, SS_DOUBLE);
   ssSetInputPortComplexSignal(S, 0, INPUT_0_COMPLEX);
   ssSetInputPortDirectFeedThrough(S, 0, INPUT_0_FEEDTHROUGH);
   ssSetInputPortRequiredContiguous(S, 0, 1);/*direct input signal access*/
 
   /* Input Port 1 */
-  ssSetInputPortWidth(S, 1, INPUT_1_NUM_ELEMS);
+  inputDimsInfo.numDims = 2;
+  inputDimsInfo.width = INPUT_1_NUM_ELEMS;
+  int_T in1Dims[] = INPUT_1_DIMS_ND;
+  inputDimsInfo.dims = in1Dims;
+  ssSetInputPortDimensionInfo(S, 1, &inputDimsInfo);
   ssSetInputPortDataType(S, 1, SS_DOUBLE);
   ssSetInputPortComplexSignal(S, 1, INPUT_1_COMPLEX);
   ssSetInputPortDirectFeedThrough(S, 1, INPUT_1_FEEDTHROUGH);
   ssSetInputPortRequiredContiguous(S, 1, 1);/*direct input signal access*/
-
-  /* Input Port 2 */
-  ssSetInputPortWidth(S, 2, INPUT_2_NUM_ELEMS);
-  ssSetInputPortDataType(S, 2, SS_DOUBLE);
-  ssSetInputPortComplexSignal(S, 2, INPUT_2_COMPLEX);
-  ssSetInputPortDirectFeedThrough(S, 2, INPUT_2_FEEDTHROUGH);
-  ssSetInputPortRequiredContiguous(S, 2, 1);/*direct input signal access*/
-
-  /* Input Port 3 */
-  ssSetInputPortWidth(S, 3, INPUT_3_NUM_ELEMS);
-  ssSetInputPortDataType(S, 3, SS_DOUBLE);
-  ssSetInputPortComplexSignal(S, 3, INPUT_3_COMPLEX);
-  ssSetInputPortDirectFeedThrough(S, 3, INPUT_3_FEEDTHROUGH);
-  ssSetInputPortRequiredContiguous(S, 3, 1);/*direct input signal access*/
   if (!ssSetNumOutputPorts(S, NUM_OUTPUTS))
     return;
 
@@ -281,7 +236,6 @@ static void mdlInitializeSizes(SimStruct *S)
   ssSetOutputPortComplexSignal(S, 2, OUTPUT_2_COMPLEX);
 
   /* Output Port 3 */
-  ssAllowSignalsWithMoreThan2D(S);
   outputDimsInfo.numDims = 2;
   outputDimsInfo.width = OUTPUT_3_NUM_ELEMS;
   int_T out3Dims[] = OUTPUT_3_DIMS_ND;
@@ -334,6 +288,24 @@ static void mdlSetDefaultPortDimensionInfo(SimStruct *S)
 {
   DECL_AND_INIT_DIMSINFO(portDimsInfo);
   int_T dims[2];
+
+  /* Setting default dimensions for input port 0 */
+  portDimsInfo.width = INPUT_0_NUM_ELEMS;
+  dims[0] = INPUT_0_NUM_ELEMS;
+  dims[1] = 1;
+  portDimsInfo.numDims = 2;
+  if (ssGetInputPortWidth(S, 0) == DYNAMICALLY_SIZED) {
+    ssSetInputPortMatrixDimensions(S, 0, 1 , 1);
+  }
+
+  /* Setting default dimensions for input port 1 */
+  portDimsInfo.width = INPUT_1_NUM_ELEMS;
+  dims[0] = INPUT_1_NUM_ELEMS;
+  dims[1] = 1;
+  portDimsInfo.numDims = 2;
+  if (ssGetInputPortWidth(S, 1) == DYNAMICALLY_SIZED) {
+    ssSetInputPortMatrixDimensions(S, 1, 1 , 1);
+  }
 
   /* Setting default dimensions for output port 3 */
   portDimsInfo.width = OUTPUT_3_NUM_ELEMS;
@@ -400,16 +372,14 @@ static void mdlStart(SimStruct *S)
  */
 static void mdlOutputs(SimStruct *S, int_T tid)
 {
-  const real_T *x = (real_T *) ssGetInputPortRealSignal(S, 0);
-  const real_T *y = (real_T *) ssGetInputPortRealSignal(S, 1);
-  const real_T *z = (real_T *) ssGetInputPortRealSignal(S, 2);
-  const real_T *coxa_offset = (real_T *) ssGetInputPortRealSignal(S, 3);
+  const real_T *angle_offsets = (real_T *) ssGetInputPortRealSignal(S, 0);
+  const real_T *coordinates = (real_T *) ssGetInputPortRealSignal(S, 1);
   real_T *alpha = (real_T *) ssGetOutputPortRealSignal(S, 0);
   real_T *beta = (real_T *) ssGetOutputPortRealSignal(S, 1);
   real_T *gamma = (real_T *) ssGetOutputPortRealSignal(S, 2);
   real_T *debug = (real_T *) ssGetOutputPortRealSignal(S, 3);
-  InverseKinematics_Outputs_wrapper(x, y, z, coxa_offset, alpha, beta, gamma,
-    debug);
+  InverseKinematics_Outputs_wrapper(angle_offsets, coordinates, alpha, beta,
+    gamma, debug);
 }
 
 /* Function: mdlTerminate =====================================================

@@ -4,9 +4,9 @@ gravity_vector = [0, 0, -9.81];
 
 
 % Initialwinkel der Gelenke
-initial_alpha = 0;
-initial_beta = 0;
-initial_gamma = 0;
+angle_offsets_front  = [-45, 14.03624347, 60.58440117];
+angle_offsets_middle = [0, 14.03624347, 60.58440117];
+angle_offsets_back   = [45, 14.03624347, 60.58440117];
 
 % Minimale und maximale Winkel der einzelnen Gelenke(erstmal geschätzt)
 
