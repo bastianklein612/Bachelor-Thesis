@@ -4,9 +4,9 @@ gravity_vector = [0, 0, -9.81];
 
 
 % Initialwinkel der Gelenke
-angle_offsets_front  = [-45, 14.03624347, 60.58440117];
+angle_offsets_LF_RB  = [45, 14.03624347, 60.58440117];
 angle_offsets_middle = [0, 14.03624347, 60.58440117];
-angle_offsets_back   = [45, 14.03624347, 60.58440117];
+angle_offsets_RF_LB   = [-45, 14.03624347, 60.58440117];
 
 % Minimale und maximale Winkel der einzelnen Gelenke(erstmal geschätzt)
 
@@ -48,7 +48,7 @@ z_offset = -0.13;
 %pid_filter_N = 100;
 
 %scene
-plane_offset = 0.46;
+plane_offset = 0.16;
 
 
 
