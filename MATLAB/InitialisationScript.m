@@ -8,6 +8,10 @@ angle_offsets_LF_RB  = [45, 14.03624347, 60.58440117];
 angle_offsets_middle = [0, 14.03624347, 60.58440117];
 angle_offsets_RF_LB   = [-45, 14.03624347, 60.58440117];
 
+%Faktoren zur Definierung der Schritthöhe/-weite
+step_height = 0.08;
+step_length = 0.05;
+
 % Minimale und maximale Winkel der einzelnen Gelenke(erstmal geschätzt)
 
 
@@ -48,7 +52,7 @@ z_offset = -0.13;
 %pid_filter_N = 100;
 
 %scene
-plane_offset = 0.16;
+plane_offset = 0.46;
 
 
 
