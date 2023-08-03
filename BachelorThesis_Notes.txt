@@ -166,5 +166,96 @@ Gespäch mit Malte und Julius:
 	  Fragestellung etwas öffnen, darauf beziehen was uns dies ermöglicht(z.B. Lernen) 
 	
 ----------------------------------------- 
-26.07 - 
+26.07 - 02.08.
+	- Feedback zum Expose umgesetzt und an Malte weitergeleitet
+	- selbst implementierte analytische IK funktioniert und lässt das Modell wesentlich schneller laufen
+	- Ellipse-/Pattern-Generator mehrfach umgebaut (besteht nun aus eliptischer Swing-Phase und einer linearen Bewegung auf dem Boden in der Stance-Phase
+	- durch Umbau des Pattern-Generators ist nun folgendes möglich:
+		- Frequenz der Gesamtbewegung kann angepasst werden(Swing+Stance zusammen)
+		- 'Duty-Cycle' der Swing-Phase kann prozentual angegeben werden (z.B. 50% --> Swing und Stance gleich lang)
+		- 'Offset' eingeführt; beim Start der Simulation dürfen nicht alle Beine gleichzeitig die selbe Bewegung starten, deshalb Verzögerung der Abläufe möglich
+	
+	- Durch Umbau können nun auf andere Gaits dargestellt werden, so funktionieren nun Wave-, Tetrapod- und Tripod-Gait
+	- Problem des Ruckelns beim laufen besteht noch immer, möchte ich durch Einführung eines Höhen-Controllers beheben
+	 (Roboter sackt beim Bewegen immer leicht ab und neu gesetzte Beine drücken ihn dann ruckartig hoch)
+	 
+----------------------------------------- 
+03.08.
+	- Oberseminar:
+		- Zwischenvortrag von Florian Warmeling(...Adaptive und intelligente Systeme in Simulink: Fallstudie mit ABS)
+		- Habe kurz mein Thema vorgestellt; Paula hat vorgeschlagen, dass ich mein Modell mit dem von Sanando kompatibel machen sollte
+		- Mit Sanando 1/2 h über sein Projekt unterhalten
 		
+		- Mitgenommene Ideen:
+			- Beim Vortrag eine visuelle Übersicht des gesamten Systems mit einbringen; Paula hat es als Beispiel als Diagramm aus versch. Blöcken dargestellt
+			  (Was baut worauf auf ? / Wo werden Daten übergeben/ weitergeleitet ? / etc.)
+			- Vortrag gut strukturieren
+			- Auch auf aktuellen Stand eingehen
+			- Simulink-Modell nur soweit erklären wie nötig
+			- Ausblick in Zukunft geben
+			- Genau definieren, was der eigene Beitrag ist
+			
+	- Weiterarbeit am Höhencontroller
+	- Beginn des Schreibens im Background-Teil
+	
+-----------------------------------------
+04.08
+
+
+
+
+
+
+
+
+
+
+
+
+
+---------------------------------------------------------------------------------------------------------------------------
+------------ZEITPLAN-------------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------------------------
+
+
+-----------------------------------------1
+07.08 - 13.08.
+
+
+
+-----------------------------------------2
+14.08 - 20.08.
+
+
+
+-----------------------------------------3
+21.08 - 27.08.
+
+
+
+-----------------------------------------4
+28.08 - 03.09.
+
+
+
+-----------------------------------------5
+04.09 - 10.09.
+
+
+
+-----------------------------------------6
+11.08 - 17.09.
+
+
+
+-----------------------------------------7
+18.08 - 24.09.
+
+
+
+
+
+
+(Hoffentlich nicht mehr benötigt)
+-----------------------------------------
+25.09 - 01.10.
