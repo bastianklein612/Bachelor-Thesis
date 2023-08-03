@@ -41,6 +41,10 @@ pid_I = 0.2;
 pid_D = 1;
 pid_filter_N = 100;
 
+height_pid_P = 6;
+height_pid_I = 0.1;
+height_pid_D = 0.1;
+
 
 %pattern generation
 x_offset = 0.2;
