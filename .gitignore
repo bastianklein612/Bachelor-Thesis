@@ -267,4 +267,8 @@ thesis.pdf
 *.asv
 *.slxc
 *.slx.autosave
+*.mexw64
+*.mat
+*_wrapper.c
 **/slprj
+
