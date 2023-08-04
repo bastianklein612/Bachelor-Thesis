@@ -196,10 +196,9 @@ Gespäch mit Malte und Julius:
 			- Genau definieren, was der eigene Beitrag ist
 			
 	- Weiterarbeit am Höhencontroller
-	- Beginn des Schreibens im Background-Teil
-	
 -----------------------------------------
-04.08
+04.08.
+	- Beginn des Schreibens im Background-Teil
 
 
 
