@@ -36,14 +36,19 @@ mu_dynamic = 0.8;
 critical_vel = 1e-3;
 
 % Test PID Settings
-pid_P = 3;
-pid_I = 0.2;
+pid_P = 1.5;
+pid_I = 0.4;
 pid_D = 1;
-pid_filter_N = 100;
+pid_filter_N = 80;
 
-height_pid_P = 6;
-height_pid_I = 0.1;
-height_pid_D = 0.1;
+%pid_P = 3;
+%pid_I = 0.2;
+%pid_D = 1;
+%pid_filter_N = 100;
+
+height_pid_P = 0;
+height_pid_I = 0;
+height_pid_D = 0;
 
 
 %pattern generation
