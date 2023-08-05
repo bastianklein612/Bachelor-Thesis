@@ -221,38 +221,50 @@ Gespäch mit Malte und Julius:
 
 -----------------------------------------1
 07.08 - 13.08.
-
-
+	- In RL und Simulinks RL-Agent einlesen
+	- Background weiterschreiben
+	- min. 2 Paper lesen
+	- Hexapod PID-Controller tunen
+	- Sanandos Modell ansehen, ausprobieren ob einfach mit meinem verbindbar
 
 -----------------------------------------2
 14.08 - 20.08.
-
-
+	- Experimente mit RL-Agent beginnen
+	- Background und Related Works schreiben
+	- Modell überarbeiten(mehrfach verwendete Subsysteme als Library anlegen ?, etc....)
+	- Paper lesen
 
 -----------------------------------------3
 21.08 - 27.08.
-
+	- Hoffentlich bis hier erste Erfolge mit RL-Learning
+	- Background sollte großteils fertig sein
+	- Related Works weiterschreiben
+	- Im Methods-Teil schonmal anfangen, grundsätzlichen Aufbau und Gait-Entwicklung zu erklären
+	
 
 
 -----------------------------------------4
 28.08 - 03.09.
-
+	- RL-Learning fortführen, Fortschritt festhalten !
+	- Related Works großteils fertig
+	- Methods-Teil weiterschreiben
+	- Results kann teils angefangen werden(das Modell an sich kann bereits bewertet werden)
 
 
 -----------------------------------------5
 04.09 - 10.09.
-
+	- Ziel bis hierhin fertig mit der inhaltlichen Arbeit zu sein
+	
 
 
 -----------------------------------------6
-11.08 - 17.09.
-
+11.09 - 17.09.
+	- nur Schreiben
 
 
 -----------------------------------------7
-18.08 - 24.09.
-
-
+18.09 - 24.09.
+	- nur Schreiben
 
 
 
