@@ -233,6 +233,7 @@ Gespäch mit Malte und Julius:
 	- Background und Related Works schreiben
 	- Modell überarbeiten(mehrfach verwendete Subsysteme als Library anlegen ?, etc....)
 	- Paper lesen
+	- Zwischenvortrag beginnen (?)
 
 -----------------------------------------3
 21.08 - 27.08.
@@ -260,7 +261,7 @@ Gespäch mit Malte und Julius:
 -----------------------------------------6
 11.09 - 17.09.
 	- nur Schreiben
-
+	- Abschlussvortrag vorbereiten (?)
 
 -----------------------------------------7
 18.09 - 24.09.
