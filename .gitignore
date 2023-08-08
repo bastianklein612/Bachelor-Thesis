@@ -269,6 +269,5 @@ thesis.pdf
 *.slx.autosave
 *.mexw64
 *.mat
-*_wrapper.c
 **/slprj
 
