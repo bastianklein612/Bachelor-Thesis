@@ -10,7 +10,7 @@ angle_offsets_RF_LB   = [-45, 14.03624347, 60.58440117];
 
 %Faktoren zur Definierung der Schritthöhe/-weite
 step_height = 0.06;
-step_length = 0.02;
+step_length = 0.04;
 
 % Minimale und maximale Winkel der einzelnen Gelenke(erstmal geschätzt)
 
@@ -45,10 +45,6 @@ pid_filter_N = 1000;
 %pid_I = 0.2;
 %pid_D = 1;
 %pid_filter_N = 100;
-
-height_pid_P = 0;
-height_pid_I = 0;
-height_pid_D = 0;
 
 
 %pattern generation
