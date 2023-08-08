@@ -209,8 +209,12 @@ Gespäch mit Malte und Julius:
 	- Versucht, die Bewegung in alle Richtugen zu ermöglichen
 	  Rotation des generierten Pfads funktioniert soweit auch, aber IK-Solver ist noch mangelhaft
 	  
+	  --> Rework des gesamten Leg Movement Generators nötig, zu unübersichtlich
+	  --> IK-Solver muss auch überarbeitet werden
+	  --> Sub-Routine, welche den Roboter zu Beginn in Startposition bringt, muss auch erstellt werden
 	  
 -----------------------------------------
+09.08.
 
 
 
