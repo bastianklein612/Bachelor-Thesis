@@ -2,21 +2,16 @@
 
 gravity_vector = [0, 0, -9.81];
 
-
-% Initialwinkel der Gelenke
-angle_offsets_LF_RB  = [45, 14.03624347, 60.58440117];
-angle_offsets_middle = [0, 14.03624347, 60.58440117];
-angle_offsets_RF_LB   = [-45, 14.03624347, 60.58440117];
-
 %Faktoren zur Definierung der Schritthöhe/-weite
 step_height = 0.06;
-step_length = 0.04;
+step_length = 0.03;
 
-% Minimale und maximale Winkel der einzelnen Gelenke(erstmal geschätzt)
+%pattern generation
+x_offset = 0.2;
+z_offset = -0.14;
 
-
-% global transition region joints
-global_transition_region = 1;
+%scene
+plane_offset = 0.16;
 
 
 globalTorque = 0.94;
@@ -25,6 +20,19 @@ globalTorque = 0.94;
 max_torque_alpha = globalTorque;
 max_torque_beta = globalTorque;
 max_torque_gamma = globalTorque;
+
+
+% Initialwinkel der Gelenke
+angle_offsets_LF_RB  = [45, 14.03624347, 60.58440117];
+angle_offsets_middle = [0, 14.03624347, 60.58440117];
+angle_offsets_RF_LB   = [-45, 14.03624347, 60.58440117];
+
+
+% Minimale und maximale Winkel der einzelnen Gelenke(erstmal geschätzt)
+
+
+% global transition region joints
+global_transition_region = 1;
 
 % Spatial contact force
 stiffness = 1e6;
@@ -46,19 +54,10 @@ pid_filter_N = 1000;
 %pid_D = 1;
 %pid_filter_N = 100;
 
-
-%pattern generation
-x_offset = 0.2;
-z_offset = -0.14;
-
 %pid_P = 1;
 %pid_I = 0.2;
 %pid_D = 1;
 %pid_filter_N = 100;
-
-%scene
-plane_offset = 0.16;
-
 
 
 %phantomX_uncovered = importrobot("robot_models\phantomx_description\urdf\phantomx.urdf");
