@@ -4,6 +4,12 @@
 
 
 \section{Hexapod Robots}
+Hexapods are 6-legged, insect-like Robots.
+Compared to wheeled or two-legged robots they are much more stable on uneven terrain and can navigate more precisely.
+Each leg of a hexapod typically consists of 3 segments named coxa, femur and tibia, just like their biological counterparts.
+The segments are connected to each other via 3 2-DoF joints, each actuated by an electric motor.
+\todo[color=Aquamarine1]{Add image of hexapod(and maybe of insect)}
+
 
 \section{MATLAB}
 \subsection{Simulink}
@@ -26,9 +32,19 @@ Simscape also provides a MATLAB based language to enable text-based development 
 \section{Inverse Kinematics}
 Inverse Kinematics(IK) is a term predominately used in robotics or computer graphics.
 It describes the process of calculating the joint angles needed to place the end of a kinematic chain, such as a robotic manipulator, at a given position and orientation.
+There are two main methods how to calculate these angles, analytical and numerical.
+Analytical solvers are based on trigonometric equations and provide exact solutions, but can only be implemented for manipulators with less than 4(?) DOF, otherwise there are infinite solutions.
+Numerical solvers use iterate approaches to closer and closer approximate the correct solutions.
+Analytical solvers are generally much faster, though the iterative approach of numerical solvers enables them to be used on all inverse kinematics problems without limitation.
 
 
 
 
 
 \section{PID Controller}
+A \textbf{p}roportional-\textbf{i}ntegral-\textbf{d}erivative controller(PID controller) is type of controller widely used in industry.
+It controls a so called "Control Variable" by listening to the feedback it gets from the environment and adjusts its output accordingly.
+ 
+
+
+\section{Reinforcement Learning}
