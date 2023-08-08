@@ -201,6 +201,16 @@ Gespäch mit Malte und Julius:
 	- Beginn des Schreibens im Background-Teil
 	- Paper gelesen(...revealsFunctionalRoleOfEmbodiedSensimotor...)
 	- Sanandos Modell als .zip erhalten
+	
+-----------------------------------------
+05.08. - 08.08.
+	- Höhencontroller entfernt, neu tunen des PID-Controllers hat ausgereicht(der hat einfach zu langsam reagiert)
+	- Im Background-Teil einige Absätze geschrieben
+	- Versucht, die Bewegung in alle Richtugen zu ermöglichen
+	  Rotation des generierten Pfads funktioniert soweit auch, aber IK-Solver ist noch mangelhaft
+	  
+	  
+-----------------------------------------
 
 
 
