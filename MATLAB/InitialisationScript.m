@@ -10,7 +10,7 @@ angle_offsets_RF_LB   = [-45, 14.03624347, 60.58440117];
 
 %Faktoren zur Definierung der Schritthöhe/-weite
 step_height = 0.06;
-step_length = 0.04;
+step_length = 0.02;
 
 % Minimale und maximale Winkel der einzelnen Gelenke(erstmal geschätzt)
 
@@ -36,10 +36,10 @@ mu_dynamic = 0.8;
 critical_vel = 1e-3;
 
 % Test PID Settings
-pid_P = 1.5;
-pid_I = 0.4;
+pid_P = 200;
+pid_I = 0.1;
 pid_D = 1;
-pid_filter_N = 80;
+pid_filter_N = 1000;
 
 %pid_P = 3;
 %pid_I = 0.2;
