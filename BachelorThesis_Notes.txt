@@ -216,7 +216,10 @@ Gespäch mit Malte und Julius:
 -----------------------------------------
 09.08.
 	- Angefangen eine eigene Library mit oft verwendeten Blöcken zu erstellen
-
+	- Leg Movement Generator überarbeitet, Rotation des Bewegungsablaufs funktioniert nun --> IK muss nicht reworked werden
+	  Problem war, dass Rotation an falscher Stelle durchgeführt worden ist
+	
+	- x,y,z-offsets zusammengefasst
 
 
 
