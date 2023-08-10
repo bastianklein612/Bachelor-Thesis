@@ -223,8 +223,9 @@ Gespäch mit Malte und Julius:
 
 -----------------------------------------
 10.08.
-	- Zwischenvortrag Marcel Schiller
-	- eigener Zwischenvortrag am 24.08 oder 31.08.
+	- Zwischenvortrag Marcel Schiller(schwer zu verstehen, keine Einleitung und sehr viel Inhalt ohne viele Grafiken)
+	- Prof. Paula Herber persönlich getroffen
+	- eigener Zwischenvortrag mit Paula abgesprochen am 24.08 oder 31.08. geplant
 	
 
 
@@ -255,7 +256,7 @@ Gespäch mit Malte und Julius:
 	- Background und Related Works schreiben
 	- Modell überarbeiten(mehrfach verwendete Subsysteme als Library anlegen ?, etc....)
 	- Paper lesen
-	- Zwischenvortrag beginnen (?)
+	- Zwischenvortrag beginnen (?) --> Ja !
 
 -----------------------------------------3
 21.08 - 27.08.
@@ -264,7 +265,7 @@ Gespäch mit Malte und Julius:
 	- Related Works weiterschreiben
 	- Im Methods-Teil schonmal anfangen, grundsätzlichen Aufbau und Gait-Entwicklung zu erklären
 	
-
+	- Zwischenvortrag halten (24.08)?
 
 -----------------------------------------4
 28.08 - 03.09.
@@ -272,7 +273,8 @@ Gespäch mit Malte und Julius:
 	- Related Works großteils fertig
 	- Methods-Teil weiterschreiben
 	- Results kann teils angefangen werden(das Modell an sich kann bereits bewertet werden)
-
+	
+	- Zwischenvortrag halten (31.08)?
 
 -----------------------------------------5
 04.09 - 10.09.
