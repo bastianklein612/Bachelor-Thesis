@@ -12,7 +12,7 @@ z_offset = -0.14;
 plane_offset = 0.16;
 
 
-globalTorque = 0.94;
+globalTorque = 0.5;
 % HS-645MG Servo:
 % Drehmoment: 94 Ncm = 0.94 NM
 max_torque_alpha = globalTorque;
