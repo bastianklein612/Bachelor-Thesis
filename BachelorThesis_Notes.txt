@@ -229,10 +229,16 @@ Gespäch mit Malte und Julius:
 	- Zugang zu Gitlab von der ES-Gruppe erhalten
 	
 -----------------------------------------
-11.08.
+11.08. - 13.08.
 	- MK3 Videos aufgezeichnet
+	- RL-Toolbox einigermaßen verstanden, mit dieser experimentiert
+	- Model umebaut
 	
+	--> Festgestellt, dass die momentane Steuerung für RL eher weniger gut geeignet ist
+	
+-----------------------------------------	
 
+	
 
 
 
