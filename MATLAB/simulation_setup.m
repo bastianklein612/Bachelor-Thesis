@@ -32,6 +32,9 @@ angle_offsets_RF_LB   = [-45, 14.03624347, 60.58440117];
 % global transition region joints
 global_transition_region = 1;
 
+%internal joint damping
+joint_damping_coefficient = 0;
+
 % Spatial contact force
 stiffness = 1e6;
 damping = 1e3;
