@@ -237,9 +237,15 @@ Gespäch mit Malte und Julius:
 	--> Festgestellt, dass die momentane Steuerung für RL eher weniger gut geeignet ist
 	
 -----------------------------------------	
-
+14.08. - 15.08.
+	- weiter mit RL experimentiert
+	- erstes Mal geschafft, RL ohne Error über mehrere Stunden laufen zu lassen; Ergebnis ok, aber nicht gut
 	
-
+	
+-----------------------------------------
+16.08. 
+	- Background fortgeführt(Hexapod, Simulink, Simscape, )
+	
 
 
 
@@ -255,18 +261,18 @@ Gespäch mit Malte und Julius:
 
 -----------------------------------------1
 07.08 - 13.08.
-	- In RL und Simulinks RL-Agent einlesen
-	- Background weiterschreiben
-	- min. 2 Paper lesen
-	- Hexapod PID-Controller tunen
-	- Sanandos Modell ansehen, ausprobieren ob einfach mit meinem verbindbar
+	- In RL und Simulinks RL-Agent einlesen															X
+	- Background weiterschreiben																	x
+	- min. 2 Paper lesen																	
+	- Hexapod PID-Controller tunen																	X
+	- Sanandos Modell ansehen, ausprobieren ob einfach mit meinem verbindbar		
 
 -----------------------------------------2
 14.08 - 20.08.
-	- Experimente mit RL-Agent beginnen
+	- Experimente mit RL-Agent beginnen																X
 	- Background und Related Works schreiben
-	- Modell überarbeiten(mehrfach verwendete Subsysteme als Library anlegen ?, etc....)
-	- Paper lesen
+	- Modell überarbeiten(mehrfach verwendete Subsysteme als Library anlegen ?, etc....)			X
+	- Paper lesen							
 	- Zwischenvortrag beginnen (?) --> Ja !
 
 -----------------------------------------3

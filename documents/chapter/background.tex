@@ -4,37 +4,79 @@
 
 
 \section{Hexapod Robots}
-Hexapods are 6-legged, insect-like Robots.
-Compared to wheeled or two-legged robots they are much more stable on uneven terrain and can navigate more precisely.
-Each leg of a hexapod typically consists of 3 segments named coxa, femur and tibia, just like their biological counterparts.
-The segments are connected to each other via 3 2-DoF joints, each actuated by an electric motor.
-\todo[color=Aquamarine1]{Add image of hexapod(and maybe of insect)}
+Hexapods are a type of robot featuring 6 legs, inspired by the locomotion of insects and arachnids.
+Over millions of years of evolution these organisms developed efficient strategies to navigate challenging terrain, making them a rich source of inspiration for robotics.
+By emulating the biomechanics and behavior of insects, researchers and engineers aim to create versatile and robust robotic systems capable of navigating challenging terrain.
 
+Most commonly, each leg of a hexapod typically consists of 3 segments named coxa, femur and tibia, equivalent to their biological counterparts.
+The individual segments are connected by 3 2-DoF(degrees of freedom) joints, each actuated by an electric servo motor.
+The first joint, hereafter named \textalpha-joint, connects the coxa to the thorax(body) and moves in parallel to the ground, thus being responsible for the longitudinal placement of each leg.
+Coxa and femur are connected by the \textbeta-joint, while the femur and tibia are connected by the \textgamma-joint. 
+These joints move orthogonal to the movement plane of the \textalpha-joint. Together, they are responsible for the lateral positioning of each leg.
+
+
+
+
+\todo[color=Aquamarine1]{Add image of hexapod(and maybe of insect)}
 
 \section{MATLAB}
 \subsection{Simulink}
-\textit{Simulink\textsuperscript{\textregistered}} is a \textit{MATLAB\textsuperscript{\textregistered}}-based graphical block-diagramming tool developed by the company \textit{MathWorks\textsuperscript{\textregistered}} intended for designing and simulating dynamical systems.
-It provides an expansive library of continuous and discrete blocks, which enables the user to create systems from various domains.
-The creation of a Simulink model is done by connecting blocks via edges in a GUI.
-The blocks transform input data provided by the connected edges, the edges forward the data to other blocks connected downstream.
-Blocks can be put into subsystems, creating different levels of abstraction.
-For reuse, subsystems can be placed in libraries, so that all linked subsystems can be updated in one place.
-Once a system is build it can be simulated using on of the many solvers provided.
+\textit{Simulink\textsuperscript{\textregistered}} is a \textit{MATLAB\textsuperscript{\textregistered}}-based graphical block-diagramming tool developed by the company \textit{MathWorks\textsuperscript{\textregistered}} .
+It is a widely used tool which plays a crucial role in various engineering and research disciplines.
+It provides the user with a versatile platform to design, simulate and analyze complex dynamic systems.
+
+Simulink offers an expansive library of predefined blocks that represent different components and behaviors.
+The user connects these blocks with so called signal lines to transport data between them.
+Blocks transform the data provided by the inputs and output the transformed data to other blocks connected downstream.
+Their behavior can be discrete, like a switch which activates when a signal is high, or represent continuous functions such as integrals.
+
+An arrangement of blocks can be encapsulated into a subsystem, thus creating different levels of abstraction.
+To enable easy reuse, subsystems can be placed in custom libraries.
+If a library object gets updated, each linked copy of this subsystem receives the update as well, preventing the user from having to edit each copy themselves.
+At any step in the development process, a model can be simulated and 
 
 \subsection{Simscape}
 \textit{Simscape\textsuperscript{\texttrademark}} is a block library developed by \textit{MathWorks\textsuperscript{\textregistered}} with which it is possible to model physical system within the Simulink environment.
-It is capable of modeling and simulating systems such as electric circuits, hydraulics or rigid body interactions.
-Simscape also provides a MATLAB based language to enable text-based development of custom components.
- 
+It is capable of modeling and simulating systems such as electric circuits, hydraulics or classical mechanics all within a unified simulation environment.
+The Simscape libraries offer a large variety of predefined components like resistors, capacitors, springs, dampers and more.
+For this thesis, the mechanical components are of the most interest, especially rigid bodies, transforms and joints.
+A model is build up using rigid bodies which get connected to coordinate frames.
+These coordinate frames then get attached to each other using rigid transforms or joints.
+Joints can allow different degrees of freedom between two frames, depending on what constraints should be imposed on the system.
+Two frames connected with a joint are named base and follower frame.
+When the joint is actuated, the follower frame moves relative to the base frame\parencite{thilderkvist2015motion}.
 
+If the user requires a component which is not yet represented by any block in the libraries, Simscape also offers a MATLAB based language to enable text-based development of custom components.
+ \todo[color=Aquamarine1]{Weiter ausführen; mehr Details, z.B. über Gelenke(Sensorik, Aktuation, etc.)}
 
 
 \section{Inverse Kinematics}
-Inverse Kinematics(IK) is a term predominately used in robotics or computer graphics.
+Inverse Kinematics(IK) is a term predominately used in robotics and computer graphics.
 It describes the process of calculating the joint angles needed to place the end of a kinematic chain, such as a robotic manipulator, at a given position and orientation.
-There are two main methods how to calculate these angles, analytical and numerical.
-Analytical solvers are based on trigonometric equations and provide exact solutions, but can only be implemented for manipulators with less than 4(?) DOF, otherwise there are infinite solutions.
-Numerical solvers use iterate approaches to closer and closer approximate the correct solutions.
+There are two distinct methods how to calculate these angles, analytical and numerical.
+
+Analytical solvers are based on trigonometric equations derived from the geometric and kinematic parameters of the manipulator arm, such as the link length, joint type and joint limits.
+They provide exact solutions to the problem and can be significantly faster than iterative approximation methods.
+Although very efficient and precise, the analytical approach is generally only feasible for kinematic chains with a small number of DoF.
+If the chain has more DoFs than the end effector, then there exists an infinite number of solutions.
+These kinds of systems potentially lack closed-form expressions for a solution, which makes deriving analytical solutions infeasible if not impossible.
+
+
+Numerical solvers use iterate approaches to approximate the joint angles and converge towards a solution over several iterations of the algorithm.
+At the start of the process this type of solver begins with an initial guess that can be based on the manipulators geometry, joint limits or previous solution.
+Using the estimated joint angles, the position of the end-effector is calculated(forward kinematics) and the error between the desired pose and the currently obtained pose is determined.
+Based on this error, the joint angles are adjusted with the goal to reduce the error and bringing the end-effector closer to the desired pose.
+This process is repeated until the error meets the predefined tolerances.
+The joint angles from the final iteration are then considered a solution to the problem.
+The exact process of error-minimization is much more complex than described here and there exist numerous different algorithms, though all with the same basic principle.
+Numerical solvers can be applied to a wide variety of inverse kinematics problems and are not limited by the number of DoF like analytical solvers.
+Due to their iterative nature numerical solvers are generally more computationally expensive, given the same problem, than their analytical counterparts.
+
+
+
+
+
+
 Analytical solvers are generally much faster, though the iterative approach of numerical solvers enables them to be used on all inverse kinematics problems without limitation.
 
 
