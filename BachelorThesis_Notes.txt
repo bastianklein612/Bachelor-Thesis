@@ -249,17 +249,27 @@ Gespäch mit Malte und Julius:
 17.08.
 
 	- Oberseminar:
-		- Zwischenvortrag am 31.08. ! (2-3 Tage vorher, falls besprechen[Malte]/ bis Beginn des Vortrags[Paula])
-		- unstellen auf wann Swing initiert wird ? (Malte)
-		- Rel. Works muss nicht groß sein (Abgrenyung von 2-3 Arbeiten)
-		- Textgröße von Grafiken groß; so groß wie umgebender Text
-		- Bis nächste Woche Rev. des Vortrags erstellen
+		- Zwischenvortrag am 31.08. ! (2-3 Tage vorher an Malte, falls noch besprechen/ für Paula spätestens zu Beginn des Vortrags 
+		- Modell so umbauen, das Input angibt, wann Swing-Phase initiiert werden soll ? (Malte)
+		- Rel. Works muss nicht groß sein (Abgrenzung von den 2-3 wichtigsten Arbeiten)
+		- Textgröße von Grafiken muss groß sein(Vortrag/Thesis); am besten so groß wie umgebender Text
 		- math. Formeln statt Code zeigen
-		- Swing-/Stance-Cycle mit in Background schreiben
-		- Background detailierter
-		- Vortrag anfangen ! (Vorgaben im Learnweb lesen)
-		- so schreiben, dass jemand ohne gleichen Schwerpunkt folgen kann
+		- Background kann ruhig detailierter
+		- Swing-/Stance-Cycle mit im Background-Teil erklären
+		- so schreiben, dass jemand ohne gleichen Schwerpunkt folgen kann(also muss nicht von anderem Studiengang verstanden werden!)
 		- Redundanzen sind ok, aber nicht immer von 0 anfangen sondern wieder aufgreifen
+		- Vortrag anfangen ! (Vorgaben im Learnweb lesen)
+		- Bis nächste Woche Rev. des Vortrags erstellen
+
+	- Zwischenvortrag begonnen; zumindest schonmal Struktur
+
+
+
+
+
+
+
+
 
 
 
@@ -291,8 +301,6 @@ Gespäch mit Malte und Julius:
 	- Background sollte großteils fertig sein
 	- Related Works weiterschreiben
 	- Im Methods-Teil schonmal anfangen, grundsätzlichen Aufbau und Gait-Entwicklung zu erklären
-	
-	- Zwischenvortrag halten (24.08)?
 
 -----------------------------------------4
 28.08 - 03.09.
@@ -301,7 +309,8 @@ Gespäch mit Malte und Julius:
 	- Methods-Teil weiterschreiben
 	- Results kann teils angefangen werden(das Modell an sich kann bereits bewertet werden)
 	
-	- Zwischenvortrag halten (31.08)?
+	- Version des Vortrags an Malte und Paula schicken
+	- Zwischenvortrag halten (31.08)
 
 -----------------------------------------5
 04.09 - 10.09.
