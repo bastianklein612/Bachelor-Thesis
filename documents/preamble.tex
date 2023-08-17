@@ -30,7 +30,7 @@ final
 \usepackage[T1]{fontenc}
 \usepackage{textcomp} % verhindert ein paar Fehler bei den Fonts
 \usepackage[varl]{zi4}
-\usepackage{mathtools,amssymb,amsthm} % Verbesserung von amsmath (die amsmath selbst lädt)
+\usepackage{mathtools,amssymb,amsthm} % Verbesserung von th (die amsmath selbst lädt)
 \usepackage[libertine,cmintegrals,bigdelims,varbb]{newtxmath}
 \usepackage[english]{babel}
 \usepackage[babel=true, tracking=true,final]{microtype}
@@ -133,6 +133,13 @@ psdextra
 \renewcommand*{\chapterformat}{%
     \thechapter\enskip
     \textcolor{gray!50}{\rule[-\dp\strutbox]{1.5pt}{\baselineskip}}\enskip
+}
+
+%creates a subsection without adding it to the table of contents
+%section keeps subsection number(* does not do this)
+\newcommand{\hiddensubsection}[1]{
+	\stepcounter{subsection}
+	\subsection*{\arabic{chapter}.\arabic{section}.\arabic{subsection}\hspace{1em}{#1}}
 }
 
 % math environments

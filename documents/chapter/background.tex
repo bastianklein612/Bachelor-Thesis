@@ -17,10 +17,11 @@ These joints move orthogonal to the movement plane of the \textalpha-joint. Toge
 
 
 
-\todo[color=Aquamarine1]{Add image of hexapod(and maybe of insect)}
+\todo{Add image of hexapod(and maybe of insect)}
+\todo{CITATIONS}
 
 \section{MATLAB}
-\subsection{Simulink}
+\hiddensubsection{Simulink}
 \textit{Simulink\textsuperscript{\textregistered}} is a \textit{MATLAB\textsuperscript{\textregistered}}-based graphical block-diagramming tool developed by the company \textit{MathWorks\textsuperscript{\textregistered}} .
 It is a widely used tool which plays a crucial role in various engineering and research disciplines.
 It provides the user with a versatile platform to design, simulate and analyze complex dynamic systems.
@@ -35,7 +36,7 @@ To enable easy reuse, subsystems can be placed in custom libraries.
 If a library object gets updated, each linked copy of this subsystem receives the update as well, preventing the user from having to edit each copy themselves.
 At any step in the development process, a model can be simulated and 
 
-\subsection{Simscape}
+\hiddensubsection{Simscape}
 \textit{Simscape\textsuperscript{\texttrademark}} is a block library developed by \textit{MathWorks\textsuperscript{\textregistered}} with which it is possible to model physical system within the Simulink environment.
 It is capable of modeling and simulating systems such as electric circuits, hydraulics or classical mechanics all within a unified simulation environment.
 The Simscape libraries offer a large variety of predefined components like resistors, capacitors, springs, dampers and more.
@@ -47,46 +48,85 @@ Two frames connected with a joint are named base and follower frame.
 When the joint is actuated, the follower frame moves relative to the base frame\parencite{thilderkvist2015motion}.
 
 If the user requires a component which is not yet represented by any block in the libraries, Simscape also offers a MATLAB based language to enable text-based development of custom components.
- \todo[color=Aquamarine1]{Weiter ausführen; mehr Details, z.B. über Gelenke(Sensorik, Aktuation, etc.)}
-
+\todo{Weiter ausführen; mehr Details, z.B. über Gelenke(Sensorik, Aktuation, etc.)}
+\todo{CITATIONS}
 
 \section{Inverse Kinematics}
 Inverse Kinematics(IK) is a term predominately used in robotics and computer graphics.
-It describes the process of calculating the joint angles needed to place the end of a kinematic chain, such as a robotic manipulator, at a given position and orientation.
+It describes the process of calculating the joint angles required to place the end of a kinematic chain, such as a robotic manipulator, at a given position and orientation.
 There are two distinct methods how to calculate these angles, analytical and numerical.
 
 Analytical solvers are based on trigonometric equations derived from the geometric and kinematic parameters of the manipulator arm, such as the link length, joint type and joint limits.
 They provide exact solutions to the problem and can be significantly faster than iterative approximation methods.
 Although very efficient and precise, the analytical approach is generally only feasible for kinematic chains with a small number of DoF.
-If the chain has more DoFs than the end effector, then there exists an infinite number of solutions.
+If for the kinematic chain the number of DoF is greater than that of the end-effector, then there exist infinite solutions for a given pose.
 These kinds of systems potentially lack closed-form expressions for a solution, which makes deriving analytical solutions infeasible if not impossible.
 
 
 Numerical solvers use iterate approaches to approximate the joint angles and converge towards a solution over several iterations of the algorithm.
-At the start of the process this type of solver begins with an initial guess that can be based on the manipulators geometry, joint limits or previous solution.
+At the start of the process this type of solver begins with an initial guess that can be based on the manipulators geometry, joint limits or previously obtained solutions.
 Using the estimated joint angles, the position of the end-effector is calculated(forward kinematics) and the error between the desired pose and the currently obtained pose is determined.
 Based on this error, the joint angles are adjusted with the goal to reduce the error and bringing the end-effector closer to the desired pose.
 This process is repeated until the error meets the predefined tolerances.
-The joint angles from the final iteration are then considered a solution to the problem.
-The exact process of error-minimization is much more complex than described here and there exist numerous different algorithms, though all with the same basic principle.
+The joint angles calculated during the final iteration are then considered a solution to the problem.
+Although the basic principle of error-minimization is always present in the algorithm, the exact process of minimization is much more complex than described here and there exist numerous different techniques on how to achieve this goal.
 Numerical solvers can be applied to a wide variety of inverse kinematics problems and are not limited by the number of DoF like analytical solvers.
 Due to their iterative nature numerical solvers are generally more computationally expensive, given the same problem, than their analytical counterparts.
 
-
-
-
-
-
-Analytical solvers are generally much faster, though the iterative approach of numerical solvers enables them to be used on all inverse kinematics problems without limitation.
-
+Both inverse kinematics methods are used extensively in industry and research, depending on the specific project and its requirements.
+\todo{CITATIONS}
 
 
 
 
 \section{PID Controller}
-A \textbf{p}roportional-\textbf{i}ntegral-\textbf{d}erivative controller(PID controller) is type of controller widely used in industry.
-It controls a so called "Control Variable" by listening to the feedback it gets from the environment and adjusts its output accordingly.
- 
+A \textbf{P}roportional-\textbf{I}ntegral-\textbf{D}erivative(PID) controller is a widely used feedback control system.
+As such a feedback control system it aims to regulate a control variable to a desired setpoint by adjusting its output according to the currently measured process variable.
+It uses three terms, proportional, integral and derivative, to compute the controlled output  based on the error between the setpoint and current process variable.
+For a digital PID controller, the process of error calculation and control variable adjustment is done at a discrete fixed rate, which is also referred to as a timestep.
+There also exist versions of this controller constructed using analog electronics which generate a continuous control signal, but we will focus on the digital controller here.
+
+\todo{Insert graphic of pid controller}
+At each timestep the controller first calculates the error between its setpoint and the currently measured process variable: 
+\[
+	Error(t) = setpoint - \textit{process variable}(t)
+.\]
+After the error is determined, controller continues with the propotional, integral and derivative term.
+
+The proportional term $P(t)$ is calculated by multiplying the error by a constant factor, the so called proportional gain $K_p$.
+This term contributes to the control output, as its name suggests, proportional to the magnitude of the error.
+$P(t)$ is given by:
+\[
+	P(t) = K_p \cdot Error(t)
+.\]
+The integral term $I(t)$takes into account the sum of past errors to address any long term bias/ constant error contained inside of the controlled system.
+It is able to eliminate long-term errors that can not be accounted for by $P(t)$.
+The term is calculated by integrating the error over time and multiplying it with the integral gain $K_i$.
+$I(t)$ is given by:
+\[
+	I(t) = K_i \cdot \int_{0}^{t} Error(t) \,dx
+.\]
+The derivative term $D(t)$ anticipates the errors future behavior by determining its rate of change.
+It prevents the controller from overshooting and oscillating by dampening the control response.
+$D(t)$ is calculated by taking the errors rate of change and multiplying it with the constant derivative gain $K_d$.
+It is given by:
+\[
+	D(t) = K_d \cdot \frac{\partial}{\partial t}(Error(t))
+.\]
+The final output of the controller is the given by the sum of all three terms:
+\[
+	\textit{Control Output(t)} = P(t) + I(t) + D(t)
+.\]
+The calculated control output is the fed into the controlled system or process.
+In most cases this control output corresponds to real world variable such as the speed of a motor, the liquid-level inside a tank or the temperature of an element.
+The performance of a PID controller greatly depends on the values of its parameters $K_p$, $K_i$ and $K_d$.
+To achieve desired results like fast response times and minimal overshooting or oscillations, these parameters have to be carefully tuned. 
+To conclude, a PID controller continuously repeats the process of error calculation and adjustment, thus forming a closed-loop system which aims to minimize the error and approach the setpoint as close as possible.
+
+
+\todo{CITATIONS}
 
 
 \section{Reinforcement Learning}
+
+\section{Swing-Stance Cycle}
