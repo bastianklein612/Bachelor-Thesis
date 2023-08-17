@@ -232,7 +232,7 @@ Gespäch mit Malte und Julius:
 11.08. - 13.08.
 	- MK3 Videos aufgezeichnet
 	- RL-Toolbox einigermaßen verstanden, mit dieser experimentiert
-	- Model umebaut
+	- Model umgebaut
 	
 	--> Festgestellt, dass die momentane Steuerung für RL eher weniger gut geeignet ist
 	
@@ -244,12 +244,22 @@ Gespäch mit Malte und Julius:
 	
 -----------------------------------------
 16.08. 
-	- Background fortgeführt(Hexapod, Simulink, Simscape, )
-	
+	- Background fortgeführt(Hexapod, Simulink, Simscape)
+-----------------------------------------
+17.08.
 
-
-
-
+	- Oberseminar:
+		- Zwischenvortrag am 31.08. ! (2-3 Tage vorher, falls besprechen[Malte]/ bis Beginn des Vortrags[Paula])
+		- unstellen auf wann Swing initiert wird ? (Malte)
+		- Rel. Works muss nicht groß sein (Abgrenyung von 2-3 Arbeiten)
+		- Textgröße von Grafiken groß; so groß wie umgebender Text
+		- Bis nächste Woche Rev. des Vortrags erstellen
+		- math. Formeln statt Code zeigen
+		- Swing-/Stance-Cycle mit in Background schreiben
+		- Background detailierter
+		- Vortrag anfangen ! (Vorgaben im Learnweb lesen)
+		- so schreiben, dass jemand ohne gleichen Schwerpunkt folgen kann
+		- Redundanzen sind ok, aber nicht immer von 0 anfangen sondern wieder aufgreifen
 
 
 
