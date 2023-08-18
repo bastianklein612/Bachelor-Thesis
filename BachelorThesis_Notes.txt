@@ -262,11 +262,14 @@ Gespäch mit Malte und Julius:
 		- Bis nächste Woche Rev. des Vortrags erstellen
 
 	- Zwischenvortrag begonnen; zumindest schonmal Struktur
-	- Fortschritt im Background-Teil()
+	- Fortschritt im Background-Teil(PID-Controller)
 
-
-
-
+-----------------------------------------
+17.08.
+	- RL-Learning Grundlagen im Background begonnen 
+	- Einarbeiten in RL
+	- 
+		
 
 
 

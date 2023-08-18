@@ -2,7 +2,6 @@
 \chapter{Background}
 \label{ch:background}
 
-
 \section{Hexapod Robots}
 Hexapods are a type of robot featuring 6 legs, inspired by the locomotion of insects and arachnids.
 Over millions of years of evolution these organisms developed efficient strategies to navigate challenging terrain, making them a rich source of inspiration for robotics.
@@ -104,7 +103,7 @@ It is able to eliminate long-term errors that can not be accounted for by $P(t)$
 The term is calculated by integrating the error over time and multiplying it with the integral gain $K_i$.
 $I(t)$ is given by:
 \[
-	I(t) = K_i \cdot \int_{0}^{t} Error(t) \,dx
+	I(t) = K_i \cdot \int_{0}^{t} Error(\tau) \,d\tau
 .\]
 The derivative term $D(t)$ anticipates the errors future behavior by determining its rate of change.
 It prevents the controller from overshooting and oscillating by dampening the control response.
@@ -129,4 +128,31 @@ To conclude, a PID controller continuously repeats the process of error calculat
 
 \section{Reinforcement Learning}
 
+\parencite{weng2018bandit}
+
+\begin{figure}
+	\centerline{\includegraphics[scale=0.55]{rl_illustration}}
+	\caption{The basic concept of Reinforcement Learning. (\cite{weng2018bandit} Fig. 1)}
+	\label{RL Illustration}
+\end{figure}
+
+Model-Free vs. Model ?
+
+
+Discrete vs. Continuous action space in RL learning:
+A discrete action space is used when the number of actions that can be taken is limited and known in advance. An example of such an environment would be a game of chess; for each move there are only a finite amount of moves possible.
+Continuous action spaces are used, when the number of actions is not known in advance and possibly infinite, such as the movement possibilities of a robotic arm.
+Because we have multiple robotic 'arms' in this project, a continuous action space is favorable.
+
+Agents applicable for continuous action spaces: 
+- DDPG: Deep Deterministic Policy Gradient
+- TD3: Twin-Delayed Deep Deterministic Policy Gradient (more complex improvement to DDPG)
+- PPO: Proximal Policy Optimization (more stable updates, but longer training)
+- SAC: Soft Actor-Critic (more complex improvement of DDPG generating stochastic policies)
+- TRPO: Trust Region Policy Optimization(more complex version of PPO, more robust for deterministic environments with fewer iterations)
+
+
+\todo{Use image for explanation}
+
 \section{Swing-Stance Cycle}
+\todo{add image of swing-stance cycle(Paper Schilling)}
