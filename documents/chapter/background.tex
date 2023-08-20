@@ -82,15 +82,15 @@ Both inverse kinematics methods are used extensively in industry and research, d
 A \textbf{P}roportional-\textbf{I}ntegral-\textbf{D}erivative(PID) controller is a widely used feedback control system.
 As such a feedback control system it aims to regulate a control variable to a desired setpoint by adjusting its output according to the currently measured process variable.
 It uses three terms, proportional, integral and derivative, to compute the controlled output  based on the error between the setpoint and current process variable.
-For a digital PID controller, the process of error calculation and control variable adjustment is done at a discrete fixed rate, which is also referred to as a timestep.
+For a digital PID controller, the process of error calculation and control variable adjustment is done at a discrete fixed rate, which is also referred to as a time step.
 There also exist versions of this controller constructed using analog electronics which generate a continuous control signal, but we will focus on the digital controller here.
 
 \todo{Insert graphic of pid controller}
-At each timestep the controller first calculates the error between its setpoint and the currently measured process variable: 
+At each time step the controller first calculates the error between its setpoint and the currently measured process variable: 
 \[
 	Error(t) = setpoint - \textit{process variable}(t)
 .\]
-After the error is determined, controller continues with the propotional, integral and derivative term.
+After the error is determined, controller continues with the proportional, integral and derivative term.
 
 The proportional term $P(t)$ is calculated by multiplying the error by a constant factor, the so called proportional gain $K_p$.
 This term contributes to the control output, as its name suggests, proportional to the magnitude of the error.
@@ -137,6 +137,25 @@ To conclude, a PID controller continuously repeats the process of error calculat
 \end{figure}
 
 Model-Free vs. Model ?
+
+Agent
+
+Environment
+
+A policy can be roughly defined as a mapping of all perceived environmental states to actions taken by the agent when experiencing these states.
+It describes the way a learning agent behaves at a given time\parencite{sutton2018reinforcement}.
+
+A reward function or reward signal is a scalar value which defines the goal of a reinforcement learning problem.
+The reward function is considered part of the environment.
+At each time step, the reward function is evaluated and the agent receives a scalar value, the reward.
+The maximization of this reward is the sole objective of the agent, so the reward function defines what is good and what is bad behavior.\parencite{sutton2018reinforcement}.
+
+A value function, in contrast to a reward function which immediately rewards good actions, defines what is good long term. 
+Rewards only define the immediate desirability of environmental states, a value function takes into account states which are likely to follow a given state and the rewards available in those states.
+A state might immediately yield a low reward, but if it is likely followed by states which yield high rewards, it can still possess a high value.
+This can also be true for the opposite, a state has a high immediate reward, but is likely only followed by states which yield low rewards. Thus the state has a low value.
+
+
 
 
 Discrete vs. Continuous action space in RL learning:

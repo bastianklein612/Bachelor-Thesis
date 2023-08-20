@@ -265,14 +265,17 @@ Gespäch mit Malte und Julius:
 	- Fortschritt im Background-Teil(PID-Controller)
 
 -----------------------------------------
-17.08.
+18.08.
 	- RL-Learning Grundlagen im Background begonnen 
-	- Einarbeiten in RL
-	- 
-		
+	- Einarbeiten in RL; Gute Quellen von Malte erhalten		
 
+-----------------------------------------
+19.08. - 20.08.
+	- RL-Blogs gelesen
+	- RL-Abschnitt weitergeschrieben
 
-
+-----------------------------------------
+21.08.
 
 
 
