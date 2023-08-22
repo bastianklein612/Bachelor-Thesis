@@ -276,7 +276,16 @@ Gespäch mit Malte und Julius:
 
 -----------------------------------------
 21.08.
+	- 1. VL Deepmind RL Introduction(David Siver)
+	sonst nichts
 
+-----------------------------------------
+22.08.
+	- Weiter an RL Abschnitt geschrieben
+	
+-----------------------------------------
+23.08.
+	
 
 
 

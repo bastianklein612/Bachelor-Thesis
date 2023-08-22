@@ -129,6 +129,7 @@ To conclude, a PID controller continuously repeats the process of error calculat
 \section{Reinforcement Learning}
 
 \parencite{weng2018bandit}
+\parencite{sutton2018reinforcement}
 
 \begin{figure}
 	\centerline{\includegraphics[scale=0.55]{rl_illustration}}
@@ -148,28 +149,43 @@ It describes the way a learning agent behaves at a given time\parencite{sutton20
 A reward function or reward signal is a scalar value which defines the goal of a reinforcement learning problem.
 The reward function is considered part of the environment.
 At each time step, the reward function is evaluated and the agent receives a scalar value, the reward.
-The maximization of this reward is the sole objective of the agent, so the reward function defines what is good and what is bad behavior.\parencite{sutton2018reinforcement}.
+The maximization of this reward is the sole objective of the agent, so the reward function defines what is good and what is bad behavior \parencite{sutton2018reinforcement}.
 
 A value function, in contrast to a reward function which immediately rewards good actions, defines what is good long term. 
 Rewards only define the immediate desirability of environmental states, a value function takes into account states which are likely to follow a given state and the rewards available in those states.
 A state might immediately yield a low reward, but if it is likely followed by states which yield high rewards, it can still possess a high value.
-This can also be true for the opposite, a state has a high immediate reward, but is likely only followed by states which yield low rewards. Thus the state has a low value.
+This can also be true for the opposite, a state has a high immediate reward, but is likely only followed by states which yield low rewards. Thus the state has a low value \parencite{sutton2018reinforcement}.
+
+Some methods of solving RL problems also consider a model of the environment. This means that the approach has a way of planning ahead, such as predicting the next environmental state and reward.
+Methods which use a model are called model-based, methods which explicitly only learn by trial and error model-free\parencite{sutton2018reinforcement}.
+
+Offline vs. Online Reinforcement Learning: 
+RL agents labeled as offline only learn from a fixed dataset which has been acquired before starting the training process.
+The agent itself does not interact with the environment, only learning on historical data.
+Online RL agents on the other side learn while actively interacting with the environment.
+They decide, act and receive feedback all in real-time and learn from the consequences of their actions \parencite{schrittwieser2021online}.
 
 
 
-
-Discrete vs. Continuous action space in RL learning:
+Discrete vs. Continuous action space in RL learning: 
 A discrete action space is used when the number of actions that can be taken is limited and known in advance. An example of such an environment would be a game of chess; for each move there are only a finite amount of moves possible.
 Continuous action spaces are used, when the number of actions is not known in advance and possibly infinite, such as the movement possibilities of a robotic arm.
 Because we have multiple robotic 'arms' in this project, a continuous action space is favorable.
 
-Agents applicable for continuous action spaces: 
-- DDPG: Deep Deterministic Policy Gradient
-- TD3: Twin-Delayed Deep Deterministic Policy Gradient (more complex improvement to DDPG)
-- PPO: Proximal Policy Optimization (more stable updates, but longer training)
-- SAC: Soft Actor-Critic (more complex improvement of DDPG generating stochastic policies)
-- TRPO: Trust Region Policy Optimization(more complex version of PPO, more robust for deterministic environments with fewer iterations)
 
+
+Agents applicable for continuous action spaces: 
+\begin{itemize}		
+	\item DDPG: Deep Deterministic Policy Gradient
+	Model-free, continuous action space, actor-critic
+	\item TD3: Twin-Delayed Deep Deterministic Policy Gradient (more complex improvement to DDPG)
+	Model-free, continuous action space, actor-critic
+	\item PPO: Proximal Policy Optimization (more stable updates, but longer training)
+	Model-free, continuous or discrete action space; policy gradient rl-method
+	\item SAC: Soft Actor-Critic (more complex improvement of DDPG generating stochastic policies)
+	Model-free, continuous action space, actor-critic
+	\item TRPO: Trust Region Policy Optimization(more complex version of PPO, more robust for deterministic environments with fewer iterations)
+\end{itemize}\parencite{MATLAB}
 
 \todo{Use image for explanation}
 
