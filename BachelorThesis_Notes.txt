@@ -71,7 +71,7 @@ Gespäch mit Malte und Julius:
  
  
  
-  - bis Montag erste version des Expose an Malte und Julius schicken.
+  - bis Montag erste Version des Expose an Malte und Julius schicken.
   
   
  ----------------------------------------
@@ -81,7 +81,7 @@ Gespäch mit Malte und Julius:
   
 -----------------------------------------
  25.06. - 27.06.
-  - Sollte man überhaupt schreiben, was man machen "könnte", oder nur was gemacht "wird" 
+  - Sollte man überhaupt schreiben, was man machen "könnte", oder nur was gemacht "wird" ?
 	--> Hauptsächlich schreiben was gemacht "wird", wenn es noch nicht feststeht ob etwas mit in die Bachelorarbeit kommt, dann ruhig otional lassen
 	
   - "z.B." oder "beispielsweise" verwenden oder immer genau nennen ?
@@ -94,8 +94,8 @@ Gespäch mit Malte und Julius:
 	- fürs Zitieren den sog. "Apa" - Style (erledigt)
 	- Als Roboter-Vorlage den Roboter aus Maltes Büro: PhantomX MK4   (Modell sollte online verfügbar sein) (erledigt)
 	- TITEL-IDEE: "Leveraging MATLAB Simulink for Hexapod Robot Simulation and Control" (erledigt)
-	- Ziel: Abstrakter halten, eher darauf eingehen wie eine gute Lößung aussehen würde, nicht was exakt gemacht werden soll; (erledigt)
-	- Zeitplan ruhig granularer aufteilen, aber in Wochenform belassen {erledigt}
+	- Ziel: Abstrakter halten, eher darauf eingehen wie eine gute Lösung aussehen würde, nicht was exakt gemacht werden soll; (erledigt)
+	- Zeitplan ruhig granularer aufteilen, aber in Wochenform belassen (erledigt)
 	- Bisheriger Text im Ziel-Teil kann in den Lösungsansatz-Teil überführt werden (erledigt)
 	- In der Problemstellung schon näher auf Thema der Bachelorarbeit eingehen, noch recht allgemein gehalten (erledigt)
 	- Belege einfügen wo noch nicht vorhanden (erledigt)
@@ -175,8 +175,8 @@ Gespäch mit Malte und Julius:
 		- 'Duty-Cycle' der Swing-Phase kann prozentual angegeben werden (z.B. 50% --> Swing und Stance gleich lang)
 		- 'Offset' eingeführt; beim Start der Simulation dürfen nicht alle Beine gleichzeitig die selbe Bewegung starten, deshalb Verzögerung der Abläufe möglich
 	
-	- Durch Umbau können nun auf andere Gaits dargestellt werden, so funktionieren nun Wave-, Tetrapod- und Tripod-Gait
-	- Problem des Ruckelns beim laufen besteht noch immer, möchte ich durch Einführung eines Höhen-Controllers beheben
+	- Durch Umbau können nun auch andere Gaits dargestellt werden, so funktionieren nun Wave-, Tetrapod- und Tripod-Gait
+	- Problem des Ruckelns beim Laufen besteht noch immer, möchte ich durch Einführung eines Höhen-Controllers beheben
 	 (Roboter sackt beim Bewegen immer leicht ab und neu gesetzte Beine drücken ihn dann ruckartig hoch)
 	 
 ----------------------------------------- 
@@ -206,7 +206,7 @@ Gespäch mit Malte und Julius:
 05.08. - 08.08.
 	- Höhencontroller entfernt, neu tunen des PID-Controllers hat ausgereicht(der hat einfach zu langsam reagiert)
 	- Im Background-Teil einige Absätze geschrieben
-	- Versucht, die Bewegung in alle Richtugen zu ermöglichen
+	- Versucht, die Bewegung in alle Richtungen zu ermöglichen
 	  Rotation des generierten Pfads funktioniert soweit auch, aber IK-Solver ist noch mangelhaft
 	  
 	  --> Rework des gesamten Leg Movement Generators nötig, zu unübersichtlich
@@ -217,13 +217,13 @@ Gespäch mit Malte und Julius:
 09.08.
 	- Angefangen eine eigene Library mit oft verwendeten Blöcken zu erstellen
 	- Leg Movement Generator überarbeitet, Rotation des Bewegungsablaufs funktioniert nun --> IK muss nicht reworked werden
-	  Problem war, dass Rotation an falscher Stelle durchgeführt worden ist
+	  Problem war, dass Rotation an falscher Stelle durchgeführt worden ist (zu spät, nachdem offsets schon drauf)
 	
 	- x,y,z-offsets zusammengefasst
 
 -----------------------------------------
 10.08.
-	- Zwischenvortrag Marcel Schiller(schwer zu verstehen, keine Einleitung und sehr viel Inhalt ohne viele Grafiken)
+	- Zwischenvortrag Marcel Schiller(schwer zu verstehen, keine Einleitung und sehr viel Inhalt ohne viele Grafiken; Genetic Algorithms Literature Study)
 	- Prof. Paula Herber persönlich getroffen
 	- eigener Zwischenvortrag mit Paula abgesprochen am 24.08 oder 31.08. geplant
 	- Zugang zu Gitlab von der ES-Gruppe erhalten
@@ -287,8 +287,40 @@ Gespäch mit Malte und Julius:
 23.08.
 	- Grafiken zur Beschreibung des Modells begonnen
 	- etwas Inhalt in Vortrag
+	
+-----------------------------------------
+24.08.
+	- Oberseminar:
+		- Diagramme kamen recht gut an; Pfeil zwischen 'Environment' und 'Physical Hexapod' fand Paula verwirrend --> verbesseren
+		  Nochmal genau schauen, ob Diagramme wirklich das Modell repräsentieren !
+		- Paula hat vorgeschlagen eine noch übersichtlichere Grafik für die Einleitung zu erstellen --> Worum geht es von ganz weit außen draufgeschaut
+		- Bachelorarbeit kann komplett ohne schriftliche Formulare online angemeldet werden ! --> diese Woche machen !
+		- Titel der Arbeit nochmal genau ansehen; kann man den noch verbessern ?
+		
+	- Background weitergeschrieben
+	
+-----------------------------------------
+25.08.
+	- Sanandos Modell angeschaut
+	- 2. RL Lecture
+	
+-----------------------------------------
+26.08.
+	- TODOs vor Zwischenvortrag:
+		- bis Sonntag-Mittag(27.08.) 1. Rev. des Vortrags erstellen
+		- Simulink Modell etwas auffrischen, damit so übersichtlich wie möglich
+		- für Vortrag alle Diagramme und Bilder erstellen
+		- Vortrag üben !!!
+		
+		
+	- Simulink-Modell als SVG: handle=get_param('BouncingBallExample','handle');
+							   print(handle,'-dsvg','BouncingBallExample');
+							   winopen BouncingBallExample.svg;
+	
+	- 					
 
-
+		
+	
 
 
 ---------------------------------------------------------------------------------------------------------------------------
