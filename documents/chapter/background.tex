@@ -37,7 +37,7 @@ If a library object gets updated, each linked copy of this subsystem receives th
 At any step in the development process, a model can be simulated and 
 
 \hiddensubsection{Simscape}
-\textit{Simscape\textsuperscript{\texttrademark}} is a block library developed by \textit{MathWorks\textsuperscript{\textregistered}} with which it is possible to model physical system within the Simulink environment.
+\textit{Simscape\textsuperscript{\texttrademark}} is a block library developed by \textit{MathWorks\textsuperscript{\textregistered}} with which it is possible to model physical systems within the Simulink environment.
 It is capable of modeling and simulating systems such as electric circuits, hydraulics or classical mechanics all within a unified simulation environment.
 The Simscape libraries offer a large variety of predefined components like resistors, capacitors, springs, dampers and more.
 For this thesis, the mechanical components are of the most interest, especially rigid bodies, transforms and joints.
@@ -75,6 +75,7 @@ Due to their iterative nature numerical solvers are generally more computational
 
 Both inverse kinematics methods are used extensively in industry and research, depending on the specific project and its requirements.
 \todo{CITATIONS}
+\todo{Describe damping factor N}
 
 
 
@@ -89,7 +90,7 @@ There also exist versions of this controller constructed using analog electronic
 \todo{Insert graphic of pid controller}
 At each time step the controller first calculates the error between its setpoint and the currently measured process variable: 
 \[
-	Error(t) = setpoint - \textit{process variable}(t)
+	Error(t) = setpoint - process variable(t)
 .\]
 After the error is determined, controller continues with the proportional, integral and derivative term.
 
@@ -134,7 +135,7 @@ To conclude, a PID controller continuously repeats the process of error calculat
 
 \begin{figure}
 	\centerline{\includegraphics[scale=0.55]{rl_illustration}}
-	\caption{The basic concept of Reinforcement Learning. (\cite{weng2018bandit} Fig. 1)}
+	\caption{The basic concept of Reinforcement Learning (\cite{weng2018bandit} [Fig.1])}
 	\label{RL Illustration}
 \end{figure}
 
@@ -146,6 +147,12 @@ Environment
 
 A policy can be roughly defined as a mapping of all perceived environmental states to actions taken by the agent when experiencing these states.
 It describes the way a learning agent behaves at a given time\parencite{sutton2018reinforcement}.
+\begin{definition*}
+	A policy $\pi$ is a distribution over actions given states,\\
+	$\pi(a|s) = \mathbb{P}(A\textsubscript{t} = a\,|\,S\textsubscript{t} = s)$
+\end{definition*}
+A policy fully defines an agents behavior. 
+\todo{Cite David Silver Lec. 2}
 
 A reward function or reward signal is a scalar value which defines the goal of a reinforcement learning problem.
 The reward function is considered part of the environment.
@@ -174,6 +181,29 @@ Continuous action spaces are used, when the number of actions is not known in ad
 Because we have multiple robotic 'arms' in this project, a continuous action space is favorable.
 
 
+Markov Property: "The future is independent of the past given the present"
+The current state contains all relevant information to make predictions about the future
+\begin{definition*}
+	State S\textsubscript{t} is \textbf{\textit{Markov}}, if and only if
+	$ P(S\textsubscript{t+1} | S\textsubscript{t}) = P(S\textsubscript{t+1} | S\textsubscript{1},...,S\textsubscript{t}) $.
+\end{definition*}
+
+Markov Process:
+A Markov Process is a memory-less random process, i.e. a sequence of random states S\textsubscript{1}, S\textsubscript{2},... that have the Markov property.
+
+\begin{definition*}
+	A Markov Process (or Markov Chain) is a tuple $\langle\mathcal{S,P}\rangle$ where
+		\begin{itemize}
+		\item $\mathcal{S}$ is a (finite) set of states that have the Markov property
+		\item $\mathcal{P}$ is a state-transition probability matrix,\\
+		$\mathcal{P}\textsubscript{ss'} = \mathbb{P}[S\textsubscript{t+1} = s'|S\textsubscript{t}=s] $
+	\end{itemize}
+\end{definition*}
+\todo{Cite David Silver RL course Lec. 1-2 for everything about Markov}
+
+Markov Decision Process(MDP):
+
+
 
 Agents applicable for continuous action spaces: 
 \begin{itemize}		
@@ -186,9 +216,33 @@ Agents applicable for continuous action spaces:
 	\item SAC: Soft Actor-Critic (more complex improvement of DDPG generating stochastic policies)
 	Model-free, continuous action space, actor-critic
 	\item TRPO: Trust Region Policy Optimization(more complex version of PPO, more robust for deterministic environments with fewer iterations)
-\end{itemize}\parencite{MATLAB}
-
+\end{itemize}
+\todo{Cite MATLAB}
 \todo{Use image for explanation}
 
+
+
 \section{Swing-Stance Cycle}
-\todo{add image of swing-stance cycle(Paper Schilling)}
+
+
+\begin{figure}
+	\centerline{\includegraphics[scale=0.75]{morphologyOfStickInsect_sketch}}
+	\caption{Morphologic drawing of a stick insect leg (\cite{schilling2013walknet} [Fig.1])}
+	\label{Stick insect leg}
+\end{figure}
+
+Angle $\alpha$ represents the position of the thorax-coxa joint, angle $\beta$ describes the position of the coxa-femur joint and angle $\gamma$ represents the position of the femur-tibia joint.
+These joints are actuated with three pairs of muscles, protractor-retractor, levator-depressor and extensor-flexor respectively.
+Also depicted are the posterior extreme position(PEP), defined as the rearmost point of the movement cycle, and the anterior extreme position(AEP), the foremost point in the cycle.
+Dashed lines depict the swing and stance movement between PEP and AEP.
+\todo{This text should be added into the image description}
+
+The swing-stance cycle depicted above is an essential element of an insects locomotion.
+In the stance phase the leg is in contact with the ground and bears a partial load of the insects weight.
+The leg moves, relative to the body, from AEP to PEP. During this phase the leg pushes the insect forward.
+During the swing phase the leg is lifted of the ground and moved form PEP to AEP in an arch.
+The stance phase is responsible for moving the insect forward until reaching the PEP, when the swing phase is needed to reposition the leg at the AEP to start the cycle again.
+The whole cycle can be described as a pushing phase(stance) and a repositioning phase(swing).
+
+\todo{CITATIONS}
+\todo{Expand}
