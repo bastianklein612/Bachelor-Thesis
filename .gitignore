@@ -270,4 +270,5 @@ thesis.pdf
 *.mexw64
 *.mat
 **/slprj
+*.slx.original
 
