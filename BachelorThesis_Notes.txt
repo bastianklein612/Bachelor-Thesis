@@ -313,13 +313,28 @@ Gespäch mit Malte und Julius:
 		- Vortrag üben !!!
 		
 		
-	- Simulink-Modell als SVG: handle=get_param('BouncingBallExample','handle');
-							   print(handle,'-dsvg','BouncingBallExample');
-							   winopen BouncingBallExample.svg;
+	- Simulink-Modell als SVG: handle=get_param('Sandbox','handle');
+							   print(handle,'-dsvg','Sandbox');
+							   winopen Sandbox.svg;
 	
-	- 					
-
+-----------------------------------------
+27.08.
+	- Zwischenvortrag weiter vorbereitet, Grundlagen so gut wie fertig
+	- Bilder des Modells aufgenommen
+	- Grafik für IK und PID erstellt
+	
+-----------------------------------------
+28.08.
+	- Titelideen:
+		- Leveraging MATLAB Simulink for Hexapod Robotics: Modeling, Control and Learning
+		- Leveraging MATLAB Simulink for Hexapod Robot Simulation, Control and Reinforcement Learning
+		- Leveraging MATLAB Simulink for Hexapod Robot Simulation, Control and Learning
+		- A MATLAB Simulink based approach to Hexapod Robot Simulation and control
+		- A MATLAB Simulink based approach to Hexapod Robot Simulation, Control and Learning
 		
+		- Projektübersichts-Grafik erstellt
+		- Weiterarbeit an Vortrag
+		- Vortrag geübt
 	
 
 

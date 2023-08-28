@@ -1,6 +1,6 @@
-<mxfile host="Electron" modified="2023-08-23T20:19:56.723Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/21.6.8 Chrome/114.0.5735.289 Electron/25.5.0 Safari/537.36" etag="upHuJyajzAOj3lKnDAdZ" version="21.6.8" type="device">
+<mxfile host="Electron" modified="2023-08-28T05:07:52.307Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/21.6.8 Chrome/114.0.5735.289 Electron/25.5.0 Safari/537.36" etag="3pWzJCvjKDnZfSUKQtFP" version="21.6.8" type="device">
   <diagram name="Seite-1" id="dMClOozi9FDAlUsFPm3h">
-    <mxGraphModel dx="978" dy="571" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" background="#4D4D4D" math="0" shadow="0">
+    <mxGraphModel dx="810" dy="473" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" background="#4D4D4D" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -13,8 +13,8 @@
         <mxCell id="wKOV665bJu43ZV_5RckP-4" value="Hexapod Controller" style="rounded=1;whiteSpace=wrap;html=1;align=center;verticalAlign=middle;arcSize=2;fontStyle=1;shadow=1;fontSize=16;fillColor=#FFFF88;fontColor=#000000;strokeColor=#000000;" parent="1" vertex="1">
           <mxGeometry x="230" y="370" width="180" height="130" as="geometry" />
         </mxCell>
-        <mxCell id="wKOV665bJu43ZV_5RckP-13" value="Forces:&lt;br&gt;&amp;nbsp;Friction, Gravity" style="endArrow=classic;startArrow=classic;html=1;rounded=0;exitX=0.998;exitY=0.623;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;verticalAlign=middle;align=center;exitPerimeter=0;fontColor=#000000;" parent="1" source="wKOV665bJu43ZV_5RckP-33" target="wKOV665bJu43ZV_5RckP-3" edge="1">
-          <mxGeometry x="-0.0027" width="50" height="50" relative="1" as="geometry">
+        <mxCell id="wKOV665bJu43ZV_5RckP-13" value="Physical Iteraction" style="endArrow=classic;startArrow=classic;html=1;rounded=0;exitX=0.998;exitY=0.623;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;verticalAlign=middle;align=center;exitPerimeter=0;fontColor=#000000;" parent="1" source="wKOV665bJu43ZV_5RckP-33" target="wKOV665bJu43ZV_5RckP-3" edge="1">
+          <mxGeometry x="-0.0229" width="50" height="50" relative="1" as="geometry">
             <mxPoint x="370" y="660" as="sourcePoint" />
             <mxPoint x="440" y="620" as="targetPoint" />
             <Array as="points">
