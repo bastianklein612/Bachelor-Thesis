@@ -335,7 +335,16 @@ Gespäch mit Malte und Julius:
 		- Projektübersichts-Grafik erstellt
 		- Weiterarbeit an Vortrag
 		- Vortrag geübt
+		
+-----------------------------------------
+29.08.
+		- PROBLEM mit Signal Generator aufgefallen(1 Hz, 50% duty, 0 offset;  x_amplitude = 0.07, y_amplitude = 0.04) 
+		  --> Nach Zwischenvortrag auf jeden Fall testen !!!
 	
+		- Vortrag großteilig fertig gestellt, RL und Hauptteil benötigen noch etwas Arbeit(+ Quellen)
+
+-----------------------------------------
+30.08.
 
 
 ---------------------------------------------------------------------------------------------------------------------------
