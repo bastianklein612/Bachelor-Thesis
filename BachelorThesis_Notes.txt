@@ -326,7 +326,7 @@ Gespäch mit Malte und Julius:
 -----------------------------------------
 28.08.
 	- Titelideen:
-		- Leveraging MATLAB Simulink for Hexapod Robotics: Modeling, Control and Learning
+		- Leveraging MATLAB Simulink for Hexapod Robotics: Simulation, Control and Learning
 		- Leveraging MATLAB Simulink for Hexapod Robot Simulation, Control and Reinforcement Learning
 		- Leveraging MATLAB Simulink for Hexapod Robot Simulation, Control and Learning
 		- A MATLAB Simulink based approach to Hexapod Robot Simulation and control
