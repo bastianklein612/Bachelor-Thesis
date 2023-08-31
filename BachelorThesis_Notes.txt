@@ -326,7 +326,7 @@ Gespäch mit Malte und Julius:
 -----------------------------------------
 28.08.
 	- Titelideen:
-		- Leveraging MATLAB Simulink for Hexapod Robotics: Simulation, Control and Learning
+		- Leveraging MATLAB Simulink for Hexapod Robotics: Simulation, Control and Learning				<----- Winner
 		- Leveraging MATLAB Simulink for Hexapod Robot Simulation, Control and Reinforcement Learning
 		- Leveraging MATLAB Simulink for Hexapod Robot Simulation, Control and Learning
 		- A MATLAB Simulink based approach to Hexapod Robot Simulation and control
@@ -345,6 +345,28 @@ Gespäch mit Malte und Julius:
 
 -----------------------------------------
 30.08.
+		- Zwischenvortrag finalisiert und an Malte, Paula und Julius geschickt
+		- Vortragen geübt
+
+-----------------------------------------
+31.08.
+		- Zwischenvortrag gehalten:
+			- gut vorgetragen, Tempo und Erklärungen gut verständlich
+			- Roter Faden fehlt 
+				--> Übersicht öfter verwenden um zu zeigen, wo man sich befindet
+				--> Schon zu Beginn damit anfangen zu sagen, warum man etwas erklärt(z.B. PID, wofür ?)
+			- Hervorheben, was der eigene Beitrag ist !!!
+			- Quellen für Text mit auf jew. Folie packen (als Zahl die auf Ende verweist)
+			- Simulink-Modell Übersichtsgrafik erweitern, kann gut als Übersicht über das gesamte Projekt genutzt werden
+			  Wie Paula schon gezeigt hat, Einflüsse von außen mit aufnehmen(urdf-import,... / RL mehr zeigen, kleiner aufteilen)
+			  
+		- 
+		
+		
+		
+		
+		
+		
 
 
 ---------------------------------------------------------------------------------------------------------------------------
@@ -358,38 +380,42 @@ Gespäch mit Malte und Julius:
 	- Background weiterschreiben																	x
 	- min. 2 Paper lesen																	
 	- Hexapod PID-Controller tunen																	X
-	- Sanandos Modell ansehen, ausprobieren ob einfach mit meinem verbindbar		
+	- Sanandos Modell ansehen, ausprobieren ob einfach mit meinem verbindbar						x
 
 -----------------------------------------2
 14.08 - 20.08.
 	- Experimente mit RL-Agent beginnen																X
-	- Background weiterschreiben
+	- Background weiterschreiben																	X
 	- Modell überarbeiten(mehrfach verwendete Subsysteme als Library anlegen ?, etc....)			X
-	- Paper lesen							
-	- Zwischenvortrag beginnen (?) --> Ja !															x
+	- Paper lesen																					x
+	- Zwischenvortrag beginnen (?) --> Ja !															X
 
 -----------------------------------------3
 21.08 - 27.08.
-	- Hoffentlich bis hier erste Erfolge mit RL-Learning
-	- Background sollte großteils fertig sein
-	- Related Works weiterschreiben
-	- Im Methods-Teil schonmal anfangen, grundsätzlichen Aufbau und Gait-Entwicklung zu erklären
-	- Zwischenvortrag bearbeiten, großteilig fertigstellen
+	- Hoffentlich bis hier erste Erfolge mit RL-Learning											
+	- Background sollte großteils fertig sein														x
+	- Related Works weiterschreiben																	
+	- Im Methods-Teil schonmal anfangen, grundsätzlichen Aufbau und Gait-Entwicklung zu erklären	
+	- Zwischenvortrag bearbeiten, großteilig fertigstellen											X
 -----------------------------------------4
 28.08 - 03.09.
-	- RL-Learning fortführen, Fortschritt festhalten !
-	- Related Works großteils fertig
-	- Methods-Teil weiterschreiben
-	- Results kann teils angefangen werden(das Modell an sich kann bereits bewertet werden)
+	- RL-Learning fortführen, Fortschritt festhalten !												
+	- Related Works großteils fertig																
+	- Methods-Teil weiterschreiben																	
+	- Results kann teils angefangen werden(das Modell an sich kann bereits bewertet werden)			
 	
-	- Version des Vortrags an Malte und Paula schicken
-	- Zwischenvortrag halten (31.08)
+	- Version des Vortrags an Malte und Paula schicken												X
+	- Zwischenvortrag halten (31.08)																X
 
 -----------------------------------------5
 04.09 - 10.09.
 	- Ziel bis hierhin fertig mit der inhaltlichen Arbeit zu sein
 	
-
+	Update(31.08.):
+		- Expose Korrekturen von Paula umsetzen
+		- Hexapod-Inputs anpassen
+		- RL im Background fertigstellen
+		- Sanandos Modell genau anschauen(nach seinem Vortrag)
 
 -----------------------------------------6
 11.09 - 17.09.
