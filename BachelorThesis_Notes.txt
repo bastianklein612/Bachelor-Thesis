@@ -360,7 +360,15 @@ Gespäch mit Malte und Julius:
 			- Simulink-Modell Übersichtsgrafik erweitern, kann gut als Übersicht über das gesamte Projekt genutzt werden
 			  Wie Paula schon gezeigt hat, Einflüsse von außen mit aufnehmen(urdf-import,... / RL mehr zeigen, kleiner aufteilen)
 			  
-		- 
+			  
+		- Bachelorarbeit online angemeldet
+-----------------------------------------
+01.09.
+		- Entwicklung von neuem Swing-Stance-Cotroller begonnen
+		
+-----------------------------------------
+02.09.
+
 		
 		
 		
