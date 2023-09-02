@@ -1,8 +1,15 @@
 gravity_vector = [0, 0, -9.81];
 
 %Faktoren zur Definierung der Schritthöhe/-weite
-step_height = 0.07;
+step_height = 0.06;
 step_length = 0.04;
+
+%Anterial Extreme Position(AEP), relativ zum jew. Bein
+%(D.h., Bein darf max. x m vom Ausgangspunkt abweichen)
+AEP = 0.03;
+%Posterior Extreme Position(PEP), relativ zum jew. Bein
+%(D.h, Bein darf max. x m vom Ausgangspunkt abweichen)
+PEP = -0.03;
 
 %pattern generation
 x_offset = 0.2;
