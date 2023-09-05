@@ -12,8 +12,8 @@ AEP = 0.03;
 PEP = -0.03;
 
 %pattern generation
-x_offset = 0.2;
-z_offset = -0.14;
+%x_offset = 0.2;
+%z_offset = -0.14;
 
 %scene
 plane_offset = 0.16;
