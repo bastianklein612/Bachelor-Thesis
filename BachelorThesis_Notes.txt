@@ -370,12 +370,34 @@ Gespäch mit Malte und Julius:
 02.09.
 		- Neuer Swing-Initialisation Ansatz für den Controller funktioniert
 		- Feste Gaits auf neuen Controller angepasst
+		- RL Learning mit angepasstem Controller getestet
 		
-		
-		
-		
-		
+-----------------------------------------
+03.09.	
 
+		- RL für 8h(ca. 250 Ep.) laufen lassen, bisher keine guten Ergebnisse --> Länger laufen lassen 
+		
+-----------------------------------------
+04.09.
+		- RL laufen gelassen
+		- Bestätigung für Anmeldung der Bachelorarbeit erhalten
+		- 3./4. RL Lecture
+
+-----------------------------------------
+05.09.
+		- Oberseminar: 
+			- Abschluss-Vortrag von Morten(Übertragung von SystemC nach FramaC zur deduktiven Verifikation(?); am Beispiel eines ABS)
+			- Abschluss-Vortrag von Sanando (Abstract Hexapod...)
+				- Gait wird nur durch Stateflow-Chart definiert; evt. anpassbar über Swing-Phase-Anteil
+				- Ob Hexapod geradeaus mMn. nicht sinnvoll definiert(?) (Mittelwert der Bein-Geschwindigkeiten auf einer Seite als v auf der Seite...)
+				- Stateflow gibt als outputs: Start-Position der Swingphase[x], Mode[Swing/Stance] und Stop-Signal[wenn Bein im PEP warten muss]
+			- Malte auf Reward-Definition angesprochen; will mir Paper schicken
+
+		- zurückgelegte Strecke in Reward-Funktion vergessen.... --> Deswegen keine guten RL-Ergebnisse...
+			--> Reward neu definieren
+
+		- 
+		
 ---------------------------------------------------------------------------------------------------------------------------
 ------------ZEITPLAN-------------------------------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------------------------------------------------
@@ -420,9 +442,10 @@ Gespäch mit Malte und Julius:
 	
 	Update(31.08.):
 		- Expose Korrekturen von Paula umsetzen
-		- Hexapod-Inputs anpassen
+		- Hexapod-Inputs anpassen																	x
 		- RL im Background fertigstellen
 		- Sanandos Modell genau anschauen(nach seinem Vortrag)
+		- Arbeit offiziel anmelden																	X
 
 -----------------------------------------6
 11.09 - 17.09.
@@ -432,7 +455,6 @@ Gespäch mit Malte und Julius:
 -----------------------------------------7
 18.09 - 24.09.
 	- nur Schreiben
-
 
 
 
