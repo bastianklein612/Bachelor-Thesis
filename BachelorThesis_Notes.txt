@@ -396,7 +396,23 @@ Gespäch mit Malte und Julius:
 		- zurückgelegte Strecke in Reward-Funktion vergessen.... --> Deswegen keine guten RL-Ergebnisse...
 			--> Reward neu definieren
 
-		- 
+		- Neuen reward definiert, abhängig von x, y, und Höhenunterschied (immer noch temporär, da Malte noch Paper schicken wollte)
+		- ca. 400 Ep. trainiert, Roboter steht bis jetzt nur(evt. hat Höhenveränderung zu großen Einfluss auf reward und x zu wenig)
+		
+-----------------------------------------
+06.09.
+		- Training weitergeführt, bis jetzt immer noch keine großen Fortschritte
+		- Paper von Malte erhalten --> Festgestellt, dass ich x-Position statt Geschwindigkeit in x-Richtung im Reward habe
+									   Reward auf Geschwi. umgestellt
+
+-----------------------------------------
+07.09.		
+
+		- RL mit neuem Reward gestartet
+		- Hauptteil der Bachelorarbeit angefangen(Hexapod-Modell)
+		-
+		
+		
 		
 ---------------------------------------------------------------------------------------------------------------------------
 ------------ZEITPLAN-------------------------------------------------------------------------------------------------------
@@ -431,7 +447,7 @@ Gespäch mit Malte und Julius:
 	- RL-Learning fortführen, Fortschritt festhalten !												
 	- Related Works großteils fertig																
 	- Methods-Teil weiterschreiben																	
-	- Results kann teils angefangen werden(das Modell an sich kann bereits bewertet werden)			
+	- Results kann teils angefangen werden(das Modell an sich kann bereits bewertet werden)			x
 	
 	- Version des Vortrags an Malte und Paula schicken												X
 	- Zwischenvortrag halten (31.08)																X
@@ -442,10 +458,10 @@ Gespäch mit Malte und Julius:
 	
 	Update(31.08.):
 		- Expose Korrekturen von Paula umsetzen
-		- Hexapod-Inputs anpassen																	x
+		- Hexapod-Inputs anpassen																	X
 		- RL im Background fertigstellen
 		- Sanandos Modell genau anschauen(nach seinem Vortrag)
-		- Arbeit offiziel anmelden																	X
+		- Arbeit offiziell anmelden																	X
 
 -----------------------------------------6
 11.09 - 17.09.

@@ -2,6 +2,28 @@
 \chapter{Methods}
 \label{ch:methods}
 
+\section{Model of the Hexapod}
+
+The hexapod model we used in this work is the \textit{PhantomX MK4} developed by \textit{Trossen Robotics}.
+The real robot 
+The company provides a .urdf file(Unified Robotics Description Format) of the robot which is imported into the MATLAB environment.
+MATLAB is then able to convert the file into a Simulink model consisting of blocks from the Simscape library.
+
+\todo{Insert images of hexapod model}
+The main body of the hexapod robot is represented by a rigid body and a main coordinate frame.
+Each of the robots legs consists of 3 rigid bodies(coxa, femur and tibia) which are connected to each other by 2 joints.
+A third joint then attaches the coxa, and thus the whole leg, to the main body.
+Each joint has 1 (rotational) DoF.
+To position each rigid body and joint correctly, so called rigid transformations are used to translate and rotate each part.
+
+Each of the models joints can receive a torque to be applied as input and output various sensory data such as the joints position, velocity and acceleration. 
+To simplify the model, we did not model the physical servo motors and instead used this direct torque input to the joints.
 
 
+From a top level perspective, the hexapod model consists of the main body(thorax) and the 6 legs.
+This system receives as input the torque to be applied on each joint and outputs sensory data taken from these joints, namely the joints position, velocity and acceleration.
+In this work only the data about the current joint positions is utilized, but to allow for further expansion on the model, such as optimizing for minimal energy consumption, joint velocity and acceleration are provided as well.
+Integration of the joint position over time would yield the same result, but we decided for ease of use to include the data explicitly.
 
+To encapsulate the system and only provide the necessary inputs and outputs, the system is placed inside a subsystem.
+This also allows for the duplication of the hexapod system, so that in future research it can also be used in multi-agent simulations.
