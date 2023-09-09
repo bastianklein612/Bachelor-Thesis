@@ -1,3 +1,5 @@
+\graphicspath{ {./images} }
+
 %!TEX root = ../thesis.tex
 \chapter{Methods}
 \label{ch:methods}
@@ -5,7 +7,6 @@
 \section{Model of the Hexapod}
 
 The hexapod model we used in this work is the \textit{PhantomX MK4} developed by \textit{Trossen Robotics}.
-The real robot 
 The company provides a .urdf file(Unified Robotics Description Format) of the robot which is imported into the MATLAB environment.
 MATLAB is then able to convert the file into a Simulink model consisting of blocks from the Simscape library.
 
@@ -19,7 +20,6 @@ To position each rigid body and joint correctly, so called rigid transformations
 Each of the models joints can receive a torque to be applied as input and output various sensory data such as the joints position, velocity and acceleration. 
 To simplify the model, we did not model the physical servo motors and instead used this direct torque input to the joints.
 
-
 From a top level perspective, the hexapod model consists of the main body(thorax) and the 6 legs.
 This system receives as input the torque to be applied on each joint and outputs sensory data taken from these joints, namely the joints position, velocity and acceleration.
 In this work only the data about the current joint positions is utilized, but to allow for further expansion on the model, such as optimizing for minimal energy consumption, joint velocity and acceleration are provided as well.
@@ -27,3 +27,23 @@ Integration of the joint position over time would yield the same result, but we 
 
 To encapsulate the system and only provide the necessary inputs and outputs, the system is placed inside a subsystem.
 This also allows for the duplication of the hexapod system, so that in future research it can also be used in multi-agent simulations.
+
+\section{Environment}
+To validate the robot model and to provide a place for the robot to learn the coordination rules of its legs, we constructed a simple test environment.
+The environment currently only consists of a horizontal plane, but can expanded to include more complex terrain with little effort.
+Some examples which we experimented with but did not include in this thesis are inclined planes and also obstacles on the ground.
+
+\section{Controller}
+The controller is responsible for the hexapods locomotion.
+It controls the movement of the robots six legs according to a predefined gait.
+As inputs, the controller receives the sensory data from the hexapod model.
+According to this data the controller outputs the torques to be applied to each joint.
+
+\todo{Viel tiefer ins Detail gehen}
+\todo{Bilder}
+
+\section{Learning Leg Coordination}
+The leg coordination problem can be considered a Markov decision process(MDP).
+The MDP is a 5-tuple $\mathcal{\{S,A,P,R,\gamma\}}$, where $\mathcal{S}$ is a finite set of states, $\mathcal{A}$ is a finite set of actions, $\mathcal{P}$ is a state-transition probability matrix ($\mathcal{P}_{ss'}^a=\mathbb{P}[S_{t+1}=s' | S_t=s, A_t=a]$), $\mathcal{R}_s^a$ is a reward function ($\mathcal{R}_s^a = \mathbb{E}[R_{t+1} | S_t=s, A_t=a]$) and $\gamma \in [0,1]$ is a discount factor.
+
+
