@@ -270,5 +270,6 @@ thesis.pdf
 *.mexw64
 *.mat
 **/slprj
+**/svg-inkscape
 *.slx.original
 
