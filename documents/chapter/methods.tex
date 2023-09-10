@@ -64,7 +64,12 @@ According to this data the controller outputs the torques to be applied to each 
 	\caption{Controller Overview}
 	\label{Controller Overview}
 \end{figure}
-Each of the hexapods legs is controlled by a separate control unit which receives the sensory information of the leg as input and computes the torques to be applied to the legs joints as outputs.
+Each of the hexapods legs is controlled by a separate control unit which receives the information of the legs joint sensors as input and computes the torques to be applied to its joints as output.
+The control unit for a leg receives the frequency for the swing-stance cycle, duty-percentage of the swing phase and swing-initiation signal as coordination inputs.
+This information can either come from a static gait definition, in which the parameters for each leg are statically configured, or can be provided by a reinforcement learning agent.
+The agent receives observations from the environment and hexapod model as well as a reward signal and outputs actions in the form as mentioned above.
+
+
 
 
 

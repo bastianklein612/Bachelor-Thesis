@@ -429,7 +429,9 @@ Gespäch mit Malte und Julius:
 		- Schreiben an Hauptteil und Background; einige Grafiken schonmal eingefügt
 		
 -----------------------------------------
-11.09.		
+11.09.	
+		- "RL learns best when inputs are normalized between N(0,1)"; also normalverteilt um 0 mit Standardabweichung 1
+		   --> morgen anpassen
 		
 ---------------------------------------------------------------------------------------------------------------------------
 ------------ZEITPLAN-------------------------------------------------------------------------------------------------------
