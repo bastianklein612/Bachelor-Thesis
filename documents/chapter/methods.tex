@@ -4,7 +4,27 @@
 \chapter{Methods}
 \label{ch:methods}
 
+\chapter{The Simulink Model}
+\begin{figure}
+	\centerline{\includegraphics[scale=0.035]{HexapodModel_Overview}}
+	\caption{Simulink Model Overview}
+	\label{Simulink Model Overview}
+\end{figure}
+
 \section{Model of the Hexapod}
+
+\begin{figure}
+	\centerline{\includesvg[scale=0.7]{Simulink/Simulink_PhysicalHexapodOverview}}
+	\caption{Hexapod Model Overview}
+	\label{Hexapod Model Overview}
+\end{figure}
+
+\begin{figure}
+	\centerline{\includesvg[scale=0.6]{Simulink/Simulink_HexapodLegOverview}}
+	\caption{Model of Hexapod Leg}
+	\label{Hexapod Leg}
+\end{figure}
+
 
 The hexapod model we used in this work is the \textit{PhantomX MK4} developed by \textit{Trossen Robotics}.
 The company provides a .urdf file(Unified Robotics Description Format) of the robot which is imported into the MATLAB environment.
@@ -38,6 +58,16 @@ The controller is responsible for the hexapods locomotion.
 It controls the movement of the robots six legs according to a predefined gait.
 As inputs, the controller receives the sensory data from the hexapod model.
 According to this data the controller outputs the torques to be applied to each joint.
+
+\begin{figure}
+	\centerline{\includegraphics[scale=0.03]{HexapodController}}
+	\caption{Controller Overview}
+	\label{Controller Overview}
+\end{figure}
+Each of the hexapods legs is controlled by a separate control unit which receives the sensory information of the leg as input and computes the torques to be applied to the legs joints as outputs.
+
+
+
 
 \todo{Viel tiefer ins Detail gehen}
 \todo{Bilder}

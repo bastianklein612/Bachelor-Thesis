@@ -36,6 +36,12 @@ To enable easy reuse, subsystems can be placed in custom libraries.
 If a library object gets updated, each linked copy of this subsystem receives the update as well, preventing the user from having to edit each copy themselves.
 At any step in the development process, a model can be simulated and 
 
+\begin{figure}
+	\centerline{\includesvg[scale=0.8]{Simulink/BouncingBallExample_Simulink.svg}}
+	\caption{Simulink, Bouncing Ball Example}
+	\label{Simulink Bouncing Ball Example}
+\end{figure}
+
 \hiddensubsection{Simscape}
 \textit{Simscape\textsuperscript{\texttrademark}} is a block library developed by \textit{MathWorks\textsuperscript{\textregistered}} with which it is possible to model physical systems within the Simulink environment.
 It is capable of modeling and simulating systems such as electric circuits, hydraulics or classical mechanics all within a unified simulation environment.
@@ -50,6 +56,12 @@ When the joint is actuated, the follower frame moves relative to the base frame\
 If the user requires a component which is not yet represented by any block in the libraries, Simscape also offers a MATLAB based language to enable text-based development of custom components.
 \todo{Weiter ausführen; mehr Details, z.B. über Gelenke(Sensorik, Aktuation, etc.)}
 \todo{CITATIONS}
+
+\begin{figure}
+	\centerline{\includesvg[scale=1.0]{Simulink/BouncingBallExample_Simscape.svg}}
+	\caption{Simscape, Bouncing Ball Example}
+	\label{Simscape Bouncing Ball Example}
+\end{figure}
 
 \section{Inverse Kinematics}
 Inverse Kinematics(IK) is a term predominately used in robotics and computer graphics.
