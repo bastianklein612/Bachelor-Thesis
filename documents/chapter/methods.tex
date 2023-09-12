@@ -26,26 +26,63 @@
 \end{figure}
 
 
-The hexapod model we used in this work is the \textit{PhantomX MK4} developed by \textit{Trossen Robotics}.
-The company provides a .urdf file(Unified Robotics Description Format) of the robot which is imported into the MATLAB environment.
-MATLAB is then able to convert the file into a Simulink model consisting of blocks from the Simscape library.
+The hexapod model we developed in this thesis is based on the \textit{PhantomX MK4} hexapod developed by \textit{Trossen Robotics}.
+A digital model of this robot is provided by the company in the form of a .urdf file which can be obtained from their Github page \parencite{interbotixGithub}.
+\textbf{U}nified \textbf{R}obotics \textbf{D}escription \textbf{F}ormat is a common format to describe the physical and kinematic properties of a robot or robotic component. 
+It defines the way in which links and joints are connected, the general geometry of the robot as well as visual and collision geometry.
+The geometry is provided in a separate folder of CAD-files which define the leg links and body structure as 
+polygon meshes and are referenced in the urdf.
+We use MATLABs capability to convert the urdf file into a Simscape-based Simulink model.
+The resulting model consists of Simscape joints, rigid transforms and rigid bodies to represent the links.
+The 3D-model off the hexapod can be seen in .
+
+
+\begin{figure}[]
+	
+	\begin{subfigure}{.5\textwidth} % this sets the figure to be max half the width of the page
+		\centering
+		% include first image
+		\includegraphics[width=.9\linewidth]{PhantomX_MK4_SideView}  % this sets the image to fill 90% of the available space -> 45% of the line width in total. 
+		\caption{}
+		\label{figure: PhantomX Side View}
+	\end{subfigure}
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		% include second image
+		\includegraphics[width=.9\linewidth]{PhantomX_MK4_FrontView}  
+		\caption{}
+		\label{figure: PhantomX Front View}
+	\end{subfigure}
+	
+	\label{fig:fig}
+	\begin{subfigure}{\textwidth}
+		\centering
+		% include third image
+		\includegraphics[width=.45\linewidth]{PhantomX_MK4_TopView}   % this width should be half of the width of the other two images
+		\caption{}
+		\label{figure: PhantomX Top View}
+	\end{subfigure}
+	\caption[]{3D model of Trossen Robotix PhantomX MK4}
+	\label{figure: PhantomX 3D model}
+\end{figure}
+\todo{get each image into list of figures, but exclude complete figure}
 
 \todo{Insert images of hexapod model}
+From a top level perspective, the hexapod model consists of the main body(thorax) and the 6 legs.
+This system receives as input the torque to be applied on each joint and outputs sensory data taken from these joints, namely the joints position, velocity and acceleration.
 The main body of the hexapod robot is represented by a rigid body and a main coordinate frame.
 Each of the robots legs consists of 3 rigid bodies(coxa, femur and tibia) which are connected to each other by 2 joints.
 A third joint then attaches the coxa, and thus the whole leg, to the main body.
 Each joint has 1 (rotational) DoF.
-To position each rigid body and joint correctly, so called rigid transformations are used to translate and rotate each part.
+To position each rigid body and joint correctly, rigid transformations are used to translate and rotate each part.
 
-Each of the models joints can receive a torque to be applied as input and output various sensory data such as the joints position, velocity and acceleration. 
-To simplify the model, we did not model the physical servo motors and instead used this direct torque input to the joints.
+Each of the models joints can receive as input a torque to be applied and can output sensory data, such as the joints position, velocity and acceleration. 
+To simplify the model, we did not model the physical servo motors and instead used this direct torque input to actuate the joints.
 
-From a top level perspective, the hexapod model consists of the main body(thorax) and the 6 legs.
-This system receives as input the torque to be applied on each joint and outputs sensory data taken from these joints, namely the joints position, velocity and acceleration.
-In this work only the data about the current joint positions is utilized, but to allow for further expansion on the model, such as optimizing for minimal energy consumption, joint velocity and acceleration are provided as well.
-Integration of the joint position over time would yield the same result, but we decided for ease of use to include the data explicitly.
+In this thesis only the sensor information about the current joint positions is utilized, but to allow for further expansions on the model, such as optimizing for minimal energy consumption, joint velocity and acceleration are provided as well.
+Integration of the joint position over time would implicitly yield the same result, but we decided for ease of use to include this data explicitly.
 
-To encapsulate the system and only provide the necessary inputs and outputs, the system is placed inside a subsystem.
+To encapsulate the system and only provide the necessary inputs and outputs, the hexapod model is placed inside a subsystem.
 This also allows for the duplication of the hexapod system, so that in future research it can also be used in multi-agent simulations.
 
 \subsection{Environment}
@@ -105,6 +142,27 @@ The coordination between these two units is influenced by the cycle frequency, d
 If the swing initiation is pulled high, the swing phase subsystem is reset(so it starts from the beginning) and the outputs(x,z) are switched to the swing system.
 When the swing phase is finished, meaning the x-coordinate coincides with the AEP, the swing phase subsystem gives up control the the stance phase subsystem via the \textit{Swing finished} signal.
 This induces a reset on the stance phase subsystem and switches the outputs over to this system.
+
+\begin{figure}
+	\centering
+	\begin{subfigure}[b]{0.55\textwidth}
+		\includesvg[width=1\linewidth]{Simulink/Simulink_SwingPhaseGenOverview}
+		\caption{}
+		\label{fig:Ng1} 
+	\end{subfigure}
+	
+	\begin{subfigure}[b]{0.55\textwidth}
+		\includesvg[width=1\linewidth]{Simulink/Simulink_SwingPhaseGenOverview}
+		\caption{}
+		\label{fig:Ng2}
+	\end{subfigure}
+	
+	\caption[Swing and Stance Phase]{(a) Swing phase subsystem. The swing ellipse is generated by two sine waves with different amplitude and phase. (b) Stance phase subsystem. As opposed to (a), the x-coordinate is now generated by a linear function and the z-coordinate is 0 throughout the whole phase.
+		values of $M,I$.}
+\end{figure}
+
+
+
 
 \begin{table}
 	\centering
