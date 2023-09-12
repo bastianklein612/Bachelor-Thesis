@@ -431,8 +431,32 @@ Gespäch mit Malte und Julius:
 -----------------------------------------
 11.09.	
 		- "RL learns best when inputs are normalized between N(0,1)"; also normalverteilt um 0 mit Standardabweichung 1
-		   --> morgen anpassen
+		   --> morgen anpassen  X
+		- Weiter am Hauptteil geschrieben; Bilder und Tabellen eingefügt
 		
+-----------------------------------------
+12.09.	
+		- Bei RL Agent nach knapp 1900 Ep. immer noch kein steigender Reward
+			--> evt. Averaging Window zu klein ?
+			--> DDPG braucht allerdings auch lange zum trainieren(aber nicht SO lange (?))
+			
+		- Fortschritt im Hauptteil
+			- Abschitt über Hexapod-Modell erweitert
+			- Bilder + Tabellen eingefügt
+			
+-----------------------------------------
+12.09.				
+
+
+
+
+
+
+
+
+
+
+			
 ---------------------------------------------------------------------------------------------------------------------------
 ------------ZEITPLAN-------------------------------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------------------------------------------------

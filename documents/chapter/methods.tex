@@ -34,11 +34,10 @@ The geometry is provided in a separate folder of CAD-files which define the leg 
 polygon meshes and are referenced in the urdf.
 We use MATLABs capability to convert the urdf file into a Simscape-based Simulink model.
 The resulting model consists of Simscape joints, rigid transforms and rigid bodies to represent the links.
-The 3D-model off the hexapod can be seen in .
+The 3D-model off the hexapod can be seen in Fig. \ref{figure: PhantomX 3D model}.
 
 
 \begin{figure}[]
-	
 	\begin{subfigure}{.5\textwidth} % this sets the figure to be max half the width of the page
 		\centering
 		% include first image
@@ -67,23 +66,48 @@ The 3D-model off the hexapod can be seen in .
 \end{figure}
 \todo{get each image into list of figures, but exclude complete figure}
 
-\todo{Insert images of hexapod model}
-From a top level perspective, the hexapod model consists of the main body(thorax) and the 6 legs.
+From a top level perspective, the hexapod model consists of the main body(thorax) and its 6 legs.
 This system receives as input the torque to be applied on each joint and outputs sensory data taken from these joints, namely the joints position, velocity and acceleration.
 The main body of the hexapod robot is represented by a rigid body and a main coordinate frame.
 Each of the robots legs consists of 3 rigid bodies(coxa, femur and tibia) which are connected to each other by 2 joints.
-A third joint then attaches the coxa, and thus the whole leg, to the main body.
-Each joint has 1 (rotational) DoF.
-To position each rigid body and joint correctly, rigid transformations are used to translate and rotate each part.
+A third joint then attaches the coxa and the leg as a whole to the main body.
+Each of the joints used has 1 (rotational) DoF.
+To position each rigid body and joint correctly, rigid transformations are used to translate and rotate each component.
 
-Each of the models joints can receive as input a torque to be applied and can output sensory data, such as the joints position, velocity and acceleration. 
+As mentioned above, joints can receive as input a torque to be applied and can output sensory data, such as the joints position, velocity and acceleration. 
 To simplify the model, we did not model the physical servo motors and instead used this direct torque input to actuate the joints.
 
-In this thesis only the sensor information about the current joint positions is utilized, but to allow for further expansions on the model, such as optimizing for minimal energy consumption, joint velocity and acceleration are provided as well.
-Integration of the joint position over time would implicitly yield the same result, but we decided for ease of use to include this data explicitly.
+The internal joint parameters are given in table \ref{table: Joint parameters}.
+Some of these parameters are adapted from \parencite{FIND AUTHOR} and some were automatically imported by MATLAB from the urdf specification.
+
+\begin{table}
+	\centering
+	\begin{tabular}{| l | c |}
+		\hline
+		\textbf{parameter} & \textbf{value} \\
+		\hline
+		spring stiffness & 0 \\
+		\hline
+		damping coefficient & 0 \\
+		\hline
+		spring stiffness(joint boundary) & $10^4 \frac{Nm}{\text{deg}}$ \\
+		\hline
+		damping coefficient(joint boundary) &  $10 \frac{Nm \cdot s}{\text{deg}}$\\
+		\hline
+		transit region width(joint boundary) &  $10^{\circ}$\\
+		\hline
+	\end{tabular}
+	\caption{Internal joint parameters}
+	\label{table: Joint parameters}
+\end{table}
+
+
+In this thesis we only utilize the sensor information about the current joint positions, but to allow for further expansions on the model, such as optimizing for minimal energy consumption, joint velocity and acceleration are provided as well.
+It should be noted, that integrating the joint position over time would implicitly yield the same result, but we decided for ease of use to include this data explicitly.
 
 To encapsulate the system and only provide the necessary inputs and outputs, the hexapod model is placed inside a subsystem.
-This also allows for the duplication of the hexapod system, so that in future research it can also be used in multi-agent simulations.
+This also allows for the duplication of the hexapod system, so that in future research it is possible to use this system in multi-agent simulations as well.
+
 
 \subsection{Environment}
 To validate the robot model and to provide a place for the robot to learn the coordination rules of its legs, we constructed a simple test environment.
