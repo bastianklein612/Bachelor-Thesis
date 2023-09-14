@@ -112,7 +112,14 @@ This also allows for the duplication of the hexapod system, so that in future re
 \subsection{Environment}
 To validate the robot model and to provide a place for the robot to learn the coordination rules of its legs, we constructed a simple test environment.
 The environment currently only consists of a horizontal plane, but can expanded to include more complex terrain with little effort.
-Some examples which we experimented with but did not include in this thesis are inclined planes and also obstacles on the ground.
+Some examples which we experimented with but did not include in this thesis are inclined planes and also small obstacles on the ground.
+As Simscape itself only provides basic geometric objects but allows for the use .stl files to define the shape of objects, complex terrain such as irregular, uneven surfaces can be imported with relative ease.
+
+In addition to being the testing ground of the hexapod model, the environment also acts as part of the reinforcement learning process.
+Similar to \ref{figure: RL Illustration}, the environment provides observations to the RL agent and calculates a reward signal, based on the agents performance.
+It does not directly receive actions from the agent, as the hexapod to which the actions are applied is its own subsystem.
+If we would define the environment exactly like \ref{figure: RL Illustration,}, we would have to include both the environment subsystem and the hexapod subsystem as part of the "RL" environment.
+For obvious reasons such as modularity and clarity of model we chose not to adapt this.
 
 \subsection{Controller}
 The controller is responsible for the hexapods locomotion.
@@ -233,5 +240,22 @@ This induces a reset on the stance phase subsystem and switches the outputs over
 \section{Learning Leg Coordination}
 The leg coordination problem can be considered a Markov decision process(MDP).
 The MDP is a 5-tuple $\mathcal{\{S,A,P,R,\gamma\}}$, where $\mathcal{S}$ is a finite set of states, $\mathcal{A}$ is a finite set of actions, $\mathcal{P}$ is a state-transition probability matrix ($\mathcal{P}_{ss'}^a=\mathbb{P}[S_{t+1}=s' | S_t=s, A_t=a]$), $\mathcal{R}_s^a$ is a reward function ($\mathcal{R}_s^a = \mathbb{E}[R_{t+1} | S_t=s, A_t=a]$) and $\gamma \in [0,1]$ is a discount factor.
+
+
+
+When we first started working on te RL process, te result were not very promising. The agent did stabilize, meaning it did not jump around randomly, but it was not able to find an efficient gain.
+The agent never learned to reliably move a leg forward if it was start to drag behind due to reaching the PEP.
+
+The reward stayed relatively flat over a period of over 2000 episodes of training.
+The strong deviation from the mean, even after several hundred episodes can be attributed to an averaging window of just 5 episodes(or steps ?). 
+In later training experiments, this averaging window was increased.
+The small averaging window might have contributed to the poor performance of the agent.
+
+DDPG does not jitter at start of learning, PPO does.
+
+
+Start learning process of PPO(Proximal Policy Optimization) agent at a small step size(0.00025s = 0.25ms) to prevent simulation errors due to initial random jerking of robot legs.
+After the agent has stabilized, the step size can be increased to speed up the further learning process.]
+
 
 
