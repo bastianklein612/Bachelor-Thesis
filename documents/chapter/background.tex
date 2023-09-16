@@ -13,11 +13,16 @@ The first joint, hereafter named \textalpha-joint, connects the coxa to the thor
 Coxa and femur are connected by the \textbeta-joint, while the femur and tibia are connected by the \textgamma-joint. 
 These joints move orthogonal to the movement plane of the \textalpha-joint. Together, they are responsible for the lateral positioning of each leg.
 
+\begin{figure}
+	\centerline{\includegraphics[scale=0.04]{phantomX_III_overview}}
+	\caption{PhantomX MKIII hexapod, predecessor of MKIV used here [\cite{PhantomX_MKIII}]}
+	\label{figure: PhantomX MKIII}
+\end{figure}
 
 \todo{"Gait Self-learning for Damaged Robots Combining Bionic Inspiration and Deep Reinforcement Learning" for parameters of hexapod}
 
+\todo{Maybe add image of stick insect}
 
-\todo{Add image of hexapod(and maybe of insect)}
 \todo{CITATIONS}
 
 \section{MATLAB}
@@ -104,8 +109,8 @@ There also exist versions of this controller constructed using analog electronic
 	\caption{Illustration of a PID Controller}
 	\label{figure: PID Controller}
 \end{figure}
+\todo{Change d and dt to /partial in pid graphic}
 
-\todo{Insert graphic of pid controller}
 At each time step the controller first calculates the error between its setpoint and the currently measured process variable: 
 \[
 	Error(t) = setpoint - process\ variable(t)
@@ -142,6 +147,13 @@ The performance of a PID controller greatly depends on the values of its paramet
 To achieve desired results like fast response times and minimal overshooting or oscillations, these parameters have to be carefully tuned. 
 To conclude, a PID controller continuously repeats the process of error calculation and adjustment, thus forming a closed-loop system which aims to minimize the error and approach the setpoint as close as possible.
 
+In real-world applications the derivative term is almost never implemented as a pure derivative as it would be extremely sensitive to noise.
+Instead, a so called filter coefficient $N$ is used.
+The modified derivative term is given by:
+
+\[
+D_{N}(t) = K_d \cdot \frac{\partial}{\partial t}(Error(t))
+\]
 
 \todo{CITATIONS}
 
@@ -155,14 +167,14 @@ To conclude, a PID controller continuously repeats the process of error calculat
 \end{figure}
 
 Reinforcement Learning(RL), besides supervised and unsupervised learning, is one of the three branches of Machine Learning.
-The underlying principle of RL is learning how to maximize a scalar reward signal. \parencite{sutton2018reinforcement}.
+The underlying principle of RL is learning how to maximize a scalar reward signal \parencite{sutton2018reinforcement}.
 In simple terms, The RL process can be defined by an agent that takes actions in an environment and receives observations from said environment.
 Besides the observations, the environment also provides a reward signal to the agent, based on how well the agent is performing the task defined by the reward signal. 
 
 
 The agent acts according to its current policy.
 The policy roughly defines a mapping of all perceived environmental states to actions to be taken by the agent.
-It fully  describes the way a learning agent behaves at any given point(in time) in the learning process.\parencite{sutton2018reinforcement}\parencite{D. Silver Lec. 2}
+It fully  describes the way a learning agent behaves at any given point(in time) in the learning process.\parencite{sutton2018reinforcement} \parencite{D. Silver Lec. 2}
 
 The reward function or reward signal is a function which defines the goal of the reinforcement leaning problem.
 At each time step, the reward function is evaluated and the agent receives a scalar value, the reward.

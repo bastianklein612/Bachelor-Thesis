@@ -231,12 +231,6 @@ This induces a reset on the stance phase subsystem and switches the outputs over
 	\label{table:Initial joint positions}
 \end{table}
 
-
-
-
-\todo{Viel tiefer ins Detail gehen}
-\todo{Bilder}
-
 \section{Learning Leg Coordination}
 The leg coordination problem can be considered a Markov decision process(MDP).
 The MDP is a 5-tuple $\mathcal{\{S,A,P,R,\gamma\}}$, where $\mathcal{S}$ is a finite set of states, $\mathcal{A}$ is a finite set of actions, $\mathcal{P}$ is a state-transition probability matrix ($\mathcal{P}_{ss'}^a=\mathbb{P}[S_{t+1}=s' | S_t=s, A_t=a]$), $\mathcal{R}_s^a$ is a reward function ($\mathcal{R}_s^a = \mathbb{E}[R_{t+1} | S_t=s, A_t=a]$) and $\gamma \in [0,1]$ is a discount factor.
@@ -256,6 +250,17 @@ DDPG does not jitter at start of learning, PPO does.
 
 Start learning process of PPO(Proximal Policy Optimization) agent at a small step size(0.00025s = 0.25ms) to prevent simulation errors due to initial random jerking of robot legs.
 After the agent has stabilized, the step size can be increased to speed up the further learning process.]
+
+
+\textbf{Optionals:}
+
+\begin{itemize}
+	\item Signal the agent that a leg is dragging by adding a discrete observation per leg which is pulled high when the leg reached its PEP.
+	
+	\item RL Designer: Automatically save agents which reached a high enough reward to evaluate them later.
+	
+\end{itemize}
+
 
 
 

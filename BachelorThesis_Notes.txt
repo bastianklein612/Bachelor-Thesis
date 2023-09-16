@@ -445,9 +445,31 @@ Gespäch mit Malte und Julius:
 			- Bilder + Tabellen eingefügt
 			
 -----------------------------------------
-12.09.				
+13.09.
+		- RL Learning neu gestartet mit größerem Averaging Window; PPO und DDPG ausprobiert
+		
+-----------------------------------------
+14.09.
+		- nicht bei Oberseminar gewesen
+		- PPO(16) Agent nochmals gestartet(PC gestern abgeschaltet, nicht gespeichert)
+		- Weiterschreiben am Hauptteil
+			- Environment
+			- Stichpunkte in RL-Abschnitt
+		
+-----------------------------------------
+15.09.
+		- PPO(16) reward hat geflatlined
+		- DDPG(16) gestartet
+		--> Falls Flatlining des Rewards weiterhin Problem ist: Ankunft eines Beines am PEP als eigene, diskrete Obesesrvation an agent liefern ?
 
-
+-----------------------------------------
+16.09.
+		- mehrere Agents laufen lassen, mit keinem zufrieden
+		- wenig Fortschritt beim Schreiben
+		
+		
+-----------------------------------------
+17.09.
 
 
 
