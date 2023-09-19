@@ -5,39 +5,17 @@
 \label{ch:methods}
 
 \section{The Simulink Model}
-\begin{figure}
-	\centerline{\includegraphics[scale=0.035]{HexapodModel_Overview}}
-	\caption{Simulink Model Overview}
-	\label{figure: Simulink Model Overview}
-\end{figure}
-
-\subsection{Model of the Hexapod}
-
-\begin{figure}
-	\centerline{\includesvg[scale=0.7]{Simulink/Simulink_PhysicalHexapodOverview}}
-	\caption{Hexapod Model Overview}
-	\label{figure: Hexapod Model Overview}
-\end{figure}
-
-\begin{figure}
-	\centerline{\includesvg[scale=0.6]{Simulink/Simulink_HexapodLegOverview}}
-	\caption{Model of Hexapod Leg}
-	\label{figure: Hexapod Leg}
-\end{figure}
-
-
-The hexapod model we developed in this thesis is based on the \textit{PhantomX MK4} hexapod developed by \textit{Trossen Robotics}.
-A digital model of this robot is provided by the company in the form of a .urdf file which can be obtained from their Github page \parencite{interbotixGithub}.
-\textbf{U}nified \textbf{R}obotics \textbf{D}escription \textbf{F}ormat is a common format to describe the physical and kinematic properties of a robot or robotic component. 
+The hexapod model we developed as part of this thesis is based on the \textit{PhantomX MK4} hexapod distributed by \textit{Trossen Robotics}.
+A digital model of this robot is provided by the company in the form of a .urdf file which can be obtained from their Github page \parencite{interboticsGithub}.
+URDF (\textbf{U}nified \textbf{R}obotics \textbf{D}escription \textbf{F}ormat) is a common format to describe the physical and kinematic properties of a robot or robotic component. 
 It defines the way in which links and joints are connected, the general geometry of the robot as well as visual and collision geometry.
 The geometry is provided in a separate folder of CAD-files which define the leg links and body structure as 
 polygon meshes and are referenced in the urdf.
 We use MATLABs capability to convert the urdf file into a Simscape-based Simulink model.
-The resulting model consists of Simscape joints, rigid transforms and rigid bodies to represent the links.
+The resulting model consists of Simscape joints, rigid transforms, coordinate frames defining the hexapods kinematic structure and rigid bodies modeling its collision geometry and visual appearance.
 The 3D-model off the hexapod can be seen in Fig. \ref{figure: PhantomX 3D model}.
 
-
-\begin{figure}[]
+\begin{figure}[h]
 	\begin{subfigure}{.5\textwidth} % this sets the figure to be max half the width of the page
 		\centering
 		% include first image
@@ -61,16 +39,17 @@ The 3D-model off the hexapod can be seen in Fig. \ref{figure: PhantomX 3D model}
 		\caption{}
 		\label{figure: PhantomX Top View}
 	\end{subfigure}
-	\caption[]{3D model of Trossen Robotix PhantomX MK4}
+	\caption[]{3D model of Trossen Robotics PhantomX MK4}
 	\label{figure: PhantomX 3D model}
 \end{figure}
 \todo{get each image into list of figures, but exclude complete figure}
 
-From a top level perspective, the hexapod model consists of the main body(thorax) and its 6 legs.
-This system receives as input the torque to be applied on each joint and outputs sensory data taken from these joints, namely the joints position, velocity and acceleration.
-The main body of the hexapod robot is represented by a rigid body and a main coordinate frame.
+From a top level perspective, the hexapod model consists of the main body(thorax) and 6 legs.
+This system receives the torques to be applied on each joint as input and generates sensory data taken from these joints, namely the joints position, velocity and acceleration, as output.
+The  thorax is represented by a rigid body and a main coordinate frame.
 Each of the robots legs consists of 3 rigid bodies(coxa, femur and tibia) which are connected to each other by 2 joints.
 A third joint then attaches the coxa and the leg as a whole to the main body.
+Like the leg of an insect, the movement plane of the joint connecting coxa and thorax is parallel to the ground and orthogonal towards the other two joints.
 Each of the joints used has 1 (rotational) DoF.
 To position each rigid body and joint correctly, rigid transformations are used to translate and rotate each component.
 
@@ -79,6 +58,29 @@ To simplify the model, we did not model the physical servo motors and instead us
 
 The internal joint parameters are given in table \ref{table: Joint parameters}.
 Some of these parameters are adapted from \parencite{FIND AUTHOR} and some were automatically imported by MATLAB from the urdf specification.
+
+
+\begin{figure}
+	\centerline{\includegraphics[scale=0.035]{HexapodModel_Overview}}
+	\caption{Simulink Model Overview}
+	\label{figure: Simulink Model Overview}
+\end{figure}
+
+\subsection{Model of the Hexapod}
+
+\begin{figure}
+	\centerline{\includesvg[scale=0.7]{Simulink/Simulink_PhysicalHexapodOverview}}
+	\caption{Hexapod Model Overview}
+	\label{figure: Hexapod Model Overview}
+\end{figure}
+
+\begin{figure}
+	\centerline{\includesvg[scale=0.6]{Simulink/Simulink_HexapodLegOverview}}
+	\caption{Model of Hexapod Leg}
+	\label{figure: Hexapod Leg}
+\end{figure}
+
+
 
 \begin{table}
 	\centering
@@ -105,8 +107,15 @@ Some of these parameters are adapted from \parencite{FIND AUTHOR} and some were 
 In this thesis we only utilize the sensor information about the current joint positions, but to allow for further expansions on the model, such as optimizing for minimal energy consumption, joint velocity and acceleration are provided as well.
 It should be noted, that integrating the joint position over time would implicitly yield the same result, but we decided for ease of use to include this data explicitly.
 
+To allow to hexapod to interact with its surroundings, we used \textit{Spatial Contact Force}-blocks to model collisions between each segment of the body and the surface on which the robot walks.
+The block connects two rigid bodies and models friction forces and semi-elastic collisions between them.
+The coefficients of friction, elasticity and damping can be configured.
+
 To encapsulate the system and only provide the necessary inputs and outputs, the hexapod model is placed inside a subsystem.
 This also allows for the duplication of the hexapod system, so that in future research it is possible to use this system in multi-agent simulations as well.
+
+To summarize, we converted the provided hexapod model into a Simulink model, compartmentalized it and added sensing and actuation capabilities the robots legs.
+We also made most of the models internal parameters accessible and changeable.
 
 
 \subsection{Environment}
@@ -231,6 +240,8 @@ This induces a reset on the stance phase subsystem and switches the outputs over
 	\label{table:Initial joint positions}
 \end{table}
 
+
+
 \section{Learning Leg Coordination}
 The leg coordination problem can be considered a Markov decision process(MDP).
 The MDP is a 5-tuple $\mathcal{\{S,A,P,R,\gamma\}}$, where $\mathcal{S}$ is a finite set of states, $\mathcal{A}$ is a finite set of actions, $\mathcal{P}$ is a state-transition probability matrix ($\mathcal{P}_{ss'}^a=\mathbb{P}[S_{t+1}=s' | S_t=s, A_t=a]$), $\mathcal{R}_s^a$ is a reward function ($\mathcal{R}_s^a = \mathbb{E}[R_{t+1} | S_t=s, A_t=a]$) and $\gamma \in [0,1]$ is a discount factor.
@@ -252,10 +263,16 @@ Start learning process of PPO(Proximal Policy Optimization) agent at a small ste
 After the agent has stabilized, the step size can be increased to speed up the further learning process.]
 
 
+Observation space only consists of only a part of all states, thus the MDP can not be fully described and is therefore called a Partially Observable Markov Decision Process(POMDP).
+The robot could be equipped with additional sensors to perceive a larger part of the state-space, but we find that the observations given by us are sufficient for successful learning of the defined task.
+
+
 \textbf{Optionals:}
 
 \begin{itemize}
 	\item Signal the agent that a leg is dragging by adding a discrete observation per leg which is pulled high when the leg reached its PEP.
+	
+	\item Agent Parallelization for faster learning $\rightarrow$ Done and working
 	
 	\item RL Designer: Automatically save agents which reached a high enough reward to evaluate them later.
 	

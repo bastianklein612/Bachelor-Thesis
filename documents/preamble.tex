@@ -10,7 +10,7 @@ index=totoc,
 toc=listof,
 fontsize=11,
 headinclude,
-twoside,
+oneside,    %changed from 'twoside'
 BCOR=12mm,
 cleardoublepage=empty,
 DIV=13,
@@ -39,6 +39,17 @@ final
 
 %scalable vector graphics(svg)
 \usepackage[inkscapeformat=png]{svg}
+
+%Modify figure and table captions
+\usepackage[font=small,labelfont=bf,labelsep=space]{caption}
+\captionsetup{%
+	figurename=Fig.,
+	tablename=Tab.,
+	justification=raggedright,
+	singlelinecheck=false,
+	format=hang,
+	font=footnotesize
+}
 
 
 % set line spacing

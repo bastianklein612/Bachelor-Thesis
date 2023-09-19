@@ -3,7 +3,7 @@
 \label{ch:background}
 
 \section{Hexapod Robots}
-Hexapods are a type of robot featuring 6 legs, inspired by the locomotion of insects and arachnids.
+Hexapods are a class of robots featuring 6 legs, inspired by the locomotion of insects and arachnids.
 Over millions of years of evolution these organisms developed efficient strategies to navigate challenging terrain, making them a rich source of inspiration for robotics.
 By emulating the biomechanics and behavior of insects, researchers and engineers aim to create versatile and robust robotic systems capable of navigating challenging terrain.
 
@@ -13,7 +13,7 @@ The first joint, hereafter named \textalpha-joint, connects the coxa to the thor
 Coxa and femur are connected by the \textbeta-joint, while the femur and tibia are connected by the \textgamma-joint. 
 These joints move orthogonal to the movement plane of the \textalpha-joint. Together, they are responsible for the lateral positioning of each leg.
 
-\begin{figure}
+\begin{figure}[h]
 	\centerline{\includegraphics[scale=0.04]{phantomX_III_overview}}
 	\caption{PhantomX MKIII hexapod, predecessor of MKIV used here [\cite{PhantomX_MKIII}]}
 	\label{figure: PhantomX MKIII}
@@ -27,7 +27,7 @@ These joints move orthogonal to the movement plane of the \textalpha-joint. Toge
 
 \section{MATLAB}
 \hiddensubsection{Simulink}
-\textit{Simulink\textsuperscript{\textregistered}} is a \textit{MATLAB\textsuperscript{\textregistered}}-based graphical block-diagramming tool developed by the company \textit{MathWorks\textsuperscript{\textregistered}} .
+\textit{Simulink\textsuperscript{\textregistered}} is a \textit{MATLAB\textsuperscript{\textregistered}}-based graphical block-diagramming tool developed by the company \textit{MathWorks\textsuperscript{\textregistered}}. 
 It is a widely used tool which plays a crucial role in various engineering and research disciplines.
 It provides the user with a versatile platform to design, simulate and analyze complex dynamic systems.
 
@@ -39,34 +39,63 @@ Their behavior can be discrete, like a switch which activates when a signal is h
 An arrangement of blocks can be encapsulated into a subsystem, thus creating different levels of abstraction.
 To enable easy reuse, subsystems can be placed in custom libraries.
 If a library object gets updated, each linked copy of this subsystem receives the update as well, preventing the user from having to edit each copy themselves.
-At any step in the development process, a model can be simulated and 
+At any step in the development process, a model can be simulated and analyzed.
+The value of any signal lines can be plotted and the simulation can be slowed down.
 
-\begin{figure}
+\begin{figure}[h]
 	\centerline{\includesvg[scale=0.8]{Simulink/BouncingBallExample_Simulink.svg}}
-	\caption{Simulink, Bouncing Ball Example}
+	\caption{Simulink model of a bouncing ball created using standard library blocks.}
 	\label{figure: Simulink Bouncing Ball Example}
 \end{figure}
 
 \hiddensubsection{Simscape}
-\textit{Simscape\textsuperscript{\texttrademark}} is a block library developed by \textit{MathWorks\textsuperscript{\textregistered}} with which it is possible to model physical systems within the Simulink environment.
-It is capable of modeling and simulating systems such as electric circuits, hydraulics or classical mechanics all within a unified simulation environment.
-The Simscape libraries offer a large variety of predefined components like resistors, capacitors, springs, dampers and more.
-For this thesis, the mechanical components are of the most interest, especially rigid bodies, transforms and joints.
-A model is build up using rigid bodies which get connected to coordinate frames.
-These coordinate frames then get attached to each other using rigid transforms or joints.
-Joints can allow different degrees of freedom between two frames, depending on what constraints should be imposed on the system.
+\textit{Simscape\textsuperscript{\texttrademark}} is a block library developed by \textit{MathWorks\textsuperscript{\textregistered}} enabling the modeling of physical systems within the Simulink environment.
+Utilizing this library it is possible model and simulate systems such as electric circuits, hydraulics or classical mechanics all within a unified simulation environment.
+Simscape offers a large variety of predefined components like resistors, capacitors, springs, dampers and more.
+To understand the model we developed, the mechanical components are of the most interest, especially coordinate frames, transforms, joints and rigid bodies.
+Coordinate frames can be attached to each other using rigid transforms or joints.
+Joints allow for different degrees of freedom between two frames, depending on what constraints should be imposed on the system.
 Two frames connected with a joint are named base and follower frame.
 When the joint is actuated, the follower frame moves relative to the base frame\parencite{thilderkvist2015motion}.
-
+Rigid transforms translate or rotate coordinate frames without allowing for any degree of freedom.
+Rigid bodies can be connected to the predefined coordinate frames, providing shape, mass and inertia to the system.
 If the user requires a component which is not yet represented by any block in the libraries, Simscape also offers a MATLAB based language to enable text-based development of custom components.
 \todo{Weiter ausführen; mehr Details, z.B. über Gelenke(Sensorik, Aktuation, etc.)}
 \todo{CITATIONS}
 
-\begin{figure}
+\begin{figure}[h]
+	\centering
 	\centerline{\includesvg[scale=1.0]{Simulink/BouncingBallExample_Simscape.svg}}
-	\caption{Simscape, Bouncing Ball Example}
+	\
+	\caption{Simulink model of the same system as in Fig. \ref{figure: Simulink Bouncing Ball Example} but created solely with Simscape blocks.}
 	\label{figure: Simscape Bouncing Ball Example}
 \end{figure}
+
+\section{Swing-Stance Cycle}
+
+\begin{figure}[h]
+	\centerline{\includegraphics[scale=0.5]{morphologyOfStickInsect_sketch}}
+	\caption{Morphologic drawing of a stick insect leg (\cite{schilling2013walknet} [Fig.1]).}
+	\begin{footnotesize}
+		Angle $\alpha$ represents the position of the thorax-coxa joint, angle $\beta$ describes the position of the coxa-femur joint and angle $\gamma$ represents the position of the femur-tibia joint.
+		These joints are actuated with three pairs of muscles, protractor-retractor, levator-depressor and extensor-flexor respectively.
+		Also depicted are the posterior extreme position(PEP), defined as the rearmost point of the movement cycle, and the anterior extreme position(AEP), the foremost point in the cycle.
+		Dashed lines depict the swing and stance movement between PEP and AEP.
+	\end{footnotesize}
+	
+	\label{figure: Stick insect leg}
+\end{figure}
+
+The swing-stance cycle depicted above is an essential element of an insects locomotion.
+When in stance phase, the leg is in contact with the ground and bears a partial load of the insects weight.
+The leg moves backwards, relative to the body, from AEP to PEP. During this phase the leg pushes the insect forward.
+During the swing phase the leg is lifted of the ground and moved form PEP to AEP in an arch.
+The stance phase is responsible for moving the insect forward until reaching the PEP, when the swing phase is needed to reposition the leg at the AEP to start the cycle again.
+The complete cycle can be described as a pushing phase(stance) and a repositioning phase(swing).
+
+\todo{CITATIONS}
+\todo{Expand}
+
 
 \section{Inverse Kinematics}
 Inverse Kinematics(IK) is a term predominately used in robotics and computer graphics.
@@ -74,16 +103,17 @@ It describes the process of calculating the joint angles required to place the e
 There are two distinct methods how to calculate these angles, analytical and numerical.
 
 Analytical solvers are based on trigonometric equations derived from the geometric and kinematic parameters of the manipulator arm, such as the link length, joint type and joint limits.
-They provide exact solutions to the problem and can be significantly faster than iterative approximation methods.
+They provide exact solutions and can be significantly faster than iterative approximation methods.
 Although very efficient and precise, the analytical approach is generally only feasible for kinematic chains with a small number of DoF.
-If for the kinematic chain the number of DoF is greater than that of the end-effector, then there exist infinite solutions for a given pose.
+If ,for the kinematic chain, the number of DoF is greater than the number of DoF of the end-effector, then there exist infinite solutions for a given pose.\todo{SOURCE ?}
 These kinds of systems potentially lack closed-form expressions for a solution, which makes deriving analytical solutions infeasible if not impossible.
 
 
-Numerical solvers use iterate approaches to approximate the joint angles and converge towards a solution over several iterations of the algorithm.
-At the start of the process this type of solver begins with an initial guess that can be based on the manipulators geometry, joint limits or previously obtained solutions.
-Using the estimated joint angles, the position of the end-effector is calculated(forward kinematics) and the error between the desired pose and the currently obtained pose is determined.
-Based on this error, the joint angles are adjusted with the goal to reduce the error and bringing the end-effector closer to the desired pose.
+Numerical solvers use iterate approaches to approximate the joint angles and converge towards a solution over several iterations of their algorithm.
+At the start of the process, this type of solver begins with an initial guess
+This guess can be based on the manipulators geometry, joint limits, previously obtained solutions, or other heuristics.
+Using the estimated joint angles, the would-be position of the end-effector is calculated(forward kinematics) and the error between the desired pose and the currently obtained pose is determined.
+Based on this error, the joint angles are adjusted with the goal of reducing the error and bringing the end-effector closer to the desired pose.
 This process is repeated until the error meets the predefined tolerances.
 The joint angles calculated during the final iteration are then considered a solution to the problem.
 Although the basic principle of error-minimization is always present in the algorithm, the exact process of minimization is much more complex than described here and there exist numerous different techniques on how to achieve this goal.
@@ -99,12 +129,14 @@ Both inverse kinematics methods are used extensively in industry and research, d
 
 \section{PID Controller}
 A \textbf{P}roportional-\textbf{I}ntegral-\textbf{D}erivative(PID) controller is a widely used feedback control system.
-As such a feedback control system it aims to regulate a control variable to a desired setpoint by adjusting its output according to the currently measured process variable.
-It uses three terms, proportional, integral and derivative, to compute the controlled output  based on the error between the setpoint and current process variable.
-For a digital PID controller, the process of error calculation and control variable adjustment is done at a discrete fixed rate, which is also referred to as a time step.
-There also exist versions of this controller constructed using analog electronics which generate a continuous control signal, but we will focus on the digital controller here.
+As such, it aims to regulate a control variable to a desired setpoint by adjusting its output according to the currently measured process variable.
+In most cases this process variable corresponds to a real world variable such as the speed of a motor, the liquid-level inside a tank or the temperature of a furnace.
+It uses three terms, a proportional, integral and derivative term, to compute the controlled output based on the error between the setpoint and current process variable.
+Focusing on digital PID controllers, the process of error calculation and control variable adjustment is done at a discrete, fixed rate and is also referred to as a time step.
+There also exist implementations of this control loop type using analog electronics which generate a continuous control signal, but these are of no concern for the content of this thesis.
+In the following section we will describe the operation of a PID controller in detail:
 
-\begin{figure}
+\begin{figure}[h]
 	\centerline{\includegraphics[scale=0.05]{PID_Controller}}
 	\caption{Illustration of a PID Controller}
 	\label{figure: PID Controller}
@@ -123,7 +155,7 @@ $P(t)$ is given by:
 \[
 	P(t) = K_p \cdot Error(t)
 .\]
-The integral term $I(t)$takes into account the sum of past errors to address any long term bias/ constant error contained inside of the controlled system.
+The integral term $I(t)$ takes the sum of past errors into account to address any long term bias/ constant error contained inside of the controlled system.
 It is able to eliminate long-term errors that can not be accounted for by $P(t)$.
 The term is calculated by integrating the error over time and multiplying it with the integral gain $K_i$.
 $I(t)$ is given by:
@@ -132,41 +164,40 @@ $I(t)$ is given by:
 .\]
 The derivative term $D(t)$ anticipates the errors future behavior by determining its rate of change.
 It prevents the controller from overshooting and oscillating by dampening the control response.
-$D(t)$ is calculated by taking the errors rate of change and multiplying it with the constant derivative gain $K_d$.
+$D(t)$ is calculated by multiplying the errors rate of change with the constant derivative gain $K_d$.
 It is given by:
 \[
 	D(t) = K_d \cdot \frac{\partial}{\partial t}(Error(t))
 .\]
-The final output of the controller is the given by the sum of all three terms:
+The final output of the controller at time $t$ is then given by the sum of all three terms:
 \[
-	\textit{Control Output(t)} = P(t) + I(t) + D(t)
+	Control\ Output(t) = P(t) + I(t) + D(t)
 .\]
-The calculated control output is the fed into the controlled system or process.
-In most cases this control output corresponds to real world variable such as the speed of a motor, the liquid-level inside a tank or the temperature of an element.
-The performance of a PID controller greatly depends on the values of its parameters $K_p$, $K_i$ and $K_d$.
-To achieve desired results like fast response times and minimal overshooting or oscillations, these parameters have to be carefully tuned. 
-To conclude, a PID controller continuously repeats the process of error calculation and adjustment, thus forming a closed-loop system which aims to minimize the error and approach the setpoint as close as possible.
+The calculated control output is fed into the controlled system or process and the PID controller calculates the next control value.
 
 In real-world applications the derivative term is almost never implemented as a pure derivative as it would be extremely sensitive to noise.
-Instead, a so called filter coefficient $N$ is used.
+Instead, a so called filter coefficient $N$ is added to modify the derivative.
 The modified derivative term is given by:
 
 \[
-D_{N}(t) = K_d \cdot \frac{\partial}{\partial t}(Error(t))
+...
 \]
+The term acts as a first-order, low pass filter, meaning frequencies in the signal above a specific limit are ignored.
+It thus behaves like a derivative up to a given cutoff frequency given by: \todo{cutoff frequency}.
+
+The performance of a PID controller greatly depends on the values of its parameters $K_p$, $K_i$ and $K_d$.
+To achieve desired results like fast response times and minimal overshooting or oscillations, these parameters have to be carefully tuned. 
+This tuning process can be done manually by trial-and-error or methodically with a tuning algorithm.
+
+To conclude, a PID controller continuously repeats the process of error calculation and adjustment, thus forming a closed-loop system which aims to minimize the error and approach the setpoint as close as possible.
 
 \todo{CITATIONS}
 
 
 \section{Reinforcement Learning}
 
-\begin{figure}
-	\centerline{\includegraphics[scale=0.1]{RL_Overview}}
-	\caption{The basic concept of Reinforcement Learning (\cite{weng2018bandit} [Fig.1])}
-	\label{figure: RL Illustration}
-\end{figure}
 
-Reinforcement Learning(RL), besides supervised and unsupervised learning, is one of the three branches of Machine Learning.
+Reinforcement Learning(RL), besides supervised and unsupervised learning, is one of the major three branches of Machine Learning.
 The underlying principle of RL is learning how to maximize a scalar reward signal \parencite{sutton2018reinforcement}.
 In simple terms, The RL process can be defined by an agent that takes actions in an environment and receives observations from said environment.
 Besides the observations, the environment also provides a reward signal to the agent, based on how well the agent is performing the task defined by the reward signal. 
@@ -175,6 +206,12 @@ Besides the observations, the environment also provides a reward signal to the a
 The agent acts according to its current policy.
 The policy roughly defines a mapping of all perceived environmental states to actions to be taken by the agent.
 It fully  describes the way a learning agent behaves at any given point(in time) in the learning process.\parencite{sutton2018reinforcement} \parencite{D. Silver Lec. 2}
+
+\begin{figure}[h]
+	\centerline{\includegraphics[scale=0.1]{RL_Overview}}
+	\caption{The basic concept of Reinforcement Learning (\cite{weng2018bandit} [Fig.1])}
+	\label{figure: RL Illustration}
+\end{figure}
 
 The reward function or reward signal is a function which defines the goal of the reinforcement leaning problem.
 At each time step, the reward function is evaluated and the agent receives a scalar value, the reward.
@@ -246,7 +283,7 @@ A Markov Process is a memory-less random process, i.e. a sequence of random stat
 Markov Decision Process(MDP):
 
 $\rightarrow$ Hexapod locomotion can be considered a MDP, see: \parencite{ouyang2021adaptive} [p.7, 4.1]
-$\rightarrow$ DDPG für RL ausprobieren, soll in Robotik weit verbreitet und gut passend sein \parencite{ouyang2021adaptive}
+$\rightarrow$ Try DDPG for RL, allegedly widely used in robotics \parencite{ouyang2021adaptive}
 
 
 Agents applicable for continuous action spaces: 
@@ -263,27 +300,3 @@ Agents applicable for continuous action spaces:
 \end{itemize}
 \todo{Cite MATLAB}
 \todo{Use image for explanation}
-
-\section{Swing-Stance Cycle}
-
-Angle $\alpha$ represents the position of the thorax-coxa joint, angle $\beta$ describes the position of the coxa-femur joint and angle $\gamma$ represents the position of the femur-tibia joint.
-These joints are actuated with three pairs of muscles, protractor-retractor, levator-depressor and extensor-flexor respectively.
-Also depicted are the posterior extreme position(PEP), defined as the rearmost point of the movement cycle, and the anterior extreme position(AEP), the foremost point in the cycle.
-Dashed lines depict the swing and stance movement between PEP and AEP.
-\todo{This text should be added into the description of the image below}
-
-\begin{figure}
-	\centerline{\includegraphics[scale=0.75]{morphologyOfStickInsect_sketch}}
-	\caption{Morphologic drawing of a stick insect leg (\cite{schilling2013walknet} [Fig.1])}
-	\label{figure: Stick insect leg}
-\end{figure}
-
-The swing-stance cycle depicted above is an essential element of an insects locomotion.
-In the stance phase the leg is in contact with the ground and bears a partial load of the insects weight.
-The leg moves, relative to the body, from AEP to PEP. During this phase the leg pushes the insect forward.
-During the swing phase the leg is lifted of the ground and moved form PEP to AEP in an arch.
-The stance phase is responsible for moving the insect forward until reaching the PEP, when the swing phase is needed to reposition the leg at the AEP to start the cycle again.
-The whole cycle can be described as a pushing phase(stance) and a repositioning phase(swing).
-
-\todo{CITATIONS}
-\todo{Expand}
