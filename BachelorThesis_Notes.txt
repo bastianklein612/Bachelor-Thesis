@@ -460,19 +460,57 @@ Gespäch mit Malte und Julius:
 15.09.
 		- PPO(16) reward hat geflatlined
 		- DDPG(16) gestartet
-		--> Falls Flatlining des Rewards weiterhin Problem ist: Ankunft eines Beines am PEP als eigene, diskrete Obesesrvation an agent liefern ?
+		--> Falls Flatlining des Rewards weiterhin Problem ist: Ankunft eines Beines am PEP als eigene, diskrete Observation an agent liefern ?
 
 -----------------------------------------
 16.09.
 		- mehrere Agents laufen lassen, mit keinem zufrieden
 		- wenig Fortschritt beim Schreiben
-		
+		--> Parallelisierung um Lernfortschritt schneller voranzutreiben (?)
 		
 -----------------------------------------
 17.09.
+		- RL-Probleme bestehen weiterhin, hie Zusammenfassung aller Ideen:
+			--> Lernen parallelisieren, mehr Episoden
+			--> Anstatt kontinuierlichem action space diskreten verwenden
+			--> Ankunft eines Beines am PEP als diskrete Observation an agent liefern
+			
+		
+		- RL-Skript komplett umgeschrieben um Parallelisierung zu ermöglichen
+			--> Parallelisierung erfolgreich, nun 8 Agents parallel(ca. 1000 Ep./h bei 0.5ms step-size)
+		- über 9000 Episoden mit DDPG_16 Agent laufen lassen, kein Ergebnis aber prove-of-concept für Parallelisierung
+		
+		- für jeden Agententyp eine eigenes Erzeugungs-Skript schreiben(für DDPG und schon erfolgt)
+		
 
+-----------------------------------------
+18.09.	
+		 - Erzeugungs-Skript für PPO_continuous geschrieben
+		 - PPO-Training:
+			- flatlining 500 Ep.
+			
+		- Internetausfall, kein weiteres Training
+		
+-----------------------------------------
+19.09.			
+		- Aufgefallen, das Reward-Signal ohne Distanz definiert ist(wahrscheinlich nicht gespeichert); korrigiert
+		
+		- DDPG_128 gestartet:
+			- mehr als 6000 Ep.
+			- Review der gut performenden Agenten morgen
+			
+		- Bisherige Arbeit durchgelesen und Korrekturen vorgenommen
+		- auch neue Dinge hizugefügt
+		
+-----------------------------------------
+20.09.		
+		- Zusammenfassung der letzte 2 Wochen:
+			-
+			
 
-
+	
+		- Oberseminar:
+			-
 
 
 
