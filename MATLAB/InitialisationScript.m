@@ -5,4 +5,4 @@ simulation_setup;
 rl_setup;
 
 %open RL-Designer
-reinforcementLearningDesigner;
+%reinforcementLearningDesigner;
