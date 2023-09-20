@@ -514,7 +514,12 @@ Gespäch mit Malte und Julius:
 				
 			- RL parallelisiert, um mehr Episoden durchführen zu können(8 Agenten parallel)
 			
-			--> viel Fortschritt beim Schreiben, weniger Fortschritt beim RL
+			
+				--> Modell und Controller soweit abgeschlossen, nur noch RL als Problem
+				--> viel Fortschritt beim Schreiben, weniger Fortschritt beim RL
+			
+			
+			--> Erste vollständige Version der Arbeit hoffentlich in 1W. , in 3W. dann fertig sein
 			
 
 	
