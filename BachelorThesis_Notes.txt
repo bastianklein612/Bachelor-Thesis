@@ -524,7 +524,15 @@ Gespäch mit Malte und Julius:
 
 	
 		- Oberseminar:
-			-
+			- Reward Signal umschreiben, Instabilität geringer bestrafen ?  und Schleifen von Beinen bestrafen ?
+			- mehr inputs an agenten
+			- in 1 Woche Arbeit an Malte schicken
+			- Termin für Vortrag überlegen(Paula 2W in Okt weg) tpx1/ Vortrag muss eingetragen werden 
+			
+			
+		- IK Solver beschreiben, wie funtioniert er und welche vorteile hat er
+		
+		- DDPG_64 gestartet
 
 
 
