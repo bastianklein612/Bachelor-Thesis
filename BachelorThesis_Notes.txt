@@ -389,7 +389,7 @@ Gespäch mit Malte und Julius:
 			- Abschluss-Vortrag von Morten(Übertragung von SystemC nach FramaC zur deduktiven Verifikation(?); am Beispiel eines ABS)
 			- Abschluss-Vortrag von Sanando (Abstract Hexapod...)
 				- Gait wird nur durch Stateflow-Chart definiert; evt. anpassbar über Swing-Phase-Anteil
-				- Ob Hexapod geradeaus mMn. nicht sinnvoll definiert(?) (Mittelwert der Bein-Geschwindigkeiten auf einer Seite als v auf der Seite...)
+				- Ob Hexapod geradeaus läuft mMn. nicht sinnvoll definiert(?) (Mittelwert der Bein-Geschwindigkeiten auf einer Seite als v auf der Seite...)
 				- Stateflow gibt als outputs: Start-Position der Swingphase[x], Mode[Swing/Stance] und Stop-Signal[wenn Bein im PEP warten muss]
 			- Malte auf Reward-Definition angesprochen; will mir Paper schicken
 
@@ -403,7 +403,7 @@ Gespäch mit Malte und Julius:
 06.09.
 		- Training weitergeführt, bis jetzt immer noch keine großen Fortschritte
 		- Paper von Malte erhalten --> Festgestellt, dass ich x-Position statt Geschwindigkeit in x-Richtung im Reward habe
-									   Reward auf Geschwi. umgestellt
+									   --> Reward auf Geschwi. umgestellt
 
 -----------------------------------------
 07.09.		
@@ -505,7 +505,16 @@ Gespäch mit Malte und Julius:
 -----------------------------------------
 20.09.		
 		- Zusammenfassung der letzte 2 Wochen:
-			-
+			- Beschreibung des Hexapod-Modells und Controllers im Hauptteil
+			
+			- RL-Abschnitt noch nicht weit ausgeführt, da noch nicht sicher was am Ende funktionieren wird
+			
+			- Wenig Erfolg mit RL soweit, Vorwärtsbewegung ja, aber mit Schleifen der Beine und nicht konstant
+				- (PPO agent stark zuckend, deswegen schwierig mit diesem zu lernen)
+				
+			- RL parallelisiert, um mehr Episoden durchführen zu können(8 Agenten parallel)
+			
+			--> viel Fortschritt beim Schreiben, weniger Fortschritt beim RL
 			
 
 	
@@ -526,7 +535,7 @@ Gespäch mit Malte und Julius:
 07.08 - 13.08.
 	- In RL und Simulinks RL-Agent einlesen															X
 	- Background weiterschreiben																	x
-	- min. 2 Paper lesen																	
+	- min. 2 Paper lesen																			x
 	- Hexapod PID-Controller tunen																	X
 	- Sanandos Modell ansehen, ausprobieren ob einfach mit meinem verbindbar						x
 
@@ -540,18 +549,17 @@ Gespäch mit Malte und Julius:
 
 -----------------------------------------3
 21.08 - 27.08.
-	- Hoffentlich bis hier erste Erfolge mit RL-Learning											
+	- Hoffentlich bis hier erste Erfolge mit RL-Learning											x
 	- Background sollte großteils fertig sein														x
 	- Related Works weiterschreiben																	
-	- Im Methods-Teil schonmal anfangen, grundsätzlichen Aufbau und Gait-Entwicklung zu erklären	
+	- Im Methods-Teil schonmal anfangen, grundsätzlichen Aufbau und Gait-Entwicklung zu erklären	X
 	- Zwischenvortrag bearbeiten, großteilig fertigstellen											X
 -----------------------------------------4
 28.08 - 03.09.
-	- RL-Learning fortführen, Fortschritt festhalten !												
+	- RL-Learning fortführen, Fortschritt festhalten !												x
 	- Related Works großteils fertig																
-	- Methods-Teil weiterschreiben																	
+	- Methods-Teil weiterschreiben																	X
 	- Results kann teils angefangen werden(das Modell an sich kann bereits bewertet werden)			x
-	
 	- Version des Vortrags an Malte und Paula schicken												X
 	- Zwischenvortrag halten (31.08)																X
 
