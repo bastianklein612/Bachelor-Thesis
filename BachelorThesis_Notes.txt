@@ -532,9 +532,18 @@ Gespäch mit Malte und Julius:
 			
 		- IK Solver beschreiben, wie funtioniert er und welche vorteile hat er
 		
-		- DDPG_64 gestartet
-
-
+		- dynamische Reibung stark erhöht um Nachschleifen der Beine zu verhindern
+		
+-----------------------------------------
+21.09.	
+		- RL-Abschnitt im Hauptteil weitergeschrieben
+		- Eigene mit anderer Arbeit verglichen
+		- Conclusion/ Outlook Stichpunktliste  begonnen
+		- Überarbeitung Introduction-Kapitel begonnen 
+		
+-----------------------------------------
+22.09.	
+		- PPO_continuous gestartet --> 
 
 
 

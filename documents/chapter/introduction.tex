@@ -12,10 +12,24 @@ Notably, various companies involved in the field of robotics use simulation tech
 Due to their high degree of mobility and versatility, hexapods are of particular interest in robotics. 
 Compared to wheeled or bipedal architectures, the presence of six legs enables these robots to more easily overcome challenging terrain and complex obstacles \parencite{barai2013smart, atifystructure}, making them particularly interesting for navigating landscapes otherwise inaccessible to humans or other types of robotic systems.
 
+
 \textbf{PROBLEM:}
+\todo{Reads to much like defining the goals I want to achieve}
 The process of developing software for these hexapods is a challenging and by no means trivial task.
 While maintaining balance for instance, is evidently easier for this architecture than for the above mentioned bipedal robots, coordinating the many legs during movement poses a major challenge \parencite{azayev2020blind,schilling2013walknet}.
-When trying to break down the complex dynamics of such a system, the creation of a virtual model presents numerous advantages.
+When trying to break down the complex dynamics of such a system, the creation of a virtual model can present 
+numerous advantages.
+
+Trying to base the complete software verification process solely on the real robotic hardware can pose multiple problems.
+Firstly, there is a heavy reliance on the hardware.
+Without a functioning robot, the development process comes to a standstill.
+As physical robots are costly, the actual number of robots available is often low if not singular.
+If the software is not functioning well, the robot can fall or otherwise damage itself.
+This can lead to high repair times and costs, both of which are undesirably.
+Another problem with solely testing on hardware is the missing complete reproducibility a simulation can offer.
+If the software contains edge cases which only occur in very specific configurations, these are extremely hard to reproduce in the real world because no test setup can be exactly the same.
+A simulation can provide this reproducibility, given the same inputs it will always produce the same outputs.
+
 In order to support and accelerate our research on hexapod robots, we aim to capitalize on these benefits.
 We seek an environment which offers a wide range of tools to enhance our understanding of the robots behavior as well as enables us to more quickly verify and optimize new ideas.
 In our search for an adequate solution, we found a variety of robot simulation platforms, such as Gazebo, V-REP or Webots. 
@@ -92,7 +106,9 @@ It also needs to show the capability of performing different gait patters as wel
 %Es wäre besonders interessant festzustellen, ob schon bekannte Gangarten erkennbar werden oder ganz neue Formen der Bewegung entstehen.
 
 
-
+\todo{Check for passive formulations --> change to active}
+\todo{Rewrite without chronological order; begin with key ideas}
+\todo{Include Sanandos model}
 \textbf{PROPOSED SOLUTION:}
 
 %THIS SECTION WAS TRNSFERED FROM "OBJECTIVE"
