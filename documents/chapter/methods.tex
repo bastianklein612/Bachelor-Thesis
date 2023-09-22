@@ -254,16 +254,23 @@ The agent never learned to reliably move a leg forward if it was start to drag b
 The reward stayed relatively flat over a period of over 2000 episodes of training.
 The strong deviation from the mean, even after several hundred episodes can be attributed to an averaging window of just 5 episodes(or steps ?). 
 In later training experiments, this averaging window was increased.
-The small averaging window might have contributed to the poor performance of the agent.
+The small averaging window might have contributed to the poor performance of the agent(unlikely, olny important for average graph ?).
 
 DDPG does not jitter at start of learning, PPO does.
+
+To speed up the learning process, we decided to utilize \textit{MATLABs Parallel Computing} toolbox.
+The toolbox allowed us to create a parallel pool of several workers, each of whom runs a separate episode of the RL process.
+The parallel learning process is carried out asynchronously, meaning workers who finished their task early do not have to wait on the others to finish as well before proceeding.
+In contrast to synchronous parallelization, where the workers send their results to the parallel pool client all at the same time and receive updates to their parameters all at once, workers under asynchronous parallelization can send their results as soon as they finish their task and instantly receive parameter updates.
+By parallelization, we significantly improve the number of simulated episodes.
+
 
 
 Start learning process of PPO(Proximal Policy Optimization) agent at a small step size(0.00025s = 0.25ms) to prevent simulation errors due to initial random jerking of robot legs.
 After the agent has stabilized, the step size can be increased to speed up the further learning process.]
 
 
-Observation space only consists of only a part of all states, thus the MDP can not be fully described and is therefore called a Partially Observable Markov Decision Process(POMDP).
+Observation space only consists of a part of all states, thus the MDP can not be fully described and is therefore called a Partially Observable Markov Decision Process(POMDP).
 The robot could be equipped with additional sensors to perceive a larger part of the state-space, but we find that the observations given by us are sufficient for successful learning of the defined task.
 
 
@@ -272,9 +279,11 @@ The robot could be equipped with additional sensors to perceive a larger part of
 \begin{itemize}
 	\item Signal the agent that a leg is dragging by adding a discrete observation per leg which is pulled high when the leg reached its PEP.
 	
+	\item Add more inputs to the RL agent
+	
 	\item Agent Parallelization for faster learning $\rightarrow$ Done and working
 	
-	\item RL Designer: Automatically save agents which reached a high enough reward to evaluate them later.
+	\item RL Designer: Automatically save agents which reached a high enough reward to evaluate them later $\rightarrow$ Done.
 	
 \end{itemize}
 
