@@ -526,7 +526,7 @@ Gespäch mit Malte und Julius:
 		- Oberseminar:
 			- Reward Signal umschreiben, Instabilität geringer bestrafen ?  und Schleifen von Beinen bestrafen ?
 			- mehr inputs an agenten
-			- in 1 Woche Arbeit an Malte schicken
+			- in 1 Woche Arbeit an Malte zum testlesen schicken
 			- Termin für Vortrag überlegen(Paula 2W in Okt weg) tpx1/ Vortrag muss eingetragen werden 
 			
 			
@@ -537,16 +537,48 @@ Gespäch mit Malte und Julius:
 -----------------------------------------
 21.09.	
 		- RL-Abschnitt im Hauptteil weitergeschrieben
-		- Eigene mit anderer Arbeit verglichen
-		- Conclusion/ Outlook Stichpunktliste  begonnen
-		- Überarbeitung Introduction-Kapitel begonnen 
 		
 -----------------------------------------
 22.09.	
 		- PPO_continuous gestartet --> 
+		- Eigene mit anderer Arbeit verglichen
+		- Conclusion/ Outlook Stichpunktliste  begonnen
+		- Überarbeitung Introduction-Kapitel begonnen 
+		
+		--> Spezifischer RL Algorithmus muss beschrieben werden ! (DDPG, PPO, etc. ...)
 
-
-
+-----------------------------------------
+23.09.	
+		- In den letzten Tagen 0 Fortschritt beim RL
+		- heute minimale Änderungen am Dokument
+		
+-----------------------------------------
+24.09.		
+		- PPO agent ca. 2000 Ep. laufen gelassen, kein Erfolg
+		
+-----------------------------------------
+25.09.				
+		- Fragen bezüglich RL auf MATLAB- und Stackoverflow-Website gestellt
+		- Änderungen am DDPG agent vorgenommen, training gestartet
+		
+		- Ziele beim Schreiben:
+			- IK Solver beschreiben, geo. Zeichnung als Grafik anfertigen
+			- Introduction überarbeiten 
+			- Zitieren
+		
+		- DDPG mit geänderten Parametern laufen gelassen, kein Erfolg
+		
+-----------------------------------------
+26.09.				
+		- Observation-Space um alpha-Beschleunigungen erweitert
+		- Reward beteht nun nur noch aus x-/ y-Geschwindigkeit und Höhenunterschied
+		- DDPG gestartet(Layeränderungen zurückgesetzt; bis auf clippedReLU)
+		
+		
+		
+		
+		
+	
 			
 ---------------------------------------------------------------------------------------------------------------------------
 ------------ZEITPLAN-------------------------------------------------------------------------------------------------------
