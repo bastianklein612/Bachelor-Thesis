@@ -167,13 +167,63 @@ The PID controller parameters $K_p$, $K_i$ and $K_d$ (and $N$) are tuned via tri
 \end{figure}
 
 The leg trajectory generator, as seen in \ref{figure: Leg trajectory generator}, consists of a signal generator, a pattern rotation subsystem and an analytic inverse kinematics solver.
-The signal generator is responsible for creating a continuous leg trajectory given as x- and z-coordinates.
-The pattern rotation subsystems rotates, if required, the x-z-trajectory around the z-axis to allow for omni-directional movement of the robot.
-At the end of the trajectory generation the inverse kinematics block receives the trajectory coordinates and translates them into joint angles.
-Even though Simulinks \textit{Robotics System Toolbox} includes an iterative IK-solver, we decided to implement our own analytical solver to increase simulation speed.
-Due to the nature of an iterative solver, the calculation time required is significantly higher than that of a purpose-build analytical solver, in our case about x to y times faster.
+The signal generator is responsible for creating a continuous leg trajectory in the form of 2-dimensional trajectory coordinates.
+The pattern rotation subsystems the planar trajectory(x,z-plane), if required, around the z-axis to allow for omni-directional movement of the robot.
+Finalizing the trajectory generation, the inverse kinematics solver receives the trajectory coordinates and translates them into joint angles.
 
-\begin{figure}
+
+\subsection{Analytical Inverse Kinematics Solver}
+Even though Simulinks \textit{Robotics System Toolbox} includes an iterative IK-solver, we decided to implement our own analytical solver.
+Early in the development process, we realized that the iterative solver provided would not be sufficient for our intended purpose.
+Due to the nature of iterative solution methods, the calculation time required to find a valid configuration is significantly higher than that of a purpose-build analytical solver and thus greatly increased simulation times.
+As we need to simulate several thousand episodes during reinforcement learning, we aim to minimize the 
+amount of time required to compute a time step in the simulation.
+
+The solver sequentially calculates the 3 joint angles of a leg, starting at \textalpha, then \textbeta and \textgamma.
+The solver is derived from the legs geometric properties as seen in \ref{figure: IK angle derivations}
+Given the length of each leg segment, the 3 angles are calculated as following:
+
+\begin{figure}[h]
+	\begin{subfigure}{.5\textwidth} % this sets the figure to be max half the width of the page
+		\centering
+		% include first image
+		\includegraphics[width=\linewidth]{IK_Solver_alphaAngle}  % this sets the image to fill 90% of the available space -> 45% of the line width in total. 
+		\caption{}
+		\label{figure: IK Solver Alpha Angle}
+	\end{subfigure}
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		% include second image
+		\includegraphics[width=\linewidth]{IK_Solver_betaGammaAngle}  
+		\caption{}
+		\label{figure: IK Solver Beta/Gamma Angle}
+	\end{subfigure}
+	\caption[Angle derivation drawings]{(a) Top-down view of a hexapod leg, used to determine \textalpha. (b) Side-view, used in the in the determination of \textbeta \ and \textgamma.}
+	\label{figure: IK angle derivations}
+\end{figure}
+
+
+\[
+	\alpha = \arctan(\frac{x}{y}) ,\quad \quad \quad \beta = 90^{\circ} - (\beta_1 + \beta_2) ,\quad \quad \quad \gamma = 90^{\circ} - \gamma_1.
+\]
+\\
+Where $\beta_1$, $\beta_2$, $\gamma_1$ and \text{BF} are given by:
+\[	
+	\beta_1 = \arccos(\frac{{l_\text{femur}}^2 + \text{BF}^2 - {l_\text{tibia}}^2}  {2\cdot l_\text{femur} \cdot \text{BF}}) ,\quad \quad \quad \beta_2 = \arctan(\frac{ l_\text{total} - l_\text{coxa}} {z}),
+\]
+
+\[
+	\gamma_1 = \arccos(\frac{{l_\text{tibia}}^2 + {l_\text{femur}}^2 - {\text{BF}}^2}  {2 \cdot {l_\text{tibia}} \cdot {l_\text{femur}}}) ,\quad \quad \quad \text{BF} = \sqrt{(l_\text{total} - l_\text{coxa})^2 + z^2}.
+\]
+
+
+
+
+
+
+
+
+\begin{figure}[h]
 	\centerline{\includesvg[scale=0.85]{Simulink/Simulink_SignalGeneratorOverview}}
 	\caption{Signal Generator}
 	\label{figure: Signal Generator}
@@ -207,7 +257,7 @@ This induces a reset on the stance phase subsystem and switches the outputs over
 
 
 
-\begin{table}
+\begin{table}[h]
 	\centering
 	\begin{tabular}{| c | c |}
 		\hline
@@ -275,6 +325,13 @@ After the agent has stabilized, the step size can be increased to speed up the f
 
 Observation space only consists of a part of all states, thus the MDP can not be fully described and is therefore called a Partially Observable Markov Decision Process(POMDP).
 The robot could be equipped with additional sensors to perceive a larger part of the state-space, but we find that the observations given by us are sufficient for successful learning of the defined task.
+
+
+\cite{lillicrap2015continuous}
+\todo{Describe dimension of action and observation space}
+
+
+
 
 
 \textbf{Optionals:}

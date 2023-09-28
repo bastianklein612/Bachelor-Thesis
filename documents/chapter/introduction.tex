@@ -17,18 +17,22 @@ While maintaining balance for instance, is evidently easier for this architectur
 When trying to break down the complex dynamics of such a system, the creation of a virtual model can present 
 numerous advantages.
 
-Trying to base the complete software verification process solely on the real robotic hardware can pose multiple problems.
-Firstly, there is a heavy reliance on the hardware.
+Trying to base the software verification process solely on real robotic hardware can pose multiple problems.
+Firstly, there exists a heavy reliance on the hardware.
 Without a functioning robot, the development process comes to a standstill.
 As physical robots are costly, the actual number of robots available is often low if not singular.
 If the software is not functioning well, the robot can fall or otherwise damage itself.
 This can lead to high repair times and costs, both of which are undesirably.
-Another problem with solely testing on hardware is the missing complete reproducibility a simulation can offer.
-If the software contains edge cases which only occur in very specific configurations, these are extremely hard to reproduce in the real world because no test setup can be exactly the same.
-A simulation can provide this reproducibility, given the same inputs it will always produce the same outputs.
+Another problem with solely testing on hardware is that it is missing the reliable reproducibility a simulation can offer.
+If the software contains edge cases that only occur in very specific configurations, these can prove to be extremely hard to reproduce in the real world, as it is near impossible for one test setup to be the same as the next.
+The real world is intrinsically more complex than a simulation and even small deviations can result in these rare edge cases not occurring.
+Given the same inputs, a deterministic simulation will allways produce the same results, thus giving us complete reproducibility.
+
+
 
 In order to support and accelerate our research on hexapod robots, we aim to capitalize on these benefits.
 We seek an environment which offers a wide range of tools to enhance our understanding of the robots behavior as well as enables us to more quickly verify and optimize new ideas.
+
 In our search for an adequate solution, we found a variety of robot simulation platforms, such as Gazebo, V-REP or Webots. 
 Each of these simulators has its own strengths and features that researchers have utilized to explore different aspects of robotics \parencite{de2019analysis}.
 Besides these tools explicitly developed for simulating robots, there are other modeling and simulation environments which have a wider fiend of use.
@@ -69,8 +73,8 @@ Considering the widespread use of Simulink in both research and industry along w
 %Der block-basierte Ansatz von Simulink ist dabei besonders hervorzuheben, da es dieser ermöglicht sehr modulare Systeme zu erzeugen, wodurch bei Anpassungen nur einzelne Subsysteme ausgetauscht werden, anstatt Änderungen am gesamten Modell vornehmen zu müssen.
 
 
-\textbf{OBJECTIVE:}
-Our main goal for this thesis is to develop a comprehensive virtual model of a hexapod robot using the MATLAB Simulink\textsuperscript{\textregistered} environment.
+%\textbf{OBJECTIVE:}
+Therefore, our main goal in this thesis is to develop a comprehensive virtual model of a hexapod robot using the MATLAB Simulink\textsuperscript{\textregistered} environment.
 The model we develop will serve as a foundation for future research to build on.
 Facilitating flexible and easy expansions to the model, a high level of modularity is required, allowing for the integration or replacement of modules without the need to reconfigure the whole system.
 It is essential that the created model interacts in a physically correct way with the simulated surrounding, giving us a testbed as close to reality as possible.
