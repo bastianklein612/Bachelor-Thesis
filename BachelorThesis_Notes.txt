@@ -562,7 +562,7 @@ Gespäch mit Malte und Julius:
 		- Änderungen am DDPG agent vorgenommen, training gestartet
 		
 		- Ziele beim Schreiben:
-			- IK Solver beschreiben, geo. Zeichnung als Grafik anfertigen
+			- IK Solver beschreiben, geo. Zeichnung als Grafik anfertigen  --> erledigt
 			- Introduction überarbeiten 
 			- Zitieren
 		
@@ -573,11 +573,38 @@ Gespäch mit Malte und Julius:
 		- Observation-Space um alpha-Beschleunigungen erweitert
 		- Reward beteht nun nur noch aus x-/ y-Geschwindigkeit und Höhenunterschied
 		- DDPG gestartet(Layeränderungen zurückgesetzt; bis auf clippedReLU)
+			--> Festgelegt, min. 5000 Ep. laufen zu lassen !!!  --> nicht eingehalten (ca. 3000 Ep.)
+			
+		- vielversprechenden DDPG-Lauf mit sehr geringer Learnrate aus neuem Paper gestartet
+			
 		
+-----------------------------------------
+27.09.		
+		- DDPG-Lauf weitergeführt
+		- Analytischen IK-Solver beschrieben und Grafiken angefertigt
 		
-		
-		
-		
+-----------------------------------------
+28.09.	
+		- nicht an Oberseminar teilgenommen
+		- IK-Solver-Grafiken und -Text fertiggestellt
+		- nach über 10000 Ep. DDPG zwar vielversprechender Verlauf, aber kein Reward-Trend nach oben;
+		  Kein Flatlining, viel Variation mit zwischenzeitlichen Hoch-und Tiefpunkten
+			--> Weiter tunen, sieht besser aus als alles vorher
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 			
 ---------------------------------------------------------------------------------------------------------------------------
