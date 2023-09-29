@@ -179,7 +179,6 @@ amount of time required to compute a time step in the simulation.
 
 The solver sequentially calculates the 3 joint angles of a leg, starting at \textalpha, then \textbeta and \textgamma.
 The solver is derived from the legs geometric properties as seen in \ref{figure: IK angle derivations}
-Given the length of each leg segment, the 3 angles are calculated as following:
 
 \begin{figure}[h]
 	\begin{subfigure}{.5\textwidth} % this sets the figure to be max half the width of the page
@@ -200,6 +199,8 @@ Given the length of each leg segment, the 3 angles are calculated as following:
 	\label{figure: IK angle derivations}
 \end{figure}
 
+
+ Given the length of each leg segment, the 3 angles are calculated as following:
 
 \[
 	\alpha = \arctan(\frac{x}{y}) ,\quad \quad \quad \beta = 90^{\circ} - (\beta_1 + \beta_2) ,\quad \quad \quad \gamma = 90^{\circ} - \gamma_1.
@@ -298,7 +299,6 @@ The leg coordination problem can be considered a Markov decision process(MDP).
 The MDP is a 5-tuple $\mathcal{\{S,A,P,R,\gamma\}}$, where $\mathcal{S}$ is a finite set of states, $\mathcal{A}$ is a finite set of actions, $\mathcal{P}$ is a state-transition probability matrix ($\mathcal{P}_{ss'}^a=\mathbb{P}[S_{t+1}=s' | S_t=s, A_t=a]$), $\mathcal{R}_s^a$ is a reward function ($\mathcal{R}_s^a = \mathbb{E}[R_{t+1} | S_t=s, A_t=a]$) and $\gamma \in [0,1]$ is a discount factor.
 
 
-
 When we first started working on te RL process, te result were not very promising. The agent did stabilize, meaning it did not jump around randomly, but it was not able to find an efficient gain.
 The agent never learned to reliably move a leg forward if it was start to drag behind due to reaching the PEP.
 
@@ -306,6 +306,13 @@ The reward stayed relatively flat over a period of over 2000 episodes of trainin
 The strong deviation from the mean, even after several hundred episodes can be attributed to an averaging window of just 5 episodes(or steps ?). 
 In later training experiments, this averaging window was increased.
 The small averaging window might have contributed to the poor performance of the agent(unlikely, olny important for average graph ?).
+
+MATLABs Reinforcement Learning Toolbox offers several different RL architectures to choose from, namely DDPG, TR3, PPO, SAC and TRPO.
+We choose to use the DDPG as well as PPO algorithms, as these have already proved themselves to work well in tasks concerning robotic locomotion\parencite{FIND AUTHOR}.
+\todo{Find authors who used DDPG and PPO for robotics(PPO bei Schilling(?), DDPG bei ? )}
+
+
+
 
 DDPG does not jitter at start of learning, PPO does.
 

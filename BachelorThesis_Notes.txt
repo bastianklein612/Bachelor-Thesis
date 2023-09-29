@@ -591,12 +591,19 @@ Gespäch mit Malte und Julius:
 		  Kein Flatlining, viel Variation mit zwischenzeitlichen Hoch-und Tiefpunkten
 			--> Weiter tunen, sieht besser aus als alles vorher
 	
+		- Einige kleine Stellen im Hauptteil überarbeitet
+		- Abstract erweitert
 	
+-----------------------------------------
+29.09.		
+		
+	- DDPG_12000 trainingStats verloren durch herunterfahren
+	- Neu gestartet mit einer Änderung: StandardDeviation: 0.1 --> 0.05;
 	
+	- RL-Teil im Background umgeschrieben
 	
-	
-	
-	
+-----------------------------------------
+30.09.		
 	
 	
 	

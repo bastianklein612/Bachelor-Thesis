@@ -198,14 +198,26 @@ To conclude, a PID controller continuously repeats the process of error calculat
 
 \section{Reinforcement Learning}
 
-Reinforcement Learning(RL), besides supervised and unsupervised learning, is one of the three major branches of Machine Learning.
-The underlying principle of RL is learning how to maximize a scalar reward signal \parencite{sutton2018reinforcement}.
-In simple terms, The RL process can be defined by an agent that takes actions in an environment and receives observations and a reward from this environment.
-The reward defines the goal of the RL process and it alone specifies what good and bad behavior is. 
+Reinforcement Learning(RL), besides supervised and unsupervised learning, is one of the three major branches in the vast field of Machine Learning.
+In simple terms, RL focuses on training an agent(or multiple agents) to take sequences of actions in an environment as to maximize a cumulative reward.
+The principle of RL is inspired by behavioral psychology, where learning is driven by the consequences of the actions taken \parencite{FIND AUTHOR}\todo{Cite author for behavioral psych.}.
+
+The agent, as seen in \ref{figure: RL Illustration}, is the entity which learns, it takes actions in the environment and receives observations and the reward signal from the environment.
+An agent always acts according to its current policy.
+A policy roughly defines a mapping of all perceived environmental states to actions to be taken by the agent.
+It fully  describes the way a learning agent behaves at any given point(in time) in the learning process.\parencite{sutton2018reinforcement} \parencite{D. Silver Lec. 2}
+The agents policy is continually updated during the learning process, always trying to improve the action sequences towards a higher expected reward.
+
+
+
+
+
 
 The agent acts according to its current policy.
 The policy roughly defines a mapping of all perceived environmental states to actions to be taken by the agent.
 It fully  describes the way a learning agent behaves at any given point(in time) in the learning process.\parencite{sutton2018reinforcement} \parencite{D. Silver Lec. 2}
+
+The basic underlying principle of RL is to learn how a scalar reward signal can be cumulatively maximized \parencite{sutton2018reinforcement}.
 
 \begin{figure}[h]
 	\centerline{\includegraphics[scale=0.1]{RL_Overview}}
