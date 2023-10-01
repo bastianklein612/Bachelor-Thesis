@@ -14,8 +14,10 @@ Compared to wheeled or bipedal architectures, the presence of six legs enables t
 \todo{Reads to much like defining the goals I want to achieve}
 The process of developing software for these hexapods is a challenging and by no means trivial task.
 While maintaining balance for instance, is evidently easier for this architecture than for the above mentioned bipedal robots, coordinating the many legs during movement poses a major challenge \parencite{azayev2020blind,schilling2013walknet}.
-When trying to break down the complex dynamics of such a system, the creation of a virtual model can present 
-numerous advantages.
+%When trying to break down the complex dynamics of such a system, the creation of a virtual model can present numerous advantages. 
+Attempting to break down the complex dynamics of such a system necessitates the use of virtual models and simulations.
+
+When developing software for a real-world system as complex as a hexapod robot, one has to think about how to test the created software and how to efficiently analize the system if it does not behave as expected.
 
 Trying to base the software verification process solely on real robotic hardware can pose multiple problems.
 Firstly, there exists a heavy reliance on the hardware.
@@ -27,8 +29,7 @@ Another problem with solely testing on hardware is that it is missing the reliab
 If the software contains edge cases that only occur in very specific configurations, these can prove to be extremely hard to reproduce in the real world, as it is near impossible for one test setup to be the same as the next.
 The real world is intrinsically more complex than a simulation and even small deviations can result in these rare edge cases not occurring.
 Given the same inputs, a deterministic simulation will allways produce the same results, thus giving us complete reproducibility.
-
-
+\todo{Probably best to shorten problem section and put benefits of simulations into Proposed Solution} 
 
 In order to support and accelerate our research on hexapod robots, we aim to capitalize on these benefits.
 We seek an environment which offers a wide range of tools to enhance our understanding of the robots behavior as well as enables us to more quickly verify and optimize new ideas.
@@ -172,3 +173,10 @@ This approach of keeping the individual legs motion predefined, makes it possibl
 %Im Gegensatz zu den bisher erzeugten Gangarten wird hier nicht vorgegeben werden, welche Beine ihren Bewegung zu welchem Zeitpunkt ausführen sollen.
 %Der Bewegungsablauf des einzelnen Beins bleibt fest definiert, während die Koordination untereinander durch Interaktion des Modells mit der Umgebung erlernt werden soll. 
 %Diese Herangehensweise ermöglicht es die Komplexität der zu erlernenden Fähigkeiten zunächst zu reduzieren, lässt aber gleichzeitig die Möglichkeit offen, im weiteren Verlauf zusätzliche Elemente in den Lernprozess einzubeziehen.
+
+
+The rest of this thesis is structured as follows:
+In chapter [\ref{ch:background}] we will intruduce foundational techniques and principles used and referenced in our work.
+We will then present our solution in chapter[\ref{ch:methods}], where we explain the developed hexapod model and controller as well as the reinforcement learning setup used to learn the robots leg coordination.
+Within chapter [\ref{ch:conclusion}] we evaluate the created hexapod model and present the results of the RL training.
+We conclude our work with suggestions towards possible future expansions to the model and more broadly towards points of future reseach interest.

@@ -170,7 +170,7 @@ The pattern rotation subsystems the planar trajectory(x,z-plane), if required, a
 Finalizing the trajectory generation, the inverse kinematics solver receives the trajectory coordinates and translates them into joint angles.
 
 
-\subsection{Analytical Inverse Kinematics Solver}
+\subsubsection{Analytical Inverse Kinematics Solver}
 Even though Simulinks \textit{Robotics System Toolbox} includes an iterative IK-solver, we decided to implement our own analytical solver.
 Early in the development process, we realized that the iterative solver provided would not be sufficient for our intended purpose.
 Due to the nature of iterative solution methods, the calculation time required to find a valid configuration is significantly higher than that of a purpose-build analytical solver and thus greatly increased simulation times.

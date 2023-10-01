@@ -2,7 +2,7 @@
 \chapter{Background}
 \label{ch:background}
 
-\section{Hexapod Robots}
+\section{Hexapods}
 Hexapods are a class of robots featuring 6 legs, inspired by the locomotion of insects and arachnids.
 Over millions of years of evolution these organisms developed efficient strategies to navigate challenging terrain, making them a rich source of inspiration for robotics.
 By emulating the biomechanics and behavior of insects, researchers and engineers aim to create versatile and robust robotic systems capable of navigating challenging terrain.
@@ -71,7 +71,7 @@ If the user requires a component which is not yet represented by any block in th
 	\label{figure: Simscape Bouncing Ball Example}
 \end{figure}
 
-\section{Swing-Stance Cycle}
+\section{Insect Locomotion}
 
 \begin{figure}[h]
 	\centerline{\includegraphics[scale=0.5]{morphologyOfStickInsect_sketch}}
@@ -239,11 +239,6 @@ The reward function is considered part of the environment.
 
 Model-Free vs. Model ?
 
-\textbf{Agent}
-In terms of RL an agent is that entity which learns by interacting with the environment and 
-
-
-Environment
 
 \begin{definition*}
 	A policy $\pi$ is a distribution over actions given states,\\
@@ -251,7 +246,6 @@ Environment
 \end{definition*}
 A policy fully defines an agents behavior. 
 \todo{Cite David Silver Lec. 2}
-
 
 A value function, in contrast to a reward function which immediately rewards good actions, defines what is good long term. 
 Rewards only define the immediate desirability of environmental states, a value function takes into account states which are likely to follow a given state and the rewards available in those states.
@@ -270,9 +264,9 @@ They decide, act and receive feedback all in real-time and learn from the conseq
 
 
 Discrete vs. Continuous action space in RL learning: 
-A discrete action space is used when the number of actions that can be taken is limited and known in advance. An example of such an environment would be a game of chess; for each move there are only a finite amount of moves possible.
-Continuous action spaces are used, when the number of actions is not known in advance and possibly infinite, such as the movement possibilities of a robotic arm.
-Because we have multiple robotic 'arms' in this project, a continuous action space is favorable.
+A discrete action space is used when the number of actions that can be taken is limited and known in advance. An example of such an environment would be a game of chess; each turn there is a finite number of avaiable moves.
+Continuous action spaces are used, when the number of possible actions is not knowable in advance and possibly infinite\todo{Just write infinite and cite ?}, such as the movement possibilities of a robotic arm.
+Because we have multiple robotic 'actuators' in this project, a continuous action space is favorable.
 
 
 Markov Property: "The future is independent of the past given the present"
