@@ -604,6 +604,12 @@ Gespäch mit Malte und Julius:
 	
 -----------------------------------------
 30.09.		
+	- rlMultiAgentTrainingOpts anstatt rlTrainingOpts  --> Nicht umgesetzt
+	- stepsUntilDataIsSent wird nicht empfohlen zu verwenden  --> umgesetzt
+	- 1. Rewrite der Arbeit gestartet
+	
+-----------------------------------------
+01.10.		
 	
 	
 	
