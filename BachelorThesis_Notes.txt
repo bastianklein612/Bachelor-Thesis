@@ -606,10 +606,12 @@ Gespäch mit Malte und Julius:
 30.09.		
 	- rlMultiAgentTrainingOpts anstatt rlTrainingOpts  --> Nicht umgesetzt
 	- stepsUntilDataIsSent wird nicht empfohlen zu verwenden  --> umgesetzt
-	- 1. Rewrite der Arbeit gestartet
+	- 1. Rewrite der Arbeit gestartet, Belege eingefügt
 	
 -----------------------------------------
 01.10.		
+	- viele Belege im Background hinzugefügt
+	- DDPG neu gestartet, da MATLAB Parallel Workers dauernd abschmierten
 	
 	
 	

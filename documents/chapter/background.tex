@@ -4,10 +4,10 @@
 
 \section{Hexapods}
 Hexapods are a class of robots featuring 6 legs, inspired by the locomotion of insects and arachnids.
-Over millions of years of evolution these organisms developed efficient strategies to navigate challenging terrain, making them a rich source of inspiration for robotics.
-By emulating the biomechanics and behavior of insects, researchers and engineers aim to create versatile and robust robotic systems capable of navigating challenging terrain.
+Through millions of years of evolution these organisms developed efficient locomotion strategies \parencite{neville2006bipedal}, making them a rich source of inspiration for robotics.
+By emulating the biomechanics and behavior of insects, researchers and engineers aim to create versatile and robust robotic systems capable of navigating challenging terrain \parencite{irawan2011optimal, ouyang2021adaptive, schilling2013walknet}.
 
-Most commonly, each leg of a hexapod typically consists of 3 segments named coxa, femur and tibia, equivalent to their biological counterparts.
+Most commonly, each leg of a hexapod consists of 3 segments named coxa, femur and tibia, equivalent to their biological counterparts.
 The individual segments are connected by 3 2-DoF(degrees of freedom) joints, each actuated by an electric servo motor.
 The first joint, hereafter named \textalpha-joint, connects the coxa to the thorax(body) and moves in parallel to the ground, thus being responsible for the longitudinal placement of each leg.
 Coxa and femur are connected by the \textbeta-joint, while the femur and tibia are connected by the \textgamma-joint. 
@@ -48,6 +48,7 @@ The value of any signal lines can be plotted and the simulation can be slowed do
 	\caption{Simulink model of a bouncing ball created using standard library blocks.}
 	\label{figure: Simulink Bouncing Ball Example}
 \end{figure}
+\todo{Cite MATLAB}
 
 \hiddensubsection{Simscape}
 \textit{Simscape\textsuperscript{\texttrademark}} is a block library developed by \textit{MathWorks\textsuperscript{\textregistered}} enabling the modeling of physical systems within the Simulink environment.
@@ -101,15 +102,16 @@ The complete cycle can be described as a pushing phase(stance) and a repositioni
 \section{Inverse Kinematics}
 Inverse Kinematics(IK) is a term predominately used in robotics and computer graphics.
 It describes the process of calculating the joint angles required to place the end of a kinematic chain, such as a robotic manipulator, at a given position and orientation.
-There are two distinct methods how to calculate these angles, analytical and numerical.
+There are two distinct methods how to calculate these angles, analytical and numerical \parencite{inverseKinematicsIllinois}.
 
+\subsection{Analytical IK}
 Analytical solvers are based on trigonometric equations derived from the geometric and kinematic parameters of the manipulator arm, such as the link length, joint type and joint limits.
 They provide exact solutions and can be significantly faster than iterative approximation methods.
 Although very efficient and precise, the analytical approach is generally only feasible for kinematic chains with a small number of DoF.
-If ,for the kinematic chain, the number of DoF is greater than the number of DoF of the end-effector, then there exist infinite solutions for a given pose.\todo{SOURCE ?}
-These kinds of systems potentially lack closed-form expressions for a solution, which makes deriving analytical solutions infeasible if not impossible.
+If the kinematic chain contains redundant DoFs, meaning it possesses more DoF than the dimension of the workspace it is in, there can exist multiple or even infinite solutions to the IK problem \parencite{inverseKinematicsIllinois}.
+These kinds of systems potentially lack closed-form expressions for the solutions, which can make deriving analytical solutions infeasible if not impossible.
 
-
+\subsection{Numerical IK}
 Numerical solvers use iterate approaches to approximate the joint angles and converge towards a solution over several iterations of their algorithm.
 At the start of the process, this type of solver begins with an initial guess
 This guess can be based on the manipulators geometry, joint limits, previously obtained solutions, or other heuristics.
@@ -119,20 +121,16 @@ This process is repeated until the error meets the predefined tolerances.
 The joint angles calculated during the final iteration are then considered a solution to the problem.
 Although the basic principle of error-minimization is always present in the algorithm, the exact process of minimization is much more complex than described here and there exist numerous different techniques on how to achieve this goal.
 Numerical solvers can be applied to a wide variety of inverse kinematics problems and are not limited by the number of DoF like analytical solvers.
-Due to their iterative nature numerical solvers are generally more computationally expensive, given the same problem, than their analytical counterparts.
+Due to their iterative nature numerical solvers are generally more computationally expensive, given the same problem, than their analytical counterparts \parencite{aristidou2018inverse, inverseKinematicsIllinois}.
 
-Both inverse kinematics methods are used extensively in industry and research, depending on the specific project and its requirements.
-\todo{CITATIONS}
-\todo{Describe filter coefficient N}
-
-
+%Both inverse kinematics methods are used extensively in industry and research, depending on the specific project and its requirements.
 
 
 \section{PID Controller}
-A \textbf{P}roportional-\textbf{I}ntegral-\textbf{D}erivative(PID) controller is a widely used feedback control system.
+A \textbf{P}roportional-\textbf{I}ntegral-\textbf{D}erivative(PID) controller is a common feedback control system \parencite{aastrom2002control}.
 As such, it aims to regulate a control variable to a desired setpoint by adjusting its output according to the currently measured process variable.
 In most cases this process variable corresponds to a real world variable such as the speed of a motor, the liquid-level inside a tank or the temperature of a furnace.
-It uses three terms, a proportional, integral and derivative term, to compute the controlled output based on the error between the setpoint and current process variable.
+A PID controller uses three terms, a proportional, integral and derivative term, to compute the controlled output based on the error between the setpoint and current process variable.
 Focusing on digital PID controllers, the process of error calculation and control variable adjustment is done at a discrete, fixed rate and is also referred to as a time step.
 There also exist implementations of this control loop type using analog electronics which generate a continuous control signal, but these are of no concern for the content of this thesis.
 In the following section we will describe the operation of a PID controller in detail:
@@ -142,6 +140,7 @@ In the following section we will describe the operation of a PID controller in d
 	\caption{Illustration of a PID Controller}
 	\label{figure: PID Controller}
 \end{figure}
+
 \todo{Change d and dt to /partial in pid graphic}
 
 At each time step the controller first calculates the error between its setpoint and the currently measured process variable: 
@@ -193,15 +192,17 @@ This tuning process can be done manually by trial-and-error or methodically with
 To conclude, a PID controller continuously repeats the process of error calculation and adjustment, thus forming a closed-loop system which aims to minimize the error and approach the setpoint as close as possible.
 
 \todo{CITATIONS}
-
+\todo{Describe filter coefficient N}
 
 
 
 \section{Reinforcement Learning}
 
-Reinforcement Learning(RL), besides supervised and unsupervised learning, is one of the three major branches in the vast field of Machine Learning.The basic underlying principle of RL is to learn how a scalar reward signal can be cumulatively maximized \parencite{sutton2018reinforcement}.
-In simple terms, RL focuses on training an agent(or multiple agents) to take sequences of actions in an environment as to maximize a cumulative reward.
-Some of the principles used in RL are inspired by behavioral psychology, where learning is mainly driven by the consequences of the actions taken \parencite{sutton2018reinforcement, FINDAUTOR}\todo{Cite author for behavioral psych.}.
+Reinforcement Learning(RL), besides supervised and unsupervised learning, is one of the three major branches in the field of Machine Learning.
+The basic underlying principle of RL is to learn how a scalar reward signal can be cumulatively maximized \parencite{sutton2018reinforcement}.
+In simple terms, RL  is about taking appropriate measures to maximize a reward signal in a particular situation.
+focuses on training an agent(or multiple agents) to take sequences of actions in an environment as to maximize a cumulative reward.
+Some of the principles used in RL are inspired by behavioral psychology, where learning is mainly driven by the consequences of the actions taken \parencite{sutton2018reinforcement, joshi2021reinforcement}.
 
 \begin{figure}[h]
 	\centerline{\includegraphics[scale=0.1]{RL_Overview}}
@@ -209,31 +210,38 @@ Some of the principles used in RL are inspired by behavioral psychology, where l
 	\label{figure: RL Illustration}
 \end{figure}
 
-The agent, as seen in \ref{figure: RL Illustration}, is the entity which learns, it takes actions in the environment and receives observations and the reward signal from the environment.
+The agent, as seen in \ref{figure: RL Illustration}, is the entity which learns, it takes actions $A_t$ in the environment and receives observations $O_t$ and the reward signal $R_t$ from the environment.
 An agent always acts according to its current policy.
-A policy roughly defines a mapping of all perceived environmental states to actions to be taken by the agent.
-It fully  describes the way a learning agent behaves at any given point(in time) in the learning process.\parencite{sutton2018reinforcement} \parencite{D. Silver Lec. 2}
+A policy is roughly defined as a mapping of all perceived environmental states to the actions to be taken by the agent when in a given state.
+It fully  describes the way a learning agent behaves at any given point(in time) in the learning process.\parencite{sutton2018reinforcement} \parencite{silver2015}
 The agents policy is continually updated during the learning process, always trying to improve the actions taken by the policy towards a higher expected reward.
 
-The environment is the place in which the agent tries to improve its policy by taking actions and learning from them.
+The environment is defined as the space in which the agent tries to improve its policy by taking actions and learning from them.
 It defines the problem which the RL agent is supposed to solve by learning a policy.
 The problem definition can range from robotic control tasks such as walking or autonomous driving over playing video games all the way to advertisement or news recommendations.
-The environment 
-Every problem for which as a reward function can be defined which accurately represents the agents performance.\todo{refactor this section}
+Every problem for which as a reward function can be defined which accurately represents the agents performance reinforcement learning can be applied to \parencite{silver2015}.\todo{refactor this section}
+The agent can only influence the environment by taking actions.
 The environment receives the actions chosen by the agent and computes the resulting environmental state and the amount of reward the agent receives for the state it is in.
 It provides the reward and observations about the environment to the agent.
 
-The RL process is repeated for every time step.
+%Discrete vs. Continuous action space in RL learning: 
+In reinforcement learning, there are 2 distinct types of environments, which differ in the definition of their action space.
+If an environment has a discrete action space, it means that there exists countable, discrete actions which can be taken.
+Discrete action spaces are used when the number of possible actions is limited and known in advance.
+An example of such an environment would be a game of chess; for each turn there is a finite number of available moves.
+Continuous action spaces on the other hand have a continuum of actions which can be taken and are used when the number of possible actions is infinite, such as the movement possibilities of a robotic arm.
+
 
 The reward function or reward signal is a scalar function which defines the goal of the reinforcement leaning problem.
 At each time step, this function is evaluated and the scalar output, the reward, is sent to the agent.
-The maximization of this reward is the sole objective of the agent.
+The maximization of this reward is the sole objective of the agent \parencite{silver2015}.
 Due to the reward being the only metric which defines what agent behavior is good and bad, it is important to define this function well.
 If the reward function is poorly defined, the agent will perform poorly as well.
 The reward function is considered part of the environment.
 \parencite{sutton2018reinforcement}
 
 
+\begin{comment}
 
 \parencite{weng2018bandit}
 \parencite{sutton2018reinforcement}
@@ -261,13 +269,6 @@ RL agents labeled as offline only learn from a fixed dataset which has been acqu
 The agent itself does not interact with the environment, only learning on historical data.
 Online RL agents on the other side learn while actively interacting with the environment.
 They decide, act and receive feedback all in real-time and learn from the consequences of their actions \parencite{schrittwieser2021online}.
-
-
-
-Discrete vs. Continuous action space in RL learning: 
-A discrete action space is used when the number of actions that can be taken is limited and known in advance. An example of such an environment would be a game of chess; each turn there is a finite number of avaiable moves.
-Continuous action spaces are used, when the number of possible actions is not knowable in advance and possibly infinite\todo{Just write infinite and cite ?}, such as the movement possibilities of a robotic arm.
-Because we have multiple robotic 'actuators' in this project, a continuous action space is favorable.
 
 
 Markov Property: "The future is independent of the past given the present"
@@ -308,5 +309,4 @@ Agents applicable for continuous action spaces:
 	Model-free, continuous action space, actor-critic
 	\item TRPO: Trust Region Policy Optimization(more complex version of PPO, more robust for deterministic environments with fewer iterations)
 \end{itemize}
-\todo{Cite MATLAB}
-\todo{Use image for explanation}
+\end{comment}
