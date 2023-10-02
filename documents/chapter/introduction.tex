@@ -8,36 +8,34 @@ Simulations play an increasingly important role in robotics research and develop
 They offer a cost-effective and efficient means to investigate, analyze and optimize the behavior of robots even before they are physically implemented \parencite{de2019analysis}. 
 Notably, various companies involved in the field of robotics use simulation technology extensively in the development process of their systems, such as Boston Dynamics \parencite{BostonDynamicsSimulation}, Tesla Inc. \parencite{TeslaAiDay2022} or Kuka Robotics \parencite{KukaSim}.
 Due to their high degree of mobility and versatility, hexapods are of particular interest in robotics. 
-Compared to wheeled or bipedal architectures, the presence of six legs enables these robots to more easily overcome challenging terrain and complex obstacles \parencite{barai2013smart, atifystructure}, making them particularly interesting for navigating landscapes otherwise inaccessible to humans or other types of robotic systems.
+Compared to wheeled or bipedal architectures, the flexibility six legs provide enable these robots to more easily overcome challenging terrain and complex obstacles \parencite{barai2013smart, atifystructure}, making them particularly interesting for navigating landscapes otherwise inaccessible to humans or other types of robotic systems.
 
 \textbf{PROBLEM:}
 \todo{Reads to much like defining the goals I want to achieve}
-The process of developing software for these hexapods is a challenging and by no means trivial task.
+The process of developing software for these hexapods can be a challenging and by no means trivial task.%is a challenging and by no means trivial task.
 While maintaining balance for instance, is evidently easier for this architecture than for the above mentioned bipedal robots, coordinating the many legs during movement poses a major challenge \parencite{azayev2020blind,schilling2013walknet}.
-%When trying to break down the complex dynamics of such a system, the creation of a virtual model can present numerous advantages. 
-Attempting to break down the complex dynamics of such a system necessitates the use of virtual models and simulations.
 
-When developing software for a real-world system as complex as a hexapod robot, one has to think about how to test the created software and how to efficiently analize the system if it does not behave as expected.
-
+When developing software for a real-world system as complex as a hexapod robot, one has to think about how to test the created software and how to efficiently analyze the system if it does not behave as expected.
 Trying to base the software verification process solely on real robotic hardware can pose multiple problems.
 Firstly, there exists a heavy reliance on the hardware.
-Without a functioning robot, the development process comes to a standstill.
 As physical robots are costly, the actual number of robots available is often low if not singular \parencite{collins2021review, marvel2014collaborative}.
-If the software is not functioning well, the robot can fall or otherwise damage itself.
-This can lead to high repair times and additional costs, both of which are undesirably.
-Another problem with solely testing on hardware is that it is missing the reliable reproducibility a simulation can offer.
-If the software contains edge cases that only occur in very specific configurations, these can prove to be extremely hard to reproduce in the real world, as it is near impossible for one test setup to be the same as the next.
+If experimental software is directly tested on one of these rare pieces of hardware, and does not perform well, the robot might fall over or otherwise damage itself.
+This can lead to time-consuming  and numerous repairs as well as additional costs, both of which are undesirably.
+Another problem with solely testing on hardware is that the real-world is lacking the reliable reproducibility a simulation can offer.
+If the software contains edge cases that only occur in very specific configurations, these can prove to be extremely hard to reproduce in the real world.
+For one test setup to be exactly the same as the next is near impossible.
 The real world is intrinsically more complex than a simulation and even small deviations can result in these rare edge cases not occurring.
-Given the same inputs, a deterministic simulation will allways produce the same results, thus giving us complete reproducibility.
+Given the same inputs, a deterministic simulation will always produce the same results, thus giving us complete reproducibility.
 \todo{Probably best to shorten problem section and put benefits of simulations into Proposed Solution} 
 
-
-Simulations can, if enough computational rescources are available, run faster than real-time, can be parallelized and do not have to be physically reset by a human operator.
+Simulations can, if enough computational resources are available, run faster than real-time, can be parallelized and do not have to be physically reset by a human operator.
 This makes them especially interesting when using learning-based approaches \parencite{collins2021review}.
 In order to support and accelerate our research on hexapod robots, we aim to capitalize on these benefits.
 We seek an environment which offers a wide range of tools to enhance our understanding of the robots behavior as well as enables us to more quickly verify and optimize new ideas.
 
-In our search for an adequate solution, we found a variety of robot simulation platforms, such as Gazebo, MuJoCo or Webots. 
+
+In our search for a simulation framework to base our robotic research on, we found a variety of robot simulation platforms, such as Gazebo, MuJoCo or Webots. 
+
 Each of these simulators has its own strengths and features that researchers have utilized to explore different aspects of robotics \parencite{de2019analysis, collins2021review}.
 Besides these tools explicitly developed for simulating robots, there are other modeling and simulation environments which have a wider fiend of use.
 One example of these is \textit{MATLAB Simulink\textsuperscript{\textregistered}}, a graphical programming environment used for modeling, simulation and analysis of complex, dynamic systems \parencite{Simulink}.
@@ -78,6 +76,8 @@ Considering the widespread use of Simulink in both research and industry along w
 
 
 %\textbf{OBJECTIVE:}
+%When trying to break down the complex dynamics of such a system, the creation of a virtual model can present numerous advantages. 
+%Attempting to break down the complex dynamics of such a system necessitates the use of virtual models and simulations.
 Therefore, our main goal in this thesis is to develop a comprehensive virtual model of a hexapod robot using the MATLAB Simulink\textsuperscript{\textregistered} environment.
 The model we develop will serve as a foundation for future research to build on.
 Facilitating flexible and easy expansions to the model, a high level of modularity is required, allowing for the integration or replacement of modules without the need to reconfigure the whole system.
