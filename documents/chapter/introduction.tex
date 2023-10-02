@@ -22,20 +22,23 @@ When developing software for a real-world system as complex as a hexapod robot, 
 Trying to base the software verification process solely on real robotic hardware can pose multiple problems.
 Firstly, there exists a heavy reliance on the hardware.
 Without a functioning robot, the development process comes to a standstill.
-As physical robots are costly, the actual number of robots available is often low if not singular.
+As physical robots are costly, the actual number of robots available is often low if not singular \parencite{collins2021review, marvel2014collaborative}.
 If the software is not functioning well, the robot can fall or otherwise damage itself.
-This can lead to high repair times and costs, both of which are undesirably.
+This can lead to high repair times and additional costs, both of which are undesirably.
 Another problem with solely testing on hardware is that it is missing the reliable reproducibility a simulation can offer.
 If the software contains edge cases that only occur in very specific configurations, these can prove to be extremely hard to reproduce in the real world, as it is near impossible for one test setup to be the same as the next.
 The real world is intrinsically more complex than a simulation and even small deviations can result in these rare edge cases not occurring.
 Given the same inputs, a deterministic simulation will allways produce the same results, thus giving us complete reproducibility.
 \todo{Probably best to shorten problem section and put benefits of simulations into Proposed Solution} 
 
+
+Simulations can, if enough computational rescources are available, run faster than real-time, can be parallelized and do not have to be physically reset by a human operator.
+This makes them especially interesting when using learning-based approaches \parencite{collins2021review}.
 In order to support and accelerate our research on hexapod robots, we aim to capitalize on these benefits.
 We seek an environment which offers a wide range of tools to enhance our understanding of the robots behavior as well as enables us to more quickly verify and optimize new ideas.
 
-In our search for an adequate solution, we found a variety of robot simulation platforms, such as Gazebo, V-REP or Webots. 
-Each of these simulators has its own strengths and features that researchers have utilized to explore different aspects of robotics \parencite{de2019analysis}.
+In our search for an adequate solution, we found a variety of robot simulation platforms, such as Gazebo, MuJoCo or Webots. 
+Each of these simulators has its own strengths and features that researchers have utilized to explore different aspects of robotics \parencite{de2019analysis, collins2021review}.
 Besides these tools explicitly developed for simulating robots, there are other modeling and simulation environments which have a wider fiend of use.
 One example of these is \textit{MATLAB Simulink\textsuperscript{\textregistered}}, a graphical programming environment used for modeling, simulation and analysis of complex, dynamic systems \parencite{Simulink}.
 In recent years, several scientific papers have been published dealing with the simulation of a hexapod in Simulink(see e.g. \cite{tanaka2019development, barai2013smart, atify2019propelling}).
@@ -88,8 +91,7 @@ The model will also provide a basis for testing more advanced learning algorithm
 
 To validate the developed model, we implement a motion controller which allows the robot to navigate within the virtual environment in straight lines. This also includes the application of Reinforcement Learning, enabling the robot to learn "interlimb" coordination from the ground up.
 To prove its functionality, the controller has to be able to steer the robot smoothly and reliably while maintaining its overall balance.
-It also needs to show the capability of performing different gait patters as well as traversing slightly uneven terrain.
-\todo{Uneven terrain not planned to be included}
+The model also has show the capabilitiy of performing several different gait patterns and speeds as well as the ability to move omnidirectional.
 
 
 %\section{Ziel}
@@ -126,9 +128,10 @@ It also needs to show the capability of performing different gait patters as wel
 %After a robust model and a reliable controller have been developed, the focus is on using machine learning to enable the robot to learn leg coordination on its own.
 %It would be particularly interesting to determine if already familiar gaits become recognizable or if entirely new forms of movement emerge.
 
-The majority of work done for this thesis is based on and supported by the \textit{MATLAB\textsuperscript{\textregistered}} software framework and the MATLAB-based \textit{Simulink\textsuperscript{\textregistered}} environment, both developed by the company \textit{MathWorks\textsuperscript{\textregistered}}.
-Simulink provides a graphical block diagramming tool, which enables a very modular and visually clear development process.
-Through a multitude of so-called "toolboxes", complex dynamic models from a wide variety of application areas can be created.
+We base the majority of work for this thesis on the \textit{MATLAB\textsuperscript{\textregistered}} software framework and the MATLAB-based \textit{Simulink\textsuperscript{\textregistered}} environment, both developed by the company \textit{MathWorks\textsuperscript{\textregistered}}.
+%MATLAB supports the development of the hexapod model as well
+We utilize Simulink, a graphical block diagramming tool, to allow for a modular and visually clear development process.
+Through a multitude of so-called "toolboxes", we are able to create complex dynamic models from a wide range of application areas.
 
 Initially, we construct a detailed, physically correct model of the hexapod using Simulink's Toolbox \textit{Simscape\textsuperscript{\texttrademark}}, taking the \emph{PhantomX} hexapod developed by \emph{Trossen Robotics} as a template.
 The model is parameterized as well as possible, so that properties like weight, friction coefficients or max. applied torques of the individual components can be easily adjusted later on.
@@ -176,7 +179,7 @@ This approach of keeping the individual legs motion predefined, makes it possibl
 
 
 The rest of this thesis is structured as follows:
-In chapter [\ref{ch:background}] we will intruduce foundational techniques and principles used and referenced in our work.
+In [\ref{ch:background}] we will introduce foundational techniques and principles used and referenced in our work.
 We will then present our solution in chapter[\ref{ch:methods}], where we explain the developed hexapod model and controller as well as the reinforcement learning setup used to learn the robots leg coordination.
 Within chapter [\ref{ch:conclusion}] we evaluate the created hexapod model and present the results of the RL training.
 We conclude our work with suggestions towards possible future expansions to the model and more broadly towards points of future reseach interest.
