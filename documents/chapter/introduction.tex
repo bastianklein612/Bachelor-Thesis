@@ -10,16 +10,16 @@ Notably, various companies involved in the field of robotics use simulation tech
 Due to their high degree of mobility and versatility, hexapods are of particular interest in robotics. 
 Compared to wheeled or bipedal architectures, the flexibility six legs provide enable these robots to more easily overcome challenging terrain and complex obstacles \parencite{barai2013smart, atifystructure}, making them particularly interesting for navigating landscapes otherwise inaccessible to humans or other types of robotic systems.
 
-\textbf{PROBLEM:}
+%\textbf{PROBLEM:}
 \todo{Reads to much like defining the goals I want to achieve}
-The process of developing software for these hexapods can be a challenging and by no means trivial task.%is a challenging and by no means trivial task.
+The process of developing software for these hexapods can be a challenging and by no means trivial task. %is a challenging and by no means trivial task.
 While maintaining balance for instance, is evidently easier for this architecture than for the above mentioned bipedal robots, coordinating the many legs during movement poses a major challenge \parencite{azayev2020blind,schilling2013walknet}.
 
 When developing software for a real-world system as complex as a hexapod robot, one has to think about how to test the created software and how to efficiently analyze the system if it does not behave as expected.
 Trying to base the software verification process solely on real robotic hardware can pose multiple problems.
-Firstly, there exists a heavy reliance on the hardware.
-As physical robots are costly, the actual number of robots available is often low if not singular \parencite{collins2021review, marvel2014collaborative}.
-If experimental software is directly tested on one of these rare pieces of hardware, and does not perform well, the robot might fall over or otherwise damage itself.
+Firstly, there exists a heavy reliance on this hardware.
+As physical robotic hardware is costly, the actual number of robots available is often low if not singular \parencite{collins2021review, marvel2014collaborative}.
+If experimental software is directly tested on one of these, and does not perform well, the robot might fall over or otherwise damage itself.
 This can lead to time-consuming  and numerous repairs as well as additional costs, both of which are undesirably.
 Another problem with solely testing on hardware is that the real-world is lacking the reliable reproducibility a simulation can offer.
 If the software contains edge cases that only occur in very specific configurations, these can prove to be extremely hard to reproduce in the real world.
@@ -27,7 +27,7 @@ For one test setup to be exactly the same as the next is near impossible.
 The real world is intrinsically more complex than a simulation and even small deviations can result in these rare edge cases not occurring.
 Given the same inputs, a deterministic simulation will always produce the same results, thus giving us complete reproducibility.
 \todo{Probably best to shorten problem section and put benefits of simulations into Proposed Solution} 
-
+	
 Simulations can, if enough computational resources are available, run faster than real-time, can be parallelized and do not have to be physically reset by a human operator.
 This makes them especially interesting when using learning-based approaches \parencite{collins2021review}.
 In order to support and accelerate our research on hexapod robots, we aim to capitalize on these benefits.
@@ -46,22 +46,10 @@ Considering the widespread use of Simulink in both research and industry along w
 %In our opinion, the MATLAB Simulink modeling and simulation environment from the MathWorks company is particularly interesting for implementing such a model.
 %Due to its diagram-like development interface based on functional blocks and a large number of so-called "toolboxes" from a wide variety of application areas, Simulink enables the generation of modular and clearly arranged systems, which can be simulated immediately.
 
-
-
-%Auf Grund ihrer hohen Beweglichkeit und Vielseitigkeit sind Hexapods in der Robotik von besonderen Interesse. 
-%Verglichen mit beräderten oder zweibeinigen Robotern können sie sich zuverlässiger auf unebenem Gelände bewegen und auch komplexe Hindernisse überwinden \parencite{barai2013smart, atifystructure}.
-%Die Programmierung eines Bewegungscontrollers für solch einen Hexapod-Roboter ist eine anspruchsvolle, keinenfalls triviale Aufgabe.
-%Obwohl das Aufrechterhalten der Balance bei einem Roboter mit 6 Beinen im Vergleich zu beispielsweise humanoiden Zweibeinern offensichtlich einfacher ist, stellt die Koordination der vielen Beine während der Fortbewegung eine große Herausforderung dar \parencite{azayev2020blind,schilling2013walknet}.
-%Die Erzeugung eines virtuellen Modells kann hierbei viele Vorteile mit sich bringen.
-%Es ermöglicht Designkonzepte zu testen, die Bewegung des Roboters zu analysieren und die Leistungsfähigkeit des Systems schon vor der physischen Umsetzung zu beurteilen \parencite{de2019analysis}.
-
 %Besonders interessant für die Umsetzung eines solchen Modells ist unserer Meinung nach die Modellierungs- und Simulationsumgebung MATLAB Simulink des Unternehmens MathWorks.
 %Durch die auf funktionalen Blöcken basierende, diagrammartige Entwicklungsoberfläche und eine Vielzahl sog. "Toolboxes" aus unterschiedlichsten Anwendungsgebieten ermöglicht Simulink die Erzeugung modularer und übersichtlicher Systeme, welche sofort simuliert werden können.
 %In den letzten Jahren wurden mehrere wissenschaftliche Arbeiten veröffentlicht, die sich mit der Simulation eines Hexapods in Simulink beschäftigen(siehe z.B. \cite{tanaka2019development, barai2013smart, atify2019propelling}), sodass sich schließen lässt, dass die Vorteile der simulationsgestützten Entwicklung durchaus wahrgenommen und genutzt werden.
 %Jedoch gibt es unseren Wissens nach derzeit kein öffentlich verfügbares, modernes Simulink-Modell auf dem weitere Forschung aufbauen könnte.
-
-%Wir wollen uns in dieser Bachelorarbeit deshalb dem Problem der Entwicklung eines solchen Modells mit Hilfe von Simulink widmen.
-
 
 
 %Um die Erforschung von Controllern zu Bewegungssteuerung möglichst effektiv vorantreiben zu können ist es wichtig, leistungsstarke Simulationssoftware in den Entwicklungsprozess einzubeziehen.
@@ -91,7 +79,7 @@ The model will also provide a basis for testing more advanced learning algorithm
 
 To validate the developed model, we implement a motion controller which allows the robot to navigate within the virtual environment in straight lines. This also includes the application of Reinforcement Learning, enabling the robot to learn "interlimb" coordination from the ground up.
 To prove its functionality, the controller has to be able to steer the robot smoothly and reliably while maintaining its overall balance.
-The model also has show the capabilitiy of performing several different gait patterns and speeds as well as the ability to move omnidirectional.
+The model also has show the capability of performing several different gait patterns and speeds as well as the ability to move omnidirectional.
 
 
 %\section{Ziel}

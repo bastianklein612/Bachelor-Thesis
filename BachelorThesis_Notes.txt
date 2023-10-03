@@ -613,8 +613,13 @@ Gespäch mit Malte und Julius:
 	- viele Belege im Background hinzugefügt
 	- DDPG neu gestartet, da MATLAB Parallel Workers dauernd abschmierten
 	
-	
-	
+-----------------------------------------
+02.10.
+	- Rewrite fortgeführt
+	- Desktop über Nacht im Wohnzimmer weiterlaufen lassen um mehr Rechenzeit zu erhalten
+
+-----------------------------------------
+02.10.	
 	
 	
 	
