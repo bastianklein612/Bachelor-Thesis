@@ -8,12 +8,11 @@ Through millions of years of evolution these organisms developed efficient locom
 By emulating the biomechanics and behavior of insects, researchers and engineers aim to create versatile and robust robotic systems capable of navigating challenging terrain \parencite{irawan2011optimal, ouyang2021adaptive, schilling2013walknet}.
 
 Most commonly, each leg of a hexapod consists of 3 segments named coxa, femur and tibia, equivalent to their biological counterparts.
-The individual segments are connected by 3 2-DoF(degrees of freedom) joints, each actuated by an electric servo motor.
+The individual segments are connected by 3 2-DoF (degrees of freedom) joints, each actuated by an electric servo motor.
 The first joint, hereafter named \textalpha-joint, connects the coxa to the thorax(body) and moves in parallel to the ground, thus being responsible for the longitudinal placement of each leg.
 Coxa and femur are connected by the \textbeta-joint, while the femur and tibia are connected by the \textgamma-joint. 
 These joints move orthogonal to the movement plane of the \textalpha-joint. Together, they are responsible for the lateral positioning of each leg.
-The nomenclature we use use in thsis thesis to label the joints and leg segments was adopted from the works of Schilling, Cruse, Hoinville et. al. \parencite{schilling2013walknet, HeterarchicalArchitectureSchilling}.
-
+The nomenclature we use use in this thesis to label the joints and leg segments was adopted from the works of \cite{schilling2013walknet} and \cite{HeterarchicalArchitectureSchilling}.
 \begin{figure}[h]
 	\centerline{\includegraphics[scale=0.04]{phantomX_III_overview}}
 	\caption{PhantomX MKIII hexapod, predecessor of MKIV used here [\cite{PhantomX_MKIII}]}
@@ -35,11 +34,11 @@ It provides the user with a versatile platform to design, simulate and analyze c
 Simulink offers an expansive library of predefined blocks that represent different components and behaviors.
 The user connects these blocks with so called signal lines to transport data between them.
 Blocks transform the data provided by the inputs and output the transformed data to other blocks connected downstream.
-Their behavior can be discrete, like a switch which activates when a signal is high, or represent continuous functions such as integrals.
+Their behavior can be discrete, like a switchor logic gate which activate when specific signals are pulled high, or represent more complex and continuous functions such as integrators, derivatives or sine waves.
 
 An arrangement of blocks can be encapsulated into a subsystem, thus creating different levels of abstraction.
 To enable easy reuse, subsystems can be placed in custom libraries.
-If a library object gets updated, each linked copy of this subsystem receives the update as well, preventing the user from having to edit each copy themselves.
+If such a library object is modified, each linked copy of this subsystem receives the update as well, preventing the developer from having to edit each copy individually.
 At any step in the development process, a model can be simulated and analyzed.
 The value of any signal lines can be plotted and the simulation can be slowed down.
 
