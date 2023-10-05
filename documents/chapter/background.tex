@@ -5,7 +5,7 @@
 \section{Hexapods}
 Hexapods are a class of robots featuring 6 legs, inspired by the locomotion of insects and arachnids.
 Through millions of years of evolution these organisms developed efficient locomotion strategies \parencite{neville2006bipedal}, making them a rich source of inspiration for robotics.
-By emulating the biomechanics and behavior of insects, researchers and engineers aim to create versatile and robust robotic systems capable of navigating challenging terrain \parencite{irawan2011optimal, ouyang2021adaptive, schilling2013walknet}.
+By emulating the biomechanics and behaviour of insects, researchers and engineers aim to create versatile and robust robotic systems capable of navigating challenging terrain \parencite{irawan2011optimal, ouyang2021adaptive, schilling2013walknet}.
 
 Most commonly, each leg of a hexapod consists of 3 segments named coxa, femur and tibia, equivalent to their biological counterparts.
 The individual segments are connected by 3 2-DoF (degrees of freedom) joints, each actuated by an electric servo motor.
@@ -29,53 +29,86 @@ The nomenclature we use use in this thesis to label the joints and leg segments 
 \hiddensubsection{Simulink}
 \textit{Simulink\textsuperscript{\textregistered}} is a \textit{MATLAB\textsuperscript{\textregistered}}-based graphical block-diagramming tool developed by the company \textit{MathWorks\textsuperscript{\textregistered}}. 
 It is a widely used tool which plays a crucial role in various engineering and research disciplines.
-It provides the user with a versatile platform to design, simulate and analyze complex dynamic systems.
+It provides the user with a versatile platform to design, simulate and analyse complex dynamic systems.
 
-Simulink offers an expansive library of predefined blocks that represent different components and behaviors.
-The user connects these blocks with so called signal lines to transport data between them.
+Simulink offers an expansive library of predefined blocks that represent different components and behaviours.
+The user connects these blocks using edges called signal lines to transport data between them.
 Blocks transform the data provided by the inputs and output the transformed data to other blocks connected downstream.
-Their behavior can be discrete, like a switchor logic gate which activate when specific signals are pulled high, or represent more complex and continuous functions such as integrators, derivatives or sine waves.
+Their behaviour can be discrete, like a switch or logic gate which activate when specific signals are pulled high, or represent more complex and continuous functions such as integrators, derivatives or sine waves.
 
 An arrangement of blocks can be encapsulated into a subsystem, thus creating different levels of abstraction.
-To enable easy reuse, subsystems can be placed in custom libraries.
+To enable simple reuse of components, subsystems can be placed in custom libraries.
 If such a library object is modified, each linked copy of this subsystem receives the update as well, preventing the developer from having to edit each copy individually.
-At any step in the development process, a model can be simulated and analyzed.
-The value of any signal lines can be plotted and the simulation can be slowed down.
+At any step in the development process, a model can be simulated and analysed.
+To be able to better analyse a model,the value of any signal lines can be plotted over time and the simulation speed can be slowed down.
+An example of a simple Simulink model can be seen in \ref{figure: Simulink bouncing ball example}.
+The model simulates the behaviour of an elastic ball which, under the influence of (earth's) gravity, accelerates downwards and repeatedly bounces of an imaginary plane.
+The ball looses energy over time, as represented by the coefficient of restitution.
+To visualize the systems dynamics, the balls velocity and speed are logged and plotted, as can be seen by the small symbols next to the respective signal lines.
 
-\begin{figure}[h]
-	\centerline{\includesvg[scale=0.8]{Simulink/BouncingBallExample_Simulink.svg}}
-	\caption{Simulink model of a bouncing ball created using standard library blocks.}
-	\label{figure: Simulink Bouncing Ball Example}
+\begin{figure}[h!]
+	\begin{subfigure}{.5\textwidth} % this sets the figure to be max half the width of the page
+		\centering
+		% include first image
+		\includesvg[scale=0.5]{Simulink/BouncingBallExample_Simulink.svg}  % this sets the image to fill 90% of the available space -> 45% of the line width in total. 
+		\caption{}
+		\label{figure: Simulink bouncing ball model}
+	\end{subfigure}
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		% include second image
+		\includegraphics[width=\linewidth]{Simulink/BouncingBall_PositionAndVelocity.png}  
+		\caption{}
+		\label{figure: Simulink bouncing ball graphs}
+	\end{subfigure}
+	\caption[Simulink bouncing ball example]{(a) Simulink model of a bouncing ball created suing standard library blocks. (b) Graphs depicting the balls velocity(orange) and position(blue).}
+	\label{figure: Simulink bouncing ball example}
 \end{figure}
-\todo{Cite MATLAB}
+
 
 \hiddensubsection{Simscape}
-\textit{Simscape\textsuperscript{\texttrademark}} is a block library developed by \textit{MathWorks\textsuperscript{\textregistered}} enabling the modeling of physical systems within the Simulink environment.
-Utilizing this library it is possible model and simulate systems such as electric circuits, hydraulics or classical mechanics all within a unified simulation environment.
-Simscape offers a large variety of predefined components like resistors, capacitors, springs, dampers and more.
-To understand the model we developed, the mechanical components are of the most interest, especially coordinate frames, transforms, joints and rigid bodies.
-Coordinate frames can be attached to each other using rigid transforms or joints.
-Joints allow for different degrees of freedom between two frames, depending on what constraints should be imposed on the system.
-Two frames connected with a joint are named base and follower frame.
-When the joint is actuated, the follower frame moves relative to the base frame\parencite{thilderkvist2015motion}.
-Rigid transforms translate or rotate coordinate frames without allowing for any degree of freedom.
-Rigid bodies can be connected to the predefined coordinate frames, providing shape, mass and inertia to the system.
-If the user requires a component which is not yet represented by any block in the libraries, Simscape also offers a MATLAB based language to enable text-based development of custom components.
-\todo{Weiter ausführen; mehr Details, z.B. über Gelenke(Sensorik, Aktuation, etc.)}
-\todo{CITATIONS}
+\textit{Simscape\textsuperscript{\texttrademark}} is a Simulink block library developed by \textit{MathWorks\textsuperscript{\textregistered}} enabling the construction of physical systems within the Simulink environment.
+Utilizing Simscape, it is possible to model and simulate systems such as electric circuits, hydraulics or classical mechanics all within a unified simulation environment.
+The library offers a large variety of predefined components like resistors, capacitors, springs, dampers, etc.
+To understand the model we develop in this thesis, Simscape's mechanical components are of the most interest, especially coordinate frames, rigid transforms, joints and rigid bodies.
 
-\begin{figure}[h]
+\begin{figure}[h!]
 	\centering
-	\centerline{\includesvg[scale=1.0]{Simulink/BouncingBallExample_Simscape.svg}}
-	\
-	\caption{Simulink model of the same system as in Fig. \ref{figure: Simulink Bouncing Ball Example} but created solely with Simscape blocks.}
+	\centerline{\includesvg[scale=0.8]{Simulink/BouncingBallExample_Simscape.svg}}
+	\caption[Simscape bouncing ball example]{Simulink model of the same bouncing ball system as in \ref{figure: Simulink bouncing ball model}, but created using solely Simscape blocks. The simulation of this system is provided in \cite{VIDEO 1}. }
 	\label{figure: Simscape Bouncing Ball Example}
 \end{figure}
 
+Coordinate frames are at the base of every Simscape model.
+They can be attached to each other using rigid transforms or joints.
+Edges similar to the basic Simulink signal lines are used to connect the individual blocks.
+These lines do not transport plot-able signal however, but rather represent the structure of the Simscape model.
+Joints allow for different degrees of freedom between two frames, depending on what constraints should be imposed on the system.
+Two frames connected by a joint are called base and follower frame.
+When a joint is actuated, either by an external or internal force, the follower frame moves relative to the base frame \parencite{thilderkvist2015motion}.
+As already mentioned in the previous sentence, joints can be actively actuated by providing them with a scalar torque signal.
+It is also possible to modify various joint parameters such as internal joint friction, joint limits and spring stiffness, which we will explain in chapter \ref{ch:methods}.
+
+Rigid transforms translate and/or rotate coordinate frames without allowing for any degree of freedom.
+They are used to define the initial position and orientation of a frame.
+Rigid bodies can be attached to the already existing coordinate frames, providing shape, mass and inertia to the system.
+If multiple of these are present in a simulation, the shape of a rigid body can also act as collision geometry, allowing different bodies to collide and interact with each other.
+If a component is required which is not yet represented by a block in the library, Simscape offers a MATLAB based language to enable text-based development of custom components.
+The description of the Simscape library in this section roughly follows the official documentation \parencite{matlabSimscapeDocumentation}.
+
+As an example, the same bouncing ball system as shown in \ref{figure: Simulink bouncing ball model} can be seen in \ref{figure: Simscape Bouncing Ball Example} constructed using only blocks from the Simscape library. When simulating this model, a 3D animation of the bouncing ball is generated which can be slowed down, replayed or saved for later analysis.
+\todo{CITATIONS ?}
+
+
 \section{Insect Locomotion}
+The locomotion of insects, more specifically arthropods,\todo{CITATION} serves as a remarkable source of inspiration for the field of hexapod robotics.
+There exists a vast amount of papers studying the movement patterns of these insects.
+Common research subjects include LATIN(stick insect), LATIN(fruit fly) or LATIN(cockroaches).\todo{CITATIONS}
+The probably most essential aspect of the locomotion of an arthropod is the "Swing-Stance Cycle", as depicted in \ref{figure: Stick insect leg}.
+
 
 \begin{figure}[h]
-	\centerline{\includegraphics[scale=0.5]{morphologyOfStickInsect_sketch}}
+	\centerline{\includegraphics[scale=0.4]{morphologyOfStickInsect_sketch}}
 	\caption{Morphologic drawing of a stick insect leg (\cite{schilling2013walknet} [Fig.1]).}
 	\begin{footnotesize}
 		Angle $\alpha$ represents the position of the thorax-coxa joint, angle $\beta$ describes the position of the coxa-femur joint and angle $\gamma$ represents the position of the femur-tibia joint.
@@ -87,15 +120,15 @@ If the user requires a component which is not yet represented by any block in th
 	\label{figure: Stick insect leg}
 \end{figure}
 
-The swing-stance cycle depicted above is an essential element of an insects locomotion.
-When in stance phase, the leg is in contact with the ground and bears a partial load of the insects weight.
-The leg moves backwards, relative to the body, from AEP to PEP. During this phase the leg pushes the insect forward.
-During the swing phase the leg is lifted of the ground and moved form PEP to AEP in an arch.
-The stance phase is responsible for moving the insect forward until reaching the PEP, when the swing phase is needed to reposition the leg at the AEP to start the cycle again.
-The complete cycle can be described as a pushing phase(stance) and a repositioning phase(swing).
+As the name suggests, the movement cycle of an arthropod leg is divided into two distinct phases, the swing phase and the stance phase.
+While in stance, the leg is constantly in contact with the ground and bears a partial load of the insects weight.
+During this phase the leg moves backwards relative to the body, from the AEP (Anterior Extreme Position) to PEP (Posterior Extreme Position) and pushes the insect forward.
+The AEP describes the foremost point a leg reaches during the movement cycle, the PEP the rearmost point.
+When the leg reaches the PEP, the swing phase begins and it is lifted of the ground and moved forward.
+While the stance phase is responsible for holding the insect up and moving it forward until reaching the PEP, the swing phase is needed to reposition the leg towards the AEP to start the cycle again.
+The complete cycle can be described as a pushing phase (Stance) and a repositioning phase (Swing).
 
 \todo{CITATIONS}
-\todo{Expand}
 
 
 \section{Inverse Kinematics}
