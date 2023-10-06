@@ -120,7 +120,7 @@ The probably most essential aspect of the locomotion of an arthropod is the "Swi
 	\label{figure: Stick insect leg}
 \end{figure}
 
-As the name suggests, the movement cycle of an arthropod leg is divided into two distinct phases, the swing phase and the stance phase.
+As its name suggests, the movement cycle of an arthropod leg is divided into two distinct phases, the swing phase and the stance phase.
 While in stance, the leg is constantly in contact with the ground and bears a partial load of the insects weight.
 During this phase the leg moves backwards relative to the body, from the AEP (Anterior Extreme Position) to PEP (Posterior Extreme Position) and pushes the insect forward.
 The AEP describes the foremost point a leg reaches during the movement cycle, the PEP the rearmost point.
@@ -132,16 +132,22 @@ The complete cycle can be described as a pushing phase (Stance) and a reposition
 
 
 \section{Inverse Kinematics}
-Inverse Kinematics(IK) is a term predominately used in robotics and computer graphics.
-It describes the process of calculating the joint angles required to place the end of a kinematic chain, such as a robotic manipulator, at a given position and orientation.
-There are two distinct methods how to calculate these angles, analytical and numerical \parencite{inverseKinematicsIllinois}.
+Inverse Kinematics (IK) is a mathematical approach predominately used in the fields of robotics and computer graphics.
+It describes the process of calculating the joint angles required to place the end of a kinematic chain, the so called the end-effector, at a given position and orientation in space.
+A kinematic chain is an abstract description of a chain consisting of joints and links, such as a robotic manipulator or the arm of a human 3D model.
+Solving inverse kinematics can be a challenging task, especially for robots with many DoF and complex joint constraints.
+The difficulty arises from the fact that there can exist multiple solutions (multiple sets of joint angles) to achieve the same end-effector pose.
+Some of which some may be physically feasible while others might lead to collisions or instabilities.\\
+There exist two primary techniques for solving the inverse kinematics problem, analytical and numerical methods \parencite{inverseKinematicsIllinois}:
+\todo{Citations}
 
 \subsection{Analytical IK}
-Analytical solvers are based on trigonometric equations derived from the geometric and kinematic parameters of the manipulator arm, such as the link length, joint type and joint limits.
-They provide exact solutions and can be significantly faster than iterative approximation methods.
+Analytical solution methods are based on trigonometric equations derived from the geometric and kinematic parameters of the manipulator arm, such as the link length, joint type and joint constraints.
+An example of such derivations is presented at a later point in this work, see \ref{subsubsec: IK Solver}.
+They provide exact solutions to the problem and only use minimal computational resources.
 Although very efficient and precise, the analytical approach is generally only feasible for kinematic chains with a small number of DoF.
 If the kinematic chain contains redundant DoFs, meaning it possesses more DoF than the dimension of the workspace it is in, there can exist multiple or even infinite solutions to the IK problem \parencite{inverseKinematicsIllinois}.
-These kinds of systems potentially lack closed-form expressions for the solutions, which can make deriving analytical solutions infeasible if not impossible.
+Such systems potentially lack closed-form expressions for solutions, making it infeasible to apply analytical solution methods.
 
 \subsection{Numerical IK}
 Numerical solvers use iterate approaches to approximate the joint angles and converge towards a solution over several iterations of their algorithm.
@@ -153,7 +159,7 @@ This process is repeated until the error meets the predefined tolerances.
 The joint angles calculated during the final iteration are then considered a solution to the problem.
 Although the basic principle of error-minimization is always present in the algorithm, the exact process of minimization is much more complex than described here and there exist numerous different techniques on how to achieve this goal.
 Numerical solvers can be applied to a wide variety of inverse kinematics problems and are not limited by the number of DoF like analytical solvers.
-Due to their iterative nature numerical solvers are generally more computationally expensive, given the same problem, than their analytical counterparts \parencite{aristidou2018inverse, inverseKinematicsIllinois}.
+Due to their iterative nature numerical solvers are generally significantly more computationally expensive, given the same problem, than their analytical counterparts \parencite{aristidou2018inverse, inverseKinematicsIllinois}.
 
 %Both inverse kinematics methods are used extensively in industry and research, depending on the specific project and its requirements.
 
