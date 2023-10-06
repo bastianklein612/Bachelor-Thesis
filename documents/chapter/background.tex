@@ -140,6 +140,7 @@ The difficulty arises from the fact that there can exist multiple solutions (mul
 Some of which some may be physically feasible while others might lead to collisions or instabilities.\\
 There exist two primary techniques for solving the inverse kinematics problem, analytical and numerical methods \parencite{inverseKinematicsIllinois}:
 \todo{Citations}
+\todo{Mention forward kinematics ?}
 
 \subsection{Analytical IK}
 Analytical solution methods are based on trigonometric equations derived from the geometric and kinematic parameters of the manipulator arm, such as the link length, joint type and joint constraints.
@@ -150,18 +151,18 @@ If the kinematic chain contains redundant DoFs, meaning it possesses more DoF th
 Such systems potentially lack closed-form expressions for solutions, making it infeasible to apply analytical solution methods.
 
 \subsection{Numerical IK}
-Numerical solvers use iterate approaches to approximate the joint angles and converge towards a solution over several iterations of their algorithm.
-At the start of the process, this type of solver begins with an initial guess
-This guess can be based on the manipulators geometry, joint limits, previously obtained solutions, or other heuristics.
-Using the estimated joint angles, the would-be position of the end-effector is calculated(forward kinematics) and the error between the desired pose and the currently obtained pose is determined.
-Based on this error, the joint angles are adjusted with the goal of reducing the error and bringing the end-effector closer to the desired pose.
+Numerical solution methods use iterate approaches to approximate the joint angles and converge towards a solution over several iterations of their algorithm.
+At the start of the process, numerical methods begins with an initial guess.
+This guess can be based on the manipulators geometry, joint limits, previously obtained solutions and other heuristics.
+Using the estimated joint angles, the would-be position of the end-effector is calculated (forward kinematics) and the error between the desired pose and the currently obtained pose is determined.
+Based on this, the joint angle estimates are adjusted, aiming to reduce the error and bring the end-effector closer to the desired pose.
 This process is repeated until the error meets the predefined tolerances.
 The joint angles calculated during the final iteration are then considered a solution to the problem.
-Although the basic principle of error-minimization is always present in the algorithm, the exact process of minimization is much more complex than described here and there exist numerous different techniques on how to achieve this goal.
-Numerical solvers can be applied to a wide variety of inverse kinematics problems and are not limited by the number of DoF like analytical solvers.
-Due to their iterative nature numerical solvers are generally significantly more computationally expensive, given the same problem, than their analytical counterparts \parencite{aristidou2018inverse, inverseKinematicsIllinois}.
+Although the basic principle of iterative error-minimization is always present in numerical solution methods, the exact process of minimization is much more complex than described here and there exist numerous different techniques on how to achieve this goal, such as Cyclic Coordinate Descent, Jacobian Inverse or FABRIK. \todo{CITATION}
+Numerical methods can be applied to a wide variety of inverse kinematic problems and are not limited by the number of DoF like analytical methods.
+Due to their iterative nature numerical methods are generally significantly more computationally expensive, given the same problem, than their analytical counterparts \parencite{aristidou2018inverse, inverseKinematicsIllinois}.
 
-%Both inverse kinematics methods are used extensively in industry and research, depending on the specific project and its requirements.
+Both inverse kinematics methods are used extensively in industry and research, depending on the specific project and its requirements.
 
 
 \section{PID Controller}
