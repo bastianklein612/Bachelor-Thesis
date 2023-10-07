@@ -619,8 +619,30 @@ Gespäch mit Malte und Julius:
 	- Desktop über Nacht im Wohnzimmer weiterlaufen lassen um mehr Rechenzeit zu erhalten
 
 -----------------------------------------
-02.10.	
+03.10.
+	- Desktop ab jetzt immer Nachts im Wohnzimmer, ca. 6000-8000 Ep. möglich
+	- Rewrite
 	
+-----------------------------------------
+04.10.	
+	- Oberseminar verpennt
+	- Rewrite im Background bis 'Insect Locomotion fertig'
+	
+-----------------------------------------
+05.10.
+	- Rewrite fortgeführt mit Inverse Kinematic
+	- DQN agent ausprobieren, dieser hat diskreten action space 
+	
+-----------------------------------------
+06.10.	
+	-Rewrite, Inverse Kinematic fertig
+	- 10000 Ep. DDPG Training ohne Erfolg, dann durch herunterfahren verloren
+	
+-----------------------------------------
+07.10.	
+	- diskreten actionSpace und DQN-Agent erstellt
+	- Rewrite vom Backgroudn fertig gestellt
+	- 
 	
 	
 	
