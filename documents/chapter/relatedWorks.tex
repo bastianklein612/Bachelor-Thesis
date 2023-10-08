@@ -2,16 +2,21 @@
 \chapter{Related Works}
 \label{ch:relatedWorks}
 
-In recent years, numerous scientific papers dealing with the simulation of hexapod locomotion have been published, also specifically targeting the MATLAB Simulink platform.
+In recent years, numerous scientific papers dealing with the simulation of hexapod locomotion and reinforcement learning have been published.
+Some of these papers specifically focus on utilising MATLAB Simulink, while others are based on different simulators or real hardware but deal with similar topics.
 
-Using a hexapod model very similar to ours, Beaber et al. \parencite{beaber2018dynamic} developed a complete dynamic model of a hexapod robot supported by the Simulink toolbox SimMechanics(now Simscape), concentrating on generating a tripod gait.
+Using a hexapod model similar to ours, Beaber et al. \parencite{beaber2018dynamic} develop a dynamic model of a hexapod robot supported by the Simulink toolbox SimMechanics (predecessor to Simscape), concentrating on the generation of  a tripod gait.
+By creating a complete forward and inverse kinematics model of the robot they are able to generate individual leg trajectories, divided into support (stance) and transfer (swing) phase, in a way that allows the robot to walk in a straight path.
+They explicitly highlight the simplicity of developing in Simulink compared to traditional modelling tools.
 
-Thilderkvist \& Svensson \Parencite{thilderkvist2015motion} applied a Model-Based Design process utilizing both a virtual model and physical hexapod robot to develop a motion controller.
-Their work emphasized the value of Simulinks simulation capabilities and that of the integrated code generation during the development process.
+Thilderkvist \& Svensson \Parencite{thilderkvist2015motion} apply a model-based design process utilizing both a virtual model and physical hexapod robot to develop a motion controller.
+They demonstrate Simulinks usefulness for testing control algorithms before transferring them onto the hardware.
+Their work emphasizes the value of Simulinks simulation capabilities and that of the integrated code generation/ hardware integration during the development process.
+They also report non-satisfying results concerning contact-force modelling using SimMechanics.
+%We attribute these to be most-likely linked to an earlier MATLAB version used for their work.
 
-Exploring the utilization of Reinforcement Learning to control the robots movements, Trotta et al. \parencite{trotta2022walking} aimed to develop the foundational architecture and control of a hexapod to be used for space exploration.
-They highlight the challenges faced during the RL learning process, particularly the models tendencies to exploit reward function constraints, leading to the emergence of undesirable behaviors.
-The study points out the potential of RL for enhancing hexapod control but also shows the difficulty of its implementation.
-
-
-\todo{This is currently just copied from the expose; EXPAND and REWRITE}
+Exploring the use of Reinforcement Learning for movement control, Trotta et al. \parencite{trotta2022walking} develop the foundational architecture and control of a hexapod to be used for space exploration.
+Using a simplified hexapod model, they train an RL agent on the task of walking on flat terrain.
+Due to limited computational resources, they reduce the agents action space to just 3 elements, the amplitude and the phase differences between the opposing tripods, which results in, as they pre-emptively predict, the agent learning a, although not perfect, tripod gait.
+They highlight the challenges faced during the training process, particularly the models tendencies to exploit reward function constraints, leading to the emergence of undesirable behaviour.
+The study points out the potential of RL for enhancing hexapod control but also show the difficulty of its implementation.

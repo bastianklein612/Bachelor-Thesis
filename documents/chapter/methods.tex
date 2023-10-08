@@ -293,6 +293,12 @@ This induces a reset on the stance phase subsystem and switches the outputs over
 	\label{table:Initial joint positions}
 \end{table}
 
+For spatial contact force parameters, see \parencite{trotta2022walking}.
+
+When running the simulation at large step sizes, we observed simulation instabilities similar to the ones mentioned in \parencite{thilderkvist2015motion}, although not of the same significance.
+We attribute the unsatisfactory results they experienced from the spatial friction forces to be most-likely linked to an earlier MATLAB version used for their work.
+A step size of 0.00025s(0.25ms) resulted in satisfactory behaviour in almost all of our simulations.
+Only when training a RL agent, we reduced the step size initially even further to anticipate uncoordinated, trembling behaviour due to an untrained agent.
 
 
 \section{Learning Leg Coordination}
