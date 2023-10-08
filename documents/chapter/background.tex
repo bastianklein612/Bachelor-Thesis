@@ -160,23 +160,23 @@ This process is repeated until the error meets the predefined tolerances.
 The joint angles calculated during the final iteration are then considered a solution to the problem.
 Although the basic principle of iterative error-minimization is always present in numerical solution methods, the exact process of minimization is much more complex than described here and there exist numerous different techniques on how to achieve this goal, such as Cyclic Coordinate Descent, Jacobian Inverse or FABRIK. \todo{CITATION}
 Numerical methods can be applied to a wide variety of inverse kinematic problems and are not limited by the number of DoF like analytical methods.
-Due to their iterative nature numerical methods are generally significantly more computationally expensive, given the same problem, than their analytical counterparts \parencite{aristidou2018inverse, inverseKinematicsIllinois}.
+Due to their iterative nature they are generally significantly more computationally expensive, given the same problem, than their analytical counterparts \parencite{aristidou2018inverse, inverseKinematicsIllinois}.
 
 Both inverse kinematics methods are used extensively in industry and research, depending on the specific project and its requirements.
 
 
 \section{PID Controller}
-A \textbf{P}roportional-\textbf{I}ntegral-\textbf{D}erivative(PID) controller is a common feedback control system \parencite{aastrom2002control}.
-As such, it aims to regulate a control variable to a desired setpoint by adjusting its output according to the currently measured process variable.
+The \textbf{P}roportional-\textbf{I}ntegral-\textbf{D}erivative (PID) controller is the most commonly used feedback control system in many modern industries \parencite{aastrom2002control}.
+A feedback control system aims to regulate a control variable towards a desired setpoint by adjusting its output according to the currently measured process variable.
 In most cases this process variable corresponds to a real world variable such as the speed of a motor, the liquid-level inside a tank or the temperature of a furnace.
-A PID controller uses three terms, a proportional, integral and derivative term, to compute the controlled output based on the error between the setpoint and current process variable.
-Focusing on digital PID controllers, the process of error calculation and control variable adjustment is done at a discrete, fixed rate and is also referred to as a time step.
-There also exist implementations of this control loop type using analog electronics which generate a continuous control signal, but these are of no concern for the content of this thesis.
-In the following section we will describe the operation of a PID controller in detail:
+The architecture of a PID controller consists of three terms, a proportional, integral and derivative term, which together compute the controlled output based on the error between setpoint and current process variable.
+Focusing on digital PID controllers, the process of error calculation and control variable adjustment is done at a discrete, fixed rate, also referred to as a time step.
+There also exist implementations of this control loop type using analogue electronics which generate a continuous control signal, but these are of no concern for the content of this thesis.
+In the following section we will describe the operation of a (digital) PID controller in detail:
 
 \begin{figure}[h]
 	\centerline{\includegraphics[scale=0.05]{PID_Controller}}
-	\caption{Illustration of a PID Controller}
+	\caption{Illustration of a basic PID Controller}
 	\label{figure: PID Controller}
 \end{figure}
 
@@ -186,7 +186,7 @@ At each time step the controller first calculates the error between its setpoint
 \[
 	Error(t) = setpoint - process\ variable(t)
 .\]
-After the error is determined, the controller then determines the proportional, integral and derivative term based on this error.
+Following this, the controller then determines the proportional, integral and derivative term based on this error.
 
 The proportional term $P(t)$ is calculated by multiplying the error by a constant factor, the so called proportional gain $K_p$.
 This term contributes to the control output, as its name suggests, proportional to the magnitude of the error.
@@ -194,14 +194,15 @@ $P(t)$ is given by:
 \[
 	P(t) = K_p \cdot Error(t)
 .\]
-The integral term $I(t)$ takes the sum of past errors into account to address any long term bias/ constant error contained inside of the controlled system.
-It is able to eliminate long-term errors that can not be accounted for by $P(t)$.
-The term is calculated by integrating the error over time and multiplying it with the integral gain $K_i$.
+The integral term $I(t)$ takes into account the sum of past errors to address any long term bias/ constant error present inside of the controlled system.
+Such a bias might for example be the gravitational pull a drone experiences while it is supposed to stay at a constant height.
+The term is able to eliminate long-term errors that can not be accounted for by $P(t)$.
+It is calculated by integrating the error over time and multiplying it with the integral gain $K_i$.
 $I(t)$ is given by:
 \[
 	I(t) = K_i \cdot \int_{0}^{t} Error(\tau) \,d\tau
 .\]
-The derivative term $D(t)$ anticipates the errors future behavior by determining its rate of change.
+The derivative term $D(t)$ anticipates the errors future behavior by determining the errors rate of change.
 It prevents the controller from overshooting and oscillating by dampening the control response.
 $D(t)$ is calculated by multiplying the errors rate of change with the constant derivative gain $K_d$.
 It is given by:
@@ -214,24 +215,24 @@ The final output of the controller at time $t$ is then given by the sum of all t
 .\]
 The calculated control output is fed into the controlled system or process and the PID controller calculates the next control value.
 
-In real-world applications the derivative term is almost never implemented as a pure derivative as it would be extremely sensitive to noise.
+In real-world applications the derivative term is almost never implemented as a pure derivative, as it would be extremely sensitive to noise.
 Instead, a so called filter coefficient $N$ is added to modify the derivative.
 The modified derivative term is given by:
 
 \[
 ...
 \]
-The term acts as a first-order, low pass filter, meaning frequencies in the signal above a specific limit are ignored.
-It thus behaves like a derivative up to a given cutoff frequency given by: \todo{cutoff frequency}.
 
-The performance of a PID controller greatly depends on the values of its parameters $K_p$, $K_i$ and $K_d$.
-To achieve desired results like fast response times and minimal overshooting or oscillations, these parameters have to be carefully tuned. 
-This tuning process can be done manually by trial-and-error or methodically with a tuning algorithm.
+The term acts as a first-order, low pass filter, meaning high frequency noise in the signal is ignored.
+It thus behaves like a derivative up to a given cutoff frequency given by: \todo{Filter coeff. and cutoff frequency}.
 
-To conclude, a PID controller continuously repeats the process of error calculation and adjustment, thus forming a closed-loop system which aims to minimize the error and approach the setpoint as close as possible.
+The performance of a PID controller greatly depends on the values of its parameters $K_p$, $K_i$ and $K_d$ (N).
+To achieve desired traits like a fast response time and minimal overshooting or oscillation, these parameters have to be carefully tuned. 
+This tuning process can be done manually via trial-and-error or methodically using a tuning algorithm.
+
+Summarizing, a PID controller continuously repeats the process of error calculation and adjustment, thus forming a closed-loop system which aims to minimize the error and thus approach the setpoint as close as possible.
 
 \todo{CITATIONS}
-\todo{Describe filter coefficient N}
 
 
 
