@@ -641,10 +641,15 @@ Gespäch mit Malte und Julius:
 -----------------------------------------
 07.10.	
 	- diskreten actionSpace und DQN-Agent erstellt
-	- Rewrite vom Backgroudn fertig gestellt
-	- 
+	- Rewrite vom Background fertig gestellt
+	- Rewrite von Related Works so gut wie fertig
 	
-	
+-----------------------------------------
+08.10.
+	- Rewrite von Related Works fertig
+	- Rewrite von Hauptteil begonnen
+	- Diskreter DQN-Agent hat über Nacht nicht gut performed
+	- diskreten PPO-Agenten aufgesetzt
 	
 	
 	
