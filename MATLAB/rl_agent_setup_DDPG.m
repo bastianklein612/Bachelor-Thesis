@@ -1,12 +1,44 @@
 %--------------------------------------------------------------------------
-% DDPG agent setup
+%DDPG agent and environment setup script
 %--------------------------------------------------------------------------
 %Source: https://de.mathworks.com/help/reinforcement-learning/ug/train-ddpg-agent-to-swing-up-and-balance-pendulum.html
 
+%-----------------------------------------------------------------------------------------------
+% Environment setup
+%-----------------------------------------------------------------------------------------------
+
+%Create observation specification
+%Observations: alpha angle of each leg
+%{
+observationInfo = rlNumericSpec([6 1],...
+    'LowerLimit',[-inf -inf -inf -inf -inf -inf]',...
+    'UpperLimit',[inf inf inf inf inf inf]');
+observationInfo.Name = 'observations';
+%}
+
+observationInfo = rlNumericSpec([12 1],...
+    'LowerLimit',[-inf -inf -inf -inf -inf -inf -inf -inf -inf -inf -inf -inf]',...
+    'UpperLimit',[inf inf inf inf inf inf inf inf inf inf inf inf]');
+observationInfo.Name = 'observations';
+
+%Create CONTINUOUS action specification
+%Action: Initiate swing phase of each leg(1 initiates, [0,1) does nothing)
+actionInfo = rlNumericSpec([6 1], ...
+    'LowerLimit', [0, 0, 0, 0, 0, 0]',...
+    'UpperLimit', [1, 1, 1, 1, 1, 1]');
+
+actionInfo.Name = 'control_output';
+
+
+env = rlSimulinkEnv(mdl,[mdl '/Motion Controller/Coordinator/RL Agent'],observationInfo,actionInfo);
+
+%-----------------------------------------------------------------------
+%Agent setup
+%-----------------------------------------------------------------------
 
 % width of nn layer
-%units = 16;
-units = 128;
+units = 16;
+%units = 8;
 
 
 %--------------------------------------------------------------------------
@@ -43,9 +75,11 @@ criticNetwork = connectLayers(criticNetwork,"apOutLayer","add/in2");
        
 
 criticNetwork = dlnetwork(criticNetwork);
+fprintf('Critic Network: \n');
 summary(criticNetwork);
-plot(criticNetwork);
-figure
+%analyzeNetwork(criticNetwork);
+%plot(criticNetwork);
+%figure
 
 
 critic = rlQValueFunction(criticNetwork, observationInfo,actionInfo, ...
@@ -55,6 +89,9 @@ critic = rlQValueFunction(criticNetwork, observationInfo,actionInfo, ...
 %--------------------------------------------------------------------------
 %Actor network
 
+%setting ceiling clip value for Relu-layer
+ceiling = 1;
+
 %network path
 actorNetworkPath = [
              featureInputLayer(observationInfo.Dimension(1), Name="observationInputLayer")
@@ -63,8 +100,9 @@ actorNetworkPath = [
              fullyConnectedLayer(units)
              reluLayer
              fullyConnectedLayer(actionInfo.Dimension(1))
-             tanhLayer
-             scalingLayer(Scale=max(actionInfo.UpperLimit))
+             clippedReluLayer(ceiling, Name="ClippedActionOutputLayer")%inserted this layer to clip output
+            %tanhLayer
+            %scalingLayer(Scale=max(actionInfo.UpperLimit))
              ];
 
 %create actor network
@@ -72,21 +110,10 @@ actorNetwork = layerGraph();
 actorNetwork = addLayers(actorNetwork,actorNetworkPath);
 
 actorNetwork = dlnetwork(actorNetwork);
+fprintf('Actor Network: \n');
 summary(actorNetwork);
-plot(actorNetwork);
-
-%{
-actorNetwork = [
-               featureInputLayer(observationInfo.Dimension(1))
-               fullyConnectedLayer(hiddenUnits)
-               reluLayer
-               fullyConnectedLayer(hiddenUnits)
-               reluLayer
-               fullyConnectedLayer(actionInfo.Dimension(1))
-               tanhLayer
-               scalingLayer(Scale=max(actionInfo.UpperLimit))
-               ];
-%}
+%analyzeNetwork(actorNetwork);
+%plot(actorNetwork);
 
 actor = rlContinuousDeterministicActor(actorNetwork,observationInfo,actionInfo);
 
@@ -94,18 +121,28 @@ actor = rlContinuousDeterministicActor(actorNetwork,observationInfo,actionInfo);
 %--------------------------------------------------------------------------
 %Specify options and create final ddpg agent
 
-%specify crtic and agent options
-criticOpts = rlOptimizerOptions(LearnRate=1e-02,GradientThreshold=1);
-actorOpts = rlOptimizerOptions(LearnRate=1e-02,GradientThreshold=1);
+%specify critic and agent options
+%with a learning rate of 10−4 and 10−3 for the actor and critic respectively
+criticOpts = rlOptimizerOptions(LearnRate=1e-3);
+actorOpts = rlOptimizerOptions(LearnRate=3e-4,GradientThreshold=1);%,L2RegularizationFactor=1e-4);
 
 %specify DDPG options
 agentOpts = rlDDPGAgentOptions(...
                                SampleTime=0.05,...
                                CriticOptimizerOptions=criticOpts,...
                                ActorOptimizerOptions=actorOpts,...
-                               ExperienceBufferLength=1e6,...
+                               ExperienceBufferLength=1e6,...%1e5
                                DiscountFactor=0.99,...
-                               MiniBatchSize=128);
+                               MiniBatchSize=16);
+
+agentOpts.NoiseOptions.StandardDeviation=0.1;
+agentOpts.NoiseOptions.StandardDeviationDecayRate=1e-6;
+%agentOpts.NoiseOptions.MeanAttractionConstant=0.15;
+%agentOpts.NoiseOptions.Variance=0.3;
+%agentOpts.NoiseOptions.VarianceDecayRate=1e-6;
+
+%agentOpts.ResetExperienceBufferBeforeTraining = false;
+
 
 %Create DDPG agent
 agent = rlDDPGAgent(actor,critic,agentOpts);

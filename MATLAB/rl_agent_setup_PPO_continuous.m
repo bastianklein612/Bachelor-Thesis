@@ -3,7 +3,7 @@
 %--------------------------------------------------------------------------
 %Source: https://de.mathworks.com/help/reinforcement-learning/ug/train-ppo-agent-to-land-vehicle.html
 
-units = 16;
+units = 8;
 numObs = observationInfo.Dimension(1);
 numAct = actionInfo.Dimension(1);
 
@@ -17,8 +17,10 @@ criticNet = [
 
 % Convert to dlnetwork and display number of weights
 criticNet = dlnetwork(criticNet);
+fprintf('Critic Network: \n');
 summary(criticNet)
-plot(criticNet)
+%plot(criticNet)
+%figure
 
 critic = rlValueFunction(criticNet,observationInfo);
 
@@ -59,8 +61,9 @@ actorNet = connectLayers(actorNet,"comPathOut","stdPathIn/in");
 
 % Convert to dlnetwork and display number of weights
 actorNet = dlnetwork(actorNet);
+fprintf('Actor Network: \n');
 summary(actorNet)
-plot(actorNet)
+%plot(actorNet)
 
 
 %create continuous actor
@@ -73,20 +76,24 @@ actor = rlContinuousGaussianActor(actorNet, observationInfo, actionInfo, ...
 %Specify options and create final ppo agent
 
 %specify critic and agent options
-criticOpts = rlOptimizerOptions(LearnRate=1e-2);
-actorOpts = rlOptimizerOptions(LearnRate=1e-3);
+criticOpts = rlOptimizerOptions(LearnRate=2e-2);
+actorOpts = rlOptimizerOptions(LearnRate=1e-2);
 
 %specify ppo options
 agentOpts = rlPPOAgentOptions(...
-    ClipFactor=0.02,...
+    ExperienceHorizon=512, ...
+    MiniBatchSize=128, ...
+    ClipFactor=0.2,...
     EntropyLossWeight=0.01,...
-    ActorOptimizerOptions=actorOpts,...
-    CriticOptimizerOptions=criticOpts,...
     NumEpoch=3,...
     AdvantageEstimateMethod="gae",...
     GAEFactor=0.95,...
+    NormalizedAdvantageMethod="none",...
+    AdvantageNormalizingWindow=1e6,...
+    ActorOptimizerOptions=actorOpts,...
+    CriticOptimizerOptions=criticOpts,...
     SampleTime=0.05,...
-    DiscountFactor=0.95);
+    DiscountFactor=0.99);
 
 %Create DDPG agent
 agent = rlPPOAgent(actor,critic,agentOpts);

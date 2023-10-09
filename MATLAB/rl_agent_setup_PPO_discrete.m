@@ -1,37 +1,49 @@
 %--------------------------------------------------------------------------
-% PPO agent setup
+% discrete PPO agent and environment setup skript
 %--------------------------------------------------------------------------
 %Source: https://de.mathworks.com/help/reinforcement-learning/ug/train-ppo-agent-to-land-vehicle.html
 
+%Create observation specification
+observationInfo = rlNumericSpec([12 1],...
+    'LowerLimit',[-inf -inf -inf -inf -inf -inf -inf -inf -inf -inf -inf -inf]',...
+    'UpperLimit',[inf inf inf inf inf inf inf inf inf inf inf inf]');
+observationInfo.Name = 'observations';
+
+%Create DISCRETE action specification
+%Action: Initiate swing phase of each leg(1); do nothing(0)
+actions = ff2n(6);
+actionInfo = rlFiniteSetSpec(num2cell(actions,2));
+actionInfo.Name = 'control_output';
+
+env = rlSimulinkEnv(mdl,[mdl '/Motion Controller/Coordinator/RL Agent'],observationInfo,actionInfo);
+
+%-----------------------------------------------------------------------
+%Agent setup
+%-----------------------------------------------------------------------
 
 % width of nn layer
-units = 16;
+units = 10;
+
+
+
 numObs = observationInfo.Dimension(1);
-numAct = 6;
-actorLayerSizes = [units units];
-
-
+numAct = 2^6;
 %--------------------------------------------------------------------------
 %Define critic network
 
 criticNetwork = [
                 featureInputLayer(numObs, Name="obsPathInputLayer")
-
                 fullyConnectedLayer(units)
-
                 reluLayer
-
                 fullyConnectedLayer(units)
-
                 reluLayer
-
                 fullyConnectedLayer(1)
                 ];
 
 criticNetwork = dlnetwork(criticNetwork);
 summary(criticNetwork);
-plot(criticNetwork);
-figure
+%plot(criticNetwork);
+%figure
 
 critic = rlValueFunction(criticNetwork,observationInfo);
 
@@ -40,24 +52,18 @@ critic = rlValueFunction(criticNetwork,observationInfo);
 
 actorNetwork = [
                 featureInputLayer(numObs)
-
                 fullyConnectedLayer(units)
-
                 reluLayer
-
                 fullyConnectedLayer(units)
-
                 reluLayer
-
                 fullyConnectedLayer(numAct)
-                
                 softmaxLayer
                 ];
 
 actorNetwork = dlnetwork(actorNetwork);
 summary(actorNetwork);
-plot(actorNetwork);
-figure
+%plot(actorNetwork);
+%figure
 
 %discrete actor
 actor = rlDiscreteCategoricalActor(actorNetwork,observationInfo,actionInfo);
@@ -66,21 +72,22 @@ actor = rlDiscreteCategoricalActor(actorNetwork,observationInfo,actionInfo);
 %Specify options and create final ppo agent
 
 %specify crtic and agent options
-actorOpts = rlOptimizerOptions(LearnRate=1e-3);
-criticOpts = rlOptimizerOptions(LearnRate=1e-2);
+actorOpts = rlOptimizerOptions(LearnRate=3e-4, GradientThreshold=1);
+criticOpts = rlOptimizerOptions(LearnRate=1e-3);
 
 %specify ppo options
 agentOpts = rlPPOAgentOptions(...
-    ExperienceHorizon=600,...
+    ExperienceHorizon=512,...
+    MiniBatchSize=32,...
     ClipFactor=0.02,...
-    EntropyLossWeight=0.01,...
+    EntropyLossWeight=0.08,...
     ActorOptimizerOptions=actorOpts,...
     CriticOptimizerOptions=criticOpts,...
     NumEpoch=3,...
     AdvantageEstimateMethod="gae",...
     GAEFactor=0.95,...
     SampleTime=0.05,...
-    DiscountFactor=0.997);
+    DiscountFactor=0.99);
 
 %Create DDPG agent
 agent = rlPPOAgent(actor,critic,agentOpts);

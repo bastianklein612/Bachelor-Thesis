@@ -47,22 +47,17 @@ stiffness = 1e6;
 damping = 1e3;
 transition_region = 1e-4;
 
-mu_static = 1.0;
-mu_dynamic = 0.8;
+mu_static = 0.9;    % increased to discourage leg dragging of RL agents
+mu_dynamic = 0.6;   % increased to discourage leg dragging of RL agents
 critical_vel = 1e-3;
 
 % Test PID Settings
-pid_P = 200;
+pid_P = 600;
 pid_I = 0.1;
 pid_D = 1;
 pid_filter_N = 1000;
 
 %pid_P = 3;
-%pid_I = 0.2;
-%pid_D = 1;
-%pid_filter_N = 100;
-
-%pid_P = 1;
 %pid_I = 0.2;
 %pid_D = 1;
 %pid_filter_N = 100;
