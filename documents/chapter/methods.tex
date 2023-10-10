@@ -2,8 +2,15 @@
 \chapter{Methods}
 \label{ch:methods}
 
-\section{Approach}
+\section{Approach} 
 \todo{Write approach section similar to Josef Treus; use model overview (?)}
+The key idea of our approach is to use the versatile MATLAB platform to create an easily expandable model of a hexapod robot to accelerate further development.
+By basing our work on this platform we will in the future be able to incorporate concepts from different domains with a more streamlined development process and less development time, given the provided toolboxes.
+In this chapter we detail the approach and methodology used to address the objectives we defined in the introduction.
+As the controller and RL setup both depend on a solid, well-working model, we will first describe the representation of the hexapod we created in Simulink.
+We will then continue with a description of the static gait motion controller, including trajectory generation and inverse kinematics solver.
+The chapter concludes with the explanation of our reinforcement learning setup used to train an agent on leg coordination/ gait generation.
+
 
 \section{The Simulink Model}
 The hexapod model we developed as part of this thesis is based on the \textit{PhantomX MK4} hexapod distributed by \textit{Trossen Robotics}.
