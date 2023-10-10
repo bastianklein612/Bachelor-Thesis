@@ -649,7 +649,23 @@ Gespäch mit Malte und Julius:
 	- Rewrite von Related Works fertig
 	- Rewrite von Hauptteil begonnen
 	- Diskreter DQN-Agent hat über Nacht nicht gut performed
-	- diskreten PPO-Agenten aufgesetzt
+	- diskreten PPO-Agenten aufgesetzt, ebenfalls keine überzeugende Performance
+	- continuous DDPG aufgesetzt über Nacht
+	
+-----------------------------------------
+09.10.
+	- ERSTES MAL LERN-ERFOLG zu verzeichnen, jedoch durch reward-function exploit --> Springendes Verhalten
+	- Anpassen der Reward-Funktion, aber bisher ohne Erfolg
+	- über Nacht DDPG aufgesetzt
+	
+-----------------------------------------
+10.10.
+	- DDPG ohne Erfolg
+	- Reward weiter angepasst
+	- isDone Subsystem eigeführt um falsches Verhalten direkt zu bestrafen und Episode zu beenden
+		--> Vielversprechende erste Versuche, aber Anpassungen nötig
+	- Fortführung vom Refactor im Hauptteil:
+	
 	
 	
 	
