@@ -127,11 +127,11 @@ As mentioned above, joints can receive as input a torque to be applied and can o
 		\hline
 		damping coefficient & 0 \\
 		\hline
-		spring stiffness(joint boundary) & $10^4 \frac{Nm}{\text{deg}}$ \\
+		spring stiffness (joint boundary) & $10^4 \frac{Nm}{\text{deg}}$ \\
 		\hline
-		damping coefficient(joint boundary) &  $10 \frac{Nm \cdot s}{\text{deg}}$\\
+		damping coefficient (joint boundary) &  $10 \frac{Nm \cdot s}{\text{deg}}$\\
 		\hline
-		transit region width(joint boundary) &  $10^{\circ}$\\
+		transit region width (joint boundary) &  $10^{\circ}$\\
 		\hline
 	\end{tabular}
 	\caption{Internal joint parameters}
@@ -144,16 +144,16 @@ As mentioned above, joints can receive as input a torque to be applied and can o
 
 
 \subsection{Environment}
-To validate the robot model and to provide a place for the robot to learn the coordination rules of its legs, we constructed a simple test environment.
-The environment currently only consists of a horizontal plane, but can expanded to include more complex terrain with little effort.
-Some examples which we experimented with but did not include in this thesis are inclined planes and also small obstacles on the ground.
-As Simscape itself only provides basic geometric objects but allows for the use .stl files to define the shape of objects, complex terrain such as irregular, uneven surfaces can be imported with relative ease.
+To validate the hexapod model and to provide a place for the robot to learn coordination strategies for its legs, we construct a simple test environment.
+The environment at this point only consists of a horizontal plane, but can expanded to include more complex terrain with little effort.
+Some examples which we experimented with, but did not utilise for testing or training so far, include inclined planes and also small obstacles on the ground.
+As Simscape itself only provides basic geometric objects but allows for the use of .stl files to define the shape of objects, complex terrain such as irregular, uneven surfaces can be imported with relative ease.
 
 In addition to being the testing ground of the hexapod model, the environment also acts as part of the reinforcement learning process.
-Similar to \ref{figure: RL Illustration}, the environment provides observations to the RL agent and calculates a reward signal, based on the agents performance.
-It does not directly receive actions from the agent, as the hexapod to which the actions are applied is its own subsystem.
-If we would define the environment exactly like \ref{figure: RL Illustration,}, we would have to include both the environment subsystem and the hexapod subsystem as part of the "RL" environment.
-For obvious reasons such as modularity and clarity of model we chose not to adapt this.
+Similar to \ref{figure: RL Illustration}, the environment provides observations to the RL agent and calculates a reward signal, based on the agents performance \todo{As of now not represented in the model, reward is part of controller}.
+It does not however directly receive actions from the agent, as the hexapod, to which the actions are applied to by the RL agent, is its own subsystem.
+If we would define the environment in a manner analogous to \ref{figure: RL Illustration,}, we would have to include both the environment subsystem and the hexapod subsystem as part of the "RL" environment.
+For obvious reasons such as modularity and clarity of model we choose not to adapt this.
 
 \subsection{Controller}
 The controller is responsible for the hexapods locomotion.
