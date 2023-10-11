@@ -2,13 +2,13 @@
 \chapter{Background}
 \label{ch:background}
 
-\section{Hexapods}
+\section[sec: Hexapods]{Hexapods}
 Hexapods are a class of robots featuring 6 legs, inspired by the locomotion of insects and arachnids.
 Through millions of years of evolution these organisms developed efficient locomotion strategies \parencite{neville2006bipedal}, making them a rich source of inspiration for robotics.
 By emulating the biomechanics and behaviour of insects, researchers and engineers aim to create versatile and robust robotic systems capable of navigating challenging terrain \parencite{irawan2011optimal, ouyang2021adaptive, schilling2013walknet}.
 
 Most commonly, each leg of a hexapod consists of 3 segments named coxa, femur and tibia, equivalent to their biological counterparts.
-The individual segments are connected by 3 2-DoF (degrees of freedom) joints, each actuated by an electric servo motor.
+The individual segments are connected by 3 1-DoF (degrees of freedom) joints, each actuated by an electric servo motor.
 The first joint, hereafter named \textalpha-joint, connects the coxa to the thorax(body) and moves in parallel to the ground, thus being responsible for the longitudinal placement of each leg.
 Coxa and femur are connected by the \textbeta-joint, while the femur and tibia are connected by the \textgamma-joint. 
 These joints move orthogonal to the movement plane of the \textalpha-joint. Together, they are responsible for the lateral positioning of each leg.

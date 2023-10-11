@@ -2,9 +2,8 @@
 \chapter{Methods}
 \label{ch:methods}
 
-\section{Approach} 
-\todo{Write approach section similar to Josef Treus; use model overview (?)}
-The key idea of our approach is to use the versatile MATLAB platform to create an easily expandable model of a hexapod robot to accelerate further development.
+\todo{approach section, use model project overview graphic (?)}
+The key idea of our approach is to use the versatile MATLAB platform to create an easily expandable model of a hexapod robot, aiming to accelerate future research.
 By basing our work on this platform we will in the future be able to incorporate concepts from different domains with a more streamlined development process and less development time, given the provided toolboxes.
 In this chapter we detail the approach and methodology used to address the objectives we defined in the introduction.
 As the controller and RL setup both depend on a solid, well-working model, we will first describe the representation of the hexapod we created in Simulink.
@@ -13,15 +12,20 @@ The chapter concludes with the explanation of our reinforcement learning setup u
 
 
 \section{The Simulink Model}
-The hexapod model we developed as part of this thesis is based on the \textit{PhantomX MK4} hexapod distributed by \textit{Trossen Robotics}.
-A digital model of this robot is provided by the company in the form of a .urdf file which can be obtained from their Github page \parencite{interboticsGithub}.
-URDF (\textbf{U}nified \textbf{R}obotics \textbf{D}escription \textbf{F}ormat) is a common format to describe the physical and kinematic properties of a robot or robotic component. 
-It defines the way in which links and joints are connected, the general geometry of the robot as well as visual and collision geometry.
-The geometry is provided in a separate folder of CAD-files which define the leg links and body structure as 
-polygon meshes and are referenced in the urdf.
-We use MATLABs capability to convert the urdf file into a Simscape-based Simulink model.
-The resulting model consists of Simscape joints, rigid transforms, coordinate frames defining the hexapods kinematic structure and rigid bodies modeling its collision geometry and visual appearance.
-The 3D-model off the hexapod can be seen in Fig. \ref{figure: PhantomX 3D model}.
+The hexapod model we develop in this thesis is based on the \textit{PhantomX MK4} hexapod distributed by \textit{Trossen Robotics}.
+The company provides a digital model of this robot in the form of an.urdf file which can be obtained from their Github page \parencite{interboticsGithub}.
+URDF (\textbf{U}nified \textbf{R}obotics \textbf{D}escription \textbf{F}ormat) is a common file format for describing the physical and kinematic properties of a robot or robotic component.
+It provides a standardized and structured way to define the connections between joints and links, the visual properties and collision geometry of each link as well as parameters such as mass and inertia \parencite{matlabURDFDocumentation}.
+Said geometry is provided in a separate folder in the form of CAD-files which are referenced by the urdf-file.
+
+The \textit{PhantomX MK4} hexapod follows the common architecture mentioned in \ref{sec: Hexapods}, meaning each leg has 3 joints, totalling 18 DoFs.
+Concerning the joint orientation, the \textalpha-joints movement plane lies parallel to the ground while the \textbeta- and \textgamma-joint are restricted to a plane perpendicular to the ground, also in accordance to mentioned architecture.
+The robots thorax is slightly wider in the middle section, meaning the front and back legs do not reach as far out as the middle legs.
+This will later be important during the generation of the leg trajectories.
+
+To import the .urdf-model we us a MATLAB-internal function to convert the urdf-file into a Simulink model.
+The resulting model consists of blocks from the Simscape library, more specifically joints, rigid transforms and coordinate frames to describe the robots kinematic chains and rigid bodies to represent the individual links geometry as well as mass and inertia.
+The resulting 3D model of the hexapod can be seen in Fig. \ref{figure: PhantomX 3D model}.
 
 \begin{figure}[h]
 	\begin{subfigure}{.5\textwidth} % this sets the figure to be max half the width of the page
@@ -52,7 +56,11 @@ The 3D-model off the hexapod can be seen in Fig. \ref{figure: PhantomX 3D model}
 \end{figure}
 \todo{get each image into list of figures, but exclude complete figure}
 
-From a top level perspective, the hexapod model consists of the main body(thorax) and 6 legs.
+To be able to use the hexapod model as a development platform, we modify the raw Simulink import.
+We reorganise and encapsulate logical subsystems, specifically the individual legs and thorax and add in- and outputs.
+From a top level perspective, the modified system is represented by a single \textit{Hexapod} block, which receives control signals as input and outputs sensory information.
+
+One level lower, the hexapod subsystem consists of 6 leg subsystems and one thorax subsystem, as can be seen in \ref[{figure: Hexapod Model Overview}.
 This system receives the torques to be applied on each joint as input and generates sensory data taken from these joints, namely the joints position, velocity and acceleration, as output.
 The  thorax is represented by a rigid body and a main coordinate frame.
 Each of the robots legs consists of 3 rigid bodies(coxa, femur and tibia) which are connected to each other by 2 joints.

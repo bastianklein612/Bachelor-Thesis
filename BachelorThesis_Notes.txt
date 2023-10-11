@@ -665,8 +665,20 @@ Gespäch mit Malte und Julius:
 	- isDone Subsystem eigeführt um falsches Verhalten direkt zu bestrafen und Episode zu beenden
 		--> Vielversprechende erste Versuche, aber Anpassungen nötig
 	- Fortführung vom Refactor im Hauptteil:
+		- Approach-Section geschieben
+		- Hexapod-Modell Description 
 	
+	- Ideen für RL morgen:
+		- Reibung wieder erhöhen ? (bis jetzt dort eig. keinen exploit gesehen)
+		- diskreten action space agent mit der neuen Reward-Funktion und isDone testen --> Definitiv testen
+		- Layer im actor und critic hinzufügen ?
+		- y-Distanz evt. erst mal gar nicht oder weniger stark bestrafen ?
+		
+-----------------------------------------
+11.10.
 	
+		
+
 	
 	
 			
