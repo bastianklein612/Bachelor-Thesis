@@ -2,9 +2,8 @@
 \chapter{Methods}
 \label{ch:methods}
 
-\section{Approach} 
-\todo{Write approach section similar to Josef Treus; use model overview (?)}
-The key idea of our approach is to use the versatile MATLAB platform to create an easily expandable model of a hexapod robot to accelerate further development.
+\todo{approach section, use model project overview graphic (?)}
+The key idea of our approach is to use the versatile MATLAB platform to create an easily expandable model of a hexapod robot, aiming to accelerate future research.
 By basing our work on this platform we will in the future be able to incorporate concepts from different domains with a more streamlined development process and less development time, given the provided toolboxes.
 In this chapter we detail the approach and methodology used to address the objectives we defined in the introduction.
 As the controller and RL setup both depend on a solid, well-working model, we will first describe the representation of the hexapod we created in Simulink.
@@ -12,16 +11,39 @@ We will then continue with a description of the static gait motion controller, i
 The chapter concludes with the explanation of our reinforcement learning setup used to train an agent on leg coordination/ gait generation.
 
 
-\section{The Simulink Model}
-The hexapod model we developed as part of this thesis is based on the \textit{PhantomX MK4} hexapod distributed by \textit{Trossen Robotics}.
-A digital model of this robot is provided by the company in the form of a .urdf file which can be obtained from their Github page \parencite{interboticsGithub}.
-URDF (\textbf{U}nified \textbf{R}obotics \textbf{D}escription \textbf{F}ormat) is a common format to describe the physical and kinematic properties of a robot or robotic component. 
-It defines the way in which links and joints are connected, the general geometry of the robot as well as visual and collision geometry.
-The geometry is provided in a separate folder of CAD-files which define the leg links and body structure as 
-polygon meshes and are referenced in the urdf.
-We use MATLABs capability to convert the urdf file into a Simscape-based Simulink model.
-The resulting model consists of Simscape joints, rigid transforms, coordinate frames defining the hexapods kinematic structure and rigid bodies modeling its collision geometry and visual appearance.
-The 3D-model off the hexapod can be seen in Fig. \ref{figure: PhantomX 3D model}.
+\section{Simulink Model}
+\todo{Intro for Simulink model}
+Taking a top-down perspective on the Simulink model as depicted in \ref{figure: Simulink Model Overview}, it is distinctly divided into 3 separate components, the hexapod, the controller and the environment.
+Being responsible for conducting the hexapods movement, the controller is, on a abstract level, responsible for deciding on the the speed, gait and direction of the robots movements.
+On the lowest level this is accomplished by instructing the hexapod which torque has to be applied to each of its joints. 
+The hexapod and the environment represent the components which physically interact with each other during the simulation.
+Responding upon the commands received by the controller, the hexapod applies the torque values at each simulation step and returns sensory feedback to the controller.
+This feedback is then used to adjust the commands which the controller will send during the next time step.
+The hexapod takes all of these actions inside of the environment, all while interacting with it.
+Additionally, if a RL agent is supposed to be trained, both the hexapod and the environment provide specific observations to the controller, which are used as inputs to the agent or to compute the reward function. 
+
+\begin{figure}[h]
+	\centerline{\includegraphics[scale=0.035]{HexapodModel_Overview}}
+	\caption{Simulink Model Overview}
+	\label{figure: Simulink Model Overview}
+\end{figure}
+
+\subsection{Model of the Hexapod}
+The hexapod model we develop in this thesis is based on the \textit{PhantomX MK4} hexapod distributed by \textit{Trossen Robotics}.
+The company provides a digital model of this robot in the form of an .urdf file which can be obtained from their Github page \parencite{interboticsGithub}.
+URDF (\textbf{U}nified \textbf{R}obotics \textbf{D}escription \textbf{F}ormat) is a common file format for describing the physical and kinematic properties of a robot or robotic component.
+It provides a standardized and structured way to define the connections between joints and links, the visual properties and collision geometry of each link as well as parameters such as mass and inertia \parencite{matlabURDFDocumentation}.
+The geometry is provided in a separate folder in the form of CAD-files which are then referenced by the urdf.
+
+The \textit{PhantomX MK4} follows the common architecture mentioned in \ref{sec: Hexapods}, meaning each leg has 3 joints and segments, totalling 18 DoFs.
+Concerning the joint orientations, the \textalpha-joints movement plane lies is parallel to the ground while the \textbeta- and \textgamma-joint are restricted to a plane perpendicular to the ground, also in accordance to mentioned architecture.
+The robot is axisymmetric towards its central axis(pointing in the movement direction) and the front and hind leg pairs are equally spaced from the middle leg pair.
+The middle legs are attached to the thorax slightly further away from the central axis than the front and back legs.
+A 3D model of the hexapod can be seen in Fig. \ref{figure: PhantomX 3D model}.
+
+To import the model into the Simulink environment, we us a MATLAB-provided function to convert it from a urdf-file into a Simulink block diagram.
+This process works automatically and results in a physically accurate Simulink representation without having to manually re-model the robot.
+The representation consists of blocks from the Simscape library, more specifically joints, rigid transforms and coordinate frames to describe the robots kinematic chains, and rigid bodies to represent the individual links geometry and physical parameters.
 
 \begin{figure}[h]
 	\begin{subfigure}{.5\textwidth} % this sets the figure to be max half the width of the page
@@ -52,8 +74,46 @@ The 3D-model off the hexapod can be seen in Fig. \ref{figure: PhantomX 3D model}
 \end{figure}
 \todo{get each image into list of figures, but exclude complete figure}
 
-From a top level perspective, the hexapod model consists of the main body(thorax) and 6 legs.
-This system receives the torques to be applied on each joint as input and generates sensory data taken from these joints, namely the joints position, velocity and acceleration, as output.
+To be able to use the imported hexapod as a development platform we have to modify and expand the raw Simulink model as it does not provide any means to control it or receive feedback.
+We reorganise and encapsulate logical groups, specifically the thorax and the individual legs, into library subsystems.
+This enables us to propagate changes faster, as we only have to edit the library component instead of each existing instance.
+As a side effect, this given the Simulink model a much more cleaned up and easier to understand appearance.
+To be able to control each joint and receive sensory feedback from it, we enable the so called \textit{direct torque input} as well as the \textit{position} and \textit{acceleration} sensor readings on each joint block.
+Trying to prevent increasing the models complexity to quickly, we do not model the physical servo motor attached to each joint and instead use the instantaneous torque application.
+the joint block also allows for physical parameters to be modified, such as internal friction, dampening or spring stiffness.
+We combine the 3 torque values and position/ acceleration readings of each leg into an input and output bus signal.
+A view inside of the leg subsystem is given in \ref{figure: Hexapod Leg}, the subsystem block itself with its torque input and sensory feedback output buses can be seen in \ref{figure: Hexapod Model Overview} as part of the complete hexapod model.
+
+\begin{figure}[h]
+	\centerline{\includesvg[scale=0.55]{Simulink/Simulink_PhysicalHexapodOverview}}
+	\caption{Overview of the Simulink Hexapod Model}
+	\label{figure: Hexapod Model Overview}
+\end{figure}
+
+\begin{figure}
+	\centerline{\includesvg[scale=0.5]{Simulink/Simulink_HexapodLegOverview}}
+	\caption{Simulink model of the Hexapod Leg subsystem}
+	\label{figure: Hexapod Leg}
+\end{figure}
+
+To enable the robot to physically interact with its surroundings, we enable the collision geometry on each of the models rigid bodies.
+In Simscape, collision modelling involves establishing connections between a rigid body, and any other rigid body it should be able to interact with in a collision scenario, via Simscapes's \textit{Spatial friction force} block.
+The block allows to modify the coefficients of static and dynamic friction, elasticity and dampening.\todo{does dampening exist in block ?}
+An example of how this block can be utilized is shown in \ref{figure: Simscape Bouncing Ball Example}.
+As collision detection is computationally relative expensive, we refrain from modelling robot self collisions and focus only on the interaction between robot and environment.
+This means that the hexapods links can only collide with the ground plane but not with each other.
+We realise this can potentially create discrepancies between simulation and real world, but as we initially only model predefined leg trajectories, which can be proven to not intersect, we are willing to give up a bit of realism in favour of faster simulations.
+
+From a top level perspective, the modified robot model is represented by a single \textit{Hexapod} subsystem block, which receives the torques to be applied as input and outputs sensory information about each joint.
+All of the internal joint parameters and friction coefficients used to model collisions are given in the tables \ref{table: Joint parameters} and \ref{X}.
+The joint parameters were already mostly given by the urdf specification, while we adapted other parameters from \parencite{AUTHOR} and \parencite{AUTHOR2}.
+\todo{Find source again}
+To summarize, we converted the provided hexapod model into a Simulink model, compartmentalized it and added sensing and actuation capabilities to the robots legs.
+In addition we made most of the models internal parameters accessible and modifiable within the MATLAB-script \textit{simulationsetup.m}.
+
+
+
+\begin{comment}
 The  thorax is represented by a rigid body and a main coordinate frame.
 Each of the robots legs consists of 3 rigid bodies(coxa, femur and tibia) which are connected to each other by 2 joints.
 A third joint then attaches the coxa and the leg as a whole to the main body.
@@ -62,32 +122,7 @@ Each of the joints used has 1 (rotational) DoF.
 To position each rigid body and joint correctly, rigid transformations are used to translate and rotate each component.
 
 As mentioned above, joints can receive as input a torque to be applied and can output sensory data, such as the joints position, velocity and acceleration. 
-To simplify the model, we did not model the physical servo motors and instead used this direct torque input to actuate the joints.
-
-The internal joint parameters are given in table \ref{table: Joint parameters}.
-Some of these parameters are adapted from \parencite{FIND AUTHOR} and some were automatically imported by MATLAB from the urdf specification.
-
-
-\begin{figure}
-	\centerline{\includegraphics[scale=0.035]{HexapodModel_Overview}}
-	\caption{Simulink Model Overview}
-	\label{figure: Simulink Model Overview}
-\end{figure}
-
-\subsection{Model of the Hexapod}
-
-\begin{figure}
-	\centerline{\includesvg[scale=0.7]{Simulink/Simulink_PhysicalHexapodOverview}}
-	\caption{Hexapod Model Overview}
-	\label{figure: Hexapod Model Overview}
-\end{figure}
-
-\begin{figure}
-	\centerline{\includesvg[scale=0.6]{Simulink/Simulink_HexapodLegOverview}}
-	\caption{Model of Hexapod Leg}
-	\label{figure: Hexapod Leg}
-\end{figure}
-
+\end{comment}
 
 
 \begin{table}
@@ -100,11 +135,11 @@ Some of these parameters are adapted from \parencite{FIND AUTHOR} and some were 
 		\hline
 		damping coefficient & 0 \\
 		\hline
-		spring stiffness(joint boundary) & $10^4 \frac{Nm}{\text{deg}}$ \\
+		spring stiffness (joint boundary) & $10^4 \frac{Nm}{\text{deg}}$ \\
 		\hline
-		damping coefficient(joint boundary) &  $10 \frac{Nm \cdot s}{\text{deg}}$\\
+		damping coefficient (joint boundary) &  $10 \frac{Nm \cdot s}{\text{deg}}$\\
 		\hline
-		transit region width(joint boundary) &  $10^{\circ}$\\
+		transit region width (joint boundary) &  $10^{\circ}$\\
 		\hline
 	\end{tabular}
 	\caption{Internal joint parameters}
@@ -112,31 +147,21 @@ Some of these parameters are adapted from \parencite{FIND AUTHOR} and some were 
 \end{table}
 
 
-In this thesis we only utilize the sensor information about the current joint positions, but to allow for further expansions on the model, such as optimizing for minimal energy consumption, joint velocity and acceleration are provided as well.
-It should be noted, that integrating the joint position over time would implicitly yield the same result, but we decided for ease of use to include this data explicitly.
-
-To allow to hexapod to interact with its surroundings, we used \textit{Spatial Contact Force}-blocks to model collisions between each segment of the body and the surface on which the robot walks.
-The block connects two rigid bodies and models friction forces and semi-elastic collisions between them.
-The coefficients of friction, elasticity and damping can be configured.
-
-To encapsulate the system and only provide the necessary inputs and outputs, the hexapod model is placed inside a subsystem.
-This also allows for the duplication of the hexapod system, so that in future research it is possible to use this system in multi-agent simulations as well.
-
-To summarize, we converted the provided hexapod model into a Simulink model, compartmentalized it and added sensing and actuation capabilities the robots legs.
-We also made most of the models internal parameters accessible and changeable.
+%In this thesis we only utilize the sensor information about the current joint positions, but to allow for further expansions on the model, such as optimizing for minimal energy consumption, joint velocity and acceleration are provided as well.
+%It should be noted, that integrating the joint position over time would implicitly yield the same result, but we decided for ease of use to include this data explicitly.
 
 
 \subsection{Environment}
-To validate the robot model and to provide a place for the robot to learn the coordination rules of its legs, we constructed a simple test environment.
-The environment currently only consists of a horizontal plane, but can expanded to include more complex terrain with little effort.
-Some examples which we experimented with but did not include in this thesis are inclined planes and also small obstacles on the ground.
-As Simscape itself only provides basic geometric objects but allows for the use .stl files to define the shape of objects, complex terrain such as irregular, uneven surfaces can be imported with relative ease.
+To validate the hexapod model and to provide a place for the robot to learn coordination strategies for its legs, we construct a simple test environment.
+The environment at this point only consists of a horizontal plane, but can expanded to include more complex terrain with little effort.
+Some examples which we experimented with, but did not utilise for testing or training so far, include inclined planes and also small obstacles on the ground.
+As Simscape itself only provides basic geometric objects but allows for the use of .stl files to define the shape of objects, complex terrain such as irregular, uneven surfaces can be imported with relative ease.
 
 In addition to being the testing ground of the hexapod model, the environment also acts as part of the reinforcement learning process.
-Similar to \ref{figure: RL Illustration}, the environment provides observations to the RL agent and calculates a reward signal, based on the agents performance.
-It does not directly receive actions from the agent, as the hexapod to which the actions are applied is its own subsystem.
-If we would define the environment exactly like \ref{figure: RL Illustration,}, we would have to include both the environment subsystem and the hexapod subsystem as part of the "RL" environment.
-For obvious reasons such as modularity and clarity of model we chose not to adapt this.
+Similar to \ref{figure: RL Illustration}, the environment provides observations to the RL agent and calculates a reward signal, based on the agents performance \todo{As of now not represented in the model, reward is part of controller}.
+It does not however directly receive actions from the agent, as the hexapod, to which the actions are applied to by the RL agent, is its own subsystem.
+If we would define the environment in a manner analogous to \ref{figure: RL Illustration,}, we would have to include both the environment subsystem and the hexapod subsystem as part of the "RL" environment.
+For obvious reasons such as modularity and clarity of model we choose not to adapt this.
 
 \subsection{Controller}
 The controller is responsible for the hexapods locomotion.

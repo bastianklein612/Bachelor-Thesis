@@ -18,7 +18,10 @@ The simulation speed is close to real time given 1 core and 0.5ms step-size.
 If the chosen step size is to large(>0.5ms) the simulation becomes unstable and can run into exceptions.
 These most often occur due to objects moving into each other faster that the solver can observe due to its low time resolution and thus cause collision exceptions.
 
-The robots behavior seems, to the best of our knowledge and without examining a real world model, physically accurate.
+The robots behaviour seems, to the best of our knowledge and without examining a real world model, physically accurate.
+
+To encapsulate the system and only provide the necessary inputs and outputs, the hexapod model is placed inside a subsystem.
+This also allows for the duplication of the hexapod system, so that in future research it is possible to use this system in multi-agent simulations as well.
 
 
 
