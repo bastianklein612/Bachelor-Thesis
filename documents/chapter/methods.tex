@@ -13,6 +13,14 @@ The chapter concludes with the explanation of our reinforcement learning setup u
 
 \section{Simulink Model}
 \todo{Intro for Simulink model}
+Taking a top-down perspective on the Simulink model as depicted in \ref{figure: Simulink Model Overview}, it is distinctly divided into 3 separate components, the hexapod, the controller and the environment.
+Being responsible for conducting the hexapods movement, the controller is, on a abstract level, responsible for deciding on the the speed, gait and direction of the robots movements.
+On the lowest level this is accomplished by instructing the hexapod which torque has to be applied to each of its joints. 
+The hexapod and the environment represent the components which physically interact with each other during the simulation.
+Responding upon the commands received by the controller, the hexapod applies the torque values at each simulation step and returns sensory feedback to the controller.
+This feedback is then used to adjust the commands which the controller will send during the next time step.
+The hexapod takes all of these actions inside of the environment, all while interacting with it.
+Additionally, if a RL agent is supposed to be trained, both the hexapod and the environment provide specific observations to the controller, which are used as inputs to the agent or to compute the reward function. 
 
 \begin{figure}[h]
 	\centerline{\includegraphics[scale=0.035]{HexapodModel_Overview}}
