@@ -666,18 +666,25 @@ Gespäch mit Malte und Julius:
 		--> Vielversprechende erste Versuche, aber Anpassungen nötig
 	- Fortführung vom Refactor im Hauptteil:
 		- Approach-Section geschieben
-		- Hexapod-Modell Description 
+		- Hexapod-Modell Description begonnen
 	
 	- Ideen für RL morgen:
 		- Reibung wieder erhöhen ? (bis jetzt dort eig. keinen exploit gesehen)
 		- diskreten action space agent mit der neuen Reward-Funktion und isDone testen --> Definitiv testen
-		- Layer im actor und critic hinzufügen ?
+		- Layer im actor und critic hinzufügen ? (oder eher entfernen ??)
 		- y-Distanz evt. erst mal gar nicht oder weniger stark bestrafen ?
 		
+	- über Nacht DDPG mit neuem reward und isDone aufgesetzt
+	
 -----------------------------------------
 11.10.
+	- DDPG flatlining		
+	- Reward-Funktion vereinfacht, nur noch x-/z-Speed und Höhe  
+		--> Nochmal nachgebessert und x-Speed wesentlich höher beloht, um stehen bleiben zu verhindern
+		    --> Vielversprechender erster DDPG-Lauf
 	
-		
+	- Refactor im Hauptteil:
+		- Hxapod-Modell Description fertig gestellt
 
 	
 	
@@ -744,3 +751,18 @@ Gespäch mit Malte und Julius:
 (Hoffentlich nicht mehr benötigt)
 -----------------------------------------
 25.09 - 01.10.
+
+
+
+
+
+---------------------------------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------------------------
+
+TODOs vor Abgabe:
+	- alle TODOs lösen und entfernen
+	- Die kompletten Notizen nochmal durchlesen und nach ungelösten Problemen Ausschau halten
+	- Bachelorarbeit komplett(auch Quellen !) durchlesen, keine Musik, keine Ablenkung, rein gar nichts
+	- jedes einzelne .tex Dokument durchlesen(auf auskommentierte Sektionen achten)
+	- PDF der Arbeit in Rechtschreibprüfer eingeben(?)
