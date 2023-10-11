@@ -30,7 +30,7 @@ trainOpts = rlTrainingOptions(...
     StopTrainingCriteria="EpisodeCount",...
     StopTrainingValue=maxEpisodes,...
     SaveAgentCriteria="EpisodeReward",...
-    SaveAgentValue=35);
+    SaveAgentValue=100);
 
 %{
 %multiAgentTrainingOptions, used for parallel/multi-agent training
@@ -55,7 +55,7 @@ trainOpts = rlMultiAgentTrainingOptions(...
 delete(gcp('nocreate'))
 
 %number of parallel agents
-N = 6;
+N = 8;
 pool = parpool(N);
 
 %ensure that the number of workers is not less than N
@@ -89,8 +89,8 @@ trainingStats = train(agent,env,trainOpts);
 
 
 %To start training again after max episodes was reached
-%trainResults.TrainingOptions.MaxEpisodes = 100000;
-%trainResultsNew = train(agent,env,trainResults);
+%trainingStats.TrainingOptions.MaxEpisodes = 100000;
+%trainingStatsNew = train(agent,env,trainingStats);
 %--------------------------------------------------------------------------
 %--------------------------------------------------------------------------
 
@@ -101,7 +101,7 @@ trainingStats = train(agent,env,trainOpts);
 % Save and load commands
 %filename = "agentBackup_ppo_continuous_64.mat";
 %save(filename,"agent");
-%save('trainingStats_ddpg_12000', 'trainingStats', '-v7.3')   %for files larger than 2 GB
+%save('trainingStats_DDPG_withIsDone', 'trainingStats', '-v7.3')   %for files larger than 2 GB
 %load(filename);
 
 
