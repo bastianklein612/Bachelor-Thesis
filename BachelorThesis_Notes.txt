@@ -684,8 +684,9 @@ Gespäch mit Malte und Julius:
 		    --> Vielversprechender erster DDPG-Lauf
 	
 	- Refactor im Hauptteil:
-		- Hxapod-Modell Description fertig gestellt
-
+		- Hexapod-Modell Description fertig gestellt
+		- Einleitenden Absatz zur Beschreibung des Simulink-Modells hinzugefügt
+		-
 	
 	
 			
@@ -713,14 +714,14 @@ Gespäch mit Malte und Julius:
 -----------------------------------------3
 21.08 - 27.08.
 	- Hoffentlich bis hier erste Erfolge mit RL-Learning											x
-	- Background sollte großteils fertig sein														x
-	- Related Works weiterschreiben																	
+	- Background sollte großteils fertig sein														X
+	- Related Works weiterschreiben																	x
 	- Im Methods-Teil schonmal anfangen, grundsätzlichen Aufbau und Gait-Entwicklung zu erklären	X
 	- Zwischenvortrag bearbeiten, großteilig fertigstellen											X
 -----------------------------------------4
 28.08 - 03.09.
 	- RL-Learning fortführen, Fortschritt festhalten !												x
-	- Related Works großteils fertig																
+	- Related Works großteils fertig																x
 	- Methods-Teil weiterschreiben																	X
 	- Results kann teils angefangen werden(das Modell an sich kann bereits bewertet werden)			x
 	- Version des Vortrags an Malte und Paula schicken												X
@@ -733,7 +734,7 @@ Gespäch mit Malte und Julius:
 	Update(31.08.):
 		- Expose Korrekturen von Paula umsetzen
 		- Hexapod-Inputs anpassen																	X
-		- RL im Background fertigstellen
+		- RL im Background fertigstellen															x
 		- Sanandos Modell genau anschauen(nach seinem Vortrag)
 		- Arbeit offiziell anmelden																	X
 
@@ -764,5 +765,6 @@ TODOs vor Abgabe:
 	- alle TODOs lösen und entfernen
 	- Die kompletten Notizen nochmal durchlesen und nach ungelösten Problemen Ausschau halten
 	- Bachelorarbeit komplett(auch Quellen !) durchlesen, keine Musik, keine Ablenkung, rein gar nichts
+	- alle Links im Dokument anklicken und überprüfen
 	- jedes einzelne .tex Dokument durchlesen(auf auskommentierte Sektionen achten)
 	- PDF der Arbeit in Rechtschreibprüfer eingeben(?)
