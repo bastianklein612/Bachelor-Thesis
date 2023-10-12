@@ -100,9 +100,9 @@ actorNetworkPath = [
              fullyConnectedLayer(units)
              reluLayer
              fullyConnectedLayer(actionInfo.Dimension(1))
-             clippedReluLayer(ceiling, Name="ClippedActionOutputLayer")%inserted this layer to clip output
-            %tanhLayer
-            %scalingLayer(Scale=max(actionInfo.UpperLimit))
+             %clippedReluLayer(ceiling, Name="ClippedActionOutputLayer")%inserted this layer to clip output
+             tanhLayer
+             scalingLayer(Scale=max(0.5), Bias=0.5)
              ];
 
 %create actor network
@@ -123,25 +123,27 @@ actor = rlContinuousDeterministicActor(actorNetwork,observationInfo,actionInfo);
 
 %specify critic and agent options
 %with a learning rate of 10−4 and 10−3 for the actor and critic respectively
+actorOpts = rlOptimizerOptions(LearnRate=3e-4);%,L2RegularizationFactor=1e-4);
 criticOpts = rlOptimizerOptions(LearnRate=1e-3);
-actorOpts = rlOptimizerOptions(LearnRate=3e-4,GradientThreshold=1);%,L2RegularizationFactor=1e-4);
 
 %specify DDPG options
 agentOpts = rlDDPGAgentOptions(...
                                SampleTime=0.05,...
-                               CriticOptimizerOptions=criticOpts,...
                                ActorOptimizerOptions=actorOpts,...
+                               CriticOptimizerOptions=criticOpts,...
                                ExperienceBufferLength=1e6,...%1e5
                                DiscountFactor=0.99,...
                                MiniBatchSize=16);
 
-agentOpts.NoiseOptions.StandardDeviation=0.1;
+agentOpts.NoiseOptions.StandardDeviation=0.3;
 agentOpts.NoiseOptions.StandardDeviationDecayRate=1e-6;
 %agentOpts.NoiseOptions.MeanAttractionConstant=0.15;
-%agentOpts.NoiseOptions.Variance=0.3;
+
+%Variance parameters not recommended (MATLAB)
+%agentOpts.NoiseOptions.Variance=0.3;                   
 %agentOpts.NoiseOptions.VarianceDecayRate=1e-6;
 
-%agentOpts.ResetExperienceBufferBeforeTraining = false;
+agentOpts.ResetExperienceBufferBeforeTraining = false;
 
 
 %Create DDPG agent
