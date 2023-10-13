@@ -146,7 +146,7 @@ There exist two primary techniques for solving the inverse kinematics problem, a
 \todo{Citations}
 \todo{Mention forward kinematics ?}
 
-\subsection{Analytical IK}
+\subsection{Analytical Inverse Kinematics}
 Analytical solution methods are based on trigonometric equations derived from the geometric and kinematic parameters of the manipulator arm, such as the link length, joint type and joint constraints.
 An example of such derivations is presented at a later point in this work, see \ref{subsubsec: IK Solver}.
 They provide exact solutions to the problem and only use minimal computational resources.
@@ -154,7 +154,7 @@ Although very efficient and precise, the analytical approach is generally only f
 If the kinematic chain contains redundant DoFs, meaning it possesses more DoF than the dimension of the workspace it is in, there can exist multiple or even infinite solutions to the IK problem \parencite{inverseKinematicsIllinois}.
 Such systems potentially lack closed-form expressions for solutions, making it infeasible to apply analytical solution methods.
 
-\subsection{Numerical IK}
+\subsection{Numerical Inverse Kinematics}
 Numerical solution methods use iterate approaches to approximate the joint angles and converge towards a solution over several iterations of their algorithm.
 At the start of the process, numerical methods begins with an initial guess.
 This guess can be based on the manipulators geometry, joint limits, previously obtained solutions and other heuristics.

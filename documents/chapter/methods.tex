@@ -184,17 +184,17 @@ A legs control unit receives the desired frequency of the swing-stance cycle ($f
 The frequency $f_{c}$ defines how often the swing-stance cycle should be repeated per second, $f_{c} = 0.5 \text{ Hz}$ for example corresponding to one cycle every 2 seconds.
 $P_{swing}$ describes the proportion of the swing (duty) phase in relation to a whole cycle and can be expressed by: 
 \[
-P_{swing} = \frac{T_{SW}}{T_{ST} + T_{SW}}, 
+P_{swing} = \frac{T_{\text{sw}}} {T_{\text{st}} + T_{\text{sw}}}, 
 \] 
-where $T_{sw}$ is the swing time and $T_{st}$ the stance time \parencite{qiu2023adaptive}.
+where $T_{\text{sw}}$ is the swing time and $T_{\text{st}}$ the stance time \parencite{qiu2023adaptive}.
 A 50\% duty cycle would correspond to swing and stance being of equal length, both taking up exactly half a cycle time.
 The swing initiation signal $s_i \in \{0,1\}$ notifies the control unit whether to initiate the swing phase ($s_i = 1$), independent of the legs position in the cycle, or whether to continue with the current cycle's execution ($s_i = 0$).
 The controller also receives an additional input, a vector pointing in the direction the robot is supposed to move.
 All these inputs can either be received from a static gait definition, in which the parameters for each leg are statically configured, or can be provided by a reinforcement learning agent.
 
 The Simulink RL Agent, which is a separate component in the controller subsystem, receives observations from the environment and hexapod model as well as a reward signal and outputs an action vector which consists of similar commands as the static gait definitions commands.
-The RL agent is a standard from the \textit{Reinforcement Learning} library and represents an agent in the same sense as described in \ref{sec: Reinforcement Learning}.
-The RL agent and reward function will be detailed more precisely in section \ref{sec: RL setup}.
+The RL agent is a standard block from the \textit{Reinforcement Learning} library and represents an agent in the same sense as described in \ref{sec: Reinforcement Learning}.
+Further and more detailed elaboration on both RL agent and reward function will be provided in section \ref{sec: RL setup}.
 
 \begin{figure}
 	\centerline{\includesvg[scale=0.6]{Simulink/Simulink_LegControllerOverview}}
@@ -202,7 +202,7 @@ The RL agent and reward function will be detailed more precisely in section \ref
 	\label{figure: Leg control unit}
 \end{figure}
 
-Continuing  with the explanation of the controller subsystem, we now focus on a single leg control unit.
+Continuing  with the explanation of the controller subsystem, we focus on a single leg control unit.
 Such a unit, as can be seen in \ref{figure: Leg control unit}, consists of a leg trajectory generator and 3 PID feedback control loops, one for each of the leg joints.
 The leg trajectory generators task is to generate joint angles which allow the leg end-effector to follow a smooth trajectory, all in accordance to the input frequency, duty cycle, swing initiation and pattern rotation.
 At each time step it outputs the desired angle for the \textalpha-, \textbeta- and \textgamma-joints, which the PID controllers then work on achieving by regulating the applied torques.
@@ -214,10 +214,10 @@ The PID controller parameters $K_p$, $K_i$ and $K_d$ (and $N$) are tuned via tri
 	\label{figure: Leg trajectory generator}
 \end{figure}
 
-The leg trajectory generator, as seen in \ref{figure: Leg trajectory generator}, consists of a signal generator, a pattern rotation subsystem and an analytical inverse kinematics solver.
+Moving down another level of complexity, the leg trajectory generator, as seen in \ref{figure: Leg trajectory generator}, consists of a signal generator, a pattern rotation subsystem and an analytical inverse kinematics solver.
 The signal generator is responsible for creating a continuous leg trajectory in the form of 2-dimensional trajectory coordinates.
-The pattern rotation subsystems applies, if required, a simple mathematical rotation to  the planar trajectory(x,z-plane) around the z-axis to allow for omni-directional movement of the robot.
-Finalizing the trajectory generation, the inverse kinematics solver receives the trajectory coordinates and translates them into the \textalpha, \textbeta and \textgamma joint angles.
+The pattern rotation subsystems applies, if required, a simple mathematical rotation to  the planar trajectory (x,z-plane) around the z-axis to allow for omni-directional movement of the robot.
+Finalizing the trajectory generation, the inverse kinematics solver receives the trajectory coordinates and translates them into the \textalpha, \textbeta \ and \textgamma \ joint angles.
 
 
 \subsubsection{Analytical Inverse Kinematics Solver} \label{subsubsec: IK Solver}
@@ -248,6 +248,7 @@ The solver is derived from the legs geometric properties as seen in \ref{figure:
 	\caption[Angle derivation drawings]{(a) Top-down view of a hexapod leg, used to determine \textalpha. (b) Side-view, used in the in the determination of \textbeta \ and \textgamma.}
 	\label{figure: IK angle derivations}
 \end{figure}
+\todo{Remove red cross in graphic, looks strange}
 
 
  Given the length of each leg segment, the 3 angles are calculated as following:
