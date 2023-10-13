@@ -110,7 +110,7 @@ All of the internal joint parameters and friction coefficients used to model col
 The joint parameters were already mostly given by the urdf specification, while we adapted other parameters from \parencite{AUTHOR} and \parencite{AUTHOR2}.
 \todo{Find source again}
 To summarize, we converted the provided hexapod model into a Simulink model, compartmentalized it and added sensing and actuation capabilities to the robots legs.
-In addition we made most of the models internal parameters accessible and modifiable within the MATLAB-script \textit{simulationsetup.m}.
+In addition we made most of the models internal parameters accessible and modifiable within the MATLAB-script \textit{simulation\_setup.m}.
 
 
 
@@ -168,8 +168,8 @@ For obvious reasons such as modularity and clarity of model we choose not to ada
 The controller is responsible for the hexapods locomotion.
 It controls the movement of the robots legs according to an internally defined gait pattern.
 As inputs, the controller receives the sensor data from the hexapod model.
-According the internally defined gait pattern and the received data input, the controller outputs the torques to be applied to each joint of the hexapod.
-The controller subsystem can be described as a feedback control system, as it receives feedback from a process it has to control and takes this feedback into account when generating new commands to steer the process.
+According the internally defined gait pattern and the received data input, the controller computes the torques to be applied to each joint of the hexapod.
+The controller subsystem can be described as a feedback control system, as it receives feedback from the process it controls and takes this feedback into account when generating new commands to steer the process.
 
 \begin{figure}
 	\centerline{\includegraphics[scale=0.03]{HexapodController}}
