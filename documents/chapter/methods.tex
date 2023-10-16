@@ -180,7 +180,7 @@ The controller subsystem can be described as a feedback control system, as it re
 A depiction of the controller subsystem can be seen in Fig. \ref{figure: Controller Overview}.
 As the legs move independently from one another, it consists of 6 separate control units, each responsible for controlling one of the six legs.
 These units receive sensory information from the leg joints as input and compute the torques to be applied to the joints as output.
-A legs control unit receives the desired frequency of the swing-stance cycle ($f_{c}$), the duty-cycle percentage ($P_{swing}$) and the swing-initiation signal ($s_i$) as coordination inputs.
+A legs control unit receives the desired frequency of the swing-stance cycle ($f_{c}$), the duty-cycle percentage ($P_{swing}$) and the swing-initiation signal ($s_i,\ i \in \{1,...,6\}$) as coordination inputs.
 The frequency $f_{c}$ defines how often the swing-stance cycle should be repeated per second, $f_{c} = 0.5 \text{ Hz}$ for example corresponding to one cycle every 2 seconds.
 $P_{swing}$ describes the proportion of the swing (duty) phase in relation to a whole cycle and can be expressed by: 
 \[
@@ -192,7 +192,7 @@ The swing initiation signal $s_i \in \{0,1\}$ notifies the control unit whether 
 The controller also receives an additional input, a vector pointing in the direction the robot is supposed to move.
 All these inputs can either be received from a static gait definition, in which the parameters for each leg are statically configured, or can be provided by a reinforcement learning agent.
 
-The Simulink RL Agent, which is a separate component in the controller subsystem, receives observations from the environment and hexapod model as well as a reward signal and outputs an action vector which consists of similar commands as the static gait definitions commands.
+The Simulink RL Agent, which is a separate component of the controller subsystem, receives observations from the environment and hexapod model as well as a reward signal and outputs an action vector which consists of the swing initiation signal for each leg during the current time step.
 The RL agent is a standard block from the \textit{Reinforcement Learning} library and represents an agent in the same sense as described in \ref{sec: Reinforcement Learning}.
 Further and more detailed elaboration on both RL agent and reward function will be provided in section \ref{sec: RL setup}.
 
@@ -203,7 +203,7 @@ Further and more detailed elaboration on both RL agent and reward function will 
 \end{figure}
 
 Continuing  with the explanation of the controller subsystem, we focus on a single leg control unit.
-Such a unit, as can be seen in \ref{figure: Leg control unit}, consists of a leg trajectory generator and 3 PID feedback control loops, one for each of the leg joints.
+Such a unit, as can be seen in \ref{figure: Leg control unit}, consists of a leg trajectory generator and three PID feedback control loops, one for each of the leg joints.
 The leg trajectory generators task is to generate joint angles which allow the leg end-effector to follow a smooth trajectory, all in accordance to the input frequency, duty cycle, swing initiation and pattern rotation.
 At each time step it outputs the desired angle for the \textalpha-, \textbeta- and \textgamma-joints, which the PID controllers then work on achieving by regulating the applied torques.
 The PID controller parameters $K_p$, $K_i$ and $K_d$ (and $N$) are tuned via trial-and-error method and are given in \ref{table: PID parameters}.
@@ -216,77 +216,52 @@ The PID controller parameters $K_p$, $K_i$ and $K_d$ (and $N$) are tuned via tri
 
 Moving down another level of complexity, the leg trajectory generator, as seen in \ref{figure: Leg trajectory generator}, consists of a signal generator, a pattern rotation subsystem and an analytical inverse kinematics solver.
 The signal generator is responsible for creating a continuous leg trajectory in the form of 2-dimensional trajectory coordinates.
-The pattern rotation subsystems applies, if required, a simple mathematical rotation to  the planar trajectory (x,z-plane) around the z-axis to allow for omni-directional movement of the robot.
+The pattern rotation subsystems applies, if required, a simple mathematical rotation to  the planar trajectory (x,z-plane) around the z-axis.
+This allows for omni-directional movement of the robot.
 Finalizing the trajectory generation, the inverse kinematics solver receives the trajectory coordinates and translates them into the \textalpha, \textbeta \ and \textgamma \ joint angles.
 
 
-\subsubsection{Analytical Inverse Kinematics Solver} \label{subsubsec: IK Solver}
-Even though Simulinks \textit{Robotics System Toolbox} includes an iterative IK-solver, we decided to implement our own analytical solver.
-Early in the development process, we realized that the iterative solver provided would not be sufficient for our intended purpose.
-Due to the nature of iterative solution methods, the calculation time required to find a valid configuration is significantly higher than that of a purpose-build analytical solver and thus greatly increased simulation times.
-As we need to simulate several thousand episodes during reinforcement learning, we aim to minimize the 
-amount of time required to compute a time step in the simulation.
+\todo{Remove text from image/ change image to diagram}
 
-The solver sequentially calculates the 3 joint angles of a leg, starting at \textalpha, then \textbeta and \textgamma.
-The solver is derived from the legs geometric properties as seen in \ref{figure: IK angle derivations}
+The Signal Generator, displayed in \ref{figure: Signal Generator}, consists mainly of two parts, a swing phase subsystem and a stance phase subsystem.
+These provide the x- and z-coordinate signals during their respective phases.
+The coordination between the two units is influenced by $f_c$, $P_{swing}$ and $s_i,\ i \in \{1,...,6\}$.
+If the swing initiation $s_i$ of a signal generator is pulled high, the swing phase subsystem is reset and the outputs (x,z) are switched to the swing system.
+At the conclusion of the swing phase, which means the x-coordinate coincides with the AEP, the swing phase subsystem gives up control to the stance phase subsystem via the \textit{Swing finished} signal.
+This induces a reset on the stance phase subsystem and switches the outputs over to this system.
+In detail, the swing and stance phase signals are generated by modulation of geometric and linear functions based on $f_c$, $P_{swing}$ and the function amplitudes.
+These amplitudes are derived from the planned step length and height.
 
-\begin{figure}[h]
-	\begin{subfigure}{.5\textwidth} % this sets the figure to be max half the width of the page
-		\centering
-		% include first image
-		\includegraphics[width=\linewidth]{IK_Solver_alphaAngle}  % this sets the image to fill 90% of the available space -> 45% of the line width in total. 
-		\caption{}
-		\label{figure: IK Solver Alpha Angle}
-	\end{subfigure}
-	\begin{subfigure}{.5\textwidth}
-		\centering
-		% include second image
-		\includegraphics[width=\linewidth]{IK_Solver_betaGammaAngle}  
-		\caption{}
-		\label{figure: IK Solver Beta/Gamma Angle}
-	\end{subfigure}
-	\caption[Angle derivation drawings]{(a) Top-down view of a hexapod leg, used to determine \textalpha. (b) Side-view, used in the in the determination of \textbeta \ and \textgamma.}
-	\label{figure: IK angle derivations}
-\end{figure}
-\todo{Remove red cross in graphic, looks strange}
-
-
- Given the length of each leg segment, the 3 angles are calculated as following:
-
-\[
-	\alpha = \arctan(\frac{x}{y}) ,\quad \quad \quad \beta = 90^{\circ} - (\beta_1 + \beta_2) ,\quad \quad \quad \gamma = 90^{\circ} - \gamma_1.
-\]
-\\
-Where $\beta_1$, $\beta_2$, $\gamma_1$ and \text{BF} are given by:
-\[	
-	\beta_1 = \arccos(\frac{{l_\text{femur}}^2 + \text{BF}^2 - {l_\text{tibia}}^2}  {2\cdot l_\text{femur} \cdot \text{BF}}) ,\quad \quad \quad \beta_2 = \arctan(\frac{ l_\text{total} - l_\text{coxa}} {z}),
-\]
-
-\[
-	\gamma_1 = \arccos(\frac{{l_\text{tibia}}^2 + {l_\text{femur}}^2 - {\text{BF}}^2}  {2 \cdot {l_\text{tibia}} \cdot {l_\text{femur}}}) ,\quad \quad \quad \text{BF} = \sqrt{(l_\text{total} - l_\text{coxa})^2 + z^2}.
-\]
-
-
-
-
-
-
-
+\textbf{Swing and stance phase functions}
+\begin{align}
+	T_{sw}(t) & = 
+	\begin{cases}
+		x_{sw}(t) = A_x \cdot \sin(\frac{f_c \cdot t} {2 \cdot P_{\text{swing}}} - \frac{\pi}{2})\\
+		z_{sw}(t) = A_z \cdot \sin(\frac{f_c \cdot t} {2 \cdot P_{\text{swing}}})
+	\end{cases}, t \in [0,\frac{P_\text{swing}}{f_c}] 
+	\\
+	T_{st}(t) & =
+	\begin{cases}
+		x_{st}(t) = \\
+		z_{st}(t) = 0
+	\end{cases}, t \in (\frac{P_\text{swing}}{f_c}, \frac{1}{f_c}]    
+\end{align}
+\todo{Double-check equations}
+\todo{Insert image of trajectory graphs}
 
 \begin{figure}[h]
-	\centerline{\includesvg[scale=0.85]{Simulink/Simulink_SignalGeneratorOverview}}
+	\centerline{\includesvg[scale=0.75]{Simulink/Simulink_SignalGeneratorOverview}}
 	\caption{Signal Generator}
 	\label{figure: Signal Generator}
 \end{figure}
 
-A Signal Generator, as seen in \ref{figure: Signal Generator}, consists two parts, a swing phase subsystem and a stance phase subsystem.
-The stance subsystems provide the x- and z-coordinate signal during stance, the swing subsystem during swing.
-The coordination between these two units is influenced by the cycle frequency, duty factor and swing initiation signal.
-If the swing initiation is pulled high, the swing phase subsystem is reset(so it starts from the beginning) and the outputs(x,z) are switched to the swing system.
-When the swing phase is finished, meaning the x-coordinate coincides with the AEP, the swing phase subsystem gives up control the the stance phase subsystem via the \textit{Swing finished} signal.
-This induces a reset on the stance phase subsystem and switches the outputs over to this system.
+\begin{figure}[h]
+	\centerline{\includegraphics[scale=0.2]{Simulink/SignalGenerator_Graph_0.5Hz.PNG}}
+	\caption{Trajectory coordinates generated by a signal generator with $f_c=0.5$\ Hz, $P_{Swing}=40\text{\%}$}
+	\label{figure: Trajectory graphs}
+\end{figure}
 
-\begin{figure}
+\begin{figure}[h]
 	\centering
 	\begin{subfigure}[b]{0.55\textwidth}
 		\includesvg[width=1\linewidth]{Simulink/Simulink_SwingPhaseGenOverview}
@@ -306,6 +281,53 @@ This induces a reset on the stance phase subsystem and switches the outputs over
 
 
 
+\subsubsection{Analytical Inverse Kinematics Solver} \label{subsubsec: IK Solver}
+Even though Simulink's \textit{Robotics System Toolbox} includes an iterative inverse kinematics block, the block is not able to support the calculation speed we require.
+The simulations, and thus the trajectory calculations as well, need to be run at about 1-2 kHz (time steps per second) to ensure stability of the simulation and smooth motion of the hexapod.
+As we are not able to achieve this compute frequency with the provided iterative solver, we implement our own, purpose-build analytical IK solver aiming to drastically improve computation time.
+
+\begin{figure}[h]
+	\begin{subfigure}{.5\textwidth} % this sets the figure to be max half the width of the page
+		\centering
+		% include first image
+		\includegraphics[width=\linewidth]{IK_Solver_alphaAngle}  % this sets the image to fill 90% of the available space -> 45% of the line width in total. 
+		\caption{}
+		\label{figure: IK Solver Alpha Angle}
+	\end{subfigure}
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		% include second image
+		\includegraphics[width=\linewidth]{IK_Solver_betaGammaAngle}  
+		\caption{}
+		\label{figure: IK Solver Beta/Gamma Angle}
+	\end{subfigure}
+	\caption[Angle derivation drawings]{(a) Top-down view of a hexapod leg, used to determine \textalpha. (b) Side-view, used to calculate \textbeta \ and \textgamma.}
+	\label{figure: IK angle derivations}
+\end{figure}
+\todo{Remove red cross in graphic, looks strange}
+
+Our proposed solver sequentially calculates the legs joint angles, starting at \textalpha, then \textbeta \ and \textgamma.
+We derive the following equations from the geometric properties of a hexapod leg as seen in \ref{figure: IK angle derivations}, translate them into C-code and run the resulting script inside a MATLAB code block.
+
+\[
+	\alpha = \arctan(\frac{x}{y}) ,\quad \quad \quad \beta = 90^{\circ} - (\beta_1 + \beta_2) ,\quad \quad \quad \gamma = 90^{\circ} - \gamma_1.
+\]
+\\
+Where $\beta_1$, $\beta_2$, $\gamma_1$ and \text{BF} are given by:
+\[	
+	\beta_1 = \arccos(\frac{{l_\text{femur}}^2 + \text{BF}^2 - {l_\text{tibia}}^2}  {2\cdot l_\text{femur} \cdot \text{BF}}) ,\quad \quad \quad \beta_2 = \arctan(\frac{ l_\text{total} - l_\text{coxa}} {z}),
+\]
+
+\[
+	\gamma_1 = \arccos(\frac{{l_\text{tibia}}^2 + {l_\text{femur}}^2 - {\text{BF}}^2}  {2 \cdot {l_\text{tibia}} \cdot {l_\text{femur}}}) ,\quad \quad \quad \text{BF} = \sqrt{(l_\text{total} - l_\text{coxa})^2 + z^2}.
+\]
+
+For spatial contact force parameters, see \parencite{trotta2022walking}.
+
+When running the simulation at large step sizes, we observed simulation instabilities similar to the ones mentioned in \parencite{thilderkvist2015motion}, although not of the same significance.
+We attribute the unsatisfactory results they experienced from the spatial friction forces to be most-likely linked to an earlier MATLAB version used for their work.
+A step size of 0.00025s(0.25ms) resulted in satisfactory behaviour in almost all of our simulations.
+Only when training a RL agent, we reduced the step size initially even further to anticipate uncoordinated, trembling behaviour due to an untrained agent.
 
 \begin{table}[h]
 	\centering
@@ -313,16 +335,16 @@ This induces a reset on the stance phase subsystem and switches the outputs over
 		\hline
 		parameter & value\\
 		\hline
-		$K_p$ & ... \\
+		$K_p$ & 600 \\
 		\hline
-		$K_i$ & ... \\
+		$K_i$ & 0.1 \\
 		\hline
-		$K_d$ & ... \\
+		$K_d$ & 1 \\
 		\hline
-		$N$ & ... \\
+		$N$ & 1000 \\
 		\hline
 	\end{tabular}
-	\caption{Gain parameters used for pid-tuning}
+	\caption{Gain parameters used for PID-tuning}
 	\label{table: PID parameters}
 \end{table}
 
@@ -330,7 +352,7 @@ This induces a reset on the stance phase subsystem and switches the outputs over
 	\centering
 	\begin{tabular}{| c | c | c | c |} 
 		\hline
-		 & \textbf{\textalpha} & \textbf{\textbeta} & \textbf{\textgamma} \\ [0.5ex] 
+		& \textbf{\textalpha} & \textbf{\textbeta} & \textbf{\textgamma} \\ [0.5ex] 
 		\hline
 		left front, right back & 45 & 14.03624347 & 60.58440117  \\ 
 		\hline
@@ -342,13 +364,6 @@ This induces a reset on the stance phase subsystem and switches the outputs over
 	\caption{Initial joint positions according to urdf-file}
 	\label{table:Initial joint positions}
 \end{table}
-
-For spatial contact force parameters, see \parencite{trotta2022walking}.
-
-When running the simulation at large step sizes, we observed simulation instabilities similar to the ones mentioned in \parencite{thilderkvist2015motion}, although not of the same significance.
-We attribute the unsatisfactory results they experienced from the spatial friction forces to be most-likely linked to an earlier MATLAB version used for their work.
-A step size of 0.00025s(0.25ms) resulted in satisfactory behaviour in almost all of our simulations.
-Only when training a RL agent, we reduced the step size initially even further to anticipate uncoordinated, trembling behaviour due to an untrained agent.
 
 
 \section{Learning Leg Coordination} \label{sec: RL setup}
