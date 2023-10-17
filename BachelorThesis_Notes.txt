@@ -686,7 +686,60 @@ Gespäch mit Malte und Julius:
 	- Refactor im Hauptteil:
 		- Hexapod-Modell Description fertig gestellt
 		- Einleitenden Absatz zur Beschreibung des Simulink-Modells hinzugefügt
+
+-----------------------------------------
+12.10.
+	- Refactor im Hauptteil:
+		- Environment Description im Hauptteil fertiggestellt
+		
+	- RL-Fortschritt:
+		- weiteren Reward-Exploit festgestellt
+		- Anpassungen vorgenommen, neue Sensordaten für die Höhe jedes Beins hinzugefügt
+		-PPO-Agenten mit großem NN(100) aufgesetzt
+		
+-----------------------------------------
+13.10.
+	- DDPG-Agenten mit großem NN(100) aufgesetzt
+	
+-----------------------------------------
+14.10.
+	- große NN jetzt Standard 
+	- Reward nochmals groß umgeschrieben, Energieverbrauch wird mit einbezogen um  Effizienz zu belohnen
+	- Training ohne Ergebnisse
+	- langsamer Fortschritt beim Refactor
+	
+-----------------------------------------
+15.10.
+	- Fehler in Energieverbrauch gefunden --> Rohe Drehmomentwerte anstatt 'limitierte' verwendet, dadurch viel zu hohe Werte
+	- RL hat auch heute keinen guten Eindruck gemacht, aber Testen geht weiter
+	- Liste mit getesteten RL-Setups/ Parametern erstellt um evt. Pattern zu finden
+	- Refactor im Hauptteil bis auf IK Sover und RL fertig
+	
+-----------------------------------------
+16.10.
+	- RL über Nacht nicht erfolgreich
+	- RL-Test über Tag ebenfalls flatlining
+	-Refactor-Fortschritt:
+		- Analytischen Ik abgeschlossen
+		- Signal Generator erweitert und umgeschrieben
 		-
+	
+	- Morgen(Dienstag) erste Version an Malte schicken
+	
+	
+	
+-----------------------------------------
+17.10.
+	- 02:05 Uhr: DDPG-Agent mit 120 Reward zeigt sehr vielversprechendes Verhalten im Test !!!
+					- bewegt sich nach vorn
+					- wenige Zuckungen
+					- noch kein richtiger Gait, eher ein nach vorn schleifen
+	
+		--> Reward scheint gut definiert zu sein
+	
+	
+	
+	
 	
 	
 			

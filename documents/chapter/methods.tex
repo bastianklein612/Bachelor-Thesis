@@ -147,6 +147,7 @@ As mentioned above, joints can receive as input a torque to be applied and can o
 	\label{table: Joint parameters}
 \end{table}
 
+\todo{For spatial contact force parameters, see \parencite{trotta2022walking}.}
 
 %In this thesis we only utilize the sensor information about the current joint positions, but to allow for further expansions on the model, such as optimizing for minimal energy consumption, joint velocity and acceleration are provided as well.
 %It should be noted, that integrating the joint position over time would implicitly yield the same result, but we decided for ease of use to include this data explicitly.
@@ -168,8 +169,8 @@ For obvious reasons such as modularity and clarity of model we choose not to ada
 The controller is responsible for the hexapods locomotion.
 It controls the movement of the robots legs according to an internally defined gait pattern.
 As inputs, the controller receives the sensor data from the hexapod model.
-According the internally defined gait pattern and the received data input, the controller computes the torques to be applied to each joint of the hexapod.
-The controller subsystem can be described as a feedback control system, as it receives feedback from the process it controls and takes this feedback into account when generating new commands to steer the process.
+According to the internally defined gait pattern and the received data input, the controller computes the torques to be applied to each joint of the hexapod.
+The controller subsystem can be described as a feedback control system, as it receives information about the process it controls and takes this feedback into account when generating new commands to steer the process.
 
 \begin{figure}
 	\centerline{\includegraphics[scale=0.03]{HexapodController}}
@@ -177,23 +178,31 @@ The controller subsystem can be described as a feedback control system, as it re
 	\label{figure: Controller Overview}
 \end{figure}
 
-A depiction of the controller subsystem can be seen in Fig. \ref{figure: Controller Overview}.
-As the legs move independently from one another, it consists of 6 separate control units, each responsible for controlling one of the six legs.
+A abstract diagram of the controller subsystem can be seen in Fig. \ref{figure: Controller Overview}.
+As the legs move independently from one another, the controller consists of 6 separate control units, each responsible for controlling one of the six legs.
 These units receive sensory information from the leg joints as input and compute the torques to be applied to the joints as output.
-A legs control unit receives the desired frequency of the swing-stance cycle ($f_{c}$), the duty-cycle percentage ($P_{swing}$) and the swing-initiation signal ($s_i,\ i \in \{1,...,6\}$) as coordination inputs.
+A legs control unit receives the desired frequency of the swing-stance cycle ($f_{c}$), the duty-cycle percentage ($P_{swing}$) and the swing-initiation signal of the respective leg ($s_i,\ i \in \{1,...,6\}$) as coordination inputs.
 The frequency $f_{c}$ defines how often the swing-stance cycle should be repeated per second, $f_{c} = 0.5 \text{ Hz}$ for example corresponding to one cycle every 2 seconds.
-$P_{swing}$ describes the proportion of the swing (duty) phase in relation to a whole cycle and can be expressed by: 
-\[
-P_{swing} = \frac{T_{\text{sw}}} {T_{\text{st}} + T_{\text{sw}}}, 
-\] 
-where $T_{\text{sw}}$ is the swing time and $T_{\text{st}}$ the stance time \parencite{qiu2023adaptive}.
-A 50\% duty cycle would correspond to swing and stance being of equal length, both taking up exactly half a cycle time.
-The swing initiation signal $s_i \in \{0,1\}$ notifies the control unit whether to initiate the swing phase ($s_i = 1$), independent of the legs position in the cycle, or whether to continue with the current cycle's execution ($s_i = 0$).
-The controller also receives an additional input, a vector pointing in the direction the robot is supposed to move.
+$P_{swing}$ describes the proportion of the swing (duty) phase in relation to a whole cycle \parencite{qiu2023adaptive} and can be expressed by: 
+
+\begin{equation}
+P_{swing} = \frac{T_\text{sw}} {T_\text{st} + T_\text{sw}}
+\end{equation}
+where $T_\text{sw}$ and $T_\text{st}$ are the durations of the swing and stance phase respectively given as:
+\begin{equation}
+T_\text{sw} = \frac{P_\text{swing}}{f_c}, \quad T_\text{st} = \frac{1-P_\text{swing}}{f_c}
+\end{equation}
+
+A 50\% duty cycle corresponds to swing and stance being of equal length, both taking up exactly half a cycle time.
+The swing initiation signal $s_i \in \{0,1\}$ for each of the six legs ($i \in \{1,...,6\}$) indicates to the control unit whether to initiate the swing phase ($s_i = 1$), independent of the legs position in its cycle.
+$s_i = 0$ simply tells the control unit to continue on with the current cycle execution.
+The control units also receive a movement direction vector as an additional input.
+This vector points in the direction in which the robot is supposed to move.
 All these inputs can either be received from a static gait definition, in which the parameters for each leg are statically configured, or can be provided by a reinforcement learning agent.
 
-The Simulink RL Agent, which is a separate component of the controller subsystem, receives observations from the environment and hexapod model as well as a reward signal and outputs an action vector which consists of the swing initiation signal for each leg during the current time step.
-The RL agent is a standard block from the \textit{Reinforcement Learning} library and represents an agent in the same sense as described in \ref{sec: Reinforcement Learning}.
+The Simulink RL Agent, a standard library block and separate component of the controller subsystem, receives the current time steps observations $o_t$ from the environment and hexapod model as well as a reward signal $r(t)$.
+It outputs an action vector $a_t = \{s_1,...,s_6\}$, which consists of the swing initiation signal for each leg during the current time step.
+The RL agent is a block belonging to the \textit{Reinforcement Learning} library and represents an agent in the same sense as described in \ref{sec: Reinforcement Learning}.
 Further and more detailed elaboration on both RL agent and reward function will be provided in section \ref{sec: RL setup}.
 
 \begin{figure}
@@ -204,7 +213,7 @@ Further and more detailed elaboration on both RL agent and reward function will 
 
 Continuing  with the explanation of the controller subsystem, we focus on a single leg control unit.
 Such a unit, as can be seen in \ref{figure: Leg control unit}, consists of a leg trajectory generator and three PID feedback control loops, one for each of the leg joints.
-The leg trajectory generators task is to generate joint angles which allow the leg end-effector to follow a smooth trajectory, all in accordance to the input frequency, duty cycle, swing initiation and pattern rotation.
+The leg trajectory generators task is to generate joint angles which allow the leg end-effector to follow a smooth trajectory, all in accordance to the $f_c$, $P_\text{swing}$, $s_i,\ i \in \{1,...,6\}$ and direction vector.
 At each time step it outputs the desired angle for the \textalpha-, \textbeta- and \textgamma-joints, which the PID controllers then work on achieving by regulating the applied torques.
 The PID controller parameters $K_p$, $K_i$ and $K_d$ (and $N$) are tuned via trial-and-error method and are given in \ref{table: PID parameters}.
 
@@ -225,43 +234,44 @@ Finalizing the trajectory generation, the inverse kinematics solver receives the
 
 The Signal Generator, displayed in \ref{figure: Signal Generator}, consists mainly of two parts, a swing phase subsystem and a stance phase subsystem.
 These provide the x- and z-coordinate signals during their respective phases.
-The coordination between the two units is influenced by $f_c$, $P_{swing}$ and $s_i,\ i \in \{1,...,6\}$.
+The coordination between the two units is influenced by $f_c$, \ $P_{swing}$ and $s_i,\ i \in \{1,...,6\}$.
 If the swing initiation $s_i$ of a signal generator is pulled high, the swing phase subsystem is reset and the outputs (x,z) are switched to the swing system.
 At the conclusion of the swing phase, which means the x-coordinate coincides with the AEP, the swing phase subsystem gives up control to the stance phase subsystem via the \textit{Swing finished} signal.
 This induces a reset on the stance phase subsystem and switches the outputs over to this system.
 In detail, the swing and stance phase signals are generated by modulation of geometric and linear functions based on $f_c$, $P_{swing}$ and the function amplitudes.
 These amplitudes are derived from the planned step length and height.
-
-\textbf{Swing and stance phase functions}
+The swing and stance phase signal functions are defined as follows:
 \begin{align}
-	T_{sw}(t) & = 
+	\Theta_{sw}(t) & = 
 	\begin{cases}
 		x_{sw}(t) = A_x \cdot \sin(\frac{f_c \cdot t} {2 \cdot P_{\text{swing}}} - \frac{\pi}{2})\\
 		z_{sw}(t) = A_z \cdot \sin(\frac{f_c \cdot t} {2 \cdot P_{\text{swing}}})
-	\end{cases}, t \in [0,\frac{P_\text{swing}}{f_c}] 
+	\end{cases} & , t \in [0,T_\text{sw}] 
 	\\
-	T_{st}(t) & =
+	\Theta_{st}(t) & =
 	\begin{cases}
 		x_{st}(t) = \\
 		z_{st}(t) = 0
-	\end{cases}, t \in (\frac{P_\text{swing}}{f_c}, \frac{1}{f_c}]    
+	\end{cases} & , t \in [0, T_\text{st}]    
 \end{align}
+The parameter $t$ is limited to the ranges $[0,T_sw]$ and $[0, T_st]$, because if one of the subsystems reaches the end of its phase ($t=T_sw$ or $t=T_st$), the subsystems internal clock is reset and thus upon its next activation, the function evaluation begins from $t=0$ again.
+
 \todo{Double-check equations}
 \todo{Insert image of trajectory graphs}
 
-\begin{figure}[h]
+\begin{figure}[!h]
 	\centerline{\includesvg[scale=0.75]{Simulink/Simulink_SignalGeneratorOverview}}
 	\caption{Signal Generator}
 	\label{figure: Signal Generator}
 \end{figure}
 
-\begin{figure}[h]
+\begin{figure}[!h]
 	\centerline{\includegraphics[scale=0.2]{Simulink/SignalGenerator_Graph_0.5Hz.PNG}}
 	\caption{Trajectory coordinates generated by a signal generator with $f_c=0.5$\ Hz, $P_{Swing}=40\text{\%}$}
 	\label{figure: Trajectory graphs}
 \end{figure}
 
-\begin{figure}[h]
+\begin{figure}[!h]
 	\centering
 	\begin{subfigure}[b]{0.55\textwidth}
 		\includesvg[width=1\linewidth]{Simulink/Simulink_SwingPhaseGenOverview}
@@ -275,29 +285,27 @@ These amplitudes are derived from the planned step length and height.
 		\label{fig:Ng2}
 	\end{subfigure}
 	
-	\caption[Swing and Stance Phase]{(a) Swing phase subsystem. The swing ellipse is generated by two sine waves with different amplitude and phase. (b) Stance phase subsystem. As opposed to (a), the x-coordinate is now generated by a linear function and the z-coordinate is 0 throughout the whole phase.
-		values of $M,I$.}
+	\caption[Swing and Stance Phase]{(a) Swing phase subsystem. The swing ellipse is generated by two sine waves with different amplitude and phase. (b) Stance phase subsystem. As opposed to (a), the x-coordinate is now generated by a linear function and the z-coordinate is 0 throughout the whole phase.}
 \end{figure}
-
 
 
 \subsubsection{Analytical Inverse Kinematics Solver} \label{subsubsec: IK Solver}
 Even though Simulink's \textit{Robotics System Toolbox} includes an iterative inverse kinematics block, the block is not able to support the calculation speed we require.
 The simulations, and thus the trajectory calculations as well, need to be run at about 1-2 kHz (time steps per second) to ensure stability of the simulation and smooth motion of the hexapod.
-As we are not able to achieve this compute frequency with the provided iterative solver, we implement our own, purpose-build analytical IK solver aiming to drastically improve computation time.
+As we are not able to achieve this compute frequency with the provided numerical solver, we implement our own, purpose-build analytical IK solver aiming to drastically improve computation time.
 
-\begin{figure}[h]
+\begin{figure}[!h]
 	\begin{subfigure}{.5\textwidth} % this sets the figure to be max half the width of the page
 		\centering
 		% include first image
-		\includegraphics[width=\linewidth]{IK_Solver_alphaAngle}  % this sets the image to fill 90% of the available space -> 45% of the line width in total. 
+		\includegraphics[width=.9\linewidth]{IK_Solver_alphaAngle}  % this sets the image to fill 90% of the available space -> 45% of the line width in total. 
 		\caption{}
 		\label{figure: IK Solver Alpha Angle}
 	\end{subfigure}
 	\begin{subfigure}{.5\textwidth}
 		\centering
 		% include second image
-		\includegraphics[width=\linewidth]{IK_Solver_betaGammaAngle}  
+		\includegraphics[width=.9\linewidth]{IK_Solver_betaGammaAngle}  
 		\caption{}
 		\label{figure: IK Solver Beta/Gamma Angle}
 	\end{subfigure}
@@ -322,14 +330,7 @@ Where $\beta_1$, $\beta_2$, $\gamma_1$ and \text{BF} are given by:
 	\gamma_1 = \arccos(\frac{{l_\text{tibia}}^2 + {l_\text{femur}}^2 - {\text{BF}}^2}  {2 \cdot {l_\text{tibia}} \cdot {l_\text{femur}}}) ,\quad \quad \quad \text{BF} = \sqrt{(l_\text{total} - l_\text{coxa})^2 + z^2}.
 \]
 
-For spatial contact force parameters, see \parencite{trotta2022walking}.
-
-When running the simulation at large step sizes, we observed simulation instabilities similar to the ones mentioned in \parencite{thilderkvist2015motion}, although not of the same significance.
-We attribute the unsatisfactory results they experienced from the spatial friction forces to be most-likely linked to an earlier MATLAB version used for their work.
-A step size of 0.00025s(0.25ms) resulted in satisfactory behaviour in almost all of our simulations.
-Only when training a RL agent, we reduced the step size initially even further to anticipate uncoordinated, trembling behaviour due to an untrained agent.
-
-\begin{table}[h]
+\begin{table}
 	\centering
 	\begin{tabular}{| c | c |}
 		\hline
@@ -364,49 +365,49 @@ Only when training a RL agent, we reduced the step size initially even further t
 	\caption{Initial joint positions according to urdf-file}
 	\label{table:Initial joint positions}
 \end{table}
+\todo{Muss keine Tabelle sein}
 
 
 \section{Learning Leg Coordination} \label{sec: RL setup}
-The leg coordination problem can be considered a Markov decision process(MDP).
-The MDP is a 5-tuple $\mathcal{\{S,A,P,R,\gamma\}}$, where $\mathcal{S}$ is a finite set of states, $\mathcal{A}$ is a finite set of actions, $\mathcal{P}$ is a state-transition probability matrix ($\mathcal{P}_{ss'}^a=\mathbb{P}[S_{t+1}=s' | S_t=s, A_t=a]$), $\mathcal{R}_s^a$ is a reward function ($\mathcal{R}_s^a = \mathbb{E}[R_{t+1} | S_t=s, A_t=a]$) and $\gamma \in [0,1]$ is a discount factor.
+\todo{Redo this section}
+From a RL point of view, the leg coordination problem can be considered a POMDP (Partially observable Markov decision process).
+The POMDP is an extension to the MDP definition and describes problem spaces in which only parts of the environment can be observed.
+This is particularly the case for complex continuous environments in which it is impossible to observe every detail of the process.
+For the problem we try to solve here this holds true as well.
 
-
-When we first started working on te RL process, te result were not very promising. The agent did stabilize, meaning it did not jump around randomly, but it was not able to find an efficient gain.
-The agent never learned to reliably move a leg forward if it was start to drag behind due to reaching the PEP.
-
-The reward stayed relatively flat over a period of over 2000 episodes of training.
-The strong deviation from the mean, even after several hundred episodes can be attributed to an averaging window of just 5 episodes(or steps ?). 
-In later training experiments, this averaging window was increased.
-The small averaging window might have contributed to the poor performance of the agent(unlikely, olny important for average graph ?).
+%The MDP is a 5-tuple $\mathcal{\{S,A,P,R,\gamma\}}$, where $\mathcal{S}$ is a finite set of states, $\mathcal{A}$ is a finite set of actions, $\mathcal{P}$ is a state-transition probability matrix ($\mathcal{P}_{ss'}^a=\mathbb{P}[S_{t+1}=s' | S_t=s, A_t=a]$), $\mathcal{R}_s^a$ is a reward function ($\mathcal{R}_s^a = \mathbb{E}[R_{t+1} | S_t=s, A_t=a]$) and $\gamma \in [0,1]$ is a discount factor.
+We define the MDP tuple $\mathcal{\{S,A,P,R,\gamma\}}$ as follows:
+The state space $\mathcal{S}$ consists of all possible configurations of the continuous simulation environment and cannot be considered a finite set.\\
+The action space $\mathcal{A}$ is defined as the set of all possible permutations of the action tuple $\{s_1,...,s_6\}$, meaning it is the set of all 6-bit binary numbers and thus is of size $2^6$.
+It follows that the action space is discrete, as the agent can only decide to activate a swing phase or not.\\
+As it is not required for the training process, we do not explicitly provide a state transition probability matrix $\mathcal{P}$.\\
+The reward function $\mathcal{R}$ given by: $R(t) = s_x(t) + v_x(t) - v_y(t) - \delta_\text{h}(t) - 0.025 \cdot W(t) \ (+ r_\text{survival})$.\\
+\todo{Only current Def.}
+The components of the reward functions are:
+The distance $s_x(t)$ and speed $v_x(t)$ the robot walks along the x-axis, the speed $v_y(t)$ along the y-axis with which the robot deviates from its straight path, the height difference between the robots front and rear $\delta_\text{h}(t)$, the energy consumption $W(t)$ and the survival reward $r_\text{survival}$.
+By negatively rewarding height differences along the hexapods body as well as energy consumption, we aim to prevent undesirable jumping or twitching behaviour.
+We experiment with several different discount factor $\gamma$, see chapter \ref{ch:results} for more information.
 
 MATLABs Reinforcement Learning Toolbox offers several different RL architectures to choose from, namely DDPG, TR3, PPO, SAC and TRPO.
-We choose to use the DDPG as well as PPO algorithms, as these have already proved themselves to work well in tasks concerning robotic locomotion\parencite{FIND AUTHOR}.
-\todo{Find authors who used DDPG and PPO for robotics(PPO bei Schilling(?), DDPG bei ? )}
-
-
-
-
-DDPG does not jitter at start of learning, PPO does.
+We choose to use the DDPG (Deep Deterministic Policy Gradient) as well as PPO (Proximal Policy Optimization) algorithms, as these have already proven themselves to work well in tasks concerning robotic locomotion\parencite{FIND AUTHOR}.
+\todo{Find authors who used DDPG and PPO for robotics(PPO bei Schilling et al.(?), DDPG bei ? )}
+To use such an agent in combination with a Simulink model, the model needs to include a \textit{RL agent} block from the \textit{Reinforcement Learning} toolbox.
+One also has to define an observation and action space as well as an environment object in the MATLAB Workspace.
+%There are 2 options for agent creation: The \textit{Reinforcement Learning Designer} MATLAB app with a reduced graphical interface or a MATLAB script-file in which the agent is defined in detail.
+We choose the utilise MATLAB scripts for this purpose, as this allows us to permanently specify agents and also automate the agent creation task.
+For each of the agents we experimented with, DDPG, continuous and discrete PPO, we write a separate creation script.
 
 To speed up the learning process, we decided to utilize \textit{MATLABs Parallel Computing} toolbox.
-The toolbox allowed us to create a parallel pool of several workers, each of whom runs a separate episode of the RL process.
-The parallel learning process is carried out asynchronously, meaning workers who finished their task early do not have to wait on the others to finish as well before proceeding.
+The toolbox allows us to initialise a parallel pool of several workers, each of whom runs a separate episode of the RL training process.
+The parallel learning process is carried out asynchronously, meaning workers who finish their task early do not have to wait on the others to finish as well before proceeding.
 In contrast to synchronous parallelization, where the workers send their results to the parallel pool client all at the same time and receive updates to their parameters all at once, workers under asynchronous parallelization can send their results as soon as they finish their task and instantly receive parameter updates.
-By parallelization, we significantly improve the number of simulated episodes.
+%By parallelization, we significantly improve the number of simulated episodes.
+\todo{Expand}
 
 
-
-Start learning process of PPO(Proximal Policy Optimization) agent at a small step size(0.00025s = 0.25ms) to prevent simulation errors due to initial random jerking of robot legs.
-After the agent has stabilized, the step size can be increased to speed up the further learning process.]
-
-
-Observation space only consists of a part of all states, thus the MDP can not be fully described and is therefore called a Partially Observable Markov Decision Process(POMDP).
-The robot could be equipped with additional sensors to perceive a larger part of the state-space, but we find that the observations given by us are sufficient for successful learning of the defined task.
-
-
+We start the training of agents at a small simulation step size(0.00025s = 0.25ms) to prevent simulation errors due to initial random jerking of robot legs.
+After the agent has stabilized, the step size is increased to speed up the further learning process.
 \cite{lillicrap2015continuous}
-\todo{Describe dimension of action and observation space}
-
 
 
 
@@ -416,13 +417,13 @@ The robot could be equipped with additional sensors to perceive a larger part of
 \begin{itemize}
 	\item Signal the agent that a leg is dragging by adding a discrete observation per leg which is pulled high when the leg reached its PEP.
 	
-	\item Add more inputs to the RL agent
+	\item Add more inputs to the RL agent $\rightarrow$ Done, added accelerations
 	
 	\item Agent Parallelization for faster learning $\rightarrow$ Done and working
 	
-	\item RL Designer: Automatically save agents which reached a high enough reward to evaluate them later $\rightarrow$ Done.
+	\item RL Designer: Automatically save agents which reach a high enough reward to evaluate them later $\rightarrow$ Done.
 	
-	\item As we have multiple robotic 'actuators' in this project, a continuous action space is favorable.
+	\item As we have multiple robotic 'actuators' in this project, a continuous action space is favorable $\rightarrow$ Not the case, as we have discrete actions
 	
 \end{itemize}
 
