@@ -162,7 +162,7 @@ As Simscape itself only provides basic geometric objects but allows for the use 
 In addition to being the testing ground of the hexapod model, the environment also acts as part of the reinforcement learning process.
 Similar to \ref{figure: RL Illustration}, the environment provides observations to the RL agent and calculates a reward signal, based on the agents performance \todo{As of now not represented in the model, reward is part of controller}.
 It does not however directly receive actions from the agent, as the hexapod, to which the actions are applied to by the RL agent, is its own subsystem.
-If we would define the environment in a manner analogous to \ref{figure: RL Illustration,}, we would have to include both the environment subsystem and the hexapod subsystem as part of the "RL" environment.
+If we would define the environment in a manner analogous to \ref{figure: RL Illustration}, we would have to include both the environment subsystem and the hexapod subsystem as part of the "RL" environment.
 For obvious reasons such as modularity and clarity of model we choose not to adapt this.
 
 \subsection{Controller}
@@ -254,7 +254,7 @@ The swing and stance phase signal functions are defined as follows:
 		z_{st}(t) = 0
 	\end{cases} & , t \in [0, T_\text{st}]    
 \end{align}
-The parameter $t$ is limited to the ranges $[0,T_sw]$ and $[0, T_st]$, because if one of the subsystems reaches the end of its phase ($t=T_sw$ or $t=T_st$), the subsystems internal clock is reset and thus upon its next activation, the function evaluation begins from $t=0$ again.
+The parameter $t$ is limited to the ranges $[0,T_\text{sw}]$ and $[0, T_\text{st}]$, because if one of the subsystems reaches the end of its phase ($t=T_sw$ or $t=T_st$), the subsystems internal clock is reset and thus upon its next activation, the function evaluation begins from $t=0$ again.
 
 \todo{Double-check equations}
 \todo{Insert image of trajectory graphs}
@@ -280,7 +280,8 @@ The parameter $t$ is limited to the ranges $[0,T_sw]$ and $[0, T_st]$, because i
 	\end{subfigure}
 	
 	\begin{subfigure}[b]{0.55\textwidth}
-		\includesvg[width=1\linewidth]{Simulink/Simulink_SwingPhaseGenOverview}
+	%	\includesvg[width=1\linewidth]{Simulink/Simulink_SwingPhaseGenOverview}
+	\includegraphics[scale=0.5]{example-image-b}
 		\caption{}
 		\label{fig:Ng2}
 	\end{subfigure}
@@ -330,7 +331,7 @@ Where $\beta_1$, $\beta_2$, $\gamma_1$ and \text{BF} are given by:
 	\gamma_1 = \arccos(\frac{{l_\text{tibia}}^2 + {l_\text{femur}}^2 - {\text{BF}}^2}  {2 \cdot {l_\text{tibia}} \cdot {l_\text{femur}}}) ,\quad \quad \quad \text{BF} = \sqrt{(l_\text{total} - l_\text{coxa})^2 + z^2}.
 \]
 
-\begin{table}
+\begin{table}[h!]
 	\centering
 	\begin{tabular}{| c | c |}
 		\hline
@@ -349,7 +350,7 @@ Where $\beta_1$, $\beta_2$, $\gamma_1$ and \text{BF} are given by:
 	\label{table: PID parameters}
 \end{table}
 
-\begin{table}
+\begin{table}[h!]
 	\centering
 	\begin{tabular}{| c | c | c | c |} 
 		\hline
@@ -376,15 +377,18 @@ This is particularly the case for complex continuous environments in which it is
 For the problem we try to solve here this holds true as well.
 
 %The MDP is a 5-tuple $\mathcal{\{S,A,P,R,\gamma\}}$, where $\mathcal{S}$ is a finite set of states, $\mathcal{A}$ is a finite set of actions, $\mathcal{P}$ is a state-transition probability matrix ($\mathcal{P}_{ss'}^a=\mathbb{P}[S_{t+1}=s' | S_t=s, A_t=a]$), $\mathcal{R}_s^a$ is a reward function ($\mathcal{R}_s^a = \mathbb{E}[R_{t+1} | S_t=s, A_t=a]$) and $\gamma \in [0,1]$ is a discount factor.
-We define the MDP tuple $\mathcal{\{S,A,P,R,\gamma\}}$ as follows:
+We define the POMDP tuple $\mathcal{\{S,A,P,R,\gamma\}}$ as follows:
 The state space $\mathcal{S}$ consists of all possible configurations of the continuous simulation environment and cannot be considered a finite set.\\
 The action space $\mathcal{A}$ is defined as the set of all possible permutations of the action tuple $\{s_1,...,s_6\}$, meaning it is the set of all 6-bit binary numbers and thus is of size $2^6$.
 It follows that the action space is discrete, as the agent can only decide to activate a swing phase or not.\\
-As it is not required for the training process, we do not explicitly provide a state transition probability matrix $\mathcal{P}$.\\
-The reward function $\mathcal{R}$ given by: $R(t) = s_x(t) + v_x(t) - v_y(t) - \delta_\text{h}(t) - 0.025 \cdot W(t) \ (+ r_\text{survival})$.\\
+As it is not required for the training process, we do not explicitly provide a state transition probability matrix $\mathcal{P}$.
+The reward function $\mathcal{R}$ given by:
+ \[
+ R(t) = s_x(t) + v_x(t) - v_y(t) - \Delta_\text{h}(t) - 0.025 \cdot W(t) \ (+ r_\text{survival}).
+ \]
 \todo{Only current Def.}
 The components of the reward functions are:
-The distance $s_x(t)$ and speed $v_x(t)$ the robot walks along the x-axis, the speed $v_y(t)$ along the y-axis with which the robot deviates from its straight path, the height difference between the robots front and rear $\delta_\text{h}(t)$, the energy consumption $W(t)$ and the survival reward $r_\text{survival}$.
+The distance $s_x(t)$ and speed $v_x(t)$ the robot walks along the x-axis, the speed $v_y(t)$ along the y-axis with which the robot deviates from its straight path, the height difference between the robots front and rear $\Delta_\text{h}(t)$, the energy consumption $W(t)$ and the survival reward $r_\text{survival}$.
 By negatively rewarding height differences along the hexapods body as well as energy consumption, we aim to prevent undesirable jumping or twitching behaviour.
 We experiment with several different discount factor $\gamma$, see chapter \ref{ch:results} for more information.
 
@@ -396,13 +400,14 @@ One also has to define an observation and action space as well as an environment
 %There are 2 options for agent creation: The \textit{Reinforcement Learning Designer} MATLAB app with a reduced graphical interface or a MATLAB script-file in which the agent is defined in detail.
 We choose the utilise MATLAB scripts for this purpose, as this allows us to permanently specify agents and also automate the agent creation task.
 For each of the agents we experimented with, DDPG, continuous and discrete PPO, we write a separate creation script.
+\todo{Expand}
 
 To speed up the learning process, we decided to utilize \textit{MATLABs Parallel Computing} toolbox.
 The toolbox allows us to initialise a parallel pool of several workers, each of whom runs a separate episode of the RL training process.
 The parallel learning process is carried out asynchronously, meaning workers who finish their task early do not have to wait on the others to finish as well before proceeding.
 In contrast to synchronous parallelization, where the workers send their results to the parallel pool client all at the same time and receive updates to their parameters all at once, workers under asynchronous parallelization can send their results as soon as they finish their task and instantly receive parameter updates.
 %By parallelization, we significantly improve the number of simulated episodes.
-\todo{Expand}
+
 
 
 We start the training of agents at a small simulation step size(0.00025s = 0.25ms) to prevent simulation errors due to initial random jerking of robot legs.

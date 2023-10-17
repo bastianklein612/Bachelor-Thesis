@@ -9,7 +9,7 @@ By emulating the biomechanics and behaviour of insects, researchers and engineer
 
 Most commonly, each leg of a hexapod consists of 3 segments named coxa, femur and tibia, equivalent to their biological counterparts.
 The individual segments are connected by 3 1-DoF (degrees of freedom) joints, each actuated by an electric servo motor.
-The first joint, hereafter named \textalpha-joint, connects the coxa to the thorax(body) and moves in parallel to the ground, thus being responsible for the longitudinal placement of each leg.
+The first joint, hereafter named \textalpha-joint, connects the coxa to the thorax (body) and moves in parallel to the ground, thus being responsible for the longitudinal placement of each leg.
 Coxa and femur are connected by the \textbeta-joint, while the femur and tibia are connected by the \textgamma-joint. 
 These joints move orthogonal to the movement plane of the \textalpha-joint. Together, they are responsible for the lateral positioning of each leg.
 The nomenclature we use use in this thesis to label the joints and leg segments was adopted from the works of \cite{schilling2013walknet} and \cite{HeterarchicalArchitectureSchilling}.
@@ -222,7 +222,7 @@ The calculated control output is fed into the controlled system or process and t
 As an additional note, in real-world applications the derivative term is almost never implemented as a pure derivative, as it would be extremely sensitive to noise.
 Instead, a so called filter coefficient ($N$) is utilised to counteract this sensitivity.
 The modified term acts as a first-order, low pass filter, attenuating high frequency noise.
-This term acts equivalently to a derivative up to a given cutoff frequency[Hz] given by: $\frac{N}{2\pi}$ \todo{Filter coeff. and cutoff frequency}.
+This term acts equivalently to a derivative up to a given cutoff frequency[Hz] given by: $\frac{N}{2\pi}$ \todo{Not required}.
 
 The performance of a PID controller greatly depends on the values of its parameters $K_p$, $K_i$ and $K_d$ (and N).
 To achieve desired traits like a fast response time and minimal overshooting or oscillation, these parameters have to be carefully tuned. 
@@ -239,7 +239,7 @@ Reinforcement Learning (RL), besides Supervised and Unsupervised Learning, is on
 The basic underlying principle of RL is to learn how a scalar reward signal can be cumulatively maximized without being told which path might lead to the highest reward \parencite{sutton2018reinforcement}.
 On an abstract level, learning takes place by letting an agent (or multiple agents) take sequences of actions in an environment, then improving the actions to be taken next time, based on the obtained experiences.
 This process is called "training" and it is essential to the operation of RL.
-Some of the principles used in RL are inspired by behavioral psychology, where learning is mainly driven by the consequences of the actions taken \parencite{sutton2018reinforcement, joshi2021reinforcement}.
+Some of the principles used in RL are inspired by behavioural psychology, where learning is mainly driven by the consequences of the actions taken \parencite{sutton2018reinforcement, joshi2021reinforcement}.
 To gain a deeper understanding of Reinforcement Learning, we will examine the three most important elements of the training process in detail:
 
 \begin{figure}[h]
