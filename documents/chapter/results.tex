@@ -1,7 +1,7 @@
 %!TEX root = ../thesis.tex
 \chapter{Results}
 \label{ch:results}
-
+\todo{major rewrite and update}
 \section{intro}
 Broad introduction to results chapter.
 
@@ -13,9 +13,9 @@ During the development process we observed that the initially created model can 
 As an example, additional sensory output was added without any complications.
 The sensor just needs to be added to the model and the signal routed through the already existing sonsory information bus.
 
-Given a moderately small step size of 0.5ms(in some cases 0.25ms) the model can be simulated without running into any Simscape exceptions.
+Given a moderately small step size of 0.5ms (in some cases 0.25ms) the model can be simulated without running into any Simscape exceptions.
 The simulation speed is close to real time given 1 core and 0.5ms step-size.
-If the chosen step size is to large(>0.5ms) the simulation becomes unstable and can run into exceptions.
+If the chosen step size is to large (>0.5ms) the simulation becomes unstable and can run into exceptions.
 These most often occur due to objects moving into each other faster that the solver can observe due to its low time resolution and thus cause collision exceptions.
 
 The robots behaviour seems, to the best of our knowledge and without examining a real world model, physically accurate.
@@ -23,29 +23,32 @@ The robots behaviour seems, to the best of our knowledge and without examining a
 To encapsulate the system and only provide the necessary inputs and outputs, the hexapod model is placed inside a subsystem.
 This also allows for the duplication of the hexapod system, so that in future research it is possible to use this system in multi-agent simulations as well.
 
-
-
+When running the simulation at large step sizes ($>0.5 \text{ms}$), we observed simulation instabilities similar to the ones mentioned in \parencite{thilderkvist2015motion}, although not of the same significance.
+We attribute the unsatisfactory results they experienced from the spatial friction forces to be most-likely linked to an earlier MATLAB version used for their work.
+A step size of 0.00025s(0.25ms) resulted in satisfactory behaviour in almost all of our simulations.
+Only when training a RL agent, we reduced the step size initially even further to anticipate uncoordinated, trembling behaviour due to an untrained agent.
 
 
 \section{RL Learning review}
-
 Trying to learn the coordination of a hexapod robots legs without any significant prior knowledge of reinforcement learning proved to be more difficult than anticipated.
 Even though RL could be described as a black box with in- and outputs which learns automatically what to do given a well defined reward function, there is an overwhelming amount of parameters to consider.
 Which reinforcement learning algorithm should be chosen, which learning parameters need to be changed, which and how many layers should the NN consist of, how many episodes of training are needed to see results ?
 
 
+When we first started working on te RL process, te result were not very promising. The agent did stabilize, meaning it did not jump around randomly, but it was not able to find an efficient gain.
+The agent never learned to reliably move a leg forward if it was starting to drag behind due to reaching the PEP.
+
 Early on in the RL setup process we realized that the current inputs into the hexapod model are not suitable for reinforcement learning.
 These initial inputs, frequency, duty cycle and offsets were better suited to being statically optimized instead of learned.
-The new inputs, one signal per leg to initiate the swing phase, were much more suited for RL, as they enable a more complex and dynamic interaction with the robot.
+The new inputs, one signal per leg to initiate the swing phase, are much more suited for RL, as they enable a more complex and dynamic interaction with the robot.
 Only after implementing these changes were we able to record the first successes in learning.
 
 
 \textit{MATLABs Parallel Computing Toolbox} provided a significant boost in learning performance.
-By being able to run 8 agents in parallel , one per processor core, we were able to speed up the learning process by a factor of 8.
+By being able to run 8-16 agents in parallel , one per processor core or multiple in separate threads, we were able to speed up the learning process significantly.
 This allowed us to test several different agent configurations in an acceptable amount of time and also enabled us to refine well performing agents by running more episodes.
 
-The simulation studies and RL training performed in this work are accomplished with a desktop computer powered by Intel i7-11700K CPU, 32 GB of RAM and NVIDIA RTX 2060 GPU.
+The simulation studies and RL training we run in this work are accomplished with a desktop computer powered by an Intel i7-11700K CPU, 32 GB of RAM and a NVIDIA RTX 2060 GPU.
 
 Concerning MATLAB, we used the version 2023a for all of our work.
-
 
