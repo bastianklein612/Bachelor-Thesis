@@ -8,15 +8,16 @@ Simulations play an increasingly important role in robotics research and develop
 They offer a cost-effective and efficient means to investigate, analyze and optimize the behavior of robots even before they are physically implemented \parencite{de2019analysis}. 
 Notably, various companies involved in the field of robotics use simulation technology extensively in the development process of their systems, such as Boston Dynamics \parencite{BostonDynamicsSimulation}, Tesla Inc. \parencite{TeslaAiDay2022} or Kuka Robotics \parencite{KukaSim}.
 Due to their high degree of mobility and versatility, hexapods are of particular interest in robotics. 
-When compared to wheeled or bipedal architectures, the flexibility six legs provide enable these robots to more easily overcome challenging terrain and complex obstacles \parencite{barai2013smart, atifystructure}
-This makes them particularly interesting for navigating landscapes inaccessible by other robotic systems or hazerdous to humans, possible applications being search and rescue, agriculture industry or even extraterrestrial exploration.\todo{CITE}
+When compared to wheeled or bipedal architectures, the flexibility six legs provide enable these robots to more easily overcome challenging terrain and complex obstacles \parencite{barai2013smart, atifystructure}.
+Hexapods, in contrast to bipedal architectures, are also statically stable, meaning they are able to stay in an upright position with with little to no active control \parencite{azayev2020blind}. 
+This makes them particularly interesting for navigating landscapes inaccessible to other robotic systems or hazardous to humans, examples of possible applications being search and rescue, the agriculture industry or even extraterrestrial exploration \parencite{trotta2022walking, billah2008walking}.
 
 %\textbf{PROBLEM:}
 \todo{Reads to much like defining the goals I want to achieve}
 The process of developing software for these hexapods can be a challenging and by no means trivial task. %is a challenging and by no means trivial task.
 While maintaining balance for instance, is evidently easier for this architecture than for the aforementioned bipedal robots, coordinating the many legs during movement poses a major challenge \parencite{azayev2020blind,schilling2013walknet}.
 
-When developing software for a real-world system as complex as a hexapod robot, one has to think about how to test the created software and how to efficiently analyze the system if it does not behave as expected.
+When developing software for a real-world system as complex as a hexapod robot, one has to think about how to test the created software and how to efficiently analyse the system if it does not behave as expected.
 Trying to base the software verification process solely on real robotic hardware can pose multiple problems.
 Firstly, there exists a heavy reliance on this hardware.
 As physical robotic hardware is costly, the actual number of robots available is often low if not singular \parencite{collins2021review, marvel2014collaborative}.

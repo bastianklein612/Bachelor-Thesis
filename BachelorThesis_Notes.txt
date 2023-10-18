@@ -736,8 +736,23 @@ Gespäch mit Malte und Julius:
 					- noch kein richtiger Gait, eher ein nach vorn schleifen
 	
 		--> Reward scheint gut definiert zu sein
+		
+	- DDPG-Agent hat max. 146 reward errreicht und zeigt erste anzeichen eines richtigen gaits
+	- Da Agent nicht auf einen hohen reward konvergiert sondern immer wieder abstürzt, Training nach ca. 8000 Ep. abgebrochen und gesichert
+	- Neuen DDPG-Agenten mit leicht abgeänderten Parametern aufgesetzt (actor-LR:1e-4 --> 1e-3 / Standard-Deviation: 0.05 --> 0.1)
+		--> Erzielt nach > 4000 Episoden schlechteres Ergebnis(<120)
+	
+	- DDPG ohne termination und termination-punishment als nächtes aufgesetzt
 	
 	
+-----------------------------------------
+18.10.
+	- Ergebnis des Nachtlaufs:
+	
+	
+	
+	- Oberseminar:
+		-
 	
 	
 	
