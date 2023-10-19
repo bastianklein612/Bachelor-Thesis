@@ -31,20 +31,19 @@ It is widely used by researchers and engineers alike in applications such as dat
 The MATLAB environment provides a multitude of apps and toolboxes to support different domains, for example model-based design, machine learning, signal processing or hardware co-simulation \parencite{MATLAB}.
 
 \hiddensubsection{Simulink}
-\textit{Simulink\textsuperscript{\textregistered}} is a \textit{MATLAB\textsuperscript{\textregistered}}-based graphical block-diagramming tool developed by the company . 
+\textit{Simulink\textsuperscript{\textregistered}} is a \textit{MATLAB\textsuperscript{\textregistered}}-based graphical block-diagramming tool. 
 It is a widely used tool which plays a crucial role in various engineering and research disciplines.
 It provides the user with a versatile platform to design, simulate and analyse complex dynamic systems.
-
 Simulink offers an expansive library of predefined blocks that represent different components and behaviours.
 The user connects these blocks using edges called signal lines to transport data between them.
 Blocks transform the data provided by the inputs and output the transformed data to other blocks connected downstream.
 Their behaviour can be discrete, like a switch or logic gate which activate when specific signals are pulled high, or represent more complex and continuous functions such as integrators, derivatives or sine waves.
-
 An arrangement of blocks can be encapsulated into a subsystem, thus creating different levels of abstraction.
 To enable simple reuse of components, subsystems can be placed in custom libraries.
 If such a library object is modified, each linked copy of this subsystem receives the update as well, preventing the developer from having to edit each copy individually.
 At any step in the development process, a model can be simulated and analysed.
-To be able to better analyse a model,the value of any signal lines can be plotted over time and the simulation speed can be slowed down.
+To be able to better analyse a model,the value of any signal lines can be plotted over time and the simulation speed can be slowed down \parencite{matlabSimulinkDocumention}.
+
 An example of a simple Simulink model can be seen in \ref{figure: Simulink bouncing ball example}.
 The model simulates the behaviour of an elastic ball which, under the influence of (earth's) gravity, accelerates downwards and repeatedly bounces of an imaginary plane.
 The ball looses energy over time, as represented by the coefficient of restitution.
@@ -73,7 +72,7 @@ To visualize the systems dynamics, the balls velocity and speed are logged and p
 \hiddensubsection{Simscape}
 \textit{Simscape\textsuperscript{\texttrademark}} is a Simulink block library developed by \textit{MathWorks\textsuperscript{\textregistered}} enabling the construction of physical systems within the Simulink environment.
 Utilizing Simscape, it is possible to model and simulate systems such as electric circuits, hydraulics or classical mechanics all within a unified simulation environment.
-The library offers a large variety of predefined components like resistors, capacitors, springs, dampers, etc.
+The library offers a large variety of predefined components like resistors, capacitors, springs, dampers, etc. \parencite{matlabSimscapeDocumentation}.
 To understand the model we develop in this thesis, Simscape's mechanical components are of the most interest, especially coordinate frames, rigid transforms, joints and rigid bodies.
 
 \begin{figure}[h!]
@@ -105,7 +104,7 @@ As an example, the same bouncing ball system as shown in \ref{figure: Simulink b
 
 
 \section{Insect Locomotion}
-The locomotion of insects, more specifically arthropods,\todo{CITATION} serves as a remarkable source of inspiration for the field of hexapod robotics.
+The locomotion of insects, more specifically arthropods, serves as a remarkable source of inspiration for the field of hexapod robotics.
 There exists a vast amount of papers studying the movement patterns of these insects.
 Common research subjects include stick insects (\textit{C. morosus}) \parencite{cruse1990mechanisms}, fruit flies (\textit{D. melanogaster}) \parencite{strauss1990coordination} or cockroaches (\textit{P. americana}) \parencite{delcomyn1971locomotion}. 
 The movement of an arthropod leg can generally be divided into two phases, a "Swing" and a "Stance" \parencite{schilling2013walknet}.
@@ -125,31 +124,29 @@ Together, these form what we will call the "Swing-Stance Cycle", which is depict
 	\label{figure: Stick insect leg}
 \end{figure}
 
-As its name suggests, the movement cycle of an arthropod leg is divided into two distinct phases, the swing phase and the stance phase.
-While in stance, the leg is constantly in contact with the ground and bears a partial load of the insects weight.
-During this phase the leg moves backwards relative to the body, from the AEP (Anterior Extreme Position) to PEP (Posterior Extreme Position) and pushes the insect forward.
+While the leg is in the stance phase, it is continuously in contact with the ground and bears a partial load of the insects weight.
+During this phase the leg pushes the body in the desired direction, moving from AEP (Anterior Extreme Position) to PEP (Posterior Extreme Position) \parencite{schilling2013walknet}.
 The AEP describes the foremost point a leg reaches during the movement cycle, the PEP the rearmost point.
-When the leg reaches the PEP, the swing phase begins and it is lifted of the ground and moved forward.
-While the stance phase is responsible for holding the insect up and moving it forward until reaching the PEP, the swing phase is needed to reposition the leg towards the AEP to start the cycle again.
-The complete cycle can be described as a pushing phase (Stance) and a repositioning phase (Swing).
-
-\todo{CITATIONS}
+When reaching the PEP, the swing phase begins, the leg is lifted of the ground and moved forward.
+While the stance phase is responsible for holding the insect up and moving it forward until reaching the PEP, the swing phase is needed to reposition the leg towards the AEP to start the cycle again\parencite{schilling2013walknet}.
+The complete cycle can be described as a pushing phase (Stance) and a repositioning phase (Swing) .
 
 
 \section{Inverse Kinematics}
-Inverse Kinematics (IK) is a mathematical approach predominately used in the fields of robotics and computer graphics.
+Inverse Kinematics (IK) is a mathematical approach predominately used in the fields of robotics and computer graphics \parencite{AristidouFABRIK}.
 It describes the process of calculating the joint angles required to place the end of a kinematic chain, the so called the end-effector, at a given position and orientation in space.
-A kinematic chain is an abstract description of a chain consisting of joints and links, such as a robotic manipulator or the arm of a human 3D model.
-Solving inverse kinematics can be a challenging task, especially for robots with many DoF and complex joint constraints.
+A kinematic chain serves as an abstract representation of a connected series of joints and links, such as a robotic manipulator or the arm of a human 3D model.
+Solving IK problems can be a challenging task, especially for robots with many DoF and complex joint constraints.
 The difficulty arises from the fact that there can exist multiple solutions (multiple sets of joint angles) to achieve the same end-effector pose.
-Some of which some may be physically feasible while others might lead to collisions or instabilities.\\
-There exist two primary techniques for solving the inverse kinematics problem, analytical and numerical methods \parencite{inverseKinematicsIllinois}:
-\todo{Citations}
-\todo{Mention forward kinematics ?}
+Some of which may be physically feasible while others might lead to collisions or instabilities.
+Essentially, IK is the opposite of the easier to solve problem of forward kinematics (FK), which is concerned with computing the position and orientation of the end-effector given a set of joint angles.
+FK is a simpler problem to solve, as there exists only one, straightforward to compute solution \parencite{inverseKinematicsIllinois}.
+ IK is essentially the opposite of a technique called forward kinematics, which computes the position and orientation of the end-effector given a set of joint angles.
+There exist two primary techniques for solving inverse kinematics problems, analytical and numerical methods \parencite{inverseKinematicsIllinois}:
 
 \subsection{Analytical Inverse Kinematics}
 Analytical solution methods are based on trigonometric equations derived from the geometric and kinematic parameters of the manipulator arm, such as the link length, joint type and joint constraints.
-An example of such derivations is presented at a later point in this work, see \ref{subsubsec: IK Solver}.
+We present an example of such derivations at a later point in this work, see \ref{subsubsec: IK Solver}.
 They provide exact solutions to the problem and only use minimal computational resources.
 Although very efficient and precise, the analytical approach is generally only feasible for kinematic chains with a small number of DoF.
 If the kinematic chain contains redundant DoFs, meaning it possesses more DoF than the dimension of the workspace it is in, there can exist multiple or even infinite solutions to the IK problem \parencite{inverseKinematicsIllinois}.
@@ -163,7 +160,7 @@ Using the estimated joint angles, the would-be position of the end-effector is c
 Based on this, the joint angle estimates are adjusted, aiming to reduce the error and bring the end-effector closer to the desired pose.
 This process is repeated until the error meets the predefined tolerances.
 The joint angles calculated during the final iteration are then considered a solution to the problem.
-Although the basic principle of iterative error-minimization is always present in numerical solution methods, the exact process of minimization is much more complex than described here and there exist numerous different techniques on how to achieve this goal, such as Cyclic Coordinate Descent, Jacobian Inverse or FABRIK. \todo{CITATION}
+Although the basic principle of iterative error-minimization is always present in numerical solution methods, the exact process of minimization is much more complex than described here and there exist numerous different techniques on how to achieve this goal, such as Cyclic Coordinate Descent, Jacobian Inverse or FABRIK \parencite{AristidouFABRIK}. \todo{CITATION}
 Numerical methods can be applied to a wide variety of inverse kinematic problems and are not limited by the number of DoF like analytical methods.
 Due to their iterative nature they are generally significantly more computationally expensive, given the same problem, than their analytical counterparts \parencite{aristidou2018inverse, inverseKinematicsIllinois}.
 
