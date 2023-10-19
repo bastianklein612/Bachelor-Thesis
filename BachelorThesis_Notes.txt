@@ -743,18 +743,40 @@ Gespäch mit Malte und Julius:
 		--> Erzielt nach > 4000 Episoden schlechteres Ergebnis(<120)
 	
 	- DDPG ohne termination und termination-punishment als nächtes aufgesetzt
+		--> es fällt schnell auf, dass Episodenterminierung sinnvoll ist um Stillstand zu vermeiden und Training zu beschleunigen
+			--> Abgebrochen
+	- diskreten PPO aufgesetzt (mit Terminierung)
 	
 	
 -----------------------------------------
 18.10.
-	- Ergebnis des Nachtlaufs:
-	
+	- Ergebnis des PPO-Nachtlaufs:
+		- kommt über einen reward von -50 im Durchschnitt nicht hinaus, max. Reward < 40
+		- Training nach 5000 Ep. abgebrochen und neuen DDPG-Versuch gestartet
 	
 	
 	- Oberseminar:
-		-
+		- beim RL sehr viel im Kreis gedreht, viele Variablen an denen man drehen kann
+		- erster Lernerfolg nutzt reward-funktion aus, mehr springen als laufen
+		- mittlerweile wirklich erster Erfolg mit neu definiertem reward (Energiebedarf und Terminierung)
+		- beim Schreiben:
+			- erste Version gestern an Malte geschickt
+			- Teil in dem es um RL geht muss noch ausgeführt werden, da momentan noch zu viele Änderungen
+		
+		- Hexapod-Modell in gitlab hochladen
+		- 08.11. Abschlussvortrag ?
+		
+-----------------------------------------
+18.10.		
+
+	DDPG-Agent von gestern und über Nacht(> 10000 Ep.):
+		-->
 	
-	
+	- TODO:
+		- Malte fragen, ob 08.11. als Abschlussvortrags-Termin passen würde
+		- Hexapod-Modell separieren und für Julius in Gitlab hochladen
+		
+	- Idee für RL-Training: Pauschalen Negativ-Reward bei Terminierung ernfernen, aber Terminierung beibehalten
 	
 	
 			
