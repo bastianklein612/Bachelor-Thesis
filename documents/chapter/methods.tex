@@ -107,7 +107,7 @@ We realise this can potentially create discrepancies between simulation and real
 
 From a top level perspective, the modified robot model is represented by a single \textit{Hexapod} subsystem block, which receives the torques to be applied as input and outputs sensory information about each joint.
 All of the internal joint parameters and friction coefficients used to model collisions are given in the tables \ref{table: Joint parameters} and \ref{X}.
-The joint parameters were already mostly given by the urdf specification, while we adapted other parameters from \parencite{AUTHOR} and \parencite{AUTHOR2}.
+The joint parameters were already mostly given by the urdf specification, while we adapted other parameters from \parencite{trotta2022walking} and \parencite{AUTHOR2}.
 \todo{Find source again}
 To summarize, we converted the provided hexapod model into a Simulink model, compartmentalized it and added sensing and actuation capabilities to the robots legs.
 In addition we made most of the models internal parameters accessible and modifiable within the MATLAB-script \textit{simulation\_setup.m}.
@@ -128,26 +128,50 @@ As mentioned above, joints can receive as input a torque to be applied and can o
 
 \begin{table}
 	\centering
-	\begin{tabular}{| l | c |}
+	\begin{tabular}{| l | c | c |}
 		\hline
-		\textbf{parameter} & \textbf{value} \\
 		\hline
-		spring stiffness & 0 \\
+		\textbf{Parameter} & \textbf{Value} & \textbf{Unit}\\
 		\hline
-		damping coefficient & 0 \\
-		\hline
-		spring stiffness (joint boundary) & $10^4 \frac{Nm}{\text{deg}}$ \\
-		\hline
-		damping coefficient (joint boundary) &  $10 \frac{Nm \cdot s}{\text{deg}}$\\
-		\hline
-		transit region width (joint boundary) &  $10^{\circ}$\\
+		Spring stiffness & 0 & $\frac{N}{m}$\\
+		
+		Damping & 0 &  $\frac{N \cdot s}{m}$\\
+		
+		Spring stiffness (joint boundary) & 0 & $\frac{Nm}{\text{deg}}$ \\
+		
+		Damping coefficient (joint boundary) &  0 & $\frac{Nm \cdot s}{\text{deg}}$\\
+		
+		Transit region width (joint boundary) & 0 &  deg\\
 		\hline
 	\end{tabular}
 	\caption{Internal joint parameters}
 	\label{table: Joint parameters}
 \end{table}
 
-\todo{For spatial contact force parameters, see \parencite{trotta2022walking}.}
+
+\begin{table}
+	\centering
+	\begin{tabular}{| l | c | c |}
+		\hline
+		\textbf{Parameter} & \textbf{Value} & \textbf{Unit} \\ 
+		\hline
+		\hline
+		Stiffness & $1 \times 10^6$ & $\frac{N}{m}$ \\
+		
+		Damping & $1 \times 10^6$ & $\frac{N\cdot s}{m}$ \\
+		
+		Transition region width & $1 \times 10^{-3}$ & $m$ \\
+		
+		Static friction coefficient &  0.9 & $-$ \\
+		
+		Dynamic friction coefficient &  0.8 & $-$ \\
+		
+		Critical velocity & $1 \times 10^{-3}$ & $\frac{m}{s}$ \\
+		\hline
+	\end{tabular}
+	\caption{\textit{Spacial contact force} parameters \parencite{trotta2022walking}}
+	\label{table: Spatial contact force}
+\end{table}
 
 %In this thesis we only utilize the sensor information about the current joint positions, but to allow for further expansions on the model, such as optimizing for minimal energy consumption, joint velocity and acceleration are provided as well.
 %It should be noted, that integrating the joint position over time would implicitly yield the same result, but we decided for ease of use to include this data explicitly.

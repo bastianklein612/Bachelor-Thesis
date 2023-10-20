@@ -770,14 +770,20 @@ Gespäch mit Malte und Julius:
 18.10.		
 
 	DDPG-Agent von gestern und über Nacht(> 10000 Ep.):
-		-->
+		--> > 140 reward, weiter laufen lassen
 	
 	- TODO:
 		- Malte fragen, ob 08.11. als Abschlussvortrags-Termin passen würde
 		- Hexapod-Modell separieren und für Julius in Gitlab hochladen
 		
 	- Idee für RL-Training: Pauschalen Negativ-Reward bei Terminierung ernfernen, aber Terminierung beibehalten
+
+-----------------------------------------
+19.10.		
+	- DDPG-Agenten nach 18000 Episoden abgebrochen: max. 1xx reward
+	- gleichen DDPG-Agenten ohne -50 Terminierungsreward gestartet, Terminierung an sich unverändert
 	
+
 	
 			
 ---------------------------------------------------------------------------------------------------------------------------
