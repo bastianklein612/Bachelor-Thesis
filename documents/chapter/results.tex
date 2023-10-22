@@ -30,12 +30,77 @@ Only when training a RL agent, we reduced the step size initially even further t
 
 
 \section{RL Learning review}
-Trying to learn the coordination of a hexapod robots legs without any significant prior knowledge of reinforcement learning proved to be more difficult than anticipated.
-Even though RL could be described as a black box with in- and outputs which learns automatically what to do given a well defined reward function, there is an overwhelming amount of parameters to consider.
-Which reinforcement learning algorithm should be chosen, which learning parameters need to be changed, which and how many layers should the NN consist of, how many episodes of training are needed to see results ?
+Trying to learn the coordination of a hexapod robots legs proved to be more difficult than anticipated.
+Even though RL could be described as a black box with in- and outputs which learns automatically what to do given a well defined reward function, there is an overwhelming amount of parameters that have to be considered.
+There are several different learning algorithms to choose from, each with their own set of parameters as well as the NN architecture of the agent. 
+
+We used the \textbf{D}eep \textbf{D}eterministic \textbf{P}olicy \textbf{G}radient (DDPG) algorithm, an actor-critic, model-free, online, off-policy RL method.
+The actor network consists of a 12-wide observation input layer followed by 3 100 neuron wide fully-connected layer, in between each of them a ReLU-layer to introduce non-linearity.
+Concluding the actor network is an output layer consisting of 6 neurons, one for each action channel.
+The architecture of critic network is more complicated, as it has to take in more informations.
+At the start this network consists of two separate branches, one taking as inputs X and one Y.
+On both branches the input layers are followed by a fully-connected and a ReLU layer.
+At this point the two branches are connected by a simple addition layer.
+After the add-layer, another 2 combinations of fully-connected and ReLU layer follow, concluding with a single output neuron, representing the critics reward estimation.
+All of the actor and critic layers are, if not mentioned otherwise, 100 neurons wide.
+The NN architectures are similar to the ones used in \parencite{AUTHOR}, but we changed some details to better fit our purpose.
+
+We used a learning rate of $3e^{-4}$ and $1e^{-3}$ for the actor and critic respectively and a discount factor of 0.99.
+The agents sample rate is set at 0.05, meaning the agent samples the environment and takes an action every 50 ms.
+A more detailed summary of the RL parameters is given in table \ref{table: DDPG parameters}.
 
 
-When we first started working on te RL process, te result were not very promising. The agent did stabilize, meaning it did not jump around randomly, but it was not able to find an efficient gain.
+\begin{table}
+	\centering
+	\begin{tabular}{| l | c |}
+		\hline
+		\textbf{Parameter} & \textbf{Value}\\
+		\hline
+		\hline
+		Actor learn rate & $3e^{-4}$ \\
+		Critic learn rate & $1e^{-3}$ \\
+		Discount factor &  0.99 \\
+		Mini-Batch-Size & 16 \\
+		Experience buffer & $1e^6$\\
+		\textsigma \ (UB) & 0.2 \\
+		\textsigma-decay (UB) & $1e^{-6}$ \\
+		
+		\hline
+	\end{tabular}
+	\caption{DDPG parameters. Uhlstein-Beck (UB) noise model is used to introduce noise into the agents exploration}
+	\label{table: DDPG parameters}
+\end{table}
+
+
+\begin{figure}[h]
+	\begin{subfigure}{.5\textwidth} % this sets the figure to be max half the width of the page
+		\centering
+		% include first image
+		\includegraphics[width=.9\linewidth]{example-image-a}  % this sets the image to fill 90% of the available space -> 45% of the line width in total. 
+		\caption{}
+		\label{figure: RL a}
+	\end{subfigure}
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		% include second image
+		\includegraphics[width=.9\linewidth]{example-image-b}  
+		\caption{}
+		\label{figure: RL b}
+	\end{subfigure}
+	\begin{subfigure}{\textwidth}
+		\centering
+		% include third image
+		\includegraphics[width=.45\linewidth]{example-image-c}   % this width should be half of the width of the other two images
+		\caption{}
+		\label{figure: RL c}
+	\end{subfigure}
+	\caption[]{DDPG learning graphs. (a) Example 1. (b) Example 2. (c) Example c.}
+	\label{figure: DDPG learning graphs}
+\end{figure}
+
+
+
+When we first started working on the RL process, te result were not very promising. The agent did stabilize, meaning it did not jump around randomly, but it was not able to find an efficient gain.
 The agent never learned to reliably move a leg forward if it was starting to drag behind due to reaching the PEP.
 
 Early on in the RL setup process we realized that the current inputs into the hexapod model are not suitable for reinforcement learning.

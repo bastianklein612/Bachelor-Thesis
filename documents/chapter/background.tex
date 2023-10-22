@@ -20,10 +20,8 @@ The nomenclature we use use in this thesis to label the joints and leg segments 
 \end{figure}
 
 \todo{"Gait Self-learning for Damaged Robots Combining Bionic Inspiration and Deep Reinforcement Learning" for parameters of hexapod}
-
 \todo{Maybe add image of stick insect}
 
-\todo{CITATIONS}
 
 \section{MATLAB}
 \textit{MATLAB\textsuperscript{\textregistered}} is a numerical computing environment and programming language, developed by the company \textit{MathWorks\textsuperscript{\textregistered}}.
@@ -78,9 +76,10 @@ To understand the model we develop in this thesis, Simscape's mechanical compone
 \begin{figure}[h!]
 	\centering
 	\centerline{\includesvg[scale=0.8]{Simulink/BouncingBallExample_Simscape.svg}}
-	\caption[Simscape bouncing ball example]{Simulink model of the same bouncing ball system as in \ref{figure: Simulink bouncing ball model}, but created using solely Simscape blocks. The simulation of this system is provided in \cite{VIDEO 1}. }
+	\caption[Simscape bouncing ball example]{Simulink model of the same bouncing ball system as in \ref{figure: Simulink bouncing ball model}, but created using solely Simscape blocks. The simulation of this system is provided in \cite{VIDEO1}.} 
 	\label{figure: Simscape Bouncing Ball Example}
 \end{figure}
+\todo{Add bouncing ball video}
 
 Coordinate frames are at the base of every Simscape model.
 They can be attached to each other using rigid transforms or joints.
@@ -159,10 +158,10 @@ This guess can be based on the manipulators geometry, joint limits, previously o
 Using the estimated joint angles, the would-be position of the end-effector is calculated (forward kinematics) and the error between the desired pose and the currently obtained pose is determined.
 Based on this, the joint angle estimates are adjusted, aiming to reduce the error and bring the end-effector closer to the desired pose.
 This process is repeated until the error meets the predefined tolerances.
-The joint angles calculated during the final iteration are then considered a solution to the problem.
-Although the basic principle of iterative error-minimization is always present in numerical solution methods, the exact process of minimization is much more complex than described here and there exist numerous different techniques on how to achieve this goal, such as Cyclic Coordinate Descent, Jacobian Inverse or FABRIK \parencite{AristidouFABRIK}. \todo{CITATION}
+The joint angles calculated during the final iteration are then considered a solution to the problem \parencite{inverseKinematicsIllinois}.
+Although the basic principle of iterative error-minimization is always present in numerical solution methods, the exact process of minimization is much more complex than described here and there exist numerous different techniques on how to achieve this goal, two examples being Cyclic Coordinate Descent \parencite{inverseKinematicsIllinois} and \textit{FABRIK} \parencite{AristidouFABRIK}. 
 Numerical methods can be applied to a wide variety of inverse kinematic problems and are not limited by the number of DoF like analytical methods.
-Due to their iterative nature they are generally significantly more computationally expensive, given the same problem, than their analytical counterparts \parencite{aristidou2018inverse, inverseKinematicsIllinois}.
+Due to their iterative nature they are generally significantly more computationally expensive, given the same problem, than their analytical counterparts \parencite{aristidou2018inverse}.
 Both inverse kinematics methods are used extensively in industry and research, depending on the specific project and its requirements.
 
 

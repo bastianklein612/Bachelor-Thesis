@@ -782,8 +782,11 @@ Gespäch mit Malte und Julius:
 19.10.		
 	- DDPG-Agenten nach 18000 Episoden abgebrochen: max. 1xx reward
 	- gleichen DDPG-Agenten ohne -50 Terminierungsreward gestartet, Terminierung an sich unverändert
-	
 
+-----------------------------------------
+20.10. -22.10.	
+	- DDPG-Agent ohne -50 terminal reward hat bis zu 180 reward errreicht, ist aber nach mehr als 11000 Ep. auf 0 konvergiert
+	- PPO-Agenten mit 200 breiten NNs laufen gelassen, kein gutes Ergebnis
 	
 			
 ---------------------------------------------------------------------------------------------------------------------------
