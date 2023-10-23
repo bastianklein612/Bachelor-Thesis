@@ -1,37 +1,34 @@
 %!TEX root = ../thesis.tex
 \chapter{Results}
 \label{ch:results}
+
+In this chapter we present the results we compiled during the course of our work.
+This includes an evaluation of the developed hexapod model and its motion controller as well as review of the reinforcement learning results obtained and lessons learned from observing the training process.
+
+\section{Evaluation: Hexapod and controller}
+During the development process of the hexapod model, and also while working on the motion controller, we observed that the conceived model architecture enables us to quickly modify or add features to the hexapod.
+As we had to retrospectively add additional sensory output for rotational acceleration to each of the robots joints, these can serve as an example for the described flexibility. 
+As the hexapod leg is defined in the custom library, it is only necessary to enable the respective sensor reading one each of the legs three joints and add the new signals to the already existing sensory information bus. 
+There is then no need to modify any of hexapods actual legs as Simulink automatically updates all library-linked blocks.
+In general, the library of custom subsystems has proven to be a useful tool, reducing development time and promoting modularity.
+The encapsulation of the hexapod model as a whole into a single, top-level subsystem block which only shows necessary inputs and outputs, provides the developer with a simple to understand interface.
+This also gives us the ability to duplicate the hexapod system without any effort, which could prove useful in future research as it enables the system to easily be used in multi-agent simulations.
+
+Concerning the actual simulation of the model, it can be said that in most cases where the robot uses a stable gait pattern for locomotion, a simulation step size of 0.5 ms yields stable results and runs at close to real time.
+Given an untrained, exploring RL agent as the models operator, a step size of 0.25 ms is preferable, as sudden twitching and jerking motions might occur, which can lead to simulation instabilities and exceptions.
+Similar to the results of \cite{thilderkvist2015motion}, we start to observe these simulation problems at larger step sizes ($> 0.5 ms$), although not of the same significance and frequency as described by them. 
+The most common reason we observed for the exceptions is a collision detection failure occurring when two rigid bodies move into each other faster than the solver can observe, due to its limited temporal resolution.
+During several ten-thousand simulation episodes run at a step-size of 0.25 ms, we 
+Overall, the behaviour of our robot model seems, to the best of our knowledge, but without the co-examination of a real world counterpart, physically accurate.
+
+We attribute the unsatisfactory results \cite{thilderkvist2015motion}  experienced from the spatial friction forces to be most likely linked to deciding on a step size too large for stable simulations.
+As they also work with an earlier MATLAB version, using Simscape's predecessor SimMechanics, the problems might have arisen from a possibly more primitive physics model.
+
+
 \todo{major rewrite and update}
-\section{intro}
-Broad introduction to results chapter.
-
-
-
-
-\section{Simulink model review}
-During the development process we observed that the initially created model can be easily modified.
-As an example, additional sensory output was added without any complications.
-The sensor just needs to be added to the model and the signal routed through the already existing sonsory information bus.
-
-Given a moderately small step size of 0.5ms (in some cases 0.25ms) the model can be simulated without running into any Simscape exceptions.
-The simulation speed is close to real time given 1 core and 0.5ms step-size.
-If the chosen step size is to large (>0.5ms) the simulation becomes unstable and can run into exceptions.
-These most often occur due to objects moving into each other faster that the solver can observe due to its low time resolution and thus cause collision exceptions.
-
-The robots behaviour seems, to the best of our knowledge and without examining a real world model, physically accurate.
-
-To encapsulate the system and only provide the necessary inputs and outputs, the hexapod model is placed inside a subsystem.
-This also allows for the duplication of the hexapod system, so that in future research it is possible to use this system in multi-agent simulations as well.
-
-When running the simulation at large step sizes ($>0.5 \text{ms}$), we observed simulation instabilities similar to the ones mentioned in \parencite{thilderkvist2015motion}, although not of the same significance.
-We attribute the unsatisfactory results they experienced from the spatial friction forces to be most-likely linked to an earlier MATLAB version used for their work.
-A step size of 0.00025s(0.25ms) resulted in satisfactory behaviour in almost all of our simulations.
-Only when training a RL agent, we reduced the step size initially even further to anticipate uncoordinated, trembling behaviour due to an untrained agent.
-
-
-\section{RL Learning review}
-Trying to learn the coordination of a hexapod robots legs proved to be more difficult than anticipated.
-Even though RL could be described as a black box with in- and outputs which learns automatically what to do given a well defined reward function, there is an overwhelming amount of parameters that have to be considered.
+\section{Evaluation: RL training}
+Implementing a RL agent which yields satisfying results proved to be more difficult than anticipated.
+There exists a large set of parameter which have to be considered when setting up an agent and as training can take a long time, finding the right parameters is a time-consuming task which requires careful planning.
 There are several different learning algorithms to choose from, each with their own set of parameters as well as the NN architecture of the agent. 
 
 We used the \textbf{D}eep \textbf{D}eterministic \textbf{P}olicy \textbf{G}radient (DDPG) algorithm, an actor-critic, model-free, online, off-policy RL method.
@@ -86,7 +83,7 @@ A more detailed summary of the RL parameters is given in table \ref{table: DDPG 
 		\includegraphics[width=.9\linewidth]{example-image-b}  
 		\caption{}
 		\label{figure: RL b}
-	\end{subfigure}
+	\end{subfigure} 
 	\begin{subfigure}{\textwidth}
 		\centering
 		% include third image

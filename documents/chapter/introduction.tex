@@ -2,8 +2,6 @@
 \chapter{Introduction}
 \label{ch:introduction}
 
-
-%\textbf{INTRODUCTION:}
 Simulations play an increasingly important role in robotics research and development \parencite{afzal2020study}. 
 They offer a cost-effective and efficient means to investigate, analyze and optimize the behavior of robots even before they are physically implemented \parencite{de2019analysis}. 
 Notably, various companies involved in the field of robotics use simulation technology extensively in the development process of their systems, such as Boston Dynamics \parencite{BostonDynamicsSimulation}, Tesla Inc. \parencite{TeslaAiDay2022} or Kuka Robotics \parencite{KukaSim}.
@@ -12,7 +10,7 @@ When compared to wheeled or bipedal architectures, the flexibility six legs prov
 Hexapods, in contrast to bipedal architectures, are also statically stable, meaning they are able to stay in an upright position with with little to no active control \parencite{azayev2020blind}. 
 This makes them particularly interesting for navigating landscapes inaccessible to other robotic systems or hazardous to humans, examples of possible applications being search and rescue, the agriculture industry or even extraterrestrial exploration \parencite{trotta2022walking, billah2008walking}.
 
-%\textbf{PROBLEM:}
+\section{Problem}
 \todo{Reads to much like defining the goals I want to achieve}
 The process of developing software for these hexapods can be a challenging and by no means trivial task. %is a challenging and by no means trivial task.
 While maintaining balance for instance, is evidently easier for this architecture than for the aforementioned bipedal robots, coordinating the many legs during movement poses a major challenge \parencite{azayev2020blind,schilling2013walknet}.
@@ -64,7 +62,7 @@ Considering the widespread use of Simulink in both research and industry along w
 %Der block-basierte Ansatz von Simulink ist dabei besonders hervorzuheben, da es dieser ermöglicht sehr modulare Systeme zu erzeugen, wodurch bei Anpassungen nur einzelne Subsysteme ausgetauscht werden, anstatt Änderungen am gesamten Modell vornehmen zu müssen.
 
 
-%\textbf{OBJECTIVE:}
+\section{Objective}
 %When trying to break down the complex dynamics of such a system, the creation of a virtual model can present numerous advantages. 
 %Attempting to break down the complex dynamics of such a system necessitates the use of virtual models and simulations.
 Therefore, our main goal in this thesis is to develop a comprehensive virtual model of a hexapod robot using the MATLAB Simulink\textsuperscript{\textregistered} environment.
@@ -101,8 +99,8 @@ The model also has to show the capability of performing several different gait p
 \todo{Check for passive formulations --> change to active}
 \todo{Rewrite without chronological order; begin with key ideas}
 \todo{Include Sanandos model ?}
-\textbf{PROPOSED SOLUTION:}
 
+\section{Proposed Solution}
 %THIS SECTION WAS TRNSFERED FROM "OBJECTIVE"
 
 %The model must take into account the kinematic properties of the robot and the environment in which it moves.
@@ -165,7 +163,7 @@ This approach of keeping the individual legs motion predefined, makes it possibl
 %Der Bewegungsablauf des einzelnen Beins bleibt fest definiert, während die Koordination untereinander durch Interaktion des Modells mit der Umgebung erlernt werden soll. 
 %Diese Herangehensweise ermöglicht es die Komplexität der zu erlernenden Fähigkeiten zunächst zu reduzieren, lässt aber gleichzeitig die Möglichkeit offen, im weiteren Verlauf zusätzliche Elemente in den Lernprozess einzubeziehen.
 
-
+\section{Structure}
 The outline of the remaining contents of this thesis is as follows:
 Chapter [\ref{ch:background}]  introduces foundational concepts and techniques we use and reference in our work followed by an exploration of existing research papers which are concerned with closely related problems in \ref{ch:relatedWorks}.
 In chapter[\ref{ch:methods}] we explain the developed hexapod model and controller in detail, and describe the reinforcement learning setup used for training the robot on leg coordination.
