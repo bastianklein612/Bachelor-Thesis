@@ -1,7 +1,7 @@
 %--------------------------------------------------------------------------
 %DDPG agent and environment setup script
 %--------------------------------------------------------------------------
-%Source: https://de.mathworks.com/help/reinforcement-learning/ug/train-ddpg-agent-to-swing-up-and-balance-pendulum.html
+%Partiallz adapted from: https://de.mathworks.com/help/reinforcement-learning/ug/train-ddpg-agent-to-swing-up-and-balance-pendulum.html
 
 %-----------------------------------------------------------------------------------------------
 % Environment setup
@@ -30,14 +30,14 @@ actionInfo = rlNumericSpec([6 1], ...
 actionInfo.Name = 'control_output';
 
 
-env = rlSimulinkEnv(mdl,[mdl '/Motion Controller/Coordinator/RL Agent'],observationInfo,actionInfo);
+env = rlSimulinkEnv(mdl,[mdl '/Motion Controller/Coordinator/RL Setup/RL Agent'],observationInfo,actionInfo);
 
 %-----------------------------------------------------------------------
 %Agent setup
 %-----------------------------------------------------------------------
 
 % width of nn layer
-units = 16;
+units = 100;
 %units = 8;
 
 
@@ -100,9 +100,9 @@ actorNetworkPath = [
              fullyConnectedLayer(units)
              reluLayer
              fullyConnectedLayer(actionInfo.Dimension(1))
-             %clippedReluLayer(ceiling, Name="ClippedActionOutputLayer")%inserted this layer to clip output
-             tanhLayer
-             scalingLayer(Scale=max(0.5), Bias=0.5)
+             clippedReluLayer(ceiling, Name="ClippedActionOutputLayer")%inserted this layer to clip output
+             %tanhLayer
+             %scalingLayer(Scale=max(0.5), Bias=0.5)
              ];
 
 %create actor network
@@ -133,10 +133,10 @@ agentOpts = rlDDPGAgentOptions(...
                                CriticOptimizerOptions=criticOpts,...
                                ExperienceBufferLength=1e6,...%1e5
                                DiscountFactor=0.99,...
-                               MiniBatchSize=16);
+                               MiniBatchSize=64);
 
-agentOpts.NoiseOptions.StandardDeviation=0.3;
-agentOpts.NoiseOptions.StandardDeviationDecayRate=1e-6;
+agentOpts.NoiseOptions.StandardDeviation=0.05;
+agentOpts.NoiseOptions.StandardDeviationDecayRate=0;
 %agentOpts.NoiseOptions.MeanAttractionConstant=0.15;
 
 %Variance parameters not recommended (MATLAB)

@@ -15,14 +15,14 @@ actions = ff2n(6);
 actionInfo = rlFiniteSetSpec(num2cell(actions,2));
 actionInfo.Name = 'control_output';
 
-env = rlSimulinkEnv(mdl,[mdl '/Motion Controller/Coordinator/RL Agent'],observationInfo,actionInfo);
+env = rlSimulinkEnv(mdl,[mdl '/Motion Controller/Coordinator/RL Setup/RL Agent'],observationInfo,actionInfo);
 
 %-----------------------------------------------------------------------
 %Agent setup
 %-----------------------------------------------------------------------
 
 % width of nn layer
-units = 10;
+units = 200;
 
 
 
@@ -72,22 +72,22 @@ actor = rlDiscreteCategoricalActor(actorNetwork,observationInfo,actionInfo);
 %Specify options and create final ppo agent
 
 %specify crtic and agent options
-actorOpts = rlOptimizerOptions(LearnRate=3e-4, GradientThreshold=1);
-criticOpts = rlOptimizerOptions(LearnRate=1e-3);
+actorOpts = rlOptimizerOptions(LearnRate=1e-4);%,GradientThreshhold=1);
+criticOpts = rlOptimizerOptions(LearnRate=1e-4);
 
 %specify ppo options
 agentOpts = rlPPOAgentOptions(...
     ExperienceHorizon=512,...
-    MiniBatchSize=32,...
-    ClipFactor=0.02,...
-    EntropyLossWeight=0.08,...
+    MiniBatchSize=128,...
+    ClipFactor=0.02,...                 %0.08 --> 0.2, changed according to "An energy-saving snake locomotion gait policy obtained using DRL"
+    EntropyLossWeight=0.01,...
     ActorOptimizerOptions=actorOpts,...
     CriticOptimizerOptions=criticOpts,...
-    NumEpoch=3,...
+    NumEpoch=3,...                    %3 --> 10
     AdvantageEstimateMethod="gae",...
     GAEFactor=0.95,...
     SampleTime=0.05,...
-    DiscountFactor=0.99);
+    DiscountFactor=0.997);
 
 %Create DDPG agent
 agent = rlPPOAgent(actor,critic,agentOpts);

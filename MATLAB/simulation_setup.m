@@ -61,6 +61,8 @@ pid_filter_N = 1000;
 %pid_I = 0.2;
 %pid_D = 1;
 %pid_filter_N = 100;
+%Filter coefficient used in PID control for attenuating high noise
+%frequencies
 
 
 %phantomX_uncovered = importrobot("robot_models\phantomx_description\urdf\phantomx.urdf");
