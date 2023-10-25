@@ -189,7 +189,7 @@ It does not however directly receive actions from the agent, as the hexapod, to 
 If we would define the environment in a manner analogous to \ref{figure: RL Illustration}, we would have to include both the environment subsystem and the hexapod subsystem as part of the "RL" environment.
 For obvious reasons such as modularity and clarity of model we choose not to adapt this.
 
-\subsection{Controller}
+\subsection{Locomotion Controller} \label{subsec: Locomotion controller}
 The controller is responsible for the hexapods locomotion.
 It controls the movement of the robots legs according to an internally defined gait pattern.
 As inputs, the controller receives the sensor data from the hexapod model.

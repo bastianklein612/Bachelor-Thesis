@@ -784,11 +784,57 @@ Gespäch mit Malte und Julius:
 	- gleichen DDPG-Agenten ohne -50 Terminierungsreward gestartet, Terminierung an sich unverändert
 
 -----------------------------------------
-20.10. -22.10.	
+20.10. - 22.10.	
 	- DDPG-Agent ohne -50 terminal reward hat bis zu 180 reward errreicht, ist aber nach mehr als 11000 Ep. auf 0 konvergiert
 	- PPO-Agenten mit 200 breiten NNs laufen gelassen, kein gutes Ergebnis
-	
+	- Begonnen, results-Abschnitt zu überarbeiten
 			
+
+-----------------------------------------
+23.10. - 24.10.	
+	- nichts, aber auch wirklich gar nichts geschafft
+
+
+-----------------------------------------
+25.10.		
+	- Oberseminar:
+		- Schriftlich soweit mit Umfang und Detailgrad zufrieden, es fehlt noch ein ausformulierter Results-Abschnitt, v.a. RL-Training 
+		- Bei inhaltlicher Arbeit schwierig einen Schlussstrich zu ziehen, da RL-Training wenig Fortschritte macht und Experimente viel Zeit benötigen
+			--> Ideen zur Verbesserung sind vielzahlig vorhanden, aber es fehlt die Zeit diese alle Testen zu können
+				Training muss nun mal 3-6h laufen, damit erste Ergebnisse sichtbar werden
+		
+		- Vorschläge von Paula und anderen Teilnehmern:
+			- Reward-Signale normieren 
+			- Bewegung in x-Richtung stärker belohnen
+			- mehrere unterschiedliche Sequenzen über Nacht ausprobieren(Skript anlegen ?)
+			
+		- wenn möglich, überall doi-Link angeben --> wenn nicht vorhanden aber auch nicht schlimm
+		- VORTRAG BEIM PRÜFUNGSAMT ANMELDEN (min. eine Woche vorher) !!!!
+		- Termin mit Malte und Julius für nächte Woche finden, da Mi. Feiertag
+		
+
+-----------------------------------------
+26.10.		
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 ---------------------------------------------------------------------------------------------------------------------------
 ------------ZEITPLAN-------------------------------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------------------------------------------------

@@ -5,7 +5,7 @@
 In this chapter we present the results we compiled during the course of our work.
 This includes an evaluation of the developed hexapod model and its motion controller as well as review of the reinforcement learning results obtained and lessons learned from observing the training process.
 
-\section{Evaluation: Hexapod and controller}
+\section{Evaluation: Hexapod model}
 During the development process of the hexapod model, and also while working on the motion controller, we observed that the conceived model architecture enables us to quickly modify or add features to the hexapod.
 As we had to retrospectively add additional sensory output for rotational acceleration to each of the robots joints, these can serve as an example for the described flexibility. 
 As the hexapod leg is defined in the custom library, it is only necessary to enable the respective sensor reading one each of the legs three joints and add the new signals to the already existing sensory information bus. 
@@ -23,6 +23,25 @@ Overall, the behaviour of our robot model seems, to the best of our knowledge, b
 
 We attribute the unsatisfactory results \cite{thilderkvist2015motion}  experienced from the spatial friction forces to be most likely linked to deciding on a step size too large for stable simulations.
 As they also work with an earlier MATLAB version, using Simscape's predecessor SimMechanics, the problems might have arisen from a possibly more primitive physics model.
+
+To summarize, we were able to create a well-functioning, virtual model of a hexapod robot.
+We are confident that the model can serve as a platform for future research as it utilizes a modular architecture, can easily be expanded and is based on the versatile MATLAB  environment.
+ 
+
+\section{Evaluation: Locomotion Controller}
+The locomotion controller we presented in \ref{subsec: Locomotion controller} is the result of several design iterations.
+We extensively tested each of the designs to uncover their weakpoints upon which the next iteration could improve on.
+
+The initial design (MK1) enabled the robot to walk in a straight line tripod gait.
+We observed that the hexapod model, controlled by MK1, would jerk up and down significantly during a movement cycle.
+When a leg was lifted, the robots thorax would slowly sink towards this direction and be rapidly pushed upwards again when the leg made contact with the ground again.
+As we defined the trajectory relative the thorax and did not consider sensing ground contact, the leg on the sinking side would hit the ground while still in full motion, as the anticipated AEP "sunk" into the ground plane.
+We were able to later on attribute this behaviour to the slow reactions of the PID controllers, which were, given our initial tuning parameters, unable to follow their assigned trajectories. 
+In addition, this first version required a lot of time to be simulated, the cause of this being the slow IK block provided by Simulink, which we have already elaborated on in \ref{subsubsec: IK Solver}.
+With the subsequent model (MK2) we 
+
+The final controller design is capable of reliably controlling the robots movements in several gaits.
+It enables the robot smooth movements in every direction
 
 
 \todo{major rewrite and update}
