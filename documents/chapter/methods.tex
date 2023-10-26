@@ -268,20 +268,21 @@ The swing and stance phase signal functions are defined as follows:
 \begin{align}
 	\Theta_{sw}(t) & = 
 	\begin{cases}
-		x_{sw}(t) = A_x \cdot \sin(\frac{f_c \cdot t} {2 \cdot P_{\text{swing}}} - \frac{\pi}{2})\\
-		z_{sw}(t) = A_z \cdot \sin(\frac{f_c \cdot t} {2 \cdot P_{\text{swing}}})
+		x_{sw}(t) = x_{st} + \frac{|AEP - x_{st}|}{2} \cdot \cos(f_{sw} \cdot t \cdot \pi + \pi) + \frac{|AEP - x_{st}|}{2} \\
+		z_{sw}(t) = h_{step} \cdot \sin(f_{sw} \cdot t \cdot \pi) \\
 	\end{cases} & , t \in [0,T_\text{sw}] 
 	\\
 	\Theta_{st}(t) & =
 	\begin{cases}
-		x_{st}(t) = \\
+		x_{st}(t) = \text{AEP} - f_{st} \cdot t \cdot l_{step}\\
 		z_{st}(t) = 0
 	\end{cases} & , t \in [0, T_\text{st}]    
-\end{align}\todo{Redo equations, these are not correct. Look at real subsystem}
+\end{align}
+, where $l_{step} = |AEP - PEP|$ is the length of a step defined as the distance between the predefined AEP and PEP, $l_{step}$ the predefined height of a step and $x_{st}$ the x-coordinate of the leg at the moment the swing phase is initiated.
 The parameter $t$ is limited to the ranges $[0,T_\text{sw}]$ and $[0, T_\text{st}]$, because if one of the subsystems reaches the end of its phase ($t=T_sw$ or $t=T_st$), the subsystems internal clock is reset and thus upon its next activation, the function evaluation begins from $t=0$ again.
 
 \todo{Double-check equations}
-\todo{Insert image of trajectory graphs}
+\todo{Insert image of trajectory graphs/ create graphic depicting early swing initiation and resulting trajectory}
 
 \begin{figure}[!h]
 	\centerline{\includesvg[scale=0.75]{Simulink/Simulink_SignalGeneratorOverview}}
