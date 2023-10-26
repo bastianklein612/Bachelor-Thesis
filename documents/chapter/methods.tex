@@ -278,7 +278,8 @@ The swing and stance phase signal functions are defined as follows:
 		z_{st}(t) = 0
 	\end{cases} & , t \in [0, T_\text{st}]    
 \end{align}
-, where $l_{step} = |AEP - PEP|$ is the length of a step defined as the distance between the predefined AEP and PEP, $l_{step}$ the predefined height of a step and $x_{st}$ the x-coordinate of the leg at the moment the swing phase is initiated.
+where $l_{step} = |AEP - PEP|$ is the length of a step defined as the distance between the predefined AEP and PEP, $l_{step}$ the predefined height of a step and $x_{st}$ the x-coordinate of the leg at the moment the swing phase is initiated.
+Given $f_c$ and $P_{swing}$, we define $f_{sw} = \frac{f_c}{P_{swing}}$ and $f_{st} = \frac{f_c}{1-P_{swing}}$ as the frequency of the swing and stance phase respectively.
 The parameter $t$ is limited to the ranges $[0,T_\text{sw}]$ and $[0, T_\text{st}]$, because if one of the subsystems reaches the end of its phase ($t=T_sw$ or $t=T_st$), the subsystems internal clock is reset and thus upon its next activation, the function evaluation begins from $t=0$ again.
 
 \todo{Double-check equations}
