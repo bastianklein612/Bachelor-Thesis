@@ -9,5 +9,5 @@ rl_setup;
 
 
 
-% about x reward for tripod gait at 256 steps per episode and 0.05 sample time
-% about 385 reward for tripod gait at 512 steps per episode and 0.05 sample time
+% about xxx reward for tripod gait at 256 steps per episode and 0.05 sample time
+% about 490 reward for tripod gait at 512 steps per episode and 0.05 sample time
