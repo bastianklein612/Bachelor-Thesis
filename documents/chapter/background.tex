@@ -3,24 +3,24 @@
 \label{ch:background}
 
 \section{Hexapods} \label{sec: Hexapods}
-Hexapods are a class of robots featuring 6 legs, inspired by the locomotion of insects and arachnids.
+Hexapods are a class of robots featuring 6 legs, inspired by naturally occurring six-legged creatures like insects and arachnids.
 Through millions of years of evolution these organisms developed efficient locomotion strategies \parencite{neville2006bipedal}, making them a rich source of inspiration for robotics.
-By emulating the biomechanics and behaviour of insects, researchers and engineers aim to create versatile and robust robotic systems capable of navigating challenging terrain \parencite{irawan2011optimal, ouyang2021adaptive, schilling2013walknet}.
+By emulating the biomechanics and behaviour of insects, researchers and engineers are able to create versatile and robust robotic systems capable of navigating challenging terrain \parencite{irawan2011optimal, ouyang2021adaptive, schilling2013walknet}.
 
 Most commonly, each leg of a hexapod consists of 3 segments named coxa, femur and tibia, equivalent to their biological counterparts.
-The individual segments are connected by 3 1-DoF (degrees of freedom) joints, each actuated by an electric servo motor.
-The first joint, hereafter named \textalpha-joint, connects the coxa to the thorax (body) and moves in parallel to the ground, thus being responsible for the longitudinal placement of each leg.
+The individual segments are connected to each other and the thorax (main body) by three 1-DoF\footnote{DoF: \textbf{D}egrees \textbf{o}f \textbf{F}reedom} joints, each actuated by an electric servo motor.\todo{Use footnotes for abreviations}
+The first joint, hereafter named \textalpha-joint, connects the coxa to the thorax and moves in parallel to the ground, thus being responsible for the longitudinal placement of the leg.
 Coxa and femur are connected by the \textbeta-joint, while the femur and tibia are connected by the \textgamma-joint. 
-These joints move orthogonal to the movement plane of the \textalpha-joint. Together, they are responsible for the lateral positioning of each leg.
-The nomenclature we use use in this thesis to label the joints and leg segments was adopted from the works of \cite{schilling2013walknet} and \cite{HeterarchicalArchitectureSchilling}.
+These joints move orthogonal to the movement plane of the \textalpha-joint. Together, they are responsible for the lateral positioning of the leg.
+An example of a hexapod robot based on the described architecture can be seen in Fig. \ref{figure: PhantomX MKIII}.
+The nomenclature we introduced in this section and use throughout the thesis to label joints and leg segments was adopted from the works of 
+\cite{schilling2013walknet} and \cite{HeterarchicalArchitectureSchilling}.
+
 \begin{figure}[h]
-	\centerline{\includegraphics[scale=0.04]{phantomX_III_overview}}
-	\caption{PhantomX MKIII hexapod, predecessor of MKIV used here [\cite{PhantomX_MKIII}]}
+	\centerline{\includegraphics[scale=0.065]{phantomX_III_overview}}
+	\caption{PhantomX MKIII hexapod, predecessor of the MKIV used in this thesis [\cite{PhantomX_MKIII}]}
 	\label{figure: PhantomX MKIII}
 \end{figure}
-
-\todo{"Gait Self-learning for Damaged Robots Combining Bionic Inspiration and Deep Reinforcement Learning" for parameters of hexapod}
-\todo{Maybe add image of stick insect}
 
 
 \section{MATLAB}
@@ -29,29 +29,30 @@ It is widely used by researchers and engineers alike in applications such as dat
 The MATLAB environment provides a multitude of apps and toolboxes to support different domains, for example model-based design, machine learning, signal processing or hardware co-simulation \parencite{MATLAB}.
 
 \hiddensubsection{Simulink}
+The overview provided in this section is loosely based of the official Simulink documentation \parencite{matlabSimulinkDocumention}.\\
 \textit{Simulink\textsuperscript{\textregistered}} is a \textit{MATLAB\textsuperscript{\textregistered}}-based graphical block-diagramming tool. 
-It is a widely used tool which plays a crucial role in various engineering and research disciplines.
+It is widely used and plays a crucial role in various engineering and research disciplines.
 It provides the user with a versatile platform to design, simulate and analyse complex dynamic systems.
 Simulink offers an expansive library of predefined blocks that represent different components and behaviours.
-The user connects these blocks using edges called signal lines to transport data between them.
-Blocks transform the data provided by the inputs and output the transformed data to other blocks connected downstream.
+The user connects these blocks via so called signal lines, which transport data in between blocks.
+The blocks themselves transform the data provided by the inputs according to their function and output the transformed data to other blocks connected downstream.
 Their behaviour can be discrete, like a switch or logic gate which activate when specific signals are pulled high, or represent more complex and continuous functions such as integrators, derivatives or sine waves.
 An arrangement of blocks can be encapsulated into a subsystem, thus creating different levels of abstraction.
 To enable simple reuse of components, subsystems can be placed in custom libraries.
 If such a library object is modified, each linked copy of this subsystem receives the update as well, preventing the developer from having to edit each copy individually.
 At any step in the development process, a model can be simulated and analysed.
-To be able to better analyse a model,the value of any signal lines can be plotted over time and the simulation speed can be slowed down \parencite{matlabSimulinkDocumention}.
+To receive better insight into the systems internal behaviour, the data of any signal lines can be logged and plotted over time and the simulation speed can be slowed down.
 
-An example of a simple Simulink model can be seen in \ref{figure: Simulink bouncing ball example}.
-The model simulates the behaviour of an elastic ball which, under the influence of (earth's) gravity, accelerates downwards and repeatedly bounces of an imaginary plane.
+An example of a simple Simulink model can be seen in Fig. \ref{figure: Simulink bouncing ball example}.
+The model simulates the behaviour of an elastic ball, which, under the influence of gravity, accelerates downwards and repeatedly bounces of an imaginary plane.
 The ball looses energy over time, as represented by the coefficient of restitution.
-To visualize the systems dynamics, the balls velocity and speed are logged and plotted, as can be seen by the small symbols next to the respective signal lines.
+To visualize the systems dynamics, the balls velocity and speed are plotted on a graph, as indicated by the symbols next to the respective signal lines.
 
 \begin{figure}[h!]
 	\begin{subfigure}{.5\textwidth} % this sets the figure to be max half the width of the page
 		\centering
 		% include first image
-		\includesvg[scale=0.5]{Simulink/BouncingBallExample_Simulink.svg}  % this sets the image to fill 90% of the available space -> 45% of the line width in total. 
+		\includesvg[scale=0.6]{Simulink/BouncingBallExample_Simulink.svg}  % this sets the image to fill 90% of the available space -> 45% of the line width in total. 
 		\caption{}
 		\label{figure: Simulink bouncing ball model}
 	\end{subfigure}
@@ -62,16 +63,17 @@ To visualize the systems dynamics, the balls velocity and speed are logged and p
 		\caption{}
 		\label{figure: Simulink bouncing ball graphs}
 	\end{subfigure}
-	\caption[Simulink bouncing ball example]{(a) Simulink model of a bouncing ball created suing standard library blocks. (b) Graphs depicting the balls velocity(orange) and position(blue).}
+	\caption[Simulink bouncing ball example]{(a) Simulink model of a bouncing ball created using standard library blocks. (b) Graphs depicting the balls velocity (orange) and position (blue).}
 	\label{figure: Simulink bouncing ball example}
 \end{figure}
 
 
 \hiddensubsection{Simscape}
-\textit{Simscape\textsuperscript{\texttrademark}} is a Simulink block library developed by \textit{MathWorks\textsuperscript{\textregistered}} enabling the construction of physical systems within the Simulink environment.
-Utilizing Simscape, it is possible to model and simulate systems such as electric circuits, hydraulics or classical mechanics all within a unified simulation environment.
+The description of the Simscape library in this section loosely follows the official documentation \parencite{matlabSimscapeDocumentation}.
+\textit{Simscape\textsuperscript{\texttrademark}} is a Simulink block library developed by \textit{MathWorks\textsuperscript{\textregistered}} to enable the construction of physical systems within the Simulink environment.
+Utilizing Simscape, it is possible to simulate systems such as electric circuits, hydraulics or classical mechanics all within a unified simulation environment.
 The library offers a large variety of predefined components like resistors, capacitors, springs, dampers, etc. \parencite{matlabSimscapeDocumentation}.
-To understand the model we develop in this thesis, Simscape's mechanical components are of the most interest, especially coordinate frames, rigid transforms, joints and rigid bodies.
+To better understand the model we develop in this thesis, Simscape's mechanical components are of the most interest, especially coordinate frames, rigid transforms, joints and rigid bodies.
 
 \begin{figure}[h!]
 	\centering
@@ -85,49 +87,44 @@ Coordinate frames are at the base of every Simscape model.
 They can be attached to each other using rigid transforms or joints.
 Edges similar to the basic Simulink signal lines are used to connect the individual blocks.
 These lines do not transport plot-able signal however, but rather represent the structure of the Simscape model.
-Joints allow for different degrees of freedom between two frames, depending on what constraints should be imposed on the system.
+Joints allow for different DoFs between two frames, depending on the constraints that should be imposed on the system.
 Two frames connected by a joint are called base and follower frame.
 When a joint is actuated, either by an external or internal force, the follower frame moves relative to the base frame \parencite{thilderkvist2015motion}.
-As already mentioned in the previous sentence, joints can be actively actuated by providing them with a scalar torque signal.
-It is also possible to modify various joint parameters such as internal joint friction, joint limits and spring stiffness, which we will explain in chapter \ref{ch:methods}.
-
-Rigid transforms translate and/or rotate coordinate frames without allowing for any degree of freedom.
+Joints can be actively actuated by providing them with a scalar torque signal or just react to the forces acting upon them.
+It is also possible to modify various joint parameters such as internal joint friction, joint limits and spring stiffness, which we will further elaborate on in chapter \ref{ch:methods}.
+Rigid transforms translate and/or rotate coordinate frames without allowing for any DoF.
 They are used to define the initial position and orientation of a frame.
 Rigid bodies can be attached to the already existing coordinate frames, providing shape, mass and inertia to the system.
 If multiple of these are present in a simulation, the shape of a rigid body can also act as collision geometry, allowing different bodies to collide and interact with each other.
 If a component is required which is not yet represented by a block in the library, Simscape offers a MATLAB based language to enable text-based development of custom components.
-The description of the Simscape library in this section roughly follows the official documentation \parencite{matlabSimscapeDocumentation}.
 
-As an example, the same bouncing ball system as shown in \ref{figure: Simulink bouncing ball model} can be seen in \ref{figure: Simscape Bouncing Ball Example} constructed using only blocks from the Simscape library. When simulating this model, a 3D animation of the bouncing ball is generated which can be slowed down, replayed or saved for later analysis.
-\todo{CITATIONS ?}
-
+As an example, the same bouncing ball system as shown in Fig. \ref{figure: Simulink bouncing ball model} can be seen in Fig. \ref{figure: Simscape Bouncing Ball Example} constructed using only blocks from the Simscape library. When running this model, a 3D simulation of the bouncing ball is generated which can be slowed down, replayed or saved for later analysis.
 
 \section{Insect Locomotion}
-The locomotion of insects, more specifically arthropods, serves as a remarkable source of inspiration for the field of hexapod robotics.
-There exists a vast amount of papers studying the movement patterns of these insects.
-Common research subjects include stick insects (\textit{C. morosus}) \parencite{cruse1990mechanisms}, fruit flies (\textit{D. melanogaster}) \parencite{strauss1990coordination} or cockroaches (\textit{P. americana}) \parencite{delcomyn1971locomotion}. 
-The movement of an arthropod leg can generally be divided into two phases, a "Swing" and a "Stance" \parencite{schilling2013walknet}.
-Together, these form what we will call the "Swing-Stance Cycle", which is depicted in \ref{figure: Stick insect leg}.
+The locomotion arthropods, more specifically insects, serves as a remarkable source of inspiration for the field of hexapod robotics.
+There exists a vast amount of papers studying the movement patterns of these organisms.
+Common research subjects include stick insects (\textit{C. morosus}) \parencite{cruse1990mechanisms}, fruit flies (\textit{D. melanogaster}) \parencite{strauss1990coordination} and cockroaches (\textit{P. americana}) \parencite{delcomyn1971locomotion}. 
+The movement of an insect leg can generally be divided into two phases, calles "Swing" and "Stance" \parencite{schilling2013walknet}.
+Together, they form what we will call the "Swing-Stance Cycle", which is depicted in Fig. \ref{figure: Stick insect leg}.
 
 
 \begin{figure}[h]
 	\centerline{\includegraphics[scale=0.4]{morphologyOfStickInsect_sketch}}
 	\caption{Morphologic drawing of a stick insect leg (\cite{schilling2013walknet} [Fig.1]).}
 	\begin{footnotesize}
-		Angle $\alpha$ represents the position of the thorax-coxa joint, angle $\beta$ describes the position of the coxa-femur joint and angle $\gamma$ represents the position of the femur-tibia joint.
-		These joints are actuated with three pairs of muscles, protractor-retractor, levator-depressor and extensor-flexor respectively.
-		Also depicted are the posterior extreme position(PEP), defined as the rearmost point of the movement cycle, and the anterior extreme position(AEP), the foremost point in the cycle.
-		Dashed lines depict the swing and stance movement between PEP and AEP.
+		Angles \textalpha, \textbeta \ and \textgamma \ represent the position of the thorax-coxa, coxa-femur and femur-tibia joint respectively.
+		These joints are actuated with three pairs of muscles, called protractor-retractor, levator-depressor and extensor-flexor.
+		Also depicted are the posterior and anterior extreme positions (PEP, AEP).
+		Dashed lines indicate the swing and stance movement between PEP and AEP.
 	\end{footnotesize}
 	
 	\label{figure: Stick insect leg}
 \end{figure}
 
 While the leg is in the stance phase, it is continuously in contact with the ground and bears a partial load of the insects weight.
-During this phase the leg pushes the body in the desired direction, moving from AEP (Anterior Extreme Position) to PEP (Posterior Extreme Position) \parencite{schilling2013walknet}.
+During this phase, the leg moves from AEP (Anterior Extreme Position) to PEP (Posterior Extreme Position), pushing the body in the desired direction \parencite{schilling2013walknet}.
 The AEP describes the foremost point a leg reaches during the movement cycle, the PEP the rearmost point.
-When reaching the PEP, the swing phase begins, the leg is lifted of the ground and moved forward.
-While the stance phase is responsible for holding the insect up and moving it forward until reaching the PEP, the swing phase is needed to reposition the leg towards the AEP to start the cycle again\parencite{schilling2013walknet}.
+While the stance phase is responsible for holding the insect up and moving it forward until reaching the PEP, the swing phase is needed to reposition the leg towards the AEP to start the cycle again \parencite{schilling2013walknet}.
 The complete cycle can be described as a pushing phase (Stance) and a repositioning phase (Swing) .
 
 
@@ -135,13 +132,11 @@ The complete cycle can be described as a pushing phase (Stance) and a reposition
 Inverse Kinematics (IK) is a mathematical approach predominately used in the fields of robotics and computer graphics \parencite{AristidouFABRIK}.
 It describes the process of calculating the joint angles required to place the end of a kinematic chain, the so called the end-effector, at a given position and orientation in space.
 A kinematic chain serves as an abstract representation of a connected series of joints and links, such as a robotic manipulator or the arm of a human 3D model.
-Solving IK problems can be a challenging task, especially for robots with many DoF and complex joint constraints.
-The difficulty arises from the fact that there can exist multiple solutions (multiple sets of joint angles) to achieve the same end-effector pose.
-Some of which may be physically feasible while others might lead to collisions or instabilities.
 Essentially, IK is the opposite of the easier to solve problem of forward kinematics (FK), which is concerned with computing the position and orientation of the end-effector given a set of joint angles.
-FK is a simpler problem to solve, as there exists only one, straightforward to compute solution \parencite{inverseKinematicsIllinois}.
- IK is essentially the opposite of a technique called forward kinematics, which computes the position and orientation of the end-effector given a set of joint angles.
-There exist two primary techniques for solving inverse kinematics problems, analytical and numerical methods \parencite{inverseKinematicsIllinois}:
+The reason for FK being an easier problem to solve is that for any set of joint angles, there can only be one, straightforward to compute solution \parencite{inverseKinematicsIllinois}.
+The difficulty of solving IK problems arises from the fact that there can exist multiple solutions (multiple sets of joint angles) which achieve the same end-effector pose.
+Some of these may be physically feasible while others might lead to collisions or instabilities.\\
+There primarily exist two approaches to solving inverse kinematics problems, analytical and numerical \parencite{inverseKinematicsIllinois}:
 
 \subsection{Analytical Inverse Kinematics}
 Analytical solution methods are based on trigonometric equations derived from the geometric and kinematic parameters of the manipulator arm, such as the link length, joint type and joint constraints.
@@ -155,7 +150,7 @@ Such systems potentially lack closed-form expressions for solutions, making it i
 Numerical solution methods use iterate approaches to approximate the joint angles and converge towards a solution over several iterations of their algorithm.
 At the start of the process, numerical methods begins with an initial guess.
 This guess can be based on the manipulators geometry, joint limits, previously obtained solutions and other heuristics.
-Using the estimated joint angles, the would-be position of the end-effector is calculated (forward kinematics) and the error between the desired pose and the currently obtained pose is determined.
+Using the estimated joint angles, the would-be position of the end-effector is calculated (FKx) and the error between the desired pose and the currently obtained pose is determined.
 Based on this, the joint angle estimates are adjusted, aiming to reduce the error and bring the end-effector closer to the desired pose.
 This process is repeated until the error meets the predefined tolerances.
 The joint angles calculated during the final iteration are then considered a solution to the problem \parencite{inverseKinematicsIllinois}.
@@ -169,10 +164,11 @@ Both inverse kinematics methods are used extensively in industry and research, d
 The \textbf{P}roportional-\textbf{I}ntegral-\textbf{D}erivative (PID) controller is the most commonly used feedback control system in many modern industries \parencite{aastrom2002control}.
 A feedback control system aims to regulate a control variable towards a desired setpoint by adjusting its output according to the currently measured process variable.
 In most cases this process variable corresponds to a real world variable such as the speed of a motor, the liquid-level inside a tank or the temperature of a furnace.
-The architecture of a PID controller consists of three terms, a proportional, integral and derivative term, which together compute the controlled output based on the error between setpoint and current process variable.
+The architecture of a PID controller consists of three terms, a proportional, integral and derivative term.
+Combined, these compute the controlled output based on the error between setpoint and current process variable.
 Focusing on digital PID controllers, the process of error calculation and control variable adjustment is done at a discrete, fixed rate, also referred to as a time step.
-There also exist implementations of this control loop type using analogue electronics which generate a continuous control signal, but these are of no concern for the content of this thesis.
-In the following section we will describe the operation of a (digital) PID controller in detail:
+There also exist implementations of PIDs using analogue electronics which generate a continuous control signal, but these are of no concern for the content of this thesis.
+In the following section we will describe the operation of a (digital) PID controller in detail, most of the information sourced from \cite{MATLAB_PID_playlist} and \cite{TLK_Energy_PID_Explanations}:
 
 \begin{figure}[h]
 	\centerline{\includegraphics[scale=0.05]{PID_Controller}}
@@ -194,10 +190,10 @@ $P(t)$ is given by:
 \[
 	P(t) = K_p \cdot Error(t)
 .\]
-The integral term $I(t)$ takes into account the sum of past errors to address any long term bias/ constant error present inside of the controlled system.
+The integral term $I(t)$ takes into account the sum of past errors to address any long term bias/ constant error inside of the controlled system.
 Such a bias might for example be the gravitational pull a drone experiences while it is supposed to stay at a constant height.
 The term is able to eliminate long-term errors that can not be accounted for by $P(t)$.
-It is calculated by integrating the error over time and multiplying it with the integral gain $K_i$.
+It is calculated by integration of the error over time and multiplication with the integral gain $K_i$.
 $I(t)$ is given by:
 \[
 	I(t) = K_i \cdot \int_{0}^{t} Error(\tau) \,d\tau
@@ -217,8 +213,8 @@ The calculated control output is fed into the controlled system or process and t
 
 As an additional note, in real-world applications the derivative term is almost never implemented as a pure derivative, as it would be extremely sensitive to noise.
 Instead, a so called filter coefficient ($N$) is utilised to counteract this sensitivity.
-The modified term acts as a first-order, low pass filter, attenuating high frequency noise.
-This term acts equivalently to a derivative up to a given cutoff frequency[Hz] given by: $\frac{N}{2\pi}$ \todo{Not required}.
+The modified term acts as a first-order, low pass filter, attenuating high frequency noise, preventing violent swings of the derivative.
+%This term acts equivalently to a derivative up to a given cutoff frequency[Hz] given by: $\frac{N}{2\pi}$ \todo{Not required}.
 
 The performance of a PID controller greatly depends on the values of its parameters $K_p$, $K_i$ and $K_d$ (and N).
 To achieve desired traits like a fast response time and minimal overshooting or oscillation, these parameters have to be carefully tuned. 

@@ -809,14 +809,20 @@ Gespäch mit Malte und Julius:
 			- mehrere unterschiedliche Sequenzen über Nacht ausprobieren(Skript anlegen ?)
 			
 		- wenn möglich, überall doi-Link angeben --> wenn nicht vorhanden aber auch nicht schlimm
-		- VORTRAG BEIM PRÜFUNGSAMT ANMELDEN (min. eine Woche vorher) !!!!
+		- VORTRAG BEIM PRÜFUNGSAMT ANMELDEN (min. eine Woche vorher) !!!!   --> Anfrage schon gestellt
 		- Termin mit Malte und Julius für nächte Woche finden, da Mi. Feiertag
 		
-
+	
 -----------------------------------------
 26.10.		
+		- Gleichungen für Bein-Trajektorien korrigiert
+		- Introduction-Kapitel endlich fertig überarbeitet (incl. Paulas Anmerkungen)
+		- Background bis auf RL section ebenfalls abgeschlossen
+		
+		- Parameter der Reward-Funktion in rl_setup Skipt mit aufgenommen
 	
-	
+-----------------------------------------
+27.10.			
 	
 	
 	
