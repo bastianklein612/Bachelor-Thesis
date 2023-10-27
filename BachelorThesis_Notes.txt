@@ -816,9 +816,13 @@ Gespäch mit Malte und Julius:
 -----------------------------------------
 26.10.		
 		- Gleichungen für Bein-Trajektorien korrigiert
-		- introduction chapter endlich fertig überarbeitet (incl. Paulas Anmerkungen)
-		- 
+		- Introduction-Kapitel endlich fertig überarbeitet (incl. Paulas Anmerkungen)
+		- Background bis auf RL section ebenfalls abgeschlossen
+		
+		- Parameter der Reward-Funktion in rl_setup Skipt mit aufgenommen
 	
+-----------------------------------------
+27.10.			
 	
 	
 	
