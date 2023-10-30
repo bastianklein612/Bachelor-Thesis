@@ -822,7 +822,14 @@ Gespäch mit Malte und Julius:
 		- Parameter der Reward-Funktion in rl_setup Skipt mit aufgenommen
 	
 -----------------------------------------
-27.10.			
+27.10. - 28.10.
+		- nicht viel inhaltlich
+		- Feedback von Malte erhalten
+		- RL-Agent sieht soweit recht gut aus(Version mit 50x Reward für v_x)
+		
+	
+-----------------------------------------
+29.10.	
 	
 	
 	
@@ -830,9 +837,9 @@ Gespäch mit Malte und Julius:
 	
 	
 	
-	
-	
-	
+	- Fragen für letztes Treffen: 
+		- 1. Anmerkung von Malte bezüglich "Reproduzierbarkeit", Introduction 
+		- 
 	
 	
 	
