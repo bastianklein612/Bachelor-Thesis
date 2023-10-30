@@ -1,7 +1,7 @@
 %--------------------------------------------------------------------------
 %DDPG agent and environment setup script
 %--------------------------------------------------------------------------
-%Partiallz adapted from: https://de.mathworks.com/help/reinforcement-learning/ug/train-ddpg-agent-to-swing-up-and-balance-pendulum.html
+%Partially adapted from: https://de.mathworks.com/help/reinforcement-learning/ug/train-ddpg-agent-to-swing-up-and-balance-pendulum.html
 
 %-----------------------------------------------------------------------------------------------
 % Environment setup
@@ -124,7 +124,7 @@ actor = rlContinuousDeterministicActor(actorNetwork,observationInfo,actionInfo);
 %specify critic and agent options
 %with a learning rate of 10−4 and 10−3 for the actor and critic respectively
 actorOpts = rlOptimizerOptions(LearnRate=3e-4);%,L2RegularizationFactor=1e-4);
-criticOpts = rlOptimizerOptions(LearnRate=1e-3);
+criticOpts = rlOptimizerOptions(LearnRate=3e-4);
 
 %specify DDPG options
 agentOpts = rlDDPGAgentOptions(...
@@ -133,7 +133,7 @@ agentOpts = rlDDPGAgentOptions(...
                                CriticOptimizerOptions=criticOpts,...
                                ExperienceBufferLength=1e6,...%1e5
                                DiscountFactor=0.99,...
-                               MiniBatchSize=64);
+                               MiniBatchSize=316);
 
 agentOpts.NoiseOptions.StandardDeviation=0.05;
 agentOpts.NoiseOptions.StandardDeviationDecayRate=0;
