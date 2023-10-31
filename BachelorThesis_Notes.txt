@@ -843,10 +843,11 @@ Gespäch mit Malte und Julius:
 		- Antwort von Malte erhalten, Treffen heute um 15:30 Uhr
 	
 			--> Fragen für letztes Treffen: 
-					- 1. Anmerkung von Malte bezüglich "Reproduzierbarkeit", Introduction. Wie verstehen ?
+					- 1. Anmerkung von Malte bezüglich "Reproduzierbarkeit", Introduction. Wie verstehen ? -->steht in Problemstellung
 					- muss ich Arbeit rechzeitig abgeben, sodass ihr diese vom Prüfungsamt erhaltet oder reicht PDF ?
 					- Länge der Arbeit, was ist akzeptabel ? 50 Seiten zu viel ?
-					- Immer im Präsens Aktiv schreiben ? (z.B. auf hierbei: We reorganize and encapsulate logical groups into...)
+					- Immer im Präsens Aktiv schreiben ? (z.B. auch hierbei: We reorganize and encapsulate logical groups into...)
+						--> an Malte 2 Sätze schicken(S.19)
 					- Begründungen im Methods-Teil: z.B. bei Kollisionen zwischen Beinen: "We realize this might result in physical inaccuracies, but ..." ?
 					- Vortrag, wie lang ? 30 min. ? (Zwischenvortrag war glaube ich ca. 40-45 min.)
 					-
