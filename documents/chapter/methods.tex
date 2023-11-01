@@ -184,59 +184,54 @@ As mentioned above, joints can receive as input a torque to be applied and can o
 
 
 \subsection{Environment}
-To validate the hexapod model and to provide a place for the robot to learn coordination strategies for its legs, we construct a simple test environment.
-The environment at this point only consists of a horizontal plane, but can expanded to include more complex terrain with little effort.
-Some examples which we experimented with, but did not utilise for testing or training so far, include inclined planes and also small obstacles on the ground.
-As Simscape itself only provides basic geometric objects but allows for the use of .stl files to define the shape of objects, complex terrain such as irregular, uneven surfaces can be imported with relative ease.
-
-In addition to being the testing ground of the hexapod model, the environment also acts as part of the reinforcement learning process.
-Similar to \ref{figure: RL Illustration}, the environment provides observations to the RL agent and calculates a reward signal, based on the agents performance \todo{As of now not represented in the model, reward is part of controller}.
-It does not however directly receive actions from the agent, as the hexapod, to which the actions are applied to by the RL agent, is its own subsystem.
-If we would define the environment in a manner analogous to \ref{figure: RL Illustration}, we would have to include both the environment subsystem and the hexapod subsystem as part of the "RL" environment.
-For obvious reasons such as modularity and clarity of model we choose not to adapt this.
+To validate the hexapod model and to provide a space for the robot to learn coordination strategies, we construct a simple test environment.
+The environment, at this point, simply consists of a horizontal plane, but can be expanded to include more complex terrain with little effort.
+Some examples which we experimented with, but did not utilise for testing or training so far, include inclined planes and small obstacles on the ground.
+As Simscape itself only provides basic geometric objects, but allows for the use of .stl files to define the shape of objects, complex terrain such as irregular, uneven surfaces can be imported with relative ease. \todo{check if really .stl and add footnote}
+In addition to being the testing ground of the hexapod model, the environment also acts as part of the RL training process.
+Similar to the basic concept of RL depicted in Fig. \ref{figure: RL Illustration}, at each time step of the simulation the environment provides RL observations and a reward to the RL agent. \todo{As of now not represented in the model, reward is part of controller}.
+In contrast to this basic concept however, the environment as we define it does not directly receive actions from the RL agent.
+Instead, the agents actions are applied to the hexapod model, which is its own separate subsystem.
+If one would precisely follow the definition of a RL environment in a manner analogous to \ref{figure: RL Illustration}, both the environment subsystem and the hexapod subsystem would have to be included as part of the "RL" environment.
+For obvious reasons such as modularity and clarity of model we choose not to adapt this approach.
 
 \subsection{Locomotion Controller} \label{subsec: Locomotion controller}
+As the conductor of the hexapods locomotion, the controller, at a high level of abstraction, sets the speed, gait and direction of the robots movement.
+On the lowest operational level, the controller achieves these parameters by precisely controlling the torque applied to each joint at every simulation step.
+The locomotion controller subsystem as a whole can be described as a feedback control system.
+It receives sensory information about the process it controls (the hexapod robot) and takes this feedback into account when generating new instructions (torque values) to steer the process.
+As can be seen in the abstract diagram displayed in Fig. \ref{figure: Controller Overview}, the locomotion controller is comprised of several components. 
+In the following, we will explain each of these components (and subcomponents) in detail.
 
-Being responsible for conducting the hexapods movement, the controller is, on a abstract level, responsible for deciding on the the speed, gait and direction of the robots movements.
-On the lowest level this is accomplished by instructing the hexapod which torque has to be applied to each of its joints. 
-
-The controller is responsible for the hexapods locomotion.
-It controls the movement of the robots legs according to an internally defined gait pattern.
-As inputs, the controller receives the sensor data from the hexapod model.
-According to the internally defined gait pattern and the received data input, the controller computes the torques to be applied to each joint of the hexapod.
-The controller subsystem can be described as a feedback control system, as it receives information about the process it controls and takes this feedback into account when generating new commands to steer the process.
-
-\begin{figure}
+\begin{figure}[h]
 	\centerline{\includegraphics[scale=0.03]{HexapodController}}
 	\caption{Controller Overview}
 	\label{figure: Controller Overview}
 \end{figure}
 
-A abstract diagram of the controller subsystem can be seen in Fig. \ref{figure: Controller Overview}.
-As the legs move independently from one another, the controller consists of 6 separate control units, each responsible for controlling one of the six legs.
-These units receive sensory information from the leg joints as input and compute the torques to be applied to the joints as output.
-A legs control unit receives the desired frequency of the swing-stance cycle ($f_{c}$), the duty-cycle percentage ($P_{swing}$) and the swing-initiation signal of the respective leg ($s_i,\ i \in \{1,...,6\}$) as coordination inputs.
-The frequency $f_{c}$ defines how often the swing-stance cycle should be repeated per second, $f_{c} = 0.5 \text{ Hz}$ for example corresponding to one cycle every 2 seconds.
-$P_{swing}$ describes the proportion of the swing (duty) phase in relation to a whole cycle \parencite{qiu2023adaptive} and can be expressed by: 
+As the robots legs have to be able to move independently from one another, the controller contains 6 separate \textit{control units}, one for each of the six legs.
+These units receive sensory information from the leg's \textalpha-joint, more precisely the position and acceleration readings, as input and compute the torques to be applied to them as output.
+In addition, each leg control unit receives the desired frequency of the swing-stance cycle $f_{c}$, the duty-cycle percentage $P_{swing}$ and the swing-initiation signal of the respective leg $s_i,\ i \in \{1,...,6\}$ as coordination inputs.
+The frequency $f_{c}$ defines how often the swing-stance cycle should be repeated per second, $f_{c} = 0.5 \text{ Hz}$ for example corresponding to one full cycle every 2 seconds.
+$P_{swing}$ defines the proportion of the swing (duty) phase in relation to a whole cycle \parencite{qiu2023adaptive} and can be expressed by: 
 
 \begin{equation}
 P_{swing} = \frac{T_\text{sw}} {T_\text{st} + T_\text{sw}}
 \end{equation}
-where $T_\text{sw}$ and $T_\text{st}$ are the durations of the swing and stance phase respectively given as:
+where $T_\text{sw}$ and $T_\text{st}$ are the durations of the swing and stance phase respectively, given as:
 \begin{equation}
 T_\text{sw} = \frac{P_\text{swing}}{f_c}, \quad T_\text{st} = \frac{1-P_\text{swing}}{f_c}
 \end{equation}
 
-A 50\% duty cycle corresponds to swing and stance being of equal length, both taking up exactly half a cycle time.
-The swing initiation signal $s_i \in \{0,1\}$ for each of the six legs ($i \in \{1,...,6\}$) indicates to the control unit whether to initiate the swing phase ($s_i = 1$), independent of the legs position in its cycle.
-$s_i = 0$ simply tells the control unit to continue on with the current cycle execution.
+A 50\% duty cycle ($P_{\text{swing}} = 0.5$) results in swing and stance being of equal length, both taking up exactly half a cycle time.
+The swing initiation signal $s_i \in \{0,1\}$ for each of the six legs ($i \in \{1,...,6\}$) indicates to the control unit whether to initiate the swing phase ($s_i = 1$), independent of the legs position in the cycle, or whether to continue on with the current cycle execution ($s_i = 0$).
 The control units also receive a movement direction vector as an additional input.
-This vector points in the direction in which the robot is supposed to move.
-All these inputs can either be received from a static gait definition, in which the parameters for each leg are statically configured, or can be provided by a reinforcement learning agent.
+All of the inputs can either be received from a \textit{Static Gait Definition}, in which the parameters are configured prior to simulation, or can be provided by a RL agent.
 
-The Simulink RL Agent, a standard library block and separate component of the controller subsystem, receives the current time steps observations $o_t$ from the environment and hexapod model as well as a reward signal $r(t)$.
-It outputs an action vector $a_t = \{s_1,...,s_6\}$, which consists of the swing initiation signal for each leg during the current time step.
-The RL agent is a block belonging to the \textit{Reinforcement Learning} library and represents an agent in the same sense as described in \ref{sec: Reinforcement Learning}.
+The \textit{Simulink RL Agent}, a standard library block and separate component in the controller subsystem, receives the observations $\vec{o_t}$ from the hexapod model as well as a reward signal $r(t)$ at each time step.\todo{Make distinction between observations an RL data, which also includes information about the reward}
+It outputs an action vector $\vec{a_t} = (s_1,...,s_6)$, which consists of the swing initiation signal for each leg.
+To reduce complexity, we restrict agents to control over these $s_i \in \{0,1\},\ i \in \{1,...,6\}$, while all other parameters stay fixed during a simulation run.
+The RL agent block belongs to the \textit{Reinforcement Learning} library and represents an agent in the same sense as described in \ref{sec: Reinforcement Learning}.
 Further and more detailed elaboration on both RL agent and reward function will be provided in section \ref{sec: RL setup}.
 
 \begin{figure}

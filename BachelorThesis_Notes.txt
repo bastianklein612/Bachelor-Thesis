@@ -838,21 +838,25 @@ Gespäch mit Malte und Julius:
 31.10.		
 		- Überarbeitung des Hauptteils: 
 			- Hexapod-Section
-			-
+			- Environment-Section
+			- Locomotion Controller - Section bis zur einzelnen Control Unit
 		
 		- Antwort von Malte erhalten, Treffen heute um 15:30 Uhr
 	
 			--> Fragen für letztes Treffen: 
-					- 1. Anmerkung von Malte bezüglich "Reproduzierbarkeit", Introduction. Wie verstehen ? -->steht in Problemstellung
-					- muss ich Arbeit rechzeitig abgeben, sodass ihr diese vom Prüfungsamt erhaltet oder reicht PDF ?
-					- Länge der Arbeit, was ist akzeptabel ? 50 Seiten zu viel ?
+					- 1. Anmerkung von Malte bezüglich "Reproduzierbarkeit", Introduction. Wie verstehen ? -->steht in Problemstellung, hört sich da eher negativ an
+					- muss ich Arbeit rechzeitig abgeben, sodass ihr diese vom Prüfungsamt erhaltet oder reicht PDF ? --> PDF reicht, aber tag vorher bei PA abgeben
+					- Länge der Arbeit, was ist akzeptabel ? 50 Seiten zu viel ? --> 30-40 Seiten ausgeführten Text
 					- Immer im Präsens Aktiv schreiben ? (z.B. auch hierbei: We reorganize and encapsulate logical groups into...)
-						--> an Malte 2 Sätze schicken(S.19)
+						--> an Malte 2 Sätze per E-Main schicken(S.19), möchte sich mit Paula absprechen
 					- Begründungen im Methods-Teil: z.B. bei Kollisionen zwischen Beinen: "We realize this might result in physical inaccuracies, but ..." ?
-					- Vortrag, wie lang ? 30 min. ? (Zwischenvortrag war glaube ich ca. 40-45 min.)
-					-
-	
-	
+						--> Auf jeden Fall ok, sollte sich aber nicht zu viel vermischen
+					- Vortrag, wie lang ? 30 min. ? (Zwischenvortrag war glaube ich ca. 40-45 min.) --> 30 min, Background reduziert, dafür viel Ergebnis und Bewertung
+
+-----------------------------------------
+01.11.				
+		-
+		
 	
 	
 ---------------------------------------------------------------------------------------------------------------------------
