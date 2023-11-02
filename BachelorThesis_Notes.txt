@@ -849,6 +849,7 @@ Gespäch mit Malte und Julius:
 					- Länge der Arbeit, was ist akzeptabel ? 50 Seiten zu viel ? --> 30-40 Seiten ausgeführten Text
 					- Immer im Präsens Aktiv schreiben ? (z.B. auch hierbei: We reorganize and encapsulate logical groups into...)
 						--> an Malte 2 Sätze per E-Main schicken(S.19), möchte sich mit Paula absprechen
+							--> Antwort: "Präsens passt"
 					- Begründungen im Methods-Teil: z.B. bei Kollisionen zwischen Beinen: "We realize this might result in physical inaccuracies, but ..." ?
 						--> Auf jeden Fall ok, sollte sich aber nicht zu viel vermischen
 					- Vortrag, wie lang ? 30 min. ? (Zwischenvortrag war glaube ich ca. 40-45 min.) --> 30 min, Background reduziert, dafür viel Ergebnis und Bewertung
@@ -861,7 +862,7 @@ Gespäch mit Malte und Julius:
 -----------------------------------------
 02.11.				
 		- Geplant:
-			- Simulink-Modell abgabefertig machen
+			- Simulink-Modell Abgabe-fertig machen
 			- Sanaodos Footfall-Pattern testen
 			- Überarbeitung von Methods beenden
 			- Überarbeitung/ Erweiterung von Results beginnen
@@ -913,7 +914,8 @@ Gespäch mit Malte und Julius:
 			- Rechtschreibfehler-Scan (manuell oder auto)
 			- Bachelorarbeit 3-Fach drucken lassen
 			- 3 CDs mit gesamtem Inhalt brennen
-			
+			- Abschluss-Vortrag beginnen mit Struktur
+			- PDF der Bachelorarbeit an Malte und Paula schicken
 			
 		- 
 		
@@ -922,7 +924,7 @@ Gespäch mit Malte und Julius:
 
 		- Geplant:
 			- Abgabe der Arbeit im Prüfungsamt
-			- Abschlusvortrag weiter bearbeiten
+			- Abschlussvortrag weiter bearbeiten
 
 		- 
 		
