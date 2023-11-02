@@ -336,21 +336,26 @@ As we are not able to achieve this compute frequency with the provided numerical
 	\begin{subfigure}{.5\textwidth} % this sets the figure to be max half the width of the page
 		\centering
 		% include first image
-		\includegraphics[width=.9\linewidth]{IK_Solver_alphaAngle}  % this sets the image to fill 90% of the available space -> 45% of the line width in total. 
+		\includegraphics[width=\linewidth]{IK_Solver_alphaAngle}  % this sets the image to fill 90% of the available space -> 45% of the line width in total. 
 		\caption{}
 		\label{figure: IK Solver Alpha Angle}
 	\end{subfigure}
 	\begin{subfigure}{.5\textwidth}
 		\centering
 		% include second image
-		\includegraphics[width=.9\linewidth]{IK_Solver_betaGammaAngle}  
+		\includegraphics[width=0.85\linewidth]{IK_Solver_betaGammaAngle}  
 		\caption{}
 		\label{figure: IK Solver Beta/Gamma Angle}
 	\end{subfigure}
 	\caption[Angle derivation drawings]{(a) Top-down view of a hexapod leg, used to determine \textalpha. (b) Side-view, used to calculate \textbeta \ and \textgamma.}
 	\label{figure: IK angle derivations}
 \end{figure}
-\todo{Remove red cross in graphic, looks strange}
+
+\begin{figure}[!h]
+	\centerline{\includegraphics[scale=0.03]{HexapodLeg_Lengths.PNG}}
+	\caption[Hexapod leg segment lengths]{Segment lengths of one of the the PhantomX MK4 hexapod legs}
+	\label{figure: Hexapod Leg Lengths}
+\end{figure}
 
 Our proposed solver sequentially calculates the legs joint angles, starting at \textalpha, then \textbeta \ and \textgamma.
 We derive the following equations from the geometric properties of a hexapod leg as seen in \ref{figure: IK angle derivations}, translate them into C-code and run the resulting script inside a MATLAB code block.

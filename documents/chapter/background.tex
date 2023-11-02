@@ -5,6 +5,26 @@
 \todo{MALTE: Small introduction to chapter; what to expect}
 
 \section{Hexapods} \label{sec: Hexapods}
+
+\begin{figure}[!h]
+	\begin{subfigure}{.5\textwidth} % this sets the figure to be max half the width of the page
+		\centering
+		% include first image
+		\includegraphics[width=\linewidth]{phantomX_III_overview}  % this sets the image to fill 90% of the available space -> 45% of the line width in total. 
+		\caption{}
+		\label{figure: PhantomX MKIII}
+	\end{subfigure}
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		% include second image
+		\includegraphics[width=0.85\linewidth]{HexapodLeg.png}  
+		\caption{}
+		\label{figure: Hexapod Leg Sketch}
+	\end{subfigure}
+	\caption[Hexapod and hexapod leg]{(a) Trossen Robotics PhantomX MKIII hexapod, predecessor of the MKIV used in this thesis [\cite{PhantomX_MKIII}] (b) Example drawing of a 3-segment hexapod leg.}
+	\label{figure: Hexapod and hexapod leg}
+\end{figure}
+
 Hexapods are a class of robots featuring 6 legs, inspired by naturally occurring six-legged creatures like insects and arachnids.
 Through millions of years of evolution these organisms developed efficient locomotion strategies \parencite{neville2006bipedal}, making them a rich source of inspiration for robotics.
 By emulating the biomechanics and behaviour of insects, researchers and engineers are able to create versatile and robust robotic systems capable of navigating challenging terrain \parencite{irawan2011optimal, ouyang2021adaptive, schilling2013walknet}.
@@ -17,13 +37,6 @@ These joints move orthogonal to the movement plane of the \textalpha-joint. Toge
 An example of a hexapod robot based on the described architecture can be seen in Fig. \ref{figure: PhantomX MKIII}.
 The nomenclature we introduced in this section and use throughout the thesis to label joints and leg segments was adopted from the works of 
 \cite{schilling2013walknet} and \cite{HeterarchicalArchitectureSchilling}.
-
-\begin{figure}[h]
-	\centerline{\includegraphics[scale=0.065]{phantomX_III_overview}}
-	\caption[Trossen Robotics PhantomX MKIII]{PhantomX MKIII hexapod, predecessor of the MKIV used in this thesis [\cite{PhantomX_MKIII}]}
-	\label{figure: PhantomX MKIII}
-\end{figure}
-\todo{MALTE: Add image of leg architecture}
 
 
 \section{MATLAB}
