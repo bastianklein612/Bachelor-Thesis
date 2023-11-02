@@ -845,7 +845,7 @@ Gespäch mit Malte und Julius:
 	
 			--> Fragen für letztes Treffen: 
 					- 1. Anmerkung von Malte bezüglich "Reproduzierbarkeit", Introduction. Wie verstehen ? -->steht in Problemstellung, hört sich da eher negativ an
-					- muss ich Arbeit rechzeitig abgeben, sodass ihr diese vom Prüfungsamt erhaltet oder reicht PDF ? --> PDF reicht, aber tag vorher bei PA abgeben
+					- muss ich Arbeit rechzeitig abgeben, sodass ihr diese vom Prüfungsamt erhaltet oder reicht PDF ? --> PDF reicht, aber Tag vorher bei PA abgeben
 					- Länge der Arbeit, was ist akzeptabel ? 50 Seiten zu viel ? --> 30-40 Seiten ausgeführten Text
 					- Immer im Präsens Aktiv schreiben ? (z.B. auch hierbei: We reorganize and encapsulate logical groups into...)
 						--> an Malte 2 Sätze per E-Main schicken(S.19), möchte sich mit Paula absprechen
@@ -875,12 +875,6 @@ Gespäch mit Malte und Julius:
 			- Überarbeitung Results
 			- Ergebnis-Daten erstellen
 			- Grafiken erstellen
-
-		- 
-		
------------------------------------------
-03.11.				
-		- Geplant:
 			- Notizen alle nochmal durchlesen
 			- Results und Fazit überarbeiten/ erweitern
 		- 
