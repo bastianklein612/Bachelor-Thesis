@@ -882,7 +882,6 @@ Gespäch mit Malte und Julius:
 		- Geplant:
 			- Notizen alle nochmal durchlesen
 			- Results und Fazit überarbeiten/ erweitern
-		
 		- 
 		
 -----------------------------------------
@@ -898,7 +897,9 @@ Gespäch mit Malte und Julius:
 	
 		- Geplant:
 			- alle Quellen checken
-			- TODOs lösen
+			- DOI-Links zu Quellen hinzufügen
+			- alle TODOs lösen
+			- CD-Daten zusammenstellen
 		
 		- 
 		
@@ -910,7 +911,9 @@ Gespäch mit Malte und Julius:
 			- Korrektur lesen
 			- alle Links testen
 			- Rechtschreibfehler-Scan (manuell oder auto)
-			Bachelorarbeit 3-Fach drucken lassen
+			- Bachelorarbeit 3-Fach drucken lassen
+			- 3 CDs mit gesamtem Inhalt brennen
+			
 			
 		- 
 		
@@ -919,7 +922,7 @@ Gespäch mit Malte und Julius:
 
 		- Geplant:
 			- Abgabe der Arbeit im Prüfungsamt
-			- Abschlusvortrag erstellen
+			- Abschlusvortrag weiter bearbeiten
 
 		- 
 		
