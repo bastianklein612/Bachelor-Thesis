@@ -225,7 +225,7 @@ T_\text{sw} = \frac{P_\text{swing}}{f_c}, \quad T_\text{st} = \frac{1-P_\text{sw
 
 A 50\% duty cycle ($P_{\text{swing}} = 0.5$) results in swing and stance being of equal length, both taking up exactly half a cycle time.
 The swing initiation signal $s_i \in \{0,1\}$ for each of the six legs ($i \in \{1,...,6\}$) indicates to the control unit whether to initiate the swing phase ($s_i = 1$), independent of the legs position in the cycle, or whether to continue on with the current cycle execution ($s_i = 0$).
-The control units also receive a movement direction vector as an additional input.
+The control units also receive a movement direction vector $\vec{d}$ as an additional input.
 All of the inputs can either be received from a \textit{Static Gait Definition}, in which the parameters are configured prior to simulation, or can be provided by a RL agent.
 
 The \textit{Simulink RL Agent}, a standard library block and separate component in the controller subsystem, receives the observations $\vec{o_t}$ from the hexapod model as well as a reward signal $r(t)$ at each time step.\todo{Make distinction between observations an RL data, which also includes information about the reward}
@@ -240,11 +240,13 @@ Further and more detailed elaboration on both RL agent and reward function will 
 	\label{figure: Leg control unit}
 \end{figure}
 
-Continuing  with the explanation of the controller subsystem, we focus on a single leg control unit.
-Such a unit, as can be seen in \ref{figure: Leg control unit}, consists of a leg trajectory generator and three PID feedback control loops, one for each of the leg joints.
-The leg trajectory generators task is to generate joint angles which allow the leg end-effector to follow a smooth trajectory, all in accordance to the $f_c$, $P_\text{swing}$, $s_i,\ i \in \{1,...,6\}$ and direction vector.
-At each time step it outputs the desired angle for the \textalpha-, \textbeta- and \textgamma-joints, which the PID controllers then work on achieving by regulating the applied torques.
-The PID controller parameters $K_p$, $K_i$ and $K_d$ (and $N$) are tuned via trial-and-error method and are given in \ref{table: PID parameters}.
+Continuing  with the description of the locomotion controller, we focus on a single leg control unit.
+Such a unit, as shown in Fig. \ref{figure: Leg control unit}, consists of a \textit{Leg Trajectory Generator} and three PID feedback control loops, one for each joint.
+The leg trajectory generator is responsible for determining the joint angles required to allow the leg's end-effector to follow a smooth trajectory, all in accordance to $f_c$, $P_\text{swing}$, $s_i\ (i \in \{1,...,6\})$ and $\vec{d}$.
+At each time step, the generator calculates the angles of the \textalpha-, \textbeta- and \textgamma-joint, which are send to the PID controllers to be used a their new setpoints.
+The PID controllers then work on achieving the desired angles by regulating the applied torques.
+$K_p$, $K_i$, $K_d$ (and $N$), the PID parameters, are tuned via trial-and-error method and are given in table \ref{table: PID parameters}.
+\todo{This section might need a rewrite for better formulation}
 
 \begin{figure}
 	\centerline{\includesvg[scale=0.75]{Simulink/Simulink_LegTrajectoryGenerationOverview}}
@@ -252,40 +254,44 @@ The PID controller parameters $K_p$, $K_i$ and $K_d$ (and $N$) are tuned via tri
 	\label{figure: Leg trajectory generator}
 \end{figure}
 
-Moving down another level of complexity, the leg trajectory generator, as seen in \ref{figure: Leg trajectory generator}, consists of a signal generator, a pattern rotation subsystem and an analytical inverse kinematics solver.
-The signal generator is responsible for creating a continuous leg trajectory in the form of 2-dimensional trajectory coordinates.
-The pattern rotation subsystems applies, if required, a simple mathematical rotation to  the planar trajectory (x,z-plane) around the z-axis.
-This allows for omni-directional movement of the robot.
-Finalizing the trajectory generation, the inverse kinematics solver receives the trajectory coordinates and translates them into the \textalpha, \textbeta \ and \textgamma \ joint angles.
+Moving down another level of complexity, the leg trajectory generator, as seen in Fig. \ref{figure: Leg trajectory generator}, consists of a \textit{Signal Generator}, a \textit{Pattern Rotation} subsystem and an \textit{Analytical IK Solver}.
+The signal generator is responsible for the generation of a continuous leg trajectory in the form of 2-dimensional trajectory coordinates.
+We provide insights into the exact process of coordinate signal generation in the upcoming section.
+As we intent the locomotion controller to allow for omnidirectional movement, the pattern rotation subsystems applies a simple mathematical rotation to the planar trajectory (x,z-plane) around the z-axis.\todo{Introduce coordinate system at the beginning of methods}
+The required rotation angle is determined from the angle between the default forward movement direction $\vec{d}_\text{default} = (1 \ 0 \ 0)^t$ and $\vec{d}$.
+Finalizing the trajectory generator, the analytical IK solver receives the trajectory coordinates and translates them into the \textalpha, \textbeta \ and \textgamma \ joint angles.
+A detailed explanation of the solver is provided in \ref{subsubsec: IK Solver}.
 
 
 \todo{Remove text from image/ change image to diagram}
-
-The Signal Generator, displayed in \ref{figure: Signal Generator}, consists mainly of two parts, a swing phase subsystem and a stance phase subsystem.
-These provide the x- and z-coordinate signals during their respective phases.
-The coordination between the two units is influenced by $f_c$, \ $P_{swing}$ and $s_i,\ i \in \{1,...,6\}$.
-If the swing initiation $s_i$ of a signal generator is pulled high, the swing phase subsystem is reset and the outputs (x,z) are switched to the swing system.
-At the conclusion of the swing phase, which means the x-coordinate coincides with the AEP, the swing phase subsystem gives up control to the stance phase subsystem via the \textit{Swing finished} signal.
-This induces a reset on the stance phase subsystem and switches the outputs over to this system.
-In detail, the swing and stance phase signals are generated by modulation of geometric and linear functions based on $f_c$, $P_{swing}$ and the function amplitudes.
-These amplitudes are derived from the planned step length and height.
-The swing and stance phase signal functions are defined as follows:
+\todo{Redo section about Signal Generator after image is refreshed}
+The Signal Generator, displayed in Fig. \ref{figure: Signal Generator}, consists mainly of two components, a \textit{Swing Phase} subsystem and a \textit{Stance Phase} subsystem.
+These provide the 2-dimensional trajectory coordinates (x,z) during their respective phases in the movement cycle.
+Coordination between the two units is achieved through the so called \textit{Swing-Stance Activation} subsystem and is influenced by $f_c$, \ $P_{swing}$ and $s_i,\ i \in \{1,...,6\}$.
+If $s_i$ is pulled high ($s_i=1$), the swing phase subsystem is reset and the outputs (x,z) are switched to this system.
+In Simulink, resetting a subsystem means the current state of the subsystem is discarded and it's initial state recreated.
+At the conclusion of the leg's swing phase (the x-coordinate coincides with the AEP), the swing phase subsystem gives up control to the stance phase subsystem via the \textit{Swing finished} signal.
+This act induces a reset on the stance phase subsystem and switches the outputs over to this system.
+\\
+In detail, the swing and stance phase trajectory coordinates are generated by modulation of geometric and linear functions based on $f_c$, $P_{swing}$ and the function amplitudes.
+These amplitudes are derived from the desired step length and height.
+The swing trajectory $\Theta_{sw}(t)$ and the stance trajectory $\Theta_{st}(t)$ are defined as follows:
 \begin{align}
 	\Theta_{sw}(t) & = 
 	\begin{cases}
 		x_{sw}(t) = x_{st} + \frac{|AEP - x_{st}|}{2} \cdot \cos(f_{sw} \cdot t \cdot \pi + \pi) + \frac{|AEP - x_{st}|}{2} \\
 		z_{sw}(t) = h_{step} \cdot \sin(f_{sw} \cdot t \cdot \pi) \\
-	\end{cases} & , t \in [0,T_\text{sw}] 
-	\\
+	\end{cases} & , t \in [0,T_\text{sw}] \\
+	\notag \\
 	\Theta_{st}(t) & =
 	\begin{cases}
 		x_{st}(t) = \text{AEP} - f_{st} \cdot t \cdot l_{step}\\
 		z_{st}(t) = 0
 	\end{cases} & , t \in [0, T_\text{st}]    
 \end{align}
-where $l_{step} = |AEP - PEP|$ is the length of a step defined as the distance between the predefined AEP and PEP, $l_{step}$ the predefined height of a step and $x_{st}$ the x-coordinate of the leg at the moment the swing phase is initiated.
-Given $f_c$ and $P_{swing}$, we define $f_{sw} = \frac{f_c}{P_{swing}}$ and $f_{st} = \frac{f_c}{1-P_{swing}}$ as the frequency of the swing and stance phase respectively.
-The parameter $t$ is limited to the ranges $[0,T_\text{sw}]$ and $[0, T_\text{st}]$, because if one of the subsystems reaches the end of its phase ($t=T_sw$ or $t=T_st$), the subsystems internal clock is reset and thus upon its next activation, the function evaluation begins from $t=0$ again.
+We define $l_{step} = |AEP - PEP|$ as the length of a step, $h_{step}$ as the predefined height of a step and $x_{st}$ as the x-coordinate of the leg at the moment the swing phase is initiated.
+Given $f_c$ and $P_{swing}$, we further define $f_{sw} = \frac{f_c}{P_{swing}}$ and $f_{st} = \frac{f_c}{1-P_{swing}}$ as the frequency of the swing and stance phase respectively.
+The parameter $t$ is limited to the ranges $[0,T_\text{sw}]$ and $[0, T_\text{st}]$, as every time one of the subsystems reaches the end of its phase ($t=T_{sw}$ or $t=T_{st}$), the subsystems internal clock is reset and upon it's next activation, the function evaluation starts at $t=0$ again.
 
 \todo{Double-check equations}
 \todo{Insert image of trajectory graphs/ create graphic depicting early swing initiation and resulting trajectory}
