@@ -855,10 +855,90 @@ Gespäch mit Malte und Julius:
 
 -----------------------------------------
 01.11.				
-		-
+		- Rework vom Locomotion Controller beendet
+		- kleinen DDPG-Agenten gestertet (N=32)
 		
+-----------------------------------------
+02.11.				
+		- Geplant:
+			- Simulink-Modell abgabefertig machen
+			- Sanaodos Footfall-Pattern testen
+			- Überarbeitung von Methods beenden
+			- Überarbeitung/ Erweiterung von Results beginnen
+		
+		- 
+		
+-----------------------------------------
+03.11.				
+		- Geplant:
+			- Überarbeitung Results
+			- Ergebnis-Daten erstellen
+			- Grafiken erstellen
+
+		- 
+		
+-----------------------------------------
+03.11.				
+		- Geplant:
+			- Notizen alle nochmal durchlesen
+			- Results und Fazit überarbeiten/ erweitern
+		
+		- 
+		
+-----------------------------------------
+04.11.				
+		- Geplant:
+			- Overall-Struktur Diagramm aufmalen; Topics und Pfeile
+			- Results, Fazit, Ausblick
+		
+		- 
+		
+-----------------------------------------
+05.11. 	
 	
+		- Geplant:
+			- alle Quellen checken
+			- TODOs lösen
+		
+		- 
+		
+-----------------------------------------
+06.11.	LETZTER TAG DER BEARBEITUNG + DRUCKTAG
+			
+		- Geplant:
+			- letzte Änderungen
+			- Korrektur lesen
+			- alle Links testen
+			- Rechtschreibfehler-Scan (manuell oder auto)
+			Bachelorarbeit 3-Fach drucken lassen
+			
+		- 
+		
+-----------------------------------------
+07.11.	ABGABE-TAG
+
+		- Geplant:
+			- Abgabe der Arbeit im Prüfungsamt
+			- Abschlusvortrag erstellen
+
+		- 
+		
+-----------------------------------------
+08.11.	ABSCHLUSSVORTRAG			
 	
+		- Geplant:
+			- Abschluss-Vortrag vollenden und üben
+			- Vortrag um 16:30 Uhr im Oberseminar halten
+				
+				
+				#
+				###
+				#####
+	###################		Ende der
+	###################   	Bachelorarbeit
+				#####
+				###
+				#
 ---------------------------------------------------------------------------------------------------------------------------
 ------------ZEITPLAN-------------------------------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------------------------------------------------
@@ -935,5 +1015,5 @@ TODOs vor Abgabe:
 	- Die kompletten Notizen nochmal durchlesen und nach ungelösten Problemen Ausschau halten
 	- Bachelorarbeit komplett(auch Quellen !) durchlesen, keine Musik, keine Ablenkung, rein gar nichts
 	- alle Links im Dokument anklicken und überprüfen
-	- jedes einzelne .tex Dokument durchlesen(auf auskommentierte Sektionen achten)
+	// - (edes einzelne .tex Dokument durchlesen(auf auskommentierte Sektionen achten)
 	- PDF der Arbeit in Rechtschreibprüfer eingeben(?)
