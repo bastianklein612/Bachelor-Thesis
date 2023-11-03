@@ -49,12 +49,13 @@ final
 %Modify figure and table captions
 \usepackage[font=small,labelfont=bf,labelsep=space]{caption}
 \captionsetup{%
-	figurename=Fig.,
-	tablename=Tab.,
-	justification=raggedright,
+	figurename=Figure,
+	tablename=Table.,
+	justification=centerlast,
 	singlelinecheck=false,
 	format=hang,
-	font=footnotesize
+	font=footnotesize,
+	labelfont=bf
 }
 
 
@@ -118,6 +119,9 @@ psdextra
 \usepackage[pass]{geometry}
 % allows adding of todo notes at the side of the document
 \usepackage[textsize=small,textwidth=2.5cm]{todonotes}
+
+%enables easy dispalying of 1e-4, ...
+\usepackage{siunitx}
 
 % settings for the header and footer
 \usepackage[headsepline=1pt]{scrlayer-scrpage}

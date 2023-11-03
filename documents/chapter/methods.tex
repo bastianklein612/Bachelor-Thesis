@@ -84,7 +84,7 @@ This enables us to propagate changes during the development process faster, as w
 As a side effect, this compartmentalisation provides the Simulink model with a much more cleaned up and easier to understand appearance.
 To be able to control each joint and receive sensory feedback from it, we enable the so called \textit{direct torque input} as well as the \textit{position} and \textit{acceleration} sensor readings on each joint block.
 Trying to prevent the models complexity from increasing to quickly, we abstain from modelling the physical servo motor attached to each joint and instead use the instantaneous torque application mentioned above.
-The joint block also allows for physical parameters to be modified, such as internal friction, dampening or spring stiffness.
+The joint block also allows for physical parameters to be modified, such as joint boundaries, internal friction, dampening and spring stiffness.
 We combine the 3 torque values and position/ acceleration readings of each leg into an input and output bus signal.
 A view inside of the leg subsystem is given in \ref{figure: Hexapod Leg}, the subsystem block itself with its torque input and sensory feedback output buses can be seen in \ref{figure: Hexapod Model Overview} as part of the complete hexapod model.
 
@@ -130,55 +130,6 @@ To position each rigid body and joint correctly, rigid transformations are used 
 As mentioned above, joints can receive as input a torque to be applied and can output sensory data, such as the joints position, velocity and acceleration. 
 \end{comment}
 
-
-\begin{table}
-	\centering
-	\begin{tabular}{| l | c | c |}
-		\hline
-		\textbf{Parameter} & \textbf{Value} & \textbf{Unit}\\
-		\hline
-		\hline
-		Spring stiffness & 0 & $\frac{N}{m}$\\
-		
-		Damping & 0 &  $\frac{N \cdot s}{m}$\\
-		
-		Spring stiffness (joint boundary) & 0 & $\frac{Nm}{\text{deg}}$ \\
-		
-		Damping coefficient (joint boundary) &  0 & $\frac{Nm \cdot s}{\text{deg}}$\\
-		
-		Transit region width (joint boundary) & 0 &  deg\\
-		\hline
-	\end{tabular}
-	\caption{Internal joint parameters}
-	\label{table: Joint parameters}
-\end{table}
-
-\todo{"Gait Self-learning for Damaged Robots Combining Bionic Inspiration and Deep Reinforcement Learning" for parameters of hexapod}
-
-\begin{table}
-	\centering
-	\begin{tabular}{| l | c | c |}
-		\hline
-		\textbf{Parameter} & \textbf{Value} & \textbf{Unit} \\ 
-		\hline
-		\hline
-		Stiffness & $1 \times 10^6$ & $\frac{N}{m}$ \\
-		
-		Damping & $1 \times 10^6$ & $\frac{N\cdot s}{m}$ \\
-		
-		Transition region width & $1 \times 10^{-3}$ & $m$ \\
-		
-		Static friction coefficient &  0.9 & $-$ \\
-		
-		Dynamic friction coefficient &  0.8 & $-$ \\
-		
-		Critical velocity & $1 \times 10^{-3}$ & $\frac{m}{s}$ \\
-		\hline
-	\end{tabular}
-	\caption[Spatial contact force parameters]{\textit{Spacial contact force} parameters similar to  \cite{trotta2022walking}}
-	\label{table: Spatial contact force}
-\end{table}
-
 %In this thesis we only utilize the sensor information about the current joint positions, but to allow for further expansions on the model, such as optimizing for minimal energy consumption, joint velocity and acceleration are provided as well.
 %It should be noted, that integrating the joint position over time would implicitly yield the same result, but we decided for ease of use to include this data explicitly.
 
@@ -211,7 +162,7 @@ In the following, we will explain each of these components (and subcomponents) i
 
 As the robots legs have to be able to move independently from one another, the controller contains 6 separate \textit{control units}, one for each of the six legs.
 These units receive sensory information from the leg's \textalpha-joint, more precisely the position and acceleration readings, as input and compute the torques to be applied to them as output.
-In addition, each leg control unit receives the desired frequency of the swing-stance cycle $f_{c}$, the duty-cycle percentage $P_{swing}$ and the swing-initiation signal of the respective leg $s_i,\ i \in \{1,...,6\}$ as coordination inputs.
+In addition, each leg control unit receives the desired frequency of the swing-stance cycle $f_{c}$, the duty-cycle percentage $P_{swing}$ and the swing-initiation signal of the respective leg $s_i,\ i \in \{1,...,6\}$ as coordination inputs.\todo{Explain why we use a Initiation Signal -> RL}
 The frequency $f_{c}$ defines how often the swing-stance cycle should be repeated per second, $f_{c} = 0.5 \text{ Hz}$ for example corresponding to one full cycle every 2 seconds.
 $P_{swing}$ defines the proportion of the swing (duty) phase in relation to a whole cycle \parencite{qiu2023adaptive} and can be expressed by: 
 
@@ -242,10 +193,10 @@ Further and more detailed elaboration on both RL agent and reward function will 
 
 Continuing  with the description of the locomotion controller, we focus on a single leg control unit.
 Such a unit, as shown in Fig. \ref{figure: Leg control unit}, consists of a \textit{Leg Trajectory Generator} and three PID feedback control loops, one for each joint.
-The leg trajectory generator is responsible for determining the joint angles required to allow the leg's end-effector to follow a smooth trajectory, all in accordance to $f_c$, $P_\text{swing}$, $s_i\ (i \in \{1,...,6\})$ and $\vec{d}$.
+The leg trajectory generator is responsible for providing the joint angles required to allow the leg's end-effector to follow a smooth trajectory, all in accordance to $f_c$, $P_\text{swing}$, $s_i\ (i \in \{1,...,6\})$ and $\vec{d}$.
 At each time step, the generator calculates the angles of the \textalpha-, \textbeta- and \textgamma-joint, which are send to the PID controllers to be used a their new setpoints.
 The PID controllers then work on achieving the desired angles by regulating the applied torques.
-$K_p$, $K_i$, $K_d$ (and $N$), the PID parameters, are tuned via trial-and-error method and are given in table \ref{table: PID parameters}.
+The PID parameters $K_p$, $K_i$, $K_d$ (and $N$) are tuned via trial-and-error method and are given in table \ref{table: PID parameters}.
 \todo{This section might need a rewrite for better formulation}
 
 \begin{figure}
@@ -259,8 +210,8 @@ The signal generator is responsible for the generation of a continuous leg traje
 We provide insights into the exact process of coordinate signal generation in the upcoming section.
 As we intent the locomotion controller to allow for omnidirectional movement, the pattern rotation subsystems applies a simple mathematical rotation to the planar trajectory (x,z-plane) around the z-axis.\todo{Introduce coordinate system at the beginning of methods}
 The required rotation angle is determined from the angle between the default forward movement direction $\vec{d}_\text{default} = (1 \ 0 \ 0)^t$ and $\vec{d}$.
-Finalizing the trajectory generator, the analytical IK solver receives the trajectory coordinates and translates them into the \textalpha, \textbeta \ and \textgamma \ joint angles.
-A detailed explanation of the solver is provided in \ref{subsubsec: IK Solver}.
+Finalizing the trajectory generator, the analytical IK solver receives the calculated trajectory coordinates and translates them into the \textalpha, \textbeta \ and \textgamma \ joint angles.
+A more detailed explanation of the solver is provided in \ref{subsubsec: IK Solver}.
 
 
 \todo{Remove text from image/ change image to diagram}
@@ -328,9 +279,10 @@ The parameter $t$ is limited to the ranges $[0,T_\text{sw}]$ and $[0, T_\text{st
 
 
 \subsubsection{Analytical Inverse Kinematics Solver} \label{subsubsec: IK Solver}
-Even though Simulink's \textit{Robotics System Toolbox} includes an iterative inverse kinematics block, the block is not able to support the calculation speed we require.
-The simulations, and thus the trajectory calculations as well, need to be run at about 1-2 kHz (time steps per second) to ensure stability of the simulation and smooth motion of the hexapod.
-As we are not able to achieve this compute frequency with the provided numerical solver, we implement our own, purpose-build analytical IK solver aiming to drastically improve computation time.
+While Simulink's \textit{Robotics System Toolbox} does provide an iterative IK block, it is unable to support the calculation speed we require.
+To achieve stable simulations and smooth motion of the hexapod robot, the model requires a simulation step-size of about 0.5 ms, equating to a trajectory calculation frequency of 2 kHz.
+At this compute frequency, the provided iterative solver becomes a bottleneck in the simulation cycle, resulting in unacceptable simulation times.
+To drastically reduce the computation time a simulation step requires, we implement our own, purpose-build analytical IK solver.
 
 \begin{figure}[!h]
 	\begin{subfigure}{.5\textwidth} % this sets the figure to be max half the width of the page
@@ -358,7 +310,7 @@ As we are not able to achieve this compute frequency with the provided numerical
 \end{figure}
 
 Our proposed solver sequentially calculates the legs joint angles, starting at \textalpha, then \textbeta \ and \textgamma.
-We derive the following equations from the geometric properties of a hexapod leg as seen in \ref{figure: IK angle derivations}, translate them into C-code and run the resulting script inside a MATLAB code block.
+We derive the following equations from the geometric properties of a hexapod leg as seen in \ref{figure: IK angle derivations}:
 
 \[
 	\alpha = \arctan(\frac{x}{y}) ,\quad \quad \quad \beta = 90^{\circ} - (\beta_1 + \beta_2) ,\quad \quad \quad \gamma = 90^{\circ} - \gamma_1.
@@ -373,44 +325,9 @@ Where $\beta_1$, $\beta_2$, $\gamma_1$ and \text{BF} are given by:
 	\gamma_1 = \arccos(\frac{{l_\text{tibia}}^2 + {l_\text{femur}}^2 - {\text{BF}}^2}  {2 \cdot {l_\text{tibia}} \cdot {l_\text{femur}}}) ,\quad \quad \quad \text{BF} = \sqrt{(l_\text{total} - l_\text{coxa})^2 + z^2}.
 \]
 
-\begin{table}[h!]
-	\centering
-	\begin{tabular}{| c | c |}
-		\hline
-		parameter & value\\
-		\hline
-		\hline
-		$K_p$ & 600 \\
-		
-		$K_i$ & 0.1 \\
-		
-		$K_d$ & 1 \\
-		
-		$N$ & 1000 \\
-		\hline
-	\end{tabular}
-	\caption[PID parameters]{Gain parameters used for PID-tuning}
-	\label{table: PID parameters}
-\end{table}
-
-\begin{table}[h!]
-	\centering
-	\begin{tabular}{| c | c | c | c |} 
-		\hline
-		 & \textbf{\textalpha} & \textbf{\textbeta} & \textbf{\textgamma} \\ [0.5ex] 
-		\hline
-		\hline
-		left front, right back & 45 & 14.03624347 & 60.58440117  \\ 
-		
-		left/right middle & 0 & 14.03624347 & 60.58440117 \\
-		
-		right front, left back & -45 & 14.03624347 & 60.58440117 \\
-		\hline
-	\end{tabular}
-	\caption[Initial joint positions]{Initial joint positions according to urdf-file}
-	\label{table:Initial joint positions}
-\end{table}
-\todo{Muss keine Tabelle sein}
+To create the Analytical IK block, we translate the derived equations into C-code.
+The resulting script is then run inside a \textit{MATLAB code block} for each simulation step.
+The implemented code can be seen in Fig. X. \todo{Add code}
 
 
 \section{Learning Leg Coordination} \label{sec: RL setup}
@@ -420,21 +337,46 @@ The POMDP is an extension to the MDP definition and describes problem spaces in 
 This is particularly the case for complex continuous environments in which it is impossible to observe every detail of the process.
 For the problem we try to solve here this holds true as well.
 
-%The MDP is a 5-tuple $\mathcal{\{S,A,P,R,\gamma\}}$, where $\mathcal{S}$ is a finite set of states, $\mathcal{A}$ is a finite set of actions, $\mathcal{P}$ is a state-transition probability matrix ($\mathcal{P}_{ss'}^a=\mathbb{P}[S_{t+1}=s' | S_t=s, A_t=a]$), $\mathcal{R}_s^a$ is a reward function ($\mathcal{R}_s^a = \mathbb{E}[R_{t+1} | S_t=s, A_t=a]$) and $\gamma \in [0,1]$ is a discount factor.
-We define the POMDP tuple $\mathcal{\{S,A,P,R,\gamma\}}$ as follows:
-The state space $\mathcal{S}$ consists of all possible configurations of the continuous simulation environment and cannot be considered a finite set.\\
-The action space $\mathcal{A}$ is defined as the set of all possible permutations of the action tuple $\{s_1,...,s_6\}$, meaning it is the set of all 6-bit binary numbers and thus is of size $2^6$.
-It follows that the action space is discrete, as the agent can only decide to activate a swing phase or not.\\
-As it is not required for the training process, we do not explicitly provide a state transition probability matrix $\mathcal{P}$.
+\begin{definition}[Partially Observable Markov Decision Process {[\cite{silver2015}]}]
+	A \textbf{POMDP} is a 7-tuple $\langle \mathcal{S,A,O,P,R,Z,\gamma} \rangle$
+	\begin{itemize}
+		\item $\mathcal{S}$ is a set of states
+		\item $\mathcal{A}$ is a finite set of actions
+		\item $\mathcal{O}$ is a finite set of observations
+		\item $\mathcal{P}$ is a state transition probability matrix, $\mathcal{P}_{ss'}^a = \mathbb{P}[S_{t+1} = s' \ | \ S_t = s, A_t = a	] $
+		\item $\mathcal{R}$ is a reward function, $\mathcal{R}_s^a = \mathbb{E}[R_{t+1} \ | \ S_t = s, A_t = a]$
+		\item $\mathcal{Z}$ is an observation function, $\mathcal{Z}_{s'o}^a = \mathcal{P}[O_{t+1} = o \ | \ S_{t+1} = s', A_t = a]$
+		\item $\mathcal{\gamma}$ is a discount factor $\mathcal{\gamma} \in [0,1]$
+	\end{itemize}
+\end{definition}
+
+In the following, we will describe the RL setup in terms of a POMDP:\\
+Our state space $\mathcal{S}$ consists of all possible configurations of the hexapod robot and environment.
+The action space $\mathcal{A}$ is defined as the set of all possible actions our RL agent can take, namely the decisions on whether to initiate a legs swing phase or not.
+The observation space $\mathcal{O}$ consists of the position and acceleration reading of each of the robots 6 \textalpha-joints, totalling 12 observations.
+% permutations of the action tuple $\{s_1,...,s_6\}$, meaning it is the set of all 6-bit binary numbers and thus is of size $2^6$.
+%It follows that the action space is discrete, as the agent can only decide to activate a swing phase or not.\\
+As they are not required for the training process, we do not go into further detail about the state transition probability matrix $\mathcal{P}$ or observation function $\mathcal{Z}$.
 The reward function $\mathcal{R}$ given by:
  \[
  R(t) = s_x(t) + v_x(t) - v_y(t) - \Delta_\text{h}(t) - 0.025 \cdot W(t) \ (+ r_\text{survival}).
  \]
-\todo{Only current Def.}
-The components of the reward functions are:
-The distance $s_x(t)$ and speed $v_x(t)$ the robot walks along the x-axis, the speed $v_y(t)$ along the y-axis with which the robot deviates from its straight path, the height difference between the robots front and rear $\Delta_\text{h}(t)$, the energy consumption $W(t)$ and the survival reward $r_\text{survival}$.
-By negatively rewarding height differences along the hexapods body as well as energy consumption, we aim to prevent undesirable jumping or twitching behaviour.
+ 
+The components of the reward function are:
+The distance $s_x(t)$ and speed $v_x(t)$ the robot reaches along the x-axis, the speed $v_y(t)$ along the y-axis with which the robot deviates from its straight path, the difference between the robots current height and the desired height $\Delta_\text{h}(t)$, the energy consumption $W(t)$ and the survival reward $r_\text{survival}$.
+By negatively rewarding height differences during movement of the hexapod as well as energy consumption, we aim to prevent undesirable jumping or twitching behaviour.
+
+As some behavioural patterns of the agent can immediately be determined to be undesirable, such as jumping, not moving at all or deviation to far from a straight line, we terminate episodes displaying this behaviour.
+More precisely, the termination criteria are:
+\begin{enumerate}
+	\item \textbf{Jumping}: The average height of the robots \textalpha-joints is above x cm
+	\item \textbf{Inactivity}: The robots speed did not exceed x $\frac{cm}{s}$ over a timespan of 1 second
+	\item \textbf{Deviation}: The total deviation on the y-axis is more than x cm
+\end{enumerate}
+By rewarding the agent for its survival time ($r_{survival}$), we aim to incentivise agents to abstain from terminating the simulation episodes prematurely.
 We experiment with several different discount factor $\gamma$, see chapter \ref{ch:results} for more information.
+
+
 
 MATLABs Reinforcement Learning Toolbox offers several different RL architectures to choose from, namely DDPG, TR3, PPO, SAC and TRPO.
 We choose to use the DDPG (Deep Deterministic Policy Gradient) as well as PPO (Proximal Policy Optimization) algorithms, as these have already proven themselves to work well in tasks concerning robotic locomotion\parencite{FIND AUTHOR}.
@@ -460,7 +402,8 @@ After the agent has stabilized, the step size is increased to speed up the furth
 
 
 
-
+\begin{comment}
+	
 \textbf{Optionals:}
 
 \begin{itemize}
@@ -475,6 +418,119 @@ After the agent has stabilized, the step size is increased to speed up the furth
 	\item As we have multiple robotic 'actuators' in this project, a continuous action space is favorable $\rightarrow$ Not the case, as we have discrete actions
 	
 \end{itemize}
+
+\end{comment}
+
+
+\section{Model parameters}
+In this last section of the methods chapter, we provide the parameters used in various components of the Simulink model.
+
+The internal joint parameters are included in the hexapod .urdf-file and were automatically imported.
+We adapted these parameters provided by \textit{Trossen Robotics} \parencite{interboticsGithub} almost completely, changing only the \textit{Transition Region Width}.
+The transition region defines a buffer around the joints boundaries, in which the boundaries spring and damping forces act upon the joint.
+The smaller the transition region, the sharper the sharper the onset of forces upon the joint and the smaller the required simulation time-step.
+We  therefore change the transition region width from  from 0.1° to 1°, sacrificing a small amount of simulation accuracy for an increase in simulation speed.
+
+{\def\arraystretch{1.4}\tabcolsep=5pt
+	\begin{table}[!h]
+		\centering
+		\begin{tabular}{| l | c | c |}
+			\hline
+			\textbf{Parameter} & \textbf{Value} & \textbf{Unit}\\
+			\hline
+			\hline
+			Spring stiffness & 0 & $\frac{Nm}{\text{deg}}$\\
+			
+			Damping & 0 &  $\frac{\text{kg} \cdot m^2}{\text{rad} \cdot s}$\\
+			
+			Spring stiffness (joint boundary) & \num{1e-4} & $\frac{Nm}{\text{deg}}$ \\
+			
+			Damping coefficient (joint boundary) &  10 & $\frac{Nm \cdot s}{\text{deg}}$\\
+			
+			Transit region width (joint boundary) & 1 &  deg\\
+			\hline
+		\end{tabular}
+		
+		\caption{Internal joint parameters}
+		\label{table: Joint parameters}
+	\end{table}
+}
+
+\todo{"Gait Self-learning for Damaged Robots Combining Bionic Inspiration and Deep Reinforcement Learning" for parameters of hexapod}
+\todo{Check for "adapt" instead of "adopt"}
+We adopt the parameters of the \textit{Spatial Contact Force} block from \cite{trotta2022walking}, but in this case reduce the transition region width from \num{1e-3} m to \num{1e-4} m, as we observe physical inaccuracies (glitches) during simulation when using larger transition region widths.
+
+{\def\arraystretch{1.4}\tabcolsep=5pt
+	\begin{table}[!h]
+		\centering
+		\begin{tabular}{| l | c | c |}
+			\hline
+			\textbf{Parameter} & \textbf{Value} & \textbf{Unit} \\ 
+			\hline
+			\hline
+			Stiffness & \num{1e6} & $\frac{N}{m}$ \\
+			
+			Damping & \num{1e6} & $\frac{N\cdot s}{m}$ \\
+			
+			Transition region width & \num{1e-4} & $m$ \\
+			
+			Static friction coefficient &  0.9 & $-$ \\
+			
+			Dynamic friction coefficient &  0.8 & $-$ \\
+			
+			Critical velocity & \num{1e-3} & $\frac{m}{s}$ \\
+			\hline
+		\end{tabular}
+		\caption[Spatial contact force parameters]{\textit{Spacial contact force} parameters similar to \cite{trotta2022walking}}
+		\label{table: Spatial contact force}
+	\end{table}
+}
+
+
+The PID parameters used in all of the models PID controller are tuned over several trial-and-error iterations.
+{\def\arraystretch{1.4}\tabcolsep=5pt
+	\begin{table}
+		\centering
+		\begin{tabular}{| c | c |}
+			\hline
+			parameter & value\\
+			\hline
+			\hline
+			$K_p$ & 600 \\
+			
+			$K_i$ & 0.1 \\
+			
+			$K_d$ & 1 \\
+			
+			$N$ & 1000 \\
+			\hline
+		\end{tabular}
+		\caption[PID parameters]{PID gain parameters and filter coefficient}
+		\label{table: PID parameters}
+	\end{table}
+}
+
+{\def\arraystretch{1.4}\tabcolsep=5pt
+	\begin{table}
+		\centering
+		\begin{tabular}{| c | c | c | c |} 
+			\hline
+			& \textbf{\textalpha} & \textbf{\textbeta} & \textbf{\textgamma} \\ [0.5ex] 
+			\hline
+			\hline
+			left front, right back & 45 & 14.03624347 & 60.58440117  \\ 
+			
+			left/right middle & 0 & 14.03624347 & 60.58440117 \\
+			
+			right front, left back & -45 & 14.03624347 & 60.58440117 \\
+			\hline
+		\end{tabular}
+		\caption[Initial joint positions]{Initial joint positions according to urdf-file}
+		\label{table:Initial joint positions}
+	\end{table}
+}
+
+\todo{Muss keine Tabelle sein}
 
 
 
