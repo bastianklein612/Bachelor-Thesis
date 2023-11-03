@@ -304,6 +304,26 @@ It is noteworthy that the reward function is considered to be part of the enviro
 Instead, it is a fixed criterion for the agents performance.
 \parencite{sutton2018reinforcement}
 
+A term often coined in the field of RL is the \text{Markov Decision Process} (MDP).
+It defines a mathematical framework for decision making in situations where the outcomes of decisions are partially random.
+As RL fits into this framework well, MDPs can provide a useful theoretical foundation.\\
+
+\begin{definition}[Markov Decision Process {[\cite{silver2015}]}]
+	A \textbf{MDP} is a 5-tuple $\langle \mathcal{S,A,P,R,\gamma} \rangle$
+	\begin{itemize}
+		\item $\mathcal{S}$ is a finite set of states
+		\item $\mathcal{A}$ is a finite set of actions
+		\item $\mathcal{P}$ is a state transition probability matrix, $\mathcal{P}_{ss'}^a = \mathbb{P}[S_{t+1} = s' \ | \ S_t = s, A_t = a	] $
+		\item $\mathcal{R}$ is a reward function, $\mathcal{R}_s^a = \mathbb{E}[R_{t+1} \ | \ S_t = s, A_t = a]$
+		\item $\mathcal{\gamma}$ is a discount factor $\mathcal{\gamma} \in [0,1]$
+	\end{itemize}
+\end{definition}
+
+In the context of RL, $\mathcal{S}$ is the set of all states the environment can be in, $\mathcal{A}$ the set of all actions the agent can decide to take.
+$\mathcal{P}$ provides the probability of the environment transitioning to state $s'$, given it is in state $s$ and the agent takes action $a$, $\forall s \in \mathcal{S}, a \in \mathcal{A}$.
+$\mathcal{R}$ represents a reward function in the same sense as already explained above.
+Lastly, $\mathcal{\gamma}$ discounts the value of future reward due to it's uncertainty.
+More exactly: The value of  reward r after k+1 steps is given as $r\mathcal{\gamma}^k$.
 \begin{comment}
 
 \parencite{weng2018bandit}

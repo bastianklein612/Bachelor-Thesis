@@ -862,12 +862,15 @@ Gespäch mit Malte und Julius:
 -----------------------------------------
 02.11.				
 		- Geplant:
-			- Simulink-Modell Abgabe-fertig machen
-			- Sanaodos Footfall-Pattern testen
-			- Überarbeitung von Methods beenden
-			- Überarbeitung/ Erweiterung von Results beginnen
+			- Simulink-Modell Abgabe-fertig machen   				x
+			- Sanaodos Footfall-Pattern testen						O
+			- Überarbeitung von Methods beenden						x
+			- Überarbeitung/ Erweiterung von Results beginnen		O
 		
-		- 
+		- Simulink-Modell begonnen aufzuräumen/ auf Bezeichnungen aus schriftlichem Teil angepasst
+		- Grafiken üerarbeitet, neue Grafiken erstellt
+		- RL section weiter ausgebaut, MDP und POMDP
+		- Tabellen in eigenem "Model Parameter"-Abschnitt untergebracht
 		
 -----------------------------------------
 03.11.				
@@ -933,8 +936,9 @@ Gespäch mit Malte und Julius:
 				#
 				###
 				#####
-	###################		Ende der
-	###################   	Bachelorarbeit
+	###################	
+	####################    Ende der Bachelorarbeit
+	###################   	
 				#####
 				###
 				#
