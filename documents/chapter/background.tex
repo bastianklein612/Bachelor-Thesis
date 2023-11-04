@@ -266,11 +266,6 @@ An agent always acts according to its current policy.
 A policy is roughly defined as a mapping of all perceived environmental states to the action to be taken by the agent when in a given state.
 It fully  describes the way a learning agent behaves at any given point (in time) in the learning process \parencite{sutton2018reinforcement, silver2015}.
 The agents policy is continually updated throughout the training process, with the overarching goal of improving the actions it prescribes.
-Various implementation methods for policies exist, the most popular being neural networks (NN).
-These, inspired by the structure of the human brain and consisting of layers of interconnected nodes (neurons), are able to model complex, non-linear relationships.
-This 
-
-\todo{Add mention of different policies\ training algorithms}
 
 %MATLABs \textit{Reinforcement Learning Toolbox} provides several different RL agents, some of which will will go into more detail about later.
 
@@ -324,6 +319,27 @@ $\mathcal{P}$ provides the probability of the environment transitioning to state
 $\mathcal{R}$ represents a reward function in the same sense as already explained above.
 Lastly, $\mathcal{\gamma}$ discounts the value of future reward due to it's uncertainty.
 More exactly: The value of  reward r after k+1 steps is given as $r\mathcal{\gamma}^k$.
+
+There exist various techniques for policy optimization.
+In MATLAB, the Reinforcement Learning Toolbox offers several different RL algorithms to choose from, including DDPG, TR3, PPO, SAC and TRPO.
+In the upcoming paragraph, a concentrated overview of the algorithms utilized in this thesis is given, namely DDPG (Deep Deterministic Policy Gradient) and PPO (Proximal Policy Optimization).
+This overview is based on the work of \cite{silver2015}, as well as MATLABs RL documentation and OpenAIs \textit{Spinning Up} documentation \parencite{matlabRLDocumentation, openAI_SpinningUp_Documentation}.
+Given the size limitations imposed on this thesis, focus lies on only the most essential elements.
+
+Policy Gradient (PG) methods in general are a class of RL techniques focusing on directly optimizing the agent's policy (instead of e.g. trying to learn a model of the environment).
+Simplified, a PG indicates the direction in which a policy has to be changed to achieve the steepest increase in cumulative reward.
+In real applications this PG is often approximated, as a deterministic calculation would be infeasible in most cases.\\
+\textbf{DDPG}, combining elements from deep learning and PG methods, employs a so called actor-critic architecture, consisting of two neural networks (NN).
+The actor is responsible for learning a deterministic policy, typically implemented as a deep NN (DNN).
+The critic, a DNN as well, evaluates the actions chosen by the actor. It estimates the expected cumulative reward (Q-value) of taking a specific action in a given state.
+This evaluation guides the actor towards better actions.\\
+DDPG uses a technique called Ornstein-Uhlenbeck(OU) noise model to add noise to the actions taken during training.
+The noise promotes exploration, which is crucial for overcoming local optima during the learning process \parencite{openAI_DDPG}.\\
+\textbf{PPO} is a PG method as well, employing the actor-critic architecture to train a NN on finding an optimal policy.
+The main innovation of PPO introduces is a limit on the size of policy updates, preventing a policy from changing to rapidly during training.
+The policy always stays in "proximity" to its previous version, promoting learning stability and preventing sharp performance collapses \parencite{openAI_PPO}.\\
+
+
 \begin{comment}
 
 \parencite{weng2018bandit}

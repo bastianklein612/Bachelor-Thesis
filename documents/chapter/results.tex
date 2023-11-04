@@ -3,52 +3,160 @@
 \label{ch:results}
 
 In this chapter we present the results we compiled during the course of our work.
-This includes an evaluation of the developed hexapod model and its motion controller as well as review of the reinforcement learning results obtained and lessons learned from observing the training process.
+This includes an evaluation of the developed hexapod model and its locomotion controller as well as review of the reinforcement learning results obtained and lessons learned from observing the training process.
 
 \section{Evaluation: Hexapod model}
-During the development process of the hexapod model, and also while working on the motion controller, we observed that the conceived model architecture enables us to quickly modify or add features to the hexapod.
-As we had to retrospectively add additional sensory output for rotational acceleration to each of the robots joints, these can serve as an example for the described flexibility. 
-As the hexapod leg is defined in the custom library, it is only necessary to enable the respective sensor reading one each of the legs three joints and add the new signals to the already existing sensory information bus. 
-There is then no need to modify any of hexapods actual legs as Simulink automatically updates all library-linked blocks.
-In general, the library of custom subsystems has proven to be a useful tool, reducing development time and promoting modularity.
-The encapsulation of the hexapod model as a whole into a single, top-level subsystem block which only shows necessary inputs and outputs, provides the developer with a simple to understand interface.
+During the development process of the hexapod model and locomotion controller, we observed that the conceived model architecture enables us to quickly modify and/or add components.
+An example of this flexibility is provided by the retrospective addition of sensor readings for the rotational acceleration of the \textalpha-joints.
+As the hexapod leg is defined in a custom library, it was only necessary to enable the respective sensor reading one the joint block and add the new signal to the already existing sensory information bus. 
+There was no need to modify the hexapods legs individually, as Simulink automatically updates all library-linked blocks.
+In general, the library of custom subsystems has proven to be a most useful tool, reducing development time and promoting modularity.
+The encapsulation of the hexapod model as a whole into a single, top-level subsystem block, which only shows necessary in- and outputs, provides the developer with a simple to understand interface.
 This also gives us the ability to duplicate the hexapod system without any effort, which could prove useful in future research as it enables the system to easily be used in multi-agent simulations.
 
-Concerning the actual simulation of the model, it can be said that in most cases where the robot uses a stable gait pattern for locomotion, a simulation step size of 0.5 ms yields stable results and runs at close to real time.
+Concerning the actual simulation of the model, it can be said that in most cases where the robot uses a statically defined gait pattern for locomotion, a simulation step size of 0.5 ms yields stable results and runs at close to real time.
 Given an untrained, exploring RL agent as the models operator, a step size of 0.25 ms is preferable, as sudden twitching and jerking motions might occur, which can lead to simulation instabilities and exceptions.
-Similar to the results of \cite{thilderkvist2015motion}, we start to observe these simulation problems at larger step sizes ($> 0.5 ms$), although not of the same significance and frequency as described by them. 
-The most common reason we observed for the exceptions is a collision detection failure occurring when two rigid bodies move into each other faster than the solver can observe, due to its limited temporal resolution.
-During several ten-thousand simulation episodes run at a step-size of 0.25 ms, we 
+Similar to the results of \cite{thilderkvist2015motion}, we begin to observe these simulation problems at larger step sizes ($> 0.5 ms$), although not of the same significance and frequency as described by them. 
+The most common reason we observed for the exceptions is a collision detection failure.
+This  failure occurs, when two rigid bodies move into each other faster than the simulation's solver can observe, due to its limited temporal resolution.
+During several ten-thousand simulation episodes run at a step-size of 0.25 ms, we did not once observe am exception.
 Overall, the behaviour of our robot model seems, to the best of our knowledge, but without the co-examination of a real world counterpart, physically accurate.
 
-We attribute the unsatisfactory results \cite{thilderkvist2015motion}  experienced from the spatial friction forces to be most likely linked to deciding on a step size too large for stable simulations.
-As they also work with an earlier MATLAB version, using Simscape's predecessor SimMechanics, the problems might have arisen from a possibly more primitive physics model.
+
+We attribute the unsatisfactory results \cite{thilderkvist2015motion} experienced from the spatial friction forces to be most likely linked to deciding on a step size too large for stable simulations.
+As they also work with an earlier MATLAB version, using Simscape's predecessor \textit{SimMechanics}, the problems might also have arisen from a possibly more primitive physics model.
 
 To summarize, we were able to create a well-functioning, virtual model of a hexapod robot.
-We are confident that the model can serve as a platform for future research as it utilizes a modular architecture, can easily be expanded and is based on the versatile MATLAB  environment.
+We are confident that the model can serve as a platform for future research as it utilizes a modular architecture, can easily be expanded and is based on the versatile MATLAB environment.
  
 
 \section{Evaluation: Locomotion Controller}
 The locomotion controller we presented in \ref{subsec: Locomotion controller} is the result of several design iterations.
-We extensively tested each of the designs to uncover their weakpoints upon which the next iteration could improve on.
+We extensively tested each of the designs to uncover their weakpoints, upon which the next iteration was improved on.
 
-The initial design (MK1) enabled the robot to walk in a straight line tripod gait.
-We observed that the hexapod model, controlled by MK1, would jerk up and down significantly during a movement cycle.
-When a leg was lifted, the robots thorax would slowly sink towards this direction and be rapidly pushed upwards again when the leg made contact with the ground again.
+The initial design (\textit{MK1}) enabled the robot to walk in a straight line tripod gait.
+We observed that the hexapod model, controlled by MK1, would jerk up and down significantly during a movement cycle, as can be seen in \cite{Hexapod_MK1_Videos}.
+During a legs swing phase, the robots thorax would slowly sink towards the side of the lifted leg and be rapidly pushed upwards again at the swing phases end.
 As we defined the trajectory relative the thorax and did not consider sensing ground contact, the leg on the sinking side would hit the ground while still in full motion, as the anticipated AEP "sunk" into the ground plane.
-We were able to later on attribute this behaviour to the slow reactions of the PID controllers, which were, given our initial tuning parameters, unable to follow their assigned trajectories. 
-In addition, this first version required a lot of time to be simulated, the cause of this being the slow IK block provided by Simulink, which we have already elaborated on in \ref{subsubsec: IK Solver}.
-With the subsequent model (MK2) we 
+We were able to later on attribute this behaviour to the slow reactions of the PID controllers.
+These were, given our initial tuning parameters, unable to follow their assigned trajectories. 
+In addition, the MK1 version requires a lot of time to be simulated, the observed cause being the slow IK block provided by Simulink, as we have already elaborated on in \ref{subsubsec: IK Solver}.
 
-The final controller design is capable of reliably controlling the robots movements in several gaits.
-It enables the robot smooth movements in every direction
+With the subsequent version, \textit{MK2}, we focused on introducing tetrapod and wave gait as well as reducing simulation time.
+Implementing the gait patters proved to be straightforward, as, resulting from the models modular architecture, solely the leg coordination of the static gait definition had to be modified.
+The resulting simulations of the robot walking in tetrapod and wave gait can be observed in \cite{Hexapod_MK2_Videos}.
+
+The decision to implement our own, custom analytical IK solver resulted in a significant performance boost.
+Comparing the MK1 and MK2 controllers, we are able to achieve an up to 10x speed up in simulation time.
+\todo{Prove with a comparison of MK1 and MK2 simulation time}
+
+With the final non-RL controller design, termed \textit{MK3}, we improved the stability of the hexapods locomotion as well as introduced the capability for omnidirectional movement.
+By simply re-tuning the PID controller parameter to the values displayed in \ref{table: PID parameters}, we were able to reduce the jerking behaviour of the robot far enough to not be visually noticeable.
+A comparison of the thorax's height differences during movement, when under control of the MK2 and MK3 controllers, can be seen in Fig. \ref{X}. \todo{Record height differences for MK2 and MK3}
+
 
 
 \todo{major rewrite and update}
 \section{Evaluation: RL training}
-Implementing a RL agent which yields satisfying results proved to be more difficult than anticipated.
-There exists a large set of parameter which have to be considered when setting up an agent and as training can take a long time, finding the right parameters is a time-consuming task which requires careful planning.
-There are several different learning algorithms to choose from, each with their own set of parameters as well as the NN architecture of the agent. 
+In this section, we present the result obtained during training RL agents on the problem of leg coordination.
+We begin with an evaluation of the overall process, after which we separately present the training results of the DDPG an PPO agents.
+
+Implementing a RL agent yielding satisfying results proved to be more difficult than anticipated.
+As there exists a large set of parameter to be considered during setup, finding a set of well-working parameters is a time-consuming task.
+This is reinforced by the fact that, to observe the performance of a set of parameters, we found the agent needed to train for at least 1-2k episodes, equating to several hours of runtime given the hardware used.
+Additionally, as we ran experiments with two different RL algorithms, we were required to tune two separate sets of parameters.
+
+The parameters common to both algorithms are presented in table 
+
+{\def\arraystretch{1.4}\tabcolsep=5pt
+}
+
+\begin{table}
+	\parbox{.4\linewidth}{
+		\centering
+		\begin{tabular}{| c | c |} 
+		\hline
+		\textbf{Training params.s} & \textbf{Value} \\ [0.5ex] 
+		\hline
+		\hline
+		Sample time & 0.05 s \\ 
+		
+		Episode steps & 512 \\
+		
+		\hline
+		\textbf{Agent params.} &  \\ [0.5ex] 
+		\hline
+		
+		Learn Rate & $\num{3e-4}$ \\
+		
+		Episode steps & 512 \\
+		
+		Exp. Buf. length & $\num{1e6}$ \\
+		
+		Discount factor &  0.99 \\
+		
+		Mini-Batch size & 32 \\
+		
+		NN-width & 128 \\
+		
+		\hline
+		\textbf{Noise params.} &  \\ [0.5ex] 
+		\hline
+		
+		\textsigma\footnote{\textsigma: Standard Deviation} & 0.05 \\
+		
+		\textsigma-decay\footnote{\textsigma-decay: Decay rate of \textsigma. Each sample time step k, \textsigma decays according to following formula: $\sigma_{k+1} = \sigma_k \cdot (1 - \textbf{\textsigma-decay})$} & 1e-6 \\
+		
+		\hline
+	\end{tabular}	
+	\caption[DDPG agent parameters]{}
+	\label{table:DDPG parameters}
+	}
+	
+	%\hfill
+	
+	\parbox{.4\linewidth}{
+		\centering
+		\begin{tabular}{| c | c |} 
+		\hline
+		\textbf{Training params.} & \textbf{Value} \\ [0.5ex] 
+		\hline
+		\hline
+		Sample time & 0.05 s \\ 
+		
+		Episode steps & 512 \\
+		
+		\hline
+		\textbf{Agent params.} &  \\ [0.5ex] 
+		\hline
+		
+		Learn Rate & $\num{3e-4}$ \\
+		
+		Episode steps & 512 \\
+		
+		Exp. Buf. length & $\num{1e6}$ \\
+		
+		Discount factor &  0.99 \\
+		
+		Mini-Batch size & 32 \\
+		
+		NN-width & 128 \\
+		
+		\hline
+		\textbf{Noise params.} &  \\ [0.5ex] 
+		\hline
+		
+		dev (\textsigma) & 0.05 \\
+		
+		devdec & 1e-6 \\
+		
+		\hline
+		\end{tabular}
+		\caption[PPO agent parameters]{}
+		\label{table:PPO parameters}
+	}
+\end{table}
+
 
 We used the \textbf{D}eep \textbf{D}eterministic \textbf{P}olicy \textbf{G}radient (DDPG) algorithm, an actor-critic, model-free, online, off-policy RL method.
 The actor network consists of a 12-wide observation input layer followed by 3 100 neuron wide fully-connected layer, in between each of them a ReLU-layer to introduce non-linearity.

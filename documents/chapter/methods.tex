@@ -303,11 +303,26 @@ To drastically reduce the computation time a simulation step requires, we implem
 	\label{figure: IK angle derivations}
 \end{figure}
 
+
 \begin{figure}[!h]
-	\centerline{\includegraphics[scale=0.03]{HexapodLeg_Lengths.PNG}}
-	\caption[Hexapod leg segment lengths]{Segment lengths of one of the the PhantomX MK4 hexapod legs}
-	\label{figure: Hexapod Leg Lengths}
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		% include second image
+		\includegraphics[width=\linewidth]{Hexapod_Offsets_Sketch.png}  
+		\caption{}
+		\label{figure: Hexapod thorax sketch}
+	\end{subfigure}
+	\begin{subfigure}{.5\textwidth} % this sets the figure to be max half the width of the page
+		\centering
+		% include first image
+		\includegraphics[angle=-90,width=0.8\linewidth]{HexapodLeg_Lengths.PNG}  % this sets the image to fill 90% of the available space -> 45% of the line width in total. 
+		\caption{}
+		\label{figure: Hexapod Leg proportions}
+	\end{subfigure}
+	\caption[Hexapod proportions]{(a) Drawing of the PhantomX MK4 thorax, annotated with proportions. (b)  Leg segment proportions of the PhantomX MK4 hexapod legs.}
+	\label{figure: Hexapod proportions}
 \end{figure}
+\todo{Increase fontsize}
 
 Our proposed solver sequentially calculates the legs joint angles, starting at \textalpha, then \textbeta \ and \textgamma.
 We derive the following equations from the geometric properties of a hexapod leg as seen in \ref{figure: IK angle derivations}:
@@ -327,15 +342,18 @@ Where $\beta_1$, $\beta_2$, $\gamma_1$ and \text{BF} are given by:
 
 To create the Analytical IK block, we translate the derived equations into C-code.
 The resulting script is then run inside a \textit{MATLAB code block} for each simulation step.
-The implemented code can be seen in Fig. X. \todo{Add code}
+The implemented code can takes the trajectory coordinates and joint offsets as inputs.
+As the hexapods initial joint positions deviate from the ones displayed in Fig. \ref{figure: IK angle derivations}, we require the offsets to convert the angles calculated by the solver to match these differing initial positions.
+The offsets are given in table \ref{table: Joint position offsets}.
+Fig. X. \todo{Add code}
 
 
 \section{Learning Leg Coordination} \label{sec: RL setup}
 \todo{Redo this section}
 From a RL point of view, the leg coordination problem can be considered a POMDP (Partially observable Markov decision process).
 The POMDP is an extension to the MDP definition and describes problem spaces in which only parts of the environment can be observed.
-This is particularly the case for complex continuous environments in which it is impossible to observe every detail of the process.
-For the problem we try to solve here this holds true as well.
+This is particularly the case for complex, continuous environments in which it is impossible to observe every environmental detail.
+For the problem we attempt to solve, this holds true as well.
 
 \begin{definition}[Partially Observable Markov Decision Process {[\cite{silver2015}]}]
 	A \textbf{POMDP} is a 7-tuple $\langle \mathcal{S,A,O,P,R,Z,\gamma} \rangle$
@@ -350,77 +368,49 @@ For the problem we try to solve here this holds true as well.
 	\end{itemize}
 \end{definition}
 
-In the following, we will describe the RL setup in terms of a POMDP:\\
+In the following, we will describe our RL setup in terms of a POMDP:\\
 Our state space $\mathcal{S}$ consists of all possible configurations of the hexapod robot and environment.
-The action space $\mathcal{A}$ is defined as the set of all possible actions our RL agent can take, namely the decisions on whether to initiate a legs swing phase or not.
-The observation space $\mathcal{O}$ consists of the position and acceleration reading of each of the robots 6 \textalpha-joints, totalling 12 observations.
+The action space $\mathcal{A}$ is defined as the set of all possible actions the RL agent can take, namely the decisions on whether to initiate a legs swing phase or not.
+The observation space $\mathcal{O}$ consists of the position and acceleration reading om each of the robots 6 \textalpha-joints, totalling 12 observations.
 % permutations of the action tuple $\{s_1,...,s_6\}$, meaning it is the set of all 6-bit binary numbers and thus is of size $2^6$.
 %It follows that the action space is discrete, as the agent can only decide to activate a swing phase or not.\\
 As they are not required for the training process, we do not go into further detail about the state transition probability matrix $\mathcal{P}$ or observation function $\mathcal{Z}$.
 The reward function $\mathcal{R}$ given by:
  \[
- R(t) = s_x(t) + v_x(t) - v_y(t) - \Delta_\text{h}(t) - 0.025 \cdot W(t) \ (+ r_\text{survival}).
+ R(t) = c_{s_x} \cdot s_x(t) + c_{v_x} \cdot v_x(t) - c_{v_y} \cdot v_y(t) - c \cdot \Delta_\text{h}(t) - c_{W} \cdot W(t) \ + r_\text{survival}.
  \]
  
 The components of the reward function are:
 The distance $s_x(t)$ and speed $v_x(t)$ the robot reaches along the x-axis, the speed $v_y(t)$ along the y-axis with which the robot deviates from its straight path, the difference between the robots current height and the desired height $\Delta_\text{h}(t)$, the energy consumption $W(t)$ and the survival reward $r_\text{survival}$.
 By negatively rewarding height differences during movement of the hexapod as well as energy consumption, we aim to prevent undesirable jumping or twitching behaviour.
+By rewarding the agent for its survival time ($r_{survival}$), we aim to provide an incentive for the agent to abstain from terminating the simulation episodes prematurely.
+We experiment with several different discount factor $\gamma$, see chapter \ref{ch:results} for more information.
+Details about the weights $c_{s_x}, c_{v_x}, c_{v_y}, c_{v_y}, c_{W}$ will be provided in chapter \ref{ch:results}.
 
 As some behavioural patterns of the agent can immediately be determined to be undesirable, such as jumping, not moving at all or deviation to far from a straight line, we terminate episodes displaying this behaviour.
 More precisely, the termination criteria are:
 \begin{enumerate}
-	\item \textbf{Jumping}: The average height of the robots \textalpha-joints is above x cm
-	\item \textbf{Inactivity}: The robots speed did not exceed x $\frac{cm}{s}$ over a timespan of 1 second
-	\item \textbf{Deviation}: The total deviation on the y-axis is more than x cm
+	\item \textbf{Jumping}: The average height of the robots \textalpha-joints is above a certain maximum
+	\item \textbf{Inactivity}: The robot did not exceed a speed of $\num{5e-3}\frac{cm}{s}$ over a timespan of 1 second
+	\item \textbf{Deviation}: The total deviation on the y-axis is greater than 20 cm
 \end{enumerate}
-By rewarding the agent for its survival time ($r_{survival}$), we aim to incentivise agents to abstain from terminating the simulation episodes prematurely.
-We experiment with several different discount factor $\gamma$, see chapter \ref{ch:results} for more information.
 
-
-
-MATLABs Reinforcement Learning Toolbox offers several different RL architectures to choose from, namely DDPG, TR3, PPO, SAC and TRPO.
-We choose to use the DDPG (Deep Deterministic Policy Gradient) as well as PPO (Proximal Policy Optimization) algorithms, as these have already proven themselves to work well in tasks concerning robotic locomotion\parencite{FIND AUTHOR}.
-\todo{Find authors who used DDPG and PPO for robotics(PPO bei Schilling et al.(?), DDPG bei ? )}
-To use such an agent in combination with a Simulink model, the model needs to include a \textit{RL agent} block from the \textit{Reinforcement Learning} toolbox.
-One also has to define an observation and action space as well as an environment object in the MATLAB Workspace.
+As policy optimization methods, we choose to use both the DDPG (Deep Deterministic Policy Gradient) and PPO (Proximal Policy Optimization) algorithms, as they have already proven themselves to work well in tasks concerning robotic locomotion\parencite{FIND AUTHOR}.\todo{Find authors who used DDPG and PPO for robotics(PPO bei Schilling et al.(?), DDPG bei ? )}
+To use agents based on these algorithms in combination with a Simulink model, the model needs to include a \textit{RL agent} block from the \textit{Reinforcement Learning} toolbox.
+We also define an observation and action space as well as an environment object in the MATLAB Workspace.
 %There are 2 options for agent creation: The \textit{Reinforcement Learning Designer} MATLAB app with a reduced graphical interface or a MATLAB script-file in which the agent is defined in detail.
-We choose the utilise MATLAB scripts for this purpose, as this allows us to permanently specify agents and also automate the agent creation task.
-For each of the agents we experimented with, DDPG, continuous and discrete PPO, we write a separate creation script.
-\todo{Expand}
+We choose the utilize MATLAB scripts for this purpose, as this allows us to permanently specify agents and automate the agent setup task.
+For each of the agents, DDPG and PPO, we write a separate initialization script.
 
-To speed up the learning process, we decided to utilize \textit{MATLABs Parallel Computing} toolbox.
-The toolbox allows us to initialise a parallel pool of several workers, each of whom runs a separate episode of the RL training process.
-The parallel learning process is carried out asynchronously, meaning workers who finish their task early do not have to wait on the others to finish as well before proceeding.
-In contrast to synchronous parallelization, where the workers send their results to the parallel pool client all at the same time and receive updates to their parameters all at once, workers under asynchronous parallelization can send their results as soon as they finish their task and instantly receive parameter updates.
+To speed up the learning process, we decide to utilize \textit{MATLABs Parallel Computing} toolbox.
+The toolbox allows us to initialize a parallel pool of several workers, each of whom runs a separate episode of the RL training process.
+The parallel learning process is carried out asynchronously, meaning workers that conclude an episode of training do not have to wait on the other workers to finish as well before proceeding.
+In contrast to synchronous parallelization, in which the workers send their results to the parallel pool client all at the same time, receiving updates to their parameters all at once, workers under asynchronous parallelization can send their results as soon as their episode terminates and instantly receive parameter updates.
 %By parallelization, we significantly improve the number of simulated episodes.
 
-
-
-We start the training of agents at a small simulation step size(0.00025s = 0.25ms) to prevent simulation errors due to initial random jerking of robot legs.
+We start the training of agents at a relatively small simulation step size(0.00025s = 0.25ms) to prevent simulation errors due to initial random jerking of robot legs.
 After the agent has stabilized, the step size is increased to speed up the further learning process.
 \cite{lillicrap2015continuous}
-
-
-
-\begin{comment}
-	
-\textbf{Optionals:}
-
-\begin{itemize}
-	\item Signal the agent that a leg is dragging by adding a discrete observation per leg which is pulled high when the leg reached its PEP.
-	
-	\item Add more inputs to the RL agent $\rightarrow$ Done, added accelerations
-	
-	\item Agent Parallelization for faster learning $\rightarrow$ Done and working
-	
-	\item RL Designer: Automatically save agents which reach a high enough reward to evaluate them later $\rightarrow$ Done.
-	
-	\item As we have multiple robotic 'actuators' in this project, a continuous action space is favorable $\rightarrow$ Not the case, as we have discrete actions
-	
-\end{itemize}
-
-\end{comment}
-
 
 \section{Model parameters}
 In this last section of the methods chapter, we provide the parameters used in various components of the Simulink model.
@@ -510,6 +500,8 @@ The PID parameters used in all of the models PID controller are tuned over sever
 	\end{table}
 }
 
+Joint offsets required by the IK solver. 
+As can be seen in Fig. \ref{figure: Hexapod proportions}, the front and back legs are attached to the thorax at a 45° angle, resulting in an addition offset required for the \textalpha-joint.
 {\def\arraystretch{1.4}\tabcolsep=5pt
 	\begin{table}
 		\centering
@@ -525,12 +517,11 @@ The PID parameters used in all of the models PID controller are tuned over sever
 			right front, left back & -45 & 14.03624347 & 60.58440117 \\
 			\hline
 		\end{tabular}
-		\caption[Initial joint positions]{Initial joint positions according to urdf-file}
-		\label{table:Initial joint positions}
+		\caption[Joint position offsets]{}
+		\label{table:Joint position offsets}
 	\end{table}
 }
 
-\todo{Muss keine Tabelle sein}
 
 
 

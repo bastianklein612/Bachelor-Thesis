@@ -864,23 +864,35 @@ Gespäch mit Malte und Julius:
 		- Geplant:
 			- Simulink-Modell Abgabe-fertig machen   				x
 			- Sanaodos Footfall-Pattern testen						O
-			- Überarbeitung von Methods beenden						x
+			- Überarbeitung von Methods beenden						X
 			- Überarbeitung/ Erweiterung von Results beginnen		O
 		
 		- Simulink-Modell begonnen aufzuräumen/ auf Bezeichnungen aus schriftlichem Teil angepasst
 		- Grafiken üerarbeitet, neue Grafiken erstellt
 		- RL section weiter ausgebaut, MDP und POMDP
 		- Tabellen in eigenem "Model Parameter"-Abschnitt untergebracht
+		- immer noch RL-Trainingsläufe, wieder kleinere DDPG-Agenten am ausprobieren (n=64, std.dev.=0.15, ExpBuf: 1e6 --> 1e5)
 		
 -----------------------------------------
 03.11.				
 		- Geplant:
 			- Überarbeitung Results
 			- Ergebnis-Daten erstellen
-			- Grafiken erstellen
+			- Grafiken erstellen/ überarbeiten						x
 			- Notizen alle nochmal durchlesen
 			- Results und Fazit überarbeiten/ erweitern
-		- 
+		
+		- PRIO 1:
+			- Methods abschließen
+			- Results beginnen
+			- Footfall-Pattern erstellen
+			
+			
+		- Absatz über DDPG und PPO erstellt
+		- RL-Abschnitt in den methods fertiggestellt
+		
+		
+			
 		
 -----------------------------------------
 04.11.				
@@ -909,9 +921,10 @@ Gespäch mit Malte und Julius:
 			- Korrektur lesen
 			- alle Links testen
 			- Rechtschreibfehler-Scan (manuell oder auto)
-			- Bachelorarbeit 3-Fach drucken lassen
-			- 3 CDs mit gesamtem Inhalt brennen
+			- Bachelorarbeit 4-Fach drucken lassen
+			- 4 CDs mit gesamtem Inhalt brennen
 			- Abschluss-Vortrag beginnen mit Struktur
+			- Vortragsstruktur an Malte schicken
 			- PDF der Bachelorarbeit an Malte und Paula schicken
 			
 		- 
