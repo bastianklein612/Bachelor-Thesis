@@ -6,7 +6,7 @@
 \section{Approach}	
 The key idea of our approach is to leverage the versatile MATLAB environment to construct a highly adaptable model of a hexapod robot. 
 By providing this easily expandable, modular platform, we aim to accelerate future research efforts.
-Anchoring our work on the MATLAB environment, we expect significant benefits in terms of development time and flexibility, facilitated by the vast array of provided toolboxes.
+Anchoring our work on the MATLAB environment, we expect significant benefits in terms of development time and flexibility, facilitated by the vast array of toolboxes.
 \\
 In this chapter, we detail the methodology used to address the objectives we defined in the introduction.
 We initially provide a quick overview of the complete Simulink model, followed by more elaborate explanations of the individual components.
@@ -486,13 +486,13 @@ The PID parameters used in all of the models PID controller are tuned over sever
 			parameter & value\\
 			\hline
 			\hline
-			$K_p$ & 600 \\
+			$K_p$ & 600 3\\
 			
-			$K_i$ & 0.1 \\
+			$K_i$ & 0.1 0.2\\
 			
-			$K_d$ & 1 \\
+			$K_d$ & 1 1\\
 			
-			$N$ & 1000 \\
+			$N$ & 1000 100\\
 			\hline
 		\end{tabular}
 		\caption[PID parameters]{PID gain parameters and filter coefficient}

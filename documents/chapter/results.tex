@@ -35,7 +35,7 @@ The locomotion controller we presented in \ref{subsec: Locomotion controller} is
 We extensively tested each of the designs to uncover their weakpoints, upon which the next iteration was improved on.
 
 The initial design (\textit{MK1}) enabled the robot to walk in a straight line tripod gait.
-We observed that the hexapod model, controlled by MK1, would jerk up and down significantly during a movement cycle, as can be seen in \cite{Hexapod_MK1_Videos}.
+We observed that the hexapod model, controlled by MK1, would jerk up and down significantly during a movement cycle, as can be seen in \hyperref[vid: MK1]{MK1}.
 During a legs swing phase, the robots thorax would slowly sink towards the side of the lifted leg and be rapidly pushed upwards again at the swing phases end.
 As we defined the trajectory relative the thorax and did not consider sensing ground contact, the leg on the sinking side would hit the ground while still in full motion, as the anticipated AEP "sunk" into the ground plane.
 We were able to later on attribute this behaviour to the slow reactions of the PID controllers.
@@ -44,7 +44,7 @@ In addition, the MK1 version requires a lot of time to be simulated, the observe
 
 With the subsequent version, \textit{MK2}, we focused on introducing tetrapod and wave gait as well as reducing simulation time.
 Implementing the gait patters proved to be straightforward, as, resulting from the models modular architecture, solely the leg coordination of the static gait definition had to be modified.
-The resulting simulations of the robot walking in tetrapod and wave gait can be observed in \cite{Hexapod_MK2_Videos}.
+The resulting simulations of the robot walking in tetrapod and wave gait can be observed in \hyperref[vid: MK1]{MK2}.
 
 The decision to implement our own, custom analytical IK solver resulted in a significant performance boost.
 Comparing the MK1 and MK2 controllers, we are able to achieve an up to 10x speed up in simulation time.
@@ -52,7 +52,27 @@ Comparing the MK1 and MK2 controllers, we are able to achieve an up to 10x speed
 
 With the final non-RL controller design, termed \textit{MK3}, we improved the stability of the hexapods locomotion as well as introduced the capability for omnidirectional movement.
 By simply re-tuning the PID controller parameter to the values displayed in \ref{table: PID parameters}, we were able to reduce the jerking behaviour of the robot far enough to not be visually noticeable.
-A comparison of the thorax's height differences during movement, when under control of the MK2 and MK3 controllers, can be seen in Fig. \ref{X}. \todo{Record height differences for MK2 and MK3}
+A comparison of the thorax's height differences during movement, when under control of the MK2 and MK3 controllers, can be seen in Fig. \hyperref[vid: MK1]{MK3}.
+
+\begin{figure}[h]
+	\begin{subfigure}{\textwidth} % this sets the figure to be max half the width of the page
+		\centering
+		% include first image
+		\includegraphics[width=\linewidth]{ThoraxHeight_firstPID.PNG}  % this sets the image to fill 90% of the available space -> 45% of the line width in total. 
+		\caption{}
+		\label{figure: Thorax Height graph, bad tuning}
+	\end{subfigure}
+	
+	\begin{subfigure}{\textwidth}
+		\centering
+		% include third image
+		\includegraphics[width=\linewidth]{ThoraxHeight_retunedPID.PNG}   % this width should be half of the width of the other two images
+		\caption{}
+		\label{figure: Thorax height graph, re-tuning}
+	\end{subfigure}
+	\caption[Thorax height graphs]{(a) Thorax height graphs of hexapod robot controlled by (a) MK2 and (b) MK3 controller.}
+	\label{figure: THorax height graphs}
+\end{figure}
 
 
 
@@ -66,11 +86,12 @@ As there exists a large set of parameter to be considered during setup, finding 
 This is reinforced by the fact that, to observe the performance of a set of parameters, we found the agent needed to train for at least 1-2k episodes, equating to several hours of runtime given the hardware used.
 Additionally, as we ran experiments with two different RL algorithms, we were required to tune two separate sets of parameters.
 
-The parameters common to both algorithms are presented in table 
+In total, we ran over 20 documented agent configurations, each with a different set of parameters.
+As we are not able to present all of the results here, a 
+The parameters common to both algorithms are presented in table \ref{}.
 
 {\def\arraystretch{1.4}\tabcolsep=5pt
-}
-
+	
 \begin{table}
 	\parbox{.4\linewidth}{
 		\centering
@@ -156,6 +177,29 @@ The parameters common to both algorithms are presented in table
 		\label{table:PPO parameters}
 	}
 \end{table}
+}
+
+{\def\arraystretch{1.4}\tabcolsep=5pt
+\begin{table}
+	\centering
+	\begin{tabular}{| c | c |}
+		\hline
+		\textbf{Weight} & \textbf{Value}\\
+		\hline
+		\hline
+		$c_{s_x}$   		&  1	\\
+		$c_{v_x}$   	    &  50	\\
+	  	$c_{v_y}$  		    &  1	\\
+	  	$\Delta_h$  		&  1	\\
+	  	$c_W$ 				&  0.025\\
+		\hline
+	\end{tabular}
+	\caption[Reward weights]{}
+	\label{table: Reward weights}
+\end{table}
+}
+
+The survival reward $r_\text{survival}$ is set at 0.1, resulting in the agent receiving $0.1 \cdot 512 = 51.2$ cumulative reward during a full episode.
 
 
 We used the \textbf{D}eep \textbf{D}eterministic \textbf{P}olicy \textbf{G}radient (DDPG) algorithm, an actor-critic, model-free, online, off-policy RL method.
@@ -173,7 +217,7 @@ We used a learning rate of $3e^{-4}$ and $1e^{-3}$ for the actor and critic resp
 The agents sample rate is set at 0.05, meaning the agent samples the environment and takes an action every 50 ms.
 A more detailed summary of the RL parameters is given in table \ref{table: DDPG parameters}.
 
-
+{\def\arraystretch{1.4}\tabcolsep=5pt
 \begin{table}
 	\centering
 	\begin{tabular}{| l | c |}
@@ -194,6 +238,7 @@ A more detailed summary of the RL parameters is given in table \ref{table: DDPG 
 	\caption[DDPG parameters]{DDPG parameters. Uhlstein-Beck (UB) noise model is used to introduce noise into the agents exploration}
 	\label{table: DDPG parameters}
 \end{table}
+}
 
 
 \begin{figure}[h]
@@ -211,13 +256,20 @@ A more detailed summary of the RL parameters is given in table \ref{table: DDPG 
 		\caption{}
 		\label{figure: RL b}
 	\end{subfigure} 
-	\begin{subfigure}{\textwidth}
+	\begin{subfigure}{.5\textwidth} % this sets the figure to be max half the width of the page
 		\centering
-		% include third image
-		\includegraphics[width=.45\linewidth]{example-image-c}   % this width should be half of the width of the other two images
+		% include first image
+		\includegraphics[width=.9\linewidth]{example-image-c}  % this sets the image to fill 90% of the available space -> 45% of the line width in total. 
 		\caption{}
 		\label{figure: RL c}
 	\end{subfigure}
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		% include second image
+		\includegraphics[width=.9\linewidth]{example-image-c}  
+		\caption{}
+		\label{figure: RL d}
+	\end{subfigure} 
 	\caption[DDPG training graphs]{DDPG training graphs. (a) Example 1. (b) Example 2. (c) Example c.}
 	\label{figure: DDPG learning graphs}
 \end{figure}

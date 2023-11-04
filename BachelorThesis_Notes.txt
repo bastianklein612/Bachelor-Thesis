@@ -863,7 +863,7 @@ Gespäch mit Malte und Julius:
 02.11.				
 		- Geplant:
 			- Simulink-Modell Abgabe-fertig machen   				x
-			- Sanaodos Footfall-Pattern testen						O
+			- Sanaodos Footfall-Pattern testen						x
 			- Überarbeitung von Methods beenden						X
 			- Überarbeitung/ Erweiterung von Results beginnen		O
 		
@@ -876,11 +876,11 @@ Gespäch mit Malte und Julius:
 -----------------------------------------
 03.11.				
 		- Geplant:
-			- Überarbeitung Results
+			- Überarbeitung Results									x
 			- Ergebnis-Daten erstellen
 			- Grafiken erstellen/ überarbeiten						x
 			- Notizen alle nochmal durchlesen
-			- Results und Fazit überarbeiten/ erweitern
+			- Results und Fazit überarbeiten/ erweitern				
 		
 		- PRIO 1:
 			- Methods abschließen
