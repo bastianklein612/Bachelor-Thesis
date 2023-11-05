@@ -28,25 +28,6 @@ A third, more subtle problem can be the lack of a practical, inexpensive and saf
 If, for example, developing a rover destined for exploration on Mars, testing cannot be carried out under Martian conditions \parencite{choi2021use}.
 It would be impractical, if not completely impossible to create a real-world testing ground capable of featuring Mars-like soil, atmosphere, gravity and all other important properties simultaneously.
 
-%BENEFITS OF SIMULATION TOOLS:
-Considering the aforementioned problems, it is no surprise that simulation software plays an important role in robotics research, as simulations offer effective solutions to many of these issues \parencite{afzal2020study}.
-To begin with, they provide inexpensive and efficient ways to validate the performance of a robotic system.
-The risk of damaging expensive hardware during testing is mitigated completely, time-consuming tasks such as uploading the modified software onto the robot and setting up the test environment manually do not have to be carried out.
-Additionally, given the same initial state, a deterministic simulation will always produce the same results, offering the researcher complete reproducibility over occurring problems \parencite{choi2021use}.
-Simulations can, if enough computational resources are available, run faster than real-time, can be parallelized and do not have to be physically reset by a human operator.
-This makes them especially interesting when planning on using learning-based approaches \parencite{collins2021review}.
-In summary, simulations provide a more cost-effective, safer, and dependable alternative to conducting direct tests on the target hardware.
-
-In order to support and accelerate our research on hexapod robots, we aim to capitalize on these benefits.
-We seek an environment which offers a wide range of tools to enhance our understanding of the robots behaviour as well as enables us to more quickly verify and optimize new ideas.
-In our search for a simulation framework to base our robotic research on, we found a variety of robot simulation platforms, such as Gazebo, V-REP, Webots or MuJoCo. 
-Each of these simulators has its own strengths and features that researchers have utilized to explore different aspects of robotics \parencite{de2019analysis, collins2021review}.
-Besides these tools explicitly developed for robot simulations, there exist other modelling and simulation environments which serve a wider field of applications.
-One example of these is \textit{MATLAB Simulink\textsuperscript{\textregistered}}, a graphical programming environment used for modelling, simulation and analysis of complex, dynamic systems \parencite{Simulink}.
-In recent years, several scientific papers have been published dealing with the simulation of hexapod robots in Simulink (see e.g. \cite{tanaka2019development, barai2013smart, atify2019propelling}).
-However, to our knowledge, there is currently no publicly available, up-to-date Simulink-based hexapod model on which further research could build on.
-%Simulink's diagram-like interface and extensive library of "toolboxes" facilitate the creation of modular and well-organized systems, which can also be immediately simulated.
-Considering the widespread use of Simulink in both research and industry along with its extensive libraries addressing various domains, we have chosen it as our preferred development platform.
 %In our opinion, the MATLAB Simulink modeling and simulation environment from the MathWorks company is particularly interesting for implementing such a model.
 %Due to its diagram-like development interface based on functional blocks and a large number of so-called "toolboxes" from a wide variety of application areas, Simulink enables the generation of modular and clearly arranged systems, which can be simulated immediately.
 
@@ -68,8 +49,28 @@ Considering the widespread use of Simulink in both research and industry along w
 
 
 \section{Objective}
+%BENEFITS OF SIMULATION TOOLS:
+Considering the aforementioned problems, it is no surprise that simulation software plays an important role in robotics research, as simulations offer effective solutions to many of these issues \parencite{afzal2020study}.
+To begin with, they provide inexpensive and efficient ways to validate the performance of a robotic system.
+The risk of damaging expensive hardware during testing is mitigated completely, time-consuming tasks such as uploading the modified software onto the robot and setting up the test environment manually do not have to be carried out.
+Additionally, given the same initial state, a deterministic simulation will always produce the same results, offering the researcher complete reproducibility over occurring problems \parencite{choi2021use}.
+Simulations can, if enough computational resources are available, run faster than real-time, can be parallelized and do not have to be physically reset by a human operator.
+This makes them especially interesting when planning on using learning-based approaches \parencite{collins2021review}.
+In summary, simulations provide a more cost-effective, safer, and dependable alternative to conducting direct tests on the target hardware.
+
+In order to support and accelerate our research on hexapod robots, we aim to capitalize on these benefits.
+We seek an environment which offers a wide range of tools to enhance our understanding of the robots behaviour as well as enables us to more quickly verify and optimize new ideas.
+In our search for a simulation framework to base our robotic research on, we found a variety of robot simulation platforms, such as Gazebo, V-REP, Webots or MuJoCo. 
+Each of these simulators has its own strengths and features that researchers have utilized to explore different aspects of robotics \parencite{de2019analysis, collins2021review}.
+Besides these tools explicitly developed for robot simulations, there exist other modelling and simulation environments which serve a wider field of applications.
+One example of these is \textit{MATLAB Simulink\textsuperscript{\textregistered}}, a graphical programming environment used for modelling, simulation and analysis of complex, dynamic systems \parencite{Simulink}.
+In recent years, several scientific papers have been published dealing with the simulation of hexapod robots in Simulink (see e.g. \cite{tanaka2019development, barai2013smart, atify2019propelling}).
+However, to our knowledge, there is currently no publicly available, up-to-date Simulink-based hexapod model on which further research could build on.
+%Simulink's diagram-like interface and extensive library of "toolboxes" facilitate the creation of modular and well-organized systems, which can also be immediately simulated.
+Considering the widespread use of Simulink in both research and industry along with its extensive libraries addressing various domains, we have chosen it as our preferred development platform.
 %When trying to break down the complex dynamics of such a system, the creation of a virtual model can present numerous advantages. 
 %Attempting to break down the complex dynamics of such a system necessitates the use of virtual models and simulations.
+
 Given the reasons outlined above, our main goal in this thesis is to develop a comprehensive virtual model of a hexapod robot using the MATLAB Simulink\textsuperscript{\textregistered} environment.
 We aim for the model to serve as a foundation for future research to build on, therefore necessitating modularity and easy expandability.
 It is essential that the created model interacts with the simulated surrounding in a physically correct way, giving us a testbed as close to reality as possible.

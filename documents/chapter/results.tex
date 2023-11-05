@@ -242,36 +242,41 @@ A more detailed summary of the RL parameters is given in table \ref{table: DDPG 
 
 
 \begin{figure}[h]
-	\begin{subfigure}{.5\textwidth} % this sets the figure to be max half the width of the page
+	\begin{subfigure}{\textwidth} % this sets the figure to be max half the width of the page
 		\centering
 		% include first image
-		\includegraphics[width=.9\linewidth]{example-image-a}  % this sets the image to fill 90% of the available space -> 45% of the line width in total. 
+		\includegraphics[width=\linewidth]{graphs/firstSuccess_146reward}  % this sets the image to fill 90% of the available space -> 45% of the line width in total. 
 		\caption{}
 		\label{figure: RL a}
 	\end{subfigure}
-	\begin{subfigure}{.5\textwidth}
+	\begin{subfigure}{\textwidth}
 		\centering
 		% include second image
-		\includegraphics[width=.9\linewidth]{example-image-b}  
+		\includegraphics[width=\linewidth]{graphs/DDPG_reward_180.PNG}  
 		\caption{}
 		\label{figure: RL b}
 	\end{subfigure} 
-	\begin{subfigure}{.5\textwidth} % this sets the figure to be max half the width of the page
+		\caption[DDPG training graphs (1)]{DDPG training graphs (1). (a) first Success 146. (b) DDPG Reward 180.}
+	\label{figure: DDPG learning graphs 1}
+\end{figure}
+
+\begin{figure}[h]
+	\begin{subfigure}{\textwidth} % this sets the figure to be max half the width of the page
 		\centering
 		% include first image
-		\includegraphics[width=.9\linewidth]{example-image-c}  % this sets the image to fill 90% of the available space -> 45% of the line width in total. 
+		\includegraphics[width=\linewidth]{graphs/redefinedReward_50x_vx.PNG}  % this sets the image to fill 90% of the available space -> 45% of the line width in total. 
 		\caption{}
 		\label{figure: RL c}
 	\end{subfigure}
-	\begin{subfigure}{.5\textwidth}
+	\begin{subfigure}{\textwidth}
 		\centering
 		% include second image
-		\includegraphics[width=.9\linewidth]{example-image-c}  
+		\includegraphics[width=\linewidth]{graphs/lastAgent_graph}  
 		\caption{}
 		\label{figure: RL d}
 	\end{subfigure} 
-	\caption[DDPG training graphs]{DDPG training graphs. (a) Example 1. (b) Example 2. (c) Example c.}
-	\label{figure: DDPG learning graphs}
+	\caption[DDPG training graphs (2)]{DDPG training graphs (2).  (a) redefined Reward 50x vx. (b) lastAgent.}
+	\label{figure: DDPG learning graphs 2}
 \end{figure}
 
 

@@ -863,9 +863,9 @@ Gespäch mit Malte und Julius:
 02.11.				
 		- Geplant:
 			- Simulink-Modell Abgabe-fertig machen   				x
-			- Sanaodos Footfall-Pattern testen						x
+			- Sanaodos Footfall-Pattern testen						X
 			- Überarbeitung von Methods beenden						X
-			- Überarbeitung/ Erweiterung von Results beginnen		O
+			- Überarbeitung/ Erweiterung von Results beginnen		X
 		
 		- Simulink-Modell begonnen aufzuräumen/ auf Bezeichnungen aus schriftlichem Teil angepasst
 		- Grafiken üerarbeitet, neue Grafiken erstellt
@@ -877,15 +877,15 @@ Gespäch mit Malte und Julius:
 03.11.				
 		- Geplant:
 			- Überarbeitung Results									x
-			- Ergebnis-Daten erstellen
+			- Ergebnis-Daten erstellen								x
 			- Grafiken erstellen/ überarbeiten						x
-			- Notizen alle nochmal durchlesen
-			- Results und Fazit überarbeiten/ erweitern				
+			- Notizen alle nochmal durchlesen						O
+			- Results und Fazit überarbeiten/ erweitern				x
 		
 		- PRIO 1:
-			- Methods abschließen
-			- Results beginnen
-			- Footfall-Pattern erstellen
+			- Methods abschließen --> Done
+			- Results beginnen	  --> Begonnen
+			- Footfall-Pattern erstellen --> Done
 			
 			
 		- Absatz über DDPG und PPO erstellt
@@ -900,7 +900,8 @@ Gespäch mit Malte und Julius:
 			- Overall-Struktur Diagramm aufmalen; Topics und Pfeile
 			- Results, Fazit, Ausblick
 		
-		- 
+		- Footfall-Pattern erstellt
+		- Gait-Abschnitt bei Insect Locomotion hinzugefügt
 		
 -----------------------------------------
 05.11. 	

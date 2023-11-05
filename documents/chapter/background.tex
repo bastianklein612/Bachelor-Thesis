@@ -142,7 +142,41 @@ The AEP describes the foremost point a leg reaches during the movement cycle, th
 While the stance phase is responsible for holding the insect up and moving it forward until reaching the PEP, the swing phase is needed to reposition the leg towards the AEP to start the cycle again \parencite{schilling2013walknet}.
 The complete cycle can be described as a pushing phase (Stance) and a repositioning phase (Swing) .
 
-\todo{MALTE: Write about gaits, include Walknet (?)}
+Out of this elemental cycle, several distinct gait patterns emerge in nature, the most common of which are the tripod, tetrapod and wave gait (different names have also been used) \parencite{trotta2022walking,schilling2013walknet}.
+A so called \textit{footfall pattern} can be used to visualize these gait patterns, as can be seen in \ref{figure: Footfall patterns}.
+In these graphs, each row represents the state of a leg over time, the black bars indicating the swing phase of a leg.
+
+\begin{figure}[h]
+	\begin{subfigure}{\textwidth} % this sets the figure to be max half the width of the page
+		\centering
+		% include first image
+		\includegraphics[scale=0.2]{TripodGait_Footfall.PNG}  % this sets the image to fill 90% of the available space -> 45% of the line width in total. 
+		\caption{}
+		\label{figure: tripod footfall}
+	\end{subfigure}
+	
+	\begin{subfigure}{\textwidth}
+		\centering
+		% include second image
+		\includegraphics[scale=0.2]{TetrapodGait_Footfall.PNG}  
+		\caption{}
+		\label{figure: tetrapod footfall}
+	\end{subfigure}
+	
+	\begin{subfigure}{\textwidth}
+		\centering
+		% include third image
+		\includegraphics[scale=0.2]{WaveGait_Footfall.PNG}   % this width should be half of the width of the other two images
+		\caption{}
+		\label{figure: wave footfall}
+	\end{subfigure}
+	\caption[Footfall Patterns]{Footfall patterns: (a) Tripod gait with a swing-stance cycle frequency of 0.5 Hz and a swing phase taking 45\% of the cycle time (45\% duty). (b) Tetrapod gait (0.5 Hz, 33.$\overline{3}$\% duty). (c) Wave gait (0.5 Hz, 16.$\overline{6}$\% duty). The patterns were generated using the "\textit{Footfallpattern}" component created by \cite{sanandoHexapod} during the course of his thesis in Simulink.}
+	\label{figure: Footfall patterns}
+\end{figure}
+
+The gait pattern an insect utilizes, loosely translates to its movement speed.
+If the speed increases, the gait gradually changes from a wave gait (slowest) to a tetrapod gait and further to a tripod gait (fastest).
+These transitions do not occur suddenly, but rather as a continuum \parencite{schilling2013walknet}.
 
 
 \section{Inverse Kinematics}
