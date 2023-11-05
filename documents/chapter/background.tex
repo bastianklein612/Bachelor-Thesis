@@ -11,17 +11,17 @@
 		\centering
 		% include first image
 		\includegraphics[width=\linewidth]{phantomX_III_overview}  % this sets the image to fill 90% of the available space -> 45% of the line width in total. 
-		\caption{}
+		\caption[PhantomX MKIII hexapod]{}
 		\label{figure: PhantomX MKIII}
 	\end{subfigure}
 	\begin{subfigure}{.5\textwidth}
 		\centering
 		% include second image
 		\includegraphics[width=0.85\linewidth]{HexapodLeg.png}  
-		\caption{}
+		\caption[Sketch of a hexapod leg]{}
 		\label{figure: Hexapod Leg Sketch}
 	\end{subfigure}
-	\caption[Hexapod and hexapod leg]{(a) Trossen Robotics PhantomX MKIII hexapod, predecessor of the MKIV version used in this thesis [\cite{PhantomX_MKIII}] (b) Drawing of a 3-segment, 3-joint hexapod leg.}
+	\caption[]{(a) Trossen Robotics PhantomX MKIII hexapod, predecessor of the MKIV version used in this thesis [\cite{PhantomX_MKIII}]. (b) Drawing of a 3-segment, 3-joint hexapod leg.}
 	\label{figure: Hexapod and hexapod leg}
 \end{figure}
 
@@ -30,7 +30,7 @@ Through millions of years of evolution these organisms developed efficient locom
 By emulating the biomechanics and behaviour of insects, researchers and engineers are able to create versatile and robust robotic systems capable of navigating challenging terrain \parencite{irawan2011optimal, ouyang2021adaptive, schilling2013walknet}.
 
 Most commonly, each leg of a hexapod consists of 3 segments named coxa, femur and tibia, equivalent to their biological counterparts.
-The individual segments are connected to each other and the thorax (main body) by three 1-DoF\footnote{DoF: \textbf{D}egrees \textbf{o}f \textbf{F}reedom} joints, each actuated by an electric servo motor.\todo{Use footnotes for abreviations}
+The individual segments are connected to each other and the thorax (main body) by three 1-DoF\footnote{DoF: \textbf{D}egrees \textbf{o}f \textbf{F}reedom} joints, each actuated by an electric servo motor.
 The first joint, hereafter named \textalpha-joint, connects the coxa to the thorax and moves in parallel to the ground, being responsible for the longitudinal placement of the leg.
 Coxa and femur are connected by the \textbeta-joint, while the femur and tibia are connected by the \textgamma-joint. 
 These joints move orthogonal to the movement plane of the \textalpha-joint. Together, they are responsible for the lateral positioning of the leg.

@@ -2,7 +2,6 @@
 \chapter{Methods}
 \label{ch:methods}
 
-\todo{Use model project overview graphic (?)}
 \section{Approach}	
 In this chapter, we detail the methodology used to address the objectives we defined in the introduction.
 We initially provide a quick overview of the complete Simulink model, followed by more elaborate explanations of the individual components.
@@ -13,22 +12,22 @@ The chapter concludes with an exploration of the RL setup we developed to train 
 \section{Simulink Model}
 
 \begin{figure}[h]
-	\centerline{\includegraphics[scale=0.045]{HexapodModel_Overview}}
-	\caption[]{Simulink model vverview}
+	\centerline{\includegraphics[scale=0.04]{HexapodModel_Overview}}
+	\caption[]{Overview of the complete Simulink model}
 	\label{figure: Simulink Model Overview}
 \end{figure}
 
 Taking a top-down perspective on the Simulink model as depicted in Fig. \ref{figure: Simulink Model Overview}, it is distinctly divided into 3 separate components: The hexapod, the locomotion controller and the environment.
 The hexapod represents a virtual model of a real hexapod robot and together with the controller constitutes a feedback loop.
 Providing sensory information about its state to the controller, the hexapod receives instructions on the torque values to be applied in return.
-The environment represents a virtual testing ground in which the hexapod is situated.
+The environment represents a virtual testing ground in which the robot is situated.
 Between the two components physical interactions are simulated.
-Additionally, if a RL agent is supposed to be trained, both the hexapod and the environment provide so called RL observations to the controller, which RL agent setup is a part of.
+Additionally, if a RL agent is supposed to be trained, both the hexapod and the environment provide information about the RL process to the controller, which the RL agent setup is a part of.
 
 
 \subsection{The Hexapod}
 The hexapod model we develop in this thesis is based on the \textit{PhantomX MK4} hexapod distributed by \textit{Trossen Robotics}.
-The company provides a digital model of this robot in the form of a .urdf file which can be obtained from their Github page \parencite{interboticsGithub}.
+The company provides a digital model of this robot in the form of a .urdf file, obtainable through their Github page \parencite{interboticsGithub}.
 URDF (\textbf{U}nified \textbf{R}obotics \textbf{D}escription \textbf{F}ormat) is a common file format for describing the physical and kinematic properties of a robot or robotic component.
 It provides a standardized and structured way to define the connections between joints and links, the visual properties and collision geometry of each link as well as parameters such as mass and inertia \parencite{matlabURDFDocumentation}.
 The robots geometry is provided in a separate folder in the form of CAD-files which are referenced by the urdf-file.
