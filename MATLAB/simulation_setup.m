@@ -1,6 +1,6 @@
 gravity_vector = [0, 0, -9.81];
 
-%Faktoren zur Definierung der Schritthöhe/-weite
+%Parameter zur Definierung der Schritthöhe/-weite
 step_height = 0.06;
 step_length = 0.04;
 

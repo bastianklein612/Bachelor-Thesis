@@ -16,18 +16,18 @@ reward_energy = -0.025;
 %-------------------------------------------------------------------------------------------------------------
 
 
-rl_agent_setup_DDPG;
+%rl_agent_setup_DDPG;
 %rl_agent_setup_DQN;
 %rl_agent_setup_PPO_continuous;
-%rl_agent_setup_PPO_discrete;
+rl_agent_setup_PPO_discrete;
 
 %--------------------------------------------------------------------------
 %Configure Training
 %--------------------------------------------------------------------------
 
 %configure training options
-maxEpisodes = 100000;
-maxSteps = 512;
+maxEpisodes = 10000;
+maxSteps = 256;
 
 
 %trainingOptions, used for single agent training
@@ -40,7 +40,7 @@ trainOpts = rlTrainingOptions(...
     StopTrainingCriteria="EpisodeCount",...
     StopTrainingValue=maxEpisodes,...
     SaveAgentCriteria="EpisodeReward",...
-    SaveAgentValue=700);
+    SaveAgentValue=400);
 
 %--------------------------------------------------------------------------
 %Parallelization of RL 
@@ -84,7 +84,7 @@ trainingStats = train(agent, env, trainOpts); %, evalOpts);
 
 %To start training again after max episodes was reached
 %trainingStats.TrainingOptions.MaxEpisodes = 100000;
-%trainingStatsNew = train(agent,env,trainingStats);
+%trainingStats = train(agent,env,trainingStats);
 %--------------------------------------------------------------------------
 %--------------------------------------------------------------------------
 
@@ -95,8 +95,9 @@ trainingStats = train(agent, env, trainOpts); %, evalOpts);
 % Save and load commands
 %filename = "agentBackup_ppo_continuous_64.mat";
 %save(filename,"agent");
-%save('trainingStats_DDPG_withIsDone', 'trainingStats', '-v7.3')   %for files larger than 2 GB
+%save('Workspace_DDPG_redefinedReward_50x_vx._2', 'trainingStats', '-v7.3')   %for files larger than 2 GB
 %load(filename);
+%inspectTrainingResult(trainingStats)
 
 
 

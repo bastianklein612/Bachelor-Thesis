@@ -19,7 +19,7 @@ actions = ff2n(6);
 actionInfo = rlFiniteSetSpec(num2cell(actions,2));
 actionInfo.Name = 'control_output';
 
-env = rlSimulinkEnv(mdl,[mdl '/Motion Controller/Coordinator/RL Setup/RL Agent'],observationInfo,actionInfo);
+env = rlSimulinkEnv(mdl,[mdl '/Locomotion Controller/Coordination/RL Setup/RL Agent'],observationInfo,actionInfo);
 
 %-----------------------------------------------------------------------
 %Agent setup

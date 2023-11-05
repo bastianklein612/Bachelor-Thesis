@@ -15,14 +15,14 @@ actions = ff2n(6);
 actionInfo = rlFiniteSetSpec(num2cell(actions,2));
 actionInfo.Name = 'control_output';
 
-env = rlSimulinkEnv(mdl,[mdl '/Motion Controller/Coordinator/RL Setup/RL Agent'],observationInfo,actionInfo);
+env = rlSimulinkEnv(mdl,[mdl '/Locomotion Controller/Coordination/RL Setup/RL Agent'],observationInfo,actionInfo);
 
 %-----------------------------------------------------------------------
 %Agent setup
 %-----------------------------------------------------------------------
 
 % width of nn layer
-units = 200;
+units = 64;
 
 
 
@@ -78,7 +78,7 @@ criticOpts = rlOptimizerOptions(LearnRate=1e-4);
 %specify ppo options
 agentOpts = rlPPOAgentOptions(...
     ExperienceHorizon=512,...
-    MiniBatchSize=128,...
+    MiniBatchSize=32,...
     ClipFactor=0.02,...                 %0.08 --> 0.2, changed according to "An energy-saving snake locomotion gait policy obtained using DRL"
     EntropyLossWeight=0.01,...
     ActorOptimizerOptions=actorOpts,...
