@@ -341,11 +341,9 @@ Where $\beta_1$, $\beta_2$, $\gamma_1$ and \text{BF} are given by:
 \]
 
 To create the Analytical IK block, we translate the derived equations into C-code.
-The resulting script is then run inside a \textit{MATLAB code block} for each simulation step.
-The implemented code can takes the trajectory coordinates and joint offsets as inputs.
+The implemented code (\textit{InverseKinematics.c}) is then run inside a \textit{MATLAB code block} for each simulation step.
 As the hexapods initial joint positions deviate from the ones displayed in Fig. \ref{figure: IK angle derivations}, we require the offsets to convert the angles calculated by the solver to match these differing initial positions.
-The offsets are given in table \ref{table: Joint position offsets}.
-Fig. X. \todo{Add code}
+The offsets are given in table \ref{table:Joint position offsets}.
 
 
 \section{Learning Leg Coordination} \label{sec: RL setup}
@@ -517,7 +515,7 @@ As can be seen in Fig. \ref{figure: Hexapod proportions}, the front and back leg
 			right front, left back & -45 & 14.03624347 & 60.58440117 \\
 			\hline
 		\end{tabular}
-		\caption[Joint position offsets]{}
+		\caption[Joint position offsets]{Joint angle offsets. In addition to the \textbeta- and \textgamma-offset present in all joints, the front and back legs also have an offset applied to the \textalpha-joint, as these legs are connected to the thorax in a 45° angle.}
 		\label{table:Joint position offsets}
 	\end{table}
 }
