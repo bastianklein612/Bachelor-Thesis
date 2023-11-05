@@ -912,8 +912,29 @@ Gespäch mit Malte und Julius:
 			- alle TODOs lösen										o
 			- CD-Daten zusammenstellen								o
 		
-		- 
 		
+		---------------------------------------------------------------
+		---------------------------------------------------------------
+		=> NOCH ZU ERLEDIGEN(nach prio. sortiert):
+			- Results und Conclusions fertigstellen
+			- Methods-Teil final überarbeiten
+			- Alle TODOs lösen
+			- Grafiken erstellen/ überarbeiten
+			- Uni-Logo ändern
+			- DOI-Links hinzufügen/ Bibliographie checken
+			- Simulink-Modell und Skripte Abgabe-fertig machen
+			- alle Links testen
+			- CD-Inhalte zusammenstellen
+			
+			- Vortragsstruktur ertellen
+			
+			- Bei Copy-Shop nachfragen
+				- Dienstag offen ?
+				- Kosten pro Kopie ?
+			
+			---------------------------------------------------------------
+			---------------------------------------------------------------
+			
 -----------------------------------------
 06.11.	LETZTER TAG DER BEARBEITUNG + DRUCKTAG
 			
