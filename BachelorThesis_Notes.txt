@@ -912,7 +912,9 @@ Gespäch mit Malte und Julius:
 			- alle TODOs lösen
 			- CD-Daten zusammenstellen
 		
-		- 
+		- Alles bis zum methods-chapter überprüft
+		- Grafiken angepasst(Beschriftungen und Schritgröße)
+		
 		
 -----------------------------------------
 06.11.	LETZTER TAG DER BEARBEITUNG + DRUCKTAG

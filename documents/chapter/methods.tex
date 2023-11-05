@@ -4,10 +4,6 @@
 
 \todo{Use model project overview graphic (?)}
 \section{Approach}	
-The key idea of our approach is to leverage the versatile MATLAB environment to construct a highly adaptable model of a hexapod robot. 
-By providing this easily expandable, modular platform, we aim to accelerate future research efforts.
-Anchoring our work on the MATLAB environment, we expect significant benefits in terms of development time and flexibility, facilitated by the vast array of toolboxes.
-\\
 In this chapter, we detail the methodology used to address the objectives we defined in the introduction.
 We initially provide a quick overview of the complete Simulink model, followed by more elaborate explanations of the individual components.
 Recognizing that controller and RL setup both depend on a solid, well-functioning model, we begin with a description of the hexapod representation we created in Simulink.
@@ -17,11 +13,10 @@ The chapter concludes with an exploration of the RL setup we developed to train 
 \section{Simulink Model}
 
 \begin{figure}[h]
-	\centerline{\includegraphics[scale=0.035]{HexapodModel_Overview}}
+	\centerline{\includegraphics[scale=0.045]{HexapodModel_Overview}}
 	\caption[]{Simulink model vverview}
 	\label{figure: Simulink Model Overview}
 \end{figure}
-\todo{MALTE: Change name of "Physical Hexapod Model in graphic and everywhere else"}
 
 Taking a top-down perspective on the Simulink model as depicted in Fig. \ref{figure: Simulink Model Overview}, it is distinctly divided into 3 separate components: The hexapod, the locomotion controller and the environment.
 The hexapod represents a virtual model of a real hexapod robot and together with the controller constitutes a feedback loop.
@@ -31,7 +26,7 @@ Between the two components physical interactions are simulated.
 Additionally, if a RL agent is supposed to be trained, both the hexapod and the environment provide so called RL observations to the controller, which RL agent setup is a part of.
 
 
-\subsection{Model of the Hexapod}
+\subsection{The Hexapod}
 The hexapod model we develop in this thesis is based on the \textit{PhantomX MK4} hexapod distributed by \textit{Trossen Robotics}.
 The company provides a digital model of this robot in the form of a .urdf file which can be obtained from their Github page \parencite{interboticsGithub}.
 URDF (\textbf{U}nified \textbf{R}obotics \textbf{D}escription \textbf{F}ormat) is a common file format for describing the physical and kinematic properties of a robot or robotic component.
@@ -134,7 +129,7 @@ As mentioned above, joints can receive as input a torque to be applied and can o
 %It should be noted, that integrating the joint position over time would implicitly yield the same result, but we decided for ease of use to include this data explicitly.
 
 
-\subsection{Environment}
+\subsection{The Environment}
 To validate the hexapod model and to provide a space for the robot to learn coordination strategies, we construct a simple test environment.
 The environment, at this point, simply consists of a horizontal plane, but can be expanded to include more complex terrain with little effort.
 Some examples which we experimented with, but did not utilise for testing or training so far, include inclined planes and small obstacles on the ground.
@@ -146,7 +141,7 @@ Instead, the agents actions are applied to the hexapod model, which is its own s
 If one would precisely follow the definition of a RL environment in a manner analogous to \ref{figure: RL Illustration}, both the environment subsystem and the hexapod subsystem would have to be included as part of the "RL" environment.
 For obvious reasons such as modularity and clarity of model we choose not to adapt this approach.
 
-\subsection{Locomotion Controller} \label{subsec: Locomotion controller}
+\subsection{The Locomotion Controller} \label{subsec: Locomotion controller}
 As the conductor of the hexapods locomotion, the controller, at a high level of abstraction, sets the speed, gait and direction of the robots movement.
 On the lowest operational level, the controller achieves these parameters by precisely controlling the torque applied to each joint at every simulation step.
 The locomotion controller subsystem as a whole can be described as a feedback control system.
@@ -410,7 +405,7 @@ We start the training of agents at a relatively small simulation step size(0.000
 After the agent has stabilized, the step size is increased to speed up the further learning process.
 \cite{lillicrap2015continuous}
 
-\section{Model parameters}
+\section{Model Parameters}
 In this last section of the methods chapter, we provide the parameters used in various components of the Simulink model.
 
 The internal joint parameters are included in the hexapod .urdf-file and were automatically imported.
