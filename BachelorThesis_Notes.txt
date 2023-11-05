@@ -879,7 +879,7 @@ Gespäch mit Malte und Julius:
 			- Überarbeitung Results									x
 			- Ergebnis-Daten erstellen								x
 			- Grafiken erstellen/ überarbeiten						x
-			- Notizen alle nochmal durchlesen						O
+			- Notizen alle nochmal durchlesen						X
 			- Results und Fazit überarbeiten/ erweitern				x
 		
 		- PRIO 1:
@@ -897,8 +897,8 @@ Gespäch mit Malte und Julius:
 -----------------------------------------
 04.11.				
 		- Geplant:
-			- Overall-Struktur Diagramm aufmalen; Topics und Pfeile
-			- Results, Fazit, Ausblick
+			- Overall-Struktur Diagramm aufmalen; Topics und Pfeile	O
+			- Results, Fazit, Ausblick								O
 		
 		- Footfall-Pattern erstellt
 		- Gait-Abschnitt bei Insect Locomotion hinzugefügt
@@ -907,14 +907,12 @@ Gespäch mit Malte und Julius:
 05.11. 	
 	
 		- Geplant:
-			- alle Quellen checken
-			- DOI-Links zu Quellen hinzufügen
-			- alle TODOs lösen
-			- CD-Daten zusammenstellen
+			- alle Quellen checken									O
+			- DOI-Links zu Quellen hinzufügen						O
+			- alle TODOs lösen										o
+			- CD-Daten zusammenstellen								o
 		
-		- Alles bis zum methods-chapter überprüft
-		- Grafiken angepasst(Beschriftungen und Schritgröße)
-		
+		- 
 		
 -----------------------------------------
 06.11.	LETZTER TAG DER BEARBEITUNG + DRUCKTAG
