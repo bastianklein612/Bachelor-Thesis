@@ -107,7 +107,7 @@ The robot model, modified in the ways described, is encapsulated as a single \te
 It receives the torques to be applied as input and outputs sensory information about each joint.
 All of the internal joint parameters and friction coefficients used in collision modelling can be modified within the MATLAB-script \textit{simulation\_setup.m}, at startup or even during simulation.
 The parameter values used in all simulations we present in thesis are given in tables \ref{table: Joint parameters} and \ref{table: Spatial contact force}.
-The joint parameter values were in large parts already defined by the urdf specification, while we adapted most of the friction force parameters from \parencite{trotta2022walking}.
+The joint parameter values were in large parts already defined by the urdf specification, while we adopted most of the friction force parameters from \parencite{trotta2022walking}.
 To summarize, we converted the provided hexapod description into a Simulink model, compartmentalized it and added sensing and actuation capabilities to the robots legs.
 In addition, we made most of the models internal parameters accessible and modifiable within an initialisation script.
 
@@ -138,7 +138,7 @@ Similar to the basic concept of RL depicted in Fig. \ref{figure: RL Illustration
 In contrast to this basic concept however, the environment, as we define it,, does not directly receive actions from the RL agent nor does it evaluate the reward function.
 Instead, the agents actions are applied to the hexapod model, which is its own separate subsystem and the reward function is part of the locomotion controller's RL setup component.
 If one would precisely follow the definition of a RL environment in a manner analogous to \ref{figure: RL Illustration}, both the environment subsystem and the hexapod subsystem would have to be included as part of the "RL" environment.
-For obvious reasons such as modularity and clarity of model we choose not to adapt this approach.
+For obvious reasons such as modularity and clarity of model we choose not to adopt this approach.
 
 \subsection{The Locomotion Controller} \label{subsec: Locomotion controller}
 As the conductor of the hexapods locomotion, the controller, at a high level of abstraction, sets the speed, gait and direction of the robots movement.
@@ -395,7 +395,7 @@ After the agent has stabilized, the step size is increased to speed up the furth
 In this last section of the methods chapter, we provide the parameters used in various components of the Simulink model.
 
 The internal joint parameters are included in the hexapod .urdf-file and were automatically imported.
-We adapted these parameters provided by \textit{Trossen Robotics} \parencite{interboticsGithub} almost completely, changing only the \textit{Transition Region Width}.
+We adopted these parameters provided by \textit{Trossen Robotics} \parencite{interboticsGithub} almost completely, changing only the \textit{Transition Region Width}.
 The transition region defines a buffer around the joints boundaries, in which the boundaries spring and damping forces act upon the joint.
 The smaller the transition region, the sharper the onset of forces upon the joint and the smaller the required simulation time-step.
 We  therefore change the transition region width from  from 0.1° to 1°, sacrificing a small amount of simulation accuracy for an increase in simulation speed.
@@ -425,7 +425,6 @@ We  therefore change the transition region width from  from 0.1° to 1°, sacrif
 	\end{table}
 }
 
-\todo{Check for "adapt" instead of "adopt"}
 We adopt the parameters of the \textit{Spatial Contact Force} block from \cite{trotta2022walking}, but in this case reduce the transition region width from \num{1e-3} m to \num{1e-4} m, as we observe physical inaccuracies (glitches) during simulation when using larger transition region widths.
 %also "Gait Self-learning for Damaged Robots Combining Bionic Inspiration and Deep Reinforcement Learning" for parameters of hexapod
 {\def\arraystretch{1.4}\tabcolsep=5pt
