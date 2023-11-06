@@ -17,9 +17,13 @@ MATLAB Simulink proved to be a versatile and reliable platform for the modelling
 The development of the hexapod model was greatly sped up by the underlying MATLAB framework and the utilisation of the provided toolboxes.
 The ability to write MATLAB-scripts to automate several task, like the initialisation of the hexapod model or the setup of the RL agents and surrounding infrastructure. 
 
+The developed model proved very robust in the face of constant twitching caused by exploring RL agents.
 \todo{Evaluate MATLAB Simulink in more detail}
 
 \subsection{RL Leg Coordination}
+Defining a reward function which accurately describes an agents performance is a complicated task requiring careful tuning.
+The same applies to the configuration of a RL algorithm.
+
 We found the learning of the RL agents to progress quite slow. 
 This could probably be improved on significantly by more carefully tuning the agents parameters and a more detailed reward function.
 
@@ -39,12 +43,14 @@ Our suggestions for future researchers attempting to apply RL to the leg coordin
 
 Mentions problems in RL.
 %Sparse reward definition might have played a role in the bad performance of the agents \parencite{matheron2019problem}.
-
+\todo{Look at proposed goals at the beginning of thesis, evaluate these}
+Since the main goal of this thesis was to develop a functional and robust hexapod model, on which further research can be based, we consider our work as a success.
+Concluding, it can be said that the developed hexapod model and locomotion controller proved to be a success, while the approach to the RL problem needs to be reconsidered/ reevaluated.
 
 
 \section{Outlook - Future Work}
 
-
+Since the main 
 
 \begin{itemize}
 	

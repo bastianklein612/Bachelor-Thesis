@@ -78,13 +78,15 @@ A comparison of the thorax's height differences during movement, when under cont
 
 The final MK3 locomotion controller is able to control the hexapod model in tripod, tetrapod as well as wave gait.
 The swing-stance cycle frequency ($f_c$) and the duty cycle percentage ($P_\text{swing}$) can be changed, even dynamically during simulation.
-An demontration of the hexapod model walking in tripod gait with varying cycle frequency is provided in \ref{}.
-The controller starts with an $f_c$ of 0.2 Hz, increasing over 20 seconds linearly to 2 Hz, then decreasing back to 0.2 Hz.
-
+An demonstration of the hexapod model walking in a wave gait with varying cycle frequency is provided in \ref{}.
+The controller starts with a $f_c$ of 0.1 Hz, increasing over 20 seconds linearly to 0.5 Hz.
 
 
 \section{Evaluation: RL training}
 \todo{major rewrite and update}
+
+Since the goal of successfully applying RL to the problem of leg coordination was not reached in completion, it might be appealing, as a future work, to focus solely on this problem.
+As we only implemented a rudimentary locomotion controller capable of navigation on flat terrain, expanding the controller to more complex, uneven terrain would be a valuable research target.
 
 Implementing a RL agent that yields satisfying results proved to be more difficult than anticipated.
 As there exists a large set of parameter to be considered during setup, finding a set of well-working parameters is a time-consuming task.
@@ -98,6 +100,16 @@ The parameters common to both algorithms are presented in table \ref{}.
 \subsection{Reward Exploitation}
 A problem often observed in RL is an agent exploiting a poorly-defined reward function.
 This commonly leads to agents exhibiting undesirable behaviour, even though according to the reward function they are performing well.
+The problem occurred during our work as well.
+
+We were unsuccessful in our task to train an agent which can perform a stable gait pattern.
+However, we discovered several reward function exploits which we want to present in the next section:
+
+As we changed the reward function several times in attempts to improve it's performance evaluation, the training episodes cannot be compared with the raw numbers.
+Instead, we focus on the development of the average and peak rewards over time, the convergence or divergence, etc.
+
+
+The graphs below each depict the learning curve of a RL agent. The dark blue graph represents the average reward (running average over the last 250 Episodes) and each data point on the light blue graph represents the reward of a specific episode.
 
 {\def\arraystretch{1.4}\tabcolsep=5pt
 	
@@ -208,7 +220,7 @@ This commonly leads to agents exhibiting undesirable behaviour, even though acco
 \end{table}
 }
 
-The survival reward $r_\text{survival}$ is set at 0.1, resulting in the agent receiving $0.1 \cdot 512 = 51.2$ cumulative reward during a full episode.
+The survival reward $r_\text{survival}$ is set at 0.1, resulting in the agent receiving $0.1 \cdot 512 = 51.2$ cumulative reward from survival during a full episode.
 
 
 We used the \textbf{D}eep \textbf{D}eterministic \textbf{P}olicy \textbf{G}radient (DDPG) algorithm, an actor-critic, model-free, online, off-policy RL method.
