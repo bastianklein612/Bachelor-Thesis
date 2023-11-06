@@ -912,7 +912,21 @@ Gespäch mit Malte und Julius:
 			- alle TODOs lösen										o
 			- CD-Daten zusammenstellen								o
 		
-		
+			
+-----------------------------------------
+06.11.	LETZTER TAG DER BEARBEITUNG + DRUCKTAG
+			
+		- Geplant:
+			- letzte Änderungen
+			- Korrektur lesen
+			- alle Links testen
+			- Rechtschreibfehler-Scan (manuell oder auto)
+			- Bachelorarbeit 4-Fach drucken lassen
+			- 4 CDs mit gesamtem Inhalt brennen
+			- Abschluss-Vortrag beginnen mit Struktur
+			- Vortragsstruktur an Malte schicken
+			- PDF der Bachelorarbeit an Malte und Paula schicken
+			
 		---------------------------------------------------------------
 		---------------------------------------------------------------
 		=> NOCH ZU ERLEDIGEN(nach prio. sortiert):
@@ -930,28 +944,15 @@ Gespäch mit Malte und Julius:
 			
 			- Vortragsstruktur ertellen
 			
-			- Bei Copy-Shop nachfragen
-				- Dienstag offen ?
-				- Kosten pro Kopie ?
+			- Bei Copy-Shop nachfragen											X
+				- Dienstag offen ?												X
+				- Was beachten ?												X Laptop mitnehmen
+				- Wie viel Zeit einplanen ?										X 30-90 min.
+				
+				- Kosten pro Kopie ?											O
 			
 			---------------------------------------------------------------
 			---------------------------------------------------------------
-			
------------------------------------------
-06.11.	LETZTER TAG DER BEARBEITUNG + DRUCKTAG
-			
-		- Geplant:
-			- letzte Änderungen
-			- Korrektur lesen
-			- alle Links testen
-			- Rechtschreibfehler-Scan (manuell oder auto)
-			- Bachelorarbeit 4-Fach drucken lassen
-			- 4 CDs mit gesamtem Inhalt brennen
-			- Abschluss-Vortrag beginnen mit Struktur
-			- Vortragsstruktur an Malte schicken
-			- PDF der Bachelorarbeit an Malte und Paula schicken
-			
-		- 
 		
 -----------------------------------------
 07.11.	ABGABE-TAG

@@ -1,4 +1,4 @@
-%ensure reproduceability
+%ensure reproducability
 %rng(0);
 
 %-------------------------------------------------------------------------------------------------------------
@@ -16,16 +16,15 @@ reward_energy = -0.025;
 %-------------------------------------------------------------------------------------------------------------
 
 
-%rl_agent_setup_DDPG;
+rl_agent_setup_DDPG;
 %rl_agent_setup_DQN;
 %rl_agent_setup_PPO_continuous;
-rl_agent_setup_PPO_discrete;
+%rl_agent_setup_PPO_discrete;
 
 %--------------------------------------------------------------------------
-%Configure Training
+%Configure RL training 
 %--------------------------------------------------------------------------
 
-%configure training options
 maxEpisodes = 10000;
 maxSteps = 256;
 
@@ -40,7 +39,7 @@ trainOpts = rlTrainingOptions(...
     StopTrainingCriteria="EpisodeCount",...
     StopTrainingValue=maxEpisodes,...
     SaveAgentCriteria="EpisodeReward",...
-    SaveAgentValue=400);
+    SaveAgentValue=300);
 
 %--------------------------------------------------------------------------
 %Parallelization of RL 
@@ -49,7 +48,7 @@ trainOpts = rlTrainingOptions(...
 delete(gcp('nocreate'))
 
 %number of parallel agents
-N = 16;
+N = 8;
 pool = parpool(N);
 
 %ensure that the number of workers is not less than N
@@ -70,16 +69,15 @@ end
 
 trainOpts.UseParallel = true;
 trainOpts.ParallelizationOptions.Mode = "async";
-%trainOpts.ParallelizationOptions.StepsUntilDataIsSent = 32;                    %not recommended
-%trainOpts.ParallelizationOptions.DataToSendFromWorkers = "Experiences";        %not recommended
+
 %--------------------------------------------------------------------------
 
 %Start training process
-trainingStats = train(agent, env, trainOpts); %, evalOpts);
+trainingStats = train(agent, env, trainOpts);
 
 %To start training where it left off
-%trainingStats = train(agent,env,trainingStats);
 %agentOpts.ResetExperienceBufferBeforeTraining = false;  %prevent experience reset if continuing training on pretrained model
+%trainingStats = train(agent,env,trainingStats);
 
 
 %To start training again after max episodes was reached
@@ -95,7 +93,7 @@ trainingStats = train(agent, env, trainOpts); %, evalOpts);
 % Save and load commands
 %filename = "agentBackup_ppo_continuous_64.mat";
 %save(filename,"agent");
-%save('Workspace_DDPG_redefinedReward_50x_vx._2', 'trainingStats', '-v7.3')   %for files larger than 2 GB
+%save('Workspace_DDPG_redefinedReward', 'trainingStats', '-v7.3')   %for files larger than 2 GB
 %load(filename);
 %inspectTrainingResult(trainingStats)
 

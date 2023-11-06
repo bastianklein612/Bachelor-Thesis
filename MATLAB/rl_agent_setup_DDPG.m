@@ -38,7 +38,6 @@ env = rlSimulinkEnv(mdl,[mdl '/Locomotion Controller/Coordination/RL Setup/RL Ag
 
 % width of nn layer
 units = 64;
-%units = 8;
 
 
 %--------------------------------------------------------------------------
@@ -123,8 +122,8 @@ actor = rlContinuousDeterministicActor(actorNetwork,observationInfo,actionInfo);
 
 %specify critic and agent options
 %with a learning rate of 10−4 and 10−3 for the actor and critic respectively
-actorOpts = rlOptimizerOptions(LearnRate=3e-3);%,L2RegularizationFactor=1e-4);
-criticOpts = rlOptimizerOptions(LearnRate=3e-3);
+actorOpts = rlOptimizerOptions(LearnRate=1e-4);%,L2RegularizationFactor=1e-4);
+criticOpts = rlOptimizerOptions(LearnRate=3e-4);
 
 %specify DDPG options
 agentOpts = rlDDPGAgentOptions(...
@@ -133,9 +132,9 @@ agentOpts = rlDDPGAgentOptions(...
                                CriticOptimizerOptions=criticOpts,...
                                ExperienceBufferLength=1e5,...%1e6
                                DiscountFactor=0.99,...
-                               MiniBatchSize=32);
+                               MiniBatchSize=64);
 
-agentOpts.NoiseOptions.StandardDeviation=0.15;
+agentOpts.NoiseOptions.StandardDeviation=0.05;
 agentOpts.NoiseOptions.StandardDeviationDecayRate=1e-6;
 %agentOpts.NoiseOptions.MeanAttractionConstant=0.15;
 
