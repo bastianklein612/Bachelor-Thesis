@@ -48,7 +48,7 @@ The resulting simulations of the robot walking in tetrapod and wave gait can be 
 
 The decision to implement our own, custom analytical IK solver resulted in a significant performance boost.
 Comparing the MK1 and MK2 controllers, we are able to achieve an up to 10x speed up in simulation time.
-\todo{Prove with a comparison of MK1 and MK2 simulation time}
+\todo{Prove with a comparison of MK1 and MK2 simulation time, run MK1 and MK2 on desktop}
 
 With the final non-RL controller design, termed \textit{MK3}, we improved the stability of the hexapods locomotion as well as introduced the capability for omnidirectional movement.
 By simply re-tuning the PID controller parameter to the values displayed in \ref{table: PID parameters}, we were able to reduce the jerking behaviour of the robot far enough to not be visually noticeable.
@@ -74,14 +74,17 @@ A comparison of the thorax's height differences during movement, when under cont
 	\label{figure: Thorax height graphs}
 \end{figure}
 
+The final MK3 locomotion controller is able to control the hexapod model in tripod, tetrapod as well as wave gait.
+The swing-stance cycle frequency ($f_c$) and the duty cycle percentage ($P_\text{swing}$) can be changed, even dynamically during simulation.
+An demontration of the hexapod model walking in tripod gait with varying cycle frequency is provided in \ref{}.
+The controller starts with an $f_c$ of 0.2 Hz, increasing over 20 seconds linearly to 2 Hz, then decreasing back to 0.2 Hz.
 
 
-\todo{major rewrite and update}
+
 \section{Evaluation: RL training}
-In this section, we present the result obtained during training RL agents on the problem of leg coordination.
-We begin with an evaluation of the overall process, after which we separately present the training results of the DDPG an PPO agents.
+\todo{major rewrite and update}
 
-Implementing a RL agent yielding satisfying results proved to be more difficult than anticipated.
+Implementing a RL agent that yields satisfying results proved to be more difficult than anticipated.
 As there exists a large set of parameter to be considered during setup, finding a set of well-working parameters is a time-consuming task.
 This is reinforced by the fact that, to observe the performance of a set of parameters, we found the agent needed to train for at least 1-2k episodes, equating to several hours of runtime given the hardware used.
 Additionally, as we ran experiments with two different RL algorithms, we were required to tune two separate sets of parameters.
