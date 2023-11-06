@@ -919,12 +919,13 @@ Gespäch mit Malte und Julius:
 			- Results und Conclusions fertigstellen
 			- Methods-Teil final überarbeiten
 			- Alle TODOs lösen
-			- Grafiken erstellen/ überarbeiten
+			- Grafiken erstellen/ überarbeiten (Controller komplett-Übersicht)
 			- Uni-Logo ändern
 			- DOI-Links hinzufügen/ Bibliographie checken
 			- Simulink-Modell und Skripte Abgabe-fertig machen
 			- alle Links testen
 			- CD-Inhalte zusammenstellen
+			- Titelseite für gebundene Fassung erstellen
 			
 			- Vortragsstruktur ertellen
 			

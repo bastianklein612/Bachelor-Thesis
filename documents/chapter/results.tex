@@ -215,7 +215,7 @@ On both branches the input layers are followed by a fully-connected and a ReLU l
 At this point the two branches are connected by a simple addition layer.
 After the add-layer, another 2 combinations of fully-connected and ReLU layer follow, concluding with a single output neuron, representing the critics reward estimation.
 All of the actor and critic layers are, if not mentioned otherwise, 100 neurons wide.
-The NN architectures are similar to the ones used in \parencite{AUTHOR}, but we changed some details to better fit our purpose.
+The architectures of the actor and critic networks have been adopted from example applications created by \cite{matlabDDPGExample, matlabPPOExample}.
 
 We used a learning rate of $3e^{-4}$ and $1e^{-3}$ for the actor and critic respectively and a discount factor of 0.99.
 The agents sample rate is set at 0.05, meaning the agent samples the environment and takes an action every 50 ms.
