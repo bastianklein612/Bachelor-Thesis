@@ -44,7 +44,7 @@ These were, given our initial tuning parameters ($K_p = 3, K_i = 0.2, K_d = 1, N
 In addition, the MK1 controller version requires a lot of calculation time per simulation step, resulting in high simulation times.
 The observed cause of the being the computationally intensive, iterative IK block provided by Simulink, as we have already elaborated on in \ref{subsubsec: IK Solver}.
 
-With the subsequent version, \textit{MK2}, we focused on introducing tetrapod and wave gait as well as reducing simulation time.
+With the subsequent version, \textit{MK2}, we focused on introducing tetrapod and wave gait as well as increasing simulation speed.
 Implementing the gait patters proved to be straightforward, as, resulting from the models modular architecture, solely the leg coordination of the static gait definition had to be modified.
 The resulting simulations of the robot walking in tetrapod and wave gait can be observed in \hyperref[vid: MK1]{MK2}.
 
