@@ -8,18 +8,18 @@ This includes an evaluation of the developed hexapod model and its locomotion co
 \section{Evaluation: Hexapod model}
 During the development process of the hexapod model and locomotion controller, we observed that the conceived model architecture enables us to quickly modify and/or add components.
 An example of this flexibility is provided by the retrospective addition of sensor readings for the rotational acceleration of the \textalpha-joints.
-As the hexapod leg is defined in a custom library, it was only necessary to enable the respective sensor reading one the joint block and add the new signal to the already existing sensory information bus. 
+As the hexapod leg is defined as a library component, it was only necessary to enable the respective sensor reading one the joint block and add the new signal to the already existing sensory information bus. 
 There was no need to modify the hexapods legs individually, as Simulink automatically updates all library-linked blocks.
 In general, the library of custom subsystems has proven to be a most useful tool, reducing development time and promoting modularity.
-The encapsulation of the hexapod model as a whole into a single, top-level subsystem block, which only shows necessary in- and outputs, provides the developer with a simple to understand interface.
-This also gives us the ability to duplicate the hexapod system without any effort, which could prove useful in future research as it enables the system to easily be used in multi-agent simulations.
+The encapsulation of the hexapod model as a whole into a single, top-level subsystem block, that only reveals necessary in- and outputs, provides the developer with a simple to understand interface.
+It also gives us the ability to duplicate the complete hexapod system without any effort, which could prove useful in future research as it enables the system to easily be utilized in multi-agent simulations.
 
 Concerning the actual simulation of the model, it can be said that in most cases where the robot uses a statically defined gait pattern for locomotion, a simulation step size of 0.5 ms yields stable results and runs at close to real time.
 Given an untrained, exploring RL agent as the models operator, a step size of 0.25 ms is preferable, as sudden twitching and jerking motions might occur, which can lead to simulation instabilities and exceptions.
 Similar to the results of \cite{thilderkvist2015motion}, we begin to observe these simulation problems at larger step sizes ($> 0.5 ms$), although not of the same significance and frequency as described by them. 
-The most common reason we observed for the exceptions is a collision detection failure.
-This  failure occurs, when two rigid bodies move into each other faster than the simulation's solver can observe, due to its limited temporal resolution.
-During several ten-thousand simulation episodes run at a step-size of 0.25 ms, we did not once observe am exception.
+The most common reason for exceptions we observed, were collision detection failures.
+These occur, when two rigid bodies move into each other faster than the simulation solver can observe, due to its limited temporal resolution.
+During the several ten-thousand simulation episodes performed at a step-size of 0.25 ms during RL training, we did not once observe am exception.
 Overall, the behaviour of our robot model seems, to the best of our knowledge, but without the co-examination of a real world counterpart, physically accurate.
 
 
@@ -27,6 +27,7 @@ We attribute the unsatisfactory results \cite{thilderkvist2015motion} experience
 As they also work with an earlier MATLAB version, using Simscape's predecessor \textit{SimMechanics}, the problems might also have arisen from a possibly more primitive physics model.
 
 To summarize, we were able to create a well-functioning, virtual model of a hexapod robot.
+Simulations of the model are robust and physically accurate
 We are confident that the model can serve as a platform for future research as it utilizes a modular architecture, can easily be expanded and is based on the versatile MATLAB environment.
  
 
@@ -35,12 +36,13 @@ The locomotion controller we presented in \ref{subsec: Locomotion controller} is
 We extensively tested each of the designs to uncover their weakpoints, upon which the next iteration was improved on.
 
 The initial design (\textit{MK1}) enabled the robot to walk in a straight line tripod gait.
-We observed that the hexapod model, controlled by MK1, would jerk up and down significantly during a movement cycle, as can be seen in \hyperref[vid: MK1]{MK1}.
-During a legs swing phase, the robots thorax would slowly sink towards the side of the lifted leg and be rapidly pushed upwards again at the swing phases end.
-As we defined the trajectory relative the thorax and did not consider sensing ground contact, the leg on the sinking side would hit the ground while still in full motion, as the anticipated AEP "sunk" into the ground plane.
+We observed that the hexapod model, controlled by MK1, would jerk up and down significantly during a movement cycle, as can be seen in \hyperref[vid: MK1]{MK1} and \ref{figure: Thorax Height graph, bad tuning}.
+During a legs swing phase, the robots thorax would slowly sink towards the side of the lifted leg and be rapidly pushed upwards again at the end of the swing.
+As we defined the trajectory relative the thorax and did not consider sensing ground contact, the leg on the sinking side would hit the ground earlier than expected by the controller, as the anticipated AEP "sunk" into the ground plane.
 We were able to later on attribute this behaviour to the slow reactions of the PID controllers.
-These were, given our initial tuning parameters, unable to follow their assigned trajectories. 
-In addition, the MK1 version requires a lot of time to be simulated, the observed cause being the slow IK block provided by Simulink, as we have already elaborated on in \ref{subsubsec: IK Solver}.
+These were, given our initial tuning parameters ($K_p = 3, K_i = 0.2, K_d = 1, N = 100$), unable to follow their assigned trajectories. 
+In addition, the MK1 controller version requires a lot of calculation time per simulation step, resulting in high simulation times.
+The observed cause of the being the computationally intensive, iterative IK block provided by Simulink, as we have already elaborated on in \ref{subsubsec: IK Solver}.
 
 With the subsequent version, \textit{MK2}, we focused on introducing tetrapod and wave gait as well as reducing simulation time.
 Implementing the gait patters proved to be straightforward, as, resulting from the models modular architecture, solely the leg coordination of the static gait definition had to be modified.
