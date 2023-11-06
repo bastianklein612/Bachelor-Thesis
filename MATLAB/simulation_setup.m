@@ -19,9 +19,9 @@ PEP = -0.03;
 plane_offset = 0.16;
 
 
-globalTorque = 0.94;
-% HS-645MG Servo:
-% Drehmoment: 94 Ncm = 0.94 NM
+globalTorque = 1.4;
+% DYNAMIXEL XL430-W250-T Servo:
+% Drehmoment: 140 Ncm = 1.4 NM
 max_torque_alpha = globalTorque;
 max_torque_beta = globalTorque;
 max_torque_gamma = globalTorque;
@@ -78,3 +78,9 @@ phantomX_mk4  = importrobot('robot_models\interbotix_xshexapod_descriptions\urdf
 
 mdl = 'PhantomX_MK4';
 open_system(mdl);
+
+%print svg
+%handle=get_param('Sandbox','handle');
+%print(handle,'-dsvg','Sandbox');
+%winopen Sandbox.svg;
+	
