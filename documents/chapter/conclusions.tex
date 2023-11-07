@@ -21,6 +21,12 @@ The developed model proved very robust in the face of constant twitching caused 
 \todo{Evaluate MATLAB Simulink in more detail}
 
 \subsection{RL Leg Coordination}
+\textit{MATLABs Parallel Computing Toolbox} provided a significant boost in learning performance.
+By being able to run 8-16 agents in parallel , one per processor core or multiple in separate threads, we were able to speed up the learning process significantly.
+This allowed us to test several different agent configurations in an acceptable amount of time and also enabled us to refine well performing agents by running more episodes.
+
+We are confident that, given more time to carefully tune parameters and reward, the training time could be reduced significantly and performance improved.
+
 Defining a reward function which accurately describes an agents performance is a complicated task requiring careful tuning.
 The same applies to the configuration of a RL algorithm.
 
@@ -50,7 +56,9 @@ Concluding, it can be said that the developed hexapod model and locomotion contr
 
 \section{Outlook - Future Work}
 
-Since the main 
+Since the goal of successfully applying RL to the problem of leg coordination was not reached in completion, it might be appealing, as a future work, to focus solely on this problem.
+As we only implemented a rudimentary locomotion controller capable of navigation on flat terrain, expanding the controller to more complex, uneven terrain would be a valuable research target.
+
 
 \begin{itemize}
 	

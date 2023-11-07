@@ -930,22 +930,22 @@ Gespäch mit Malte und Julius:
 		---------------------------------------------------------------
 		---------------------------------------------------------------
 		=> NOCH ZU ERLEDIGEN(nach prio. sortiert):
-			- Results und Conclusions fertigstellen								o
+			- Results und Conclusions fertigstellen								
 			- Methods-Teil final überarbeiten									X
-			- Alle TODOs lösen													o
-			- Grafiken erstellen/ überarbeiten (Controller komplett-Übersicht)	o
+			- Alle TODOs lösen													
+			- Grafiken erstellen/ überarbeiten (Controller komplett-Übersicht)	
 			- Uni-Logo ändern													X
-			- DOI-Links hinzufügen/ Bibliographie checken						o
+			- DOI-Links hinzufügen/ Bibliographie checken						
 			- Simulink-Modell und Skripte Abgabe-fertig machen					X
-			- alle Links testen													o
-			- List of Figures fixen												o
-			- CD-Inhalte zusammenstellen										o
-			- Titelseite für gebundene Fassung erstellen						o
+			- alle Links testen													
+			- List of Figures fixen												
+			- CD-Inhalte zusammenstellen										
+			- Titelseite für gebundene Fassung erstellen						
 			
-			- Vortragsstruktur ertellen											o
+			- Vortragsstruktur ertellen											
 			
 			- Bei Copy-Shop nachfragen											X
-				- Dienstag offen ?												X
+				- Dienstag offen ?												X 9:30 - 18:00 Uhr
 				- Was beachten ?												X Laptop mitnehmen
 				- Wie viel Zeit einplanen ?										X 30-90 min.
 				
@@ -958,7 +958,7 @@ Gespäch mit Malte und Julius:
 07.11.	ABGABE-TAG
 
 		- Geplant:
-			- Abgabe der Arbeit im Prüfungsamt
+			- Abgabe der Arbeit im Prüfungsamt					(offen von 9:30 - 12 Uhr und 13:30 - 15:30 Uhr)
 			- Abschlussvortrag weiter bearbeiten
 
 		- 
