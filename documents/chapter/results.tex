@@ -61,7 +61,7 @@ A comparison of the thorax's height differences during movement, when under cont
 	\begin{subfigure}{\textwidth} % this sets the figure to be max half the width of the page
 		\centering
 		% include first image
-		\includegraphics[width=\linewidth]{ThoraxHeight_firstPID.PNG}  % this sets the image to fill 90% of the available space -> 45% of the line width in total. 
+		\includegraphics[width=.9\linewidth]{ThoraxHeight_firstPID.PNG}  % this sets the image to fill 90% of the available space -> 45% of the line width in total. 
 		\caption{}
 		\label{figure: Thorax Height graph, bad tuning}
 	\end{subfigure}
@@ -69,7 +69,7 @@ A comparison of the thorax's height differences during movement, when under cont
 	\begin{subfigure}{\textwidth}
 		\centering
 		% include third image
-		\includegraphics[width=\linewidth]{ThoraxHeight_retunedPID.PNG}   % this width should be half of the width of the other two images
+		\includegraphics[width=.9\linewidth]{ThoraxHeight_retunedPID.PNG}   % this width should be half of the width of the other two images
 		\caption{}
 		\label{figure: Thorax height graph, re-tuning}
 	\end{subfigure}
@@ -257,18 +257,18 @@ We therefore abstain from comparing the algorithms separately.
 	\begin{subfigure}{\textwidth} % this sets the figure to be max half the width of the page
 		\centering
 		% include first image
-		\includegraphics[width=\linewidth]{graphs/firstSuccess_146reward}  % this sets the image to fill 90% of the available space -> 45% of the line width in total. 
+		\includegraphics[width=\linewidth]{graphs/cropped/exploitGraph_cropped.PNG}  % this sets the image to fill 90% of the available space -> 45% of the line width in total. 
 		\caption{}
 		\label{figure: RL a}
 	\end{subfigure}
 	\begin{subfigure}{\textwidth}
 		\centering
 		% include second image
-		\includegraphics[width=\linewidth]{graphs/DDPG_reward_180.PNG}  
+		\includegraphics[width=\linewidth]{graphs/cropped/firstSuccess_146reward_cropped.PNG}  
 		\caption{}
 		\label{figure: RL b}
 	\end{subfigure} 
-		\caption[DDPG training graphs (1)]{DDPG training graphs (1). (a) first Success 146. (b) DDPG Reward 180. The graphs above each depict the learning curve of a RL agent. The dark blue graph represents the average reward (running average over the last 250 Episodes) and each data point on the light blue graph represents the reward of a specific episode.
+		\caption[Training graphs (1)]{Training graphs (1): Each graph depicts the learning curve of a RL agent. The dark blue graph represents the average reward over a running average of 250 episodes, while each data point on the light blue graph represents the reward obtained during a specific episode. (a) Jumping exploit learning curve. (b) Reward spiking.
 		}
 	\label{figure: DDPG learning graphs 1}
 \end{figure}
@@ -277,18 +277,18 @@ We therefore abstain from comparing the algorithms separately.
 	\begin{subfigure}{\textwidth} % this sets the figure to be max half the width of the page
 		\centering
 		% include first image
-		\includegraphics[width=\linewidth]{graphs/redefinedReward_50x_vx.PNG}  % this sets the image to fill 90% of the available space -> 45% of the line width in total. 
+		\includegraphics[width=\linewidth]{graphs/cropped/flatlining_cropped.PNG}  % this sets the image to fill 90% of the available space -> 45% of the line width in total. 
 		\caption{}
 		\label{figure: RL c}
 	\end{subfigure}
 	\begin{subfigure}{\textwidth}
 		\centering
 		% include second image
-		\includegraphics[width=\linewidth]{graphs/lastAgent_graph}  
+		\includegraphics[width=\linewidth]{graphs/cropped/lastAgent_graph_cropped.PNG}  
 		\caption{}
 		\label{figure: RL d}
 	\end{subfigure} 
-	\caption[DDPG training graphs (2)]{DDPG training graphs (2).  (a) redefined Reward 50x vx. (b) lastAgent.}
+	\caption[DDPG training graphs (2)]{DDPG training graphs (2):  (a) Reward flatlining (b) lastAgent.}
 	\label{figure: DDPG learning graphs 2}
 \end{figure}
 

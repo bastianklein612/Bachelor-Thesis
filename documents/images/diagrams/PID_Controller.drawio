@@ -1,6 +1,6 @@
-<mxfile host="Electron" modified="2023-08-28T06:37:32.130Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/21.6.8 Chrome/114.0.5735.289 Electron/25.5.0 Safari/537.36" etag="I_cIEBRNEFxIXOBq8W44" version="21.6.8" type="device">
+<mxfile host="Electron" modified="2023-11-07T07:35:10.710Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/21.8.2 Chrome/114.0.5735.289 Electron/25.8.1 Safari/537.36" etag="EApZsccNsLhyztfLNmX5" version="21.8.2" type="device">
   <diagram name="Seite-1" id="BAM6PRnBAanOPAxunZYQ">
-    <mxGraphModel dx="326" dy="190" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="1" shadow="0">
+    <mxGraphModel dx="473" dy="276" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="1" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -26,7 +26,7 @@
         <mxCell id="HaAzMO8a2-IeS6XRmNfj-8" value="$$K_i \cdot \int_{0}^{t} e(\tau)d\tau$$" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#99FFFF;" parent="1" vertex="1">
           <mxGeometry x="270" y="235" width="140" height="40" as="geometry" />
         </mxCell>
-        <mxCell id="HaAzMO8a2-IeS6XRmNfj-9" value="$$K_d \cdot \frac{d}{dt}e(t)$$" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#99FF99;" parent="1" vertex="1">
+        <mxCell id="HaAzMO8a2-IeS6XRmNfj-9" value="$$K_d \cdot \frac{\delta}{\delta t}e(t)$$" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#99FF99;" parent="1" vertex="1">
           <mxGeometry x="270" y="290" width="140" height="40" as="geometry" />
         </mxCell>
         <mxCell id="HaAzMO8a2-IeS6XRmNfj-13" value="" style="endArrow=classic;html=1;rounded=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" target="HaAzMO8a2-IeS6XRmNfj-7" edge="1">
@@ -119,12 +119,12 @@
         <mxCell id="HaAzMO8a2-IeS6XRmNfj-38" value="D" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=20;fontStyle=1" parent="1" vertex="1">
           <mxGeometry x="260" y="290" width="40" height="40" as="geometry" />
         </mxCell>
-        <mxCell id="OLIFaUyZPXWUsOuU-HqV-3" value="+" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontStyle=1;fontSize=20;labelBackgroundColor=none;" vertex="1" connectable="0" parent="1">
+        <mxCell id="OLIFaUyZPXWUsOuU-HqV-3" value="+" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontStyle=1;fontSize=20;labelBackgroundColor=none;" parent="1" vertex="1" connectable="0">
           <mxGeometry x="190" y="239.9961904761905" as="geometry">
             <mxPoint x="-22" as="offset" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="OLIFaUyZPXWUsOuU-HqV-4" value="-" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontStyle=1;fontSize=20;labelBackgroundColor=none;" vertex="1" connectable="0" parent="1">
+        <mxCell id="OLIFaUyZPXWUsOuU-HqV-4" value="-" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontStyle=1;fontSize=20;labelBackgroundColor=none;" parent="1" vertex="1" connectable="0">
           <mxGeometry x="210" y="289.99619047619046" as="geometry">
             <mxPoint x="-22" as="offset" />
           </mxGeometry>
