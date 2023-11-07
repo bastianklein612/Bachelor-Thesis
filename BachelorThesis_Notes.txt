@@ -929,8 +929,8 @@ Gespäch mit Malte und Julius:
 			
 		---------------------------------------------------------------
 		---------------------------------------------------------------
-		=> NOCH ZU ERLEDIGEN(nach prio. sortiert):
-			- Results und Conclusions fertigstellen								
+		=> NOCH ZU ERLEDIGEN (nach prio. sortiert):
+			- Results und Conclusions fertigstellen								x
 			- Methods-Teil final überarbeiten									X
 			- Alle TODOs lösen													
 			- Grafiken erstellen/ überarbeiten (Controller komplett-Übersicht)	
@@ -938,9 +938,12 @@ Gespäch mit Malte und Julius:
 			- DOI-Links hinzufügen/ Bibliographie checken						
 			- Simulink-Modell und Skripte Abgabe-fertig machen					X
 			- alle Links testen													
+			- RL-Configs.-Liste fertigstellen
 			- List of Figures fixen												
 			- CD-Inhalte zusammenstellen										
 			- Titelseite für gebundene Fassung erstellen						
+			- alle Videos auf Youtube hochladen
+			- Alles ins GitLab stellen
 			
 			- Vortragsstruktur ertellen											
 			

@@ -8,31 +8,40 @@ Lastly, we provide an outlook toward potentially interesting future research top
 
 \section{Conclusions}
 
-\subsection{Model and Controller}
 MATLAB Simulink proved to be a versatile and reliable platform for the modelling and simulation of robotic systems.
 The development of the hexapod model was greatly sped up by the underlying MATLAB framework and the utilisation of the provided toolboxes.
 The ability to write MATLAB-scripts to automate several task, like the initialisation of the hexapod model or the setup of the RL agents and surrounding infrastructure, significantly increased our productivity.
-
 We are confident that the developed model can serve as a platform for future research, as it utilizes a modular architecture, can easily be adapted to changing requirements and is based on the versatile MATLAB environment.
-The developed model proved very robust in the face of constant twitching caused by exploring RL agents.
-\todo{Evaluate MATLAB Simulink in more detail}
+The model also proved surprisingly robust in the face of constant twitching caused by exploring RL agents.
 
-\subsection{RL Leg Coordination}
-\textit{MATLABs Parallel Computing Toolbox} provided a significant boost in learning performance.
-By being able to run 8-16 agents in parallel , one per processor core or multiple in separate threads, we were able to speed up the learning process significantly.
-This allowed us to test several different agent configurations in an acceptable amount of time and also enabled us to refine well performing agents by running more episodes.
+Another benefit the use of MATLAB provided was the \textit{Parallel Computing Toolbox}. 
+By being able to run 8-16 agents in parallel, one per processor core or multiple in separate threads, we were able to greatly increase the number of RL training episodes and thus faster reach conclusions on the examined agents.
+As we were unsuccessful in creating an agent with an emergent gait, we can not speak to the effectiveness of continuing the training of already performant agents even loger.
+
+As to the reasons for why the RL approach did not yield satisfying results, we have several potential explanations:
+\begin{itemize}
+	\item \textbf{Inadequate reward function: } As we already mentioned, defining a reward function which accurately judges an agent's performance is a difficult task, requiring expertise.
+	Although we based our reward function on existing literature \parencite{trotta2022walking, schilling2021decentralized}, refined it's weight over several iterations and thoroughly tested it judgement on the static gait patterns, we cannot rule out a flaw in the function which leads to exploitation or loss of relevant information.
+	
+	\item \textbf{RL algorithm configuration: } Over the course of this work we experimented with many different RL parameters, many of which have already been successfully applied by other authors \parencite{matlabDDPGExample, matlabPPOExample, trotta2022walking}.
+	Even so, there does not exist any literature on the same problem of leg coordination given a fixed leg trajectory and thus the possibility exists that we did not discover a performant set of parameters.
+	As the learning ability of both policy optimization methods (DDPG, PPO) was observed to be about equal, we are however confident that the chosen algorithms are not the cause of the observed problems.
+	
+	\item \textbf{Continued Development: } As we continued to develop and improve both the locomotion controller and the RL setup while we were already training RL agents, there does not exist a fixed, final state of the underlying model, on which all training was based.
+	The resulted of which is a limited comparability of the the trained agents.
+	
+\end{itemize}
+
+
 
 We were unsuccessful in our task to train an agent which can perform a stable gait pattern.
 
-As the learning ability of both algorithms was observed to be about equal, we are confident that the algorithm can be ruled out as a cause for the unsatisfactory results. 
-
 We are confident that, given more time to carefully tune parameters and reward, the training time could be reduced significantly and performance improved.
-
-Defining a reward function which accurately describes an agents performance is a complicated task requiring careful tuning.
-The same applies to the configuration of a RL algorithm.
 
 We found the learning of the RL agents to progress quite slow. 
 This could probably be improved on significantly by more carefully tuning the agents parameters and a more detailed reward function.
+
+
 
 Our suggestions for future researchers attempting to apply RL to the leg coordination problems are the following:
 \begin{enumerate}
@@ -48,18 +57,22 @@ Our suggestions for future researchers attempting to apply RL to the leg coordin
 	
 \end{enumerate}
 
-Mentions problems in RL.
-%Sparse reward definition might have played a role in the bad performance of the agents \parencite{matheron2019problem}.
-\todo{Look at proposed goals at the beginning of thesis, evaluate these}
-Since the main goal of this thesis was to develop a functional and robust hexapod model, on which further research can be based, we consider our work as a success.
-Concluding, it can be said that the developed hexapod model and locomotion controller proved to be a success, while the approach to the RL problem needs to be reconsidered/ reevaluated.
+Given that the primary objective of this thesis was the creation of a functional and resilient hexapod model, serving as a foundational platform for future research, we consider our efforts a success.
+In addition to the hexapod model itself, we successfully designed a basic locomotion controller and established a framework for applying RL to the hexapod system, offering potential starting point for future expansions.
+In summary, the development of the hexapod model and locomotion controller can be deemed successful, while the approach to solving the RL leg coordination problem presents an ongoing challenge to which further research has to be applied.
 
 
 \section{Outlook - Future Work}
 
-Since the goal of successfully applying RL to the problem of leg coordination was not reached in completion, it might be appealing, as a future work, to focus solely on this problem.
-As we only implemented a rudimentary locomotion controller capable of navigation on flat terrain, expanding the controller to more complex, uneven terrain would be a valuable research target.
+In this last section, we draw our work to a close by suggesting possible future expansions to the model and more broadly point of future research interest.
+As we also only implemented a rudimentary locomotion controller capable of navigation on flat terrain, expanding the controller's capabilities to more complex, uneven terrain would be a valuable research target.
+Since the goal of successfully applying RL to the problem of leg coordination was not reached in completion, it might also be appealing, as a future work, to focus solely on this problem.
+This could include a deeper investigation into reward function definitions and the task of tuning parameters of a RL algorithm.
+Looking further ahead, a substantial research goal could involve applying RL to learn hexapod locomotion from scratch, granting the agent complete control over all 18 DoF.
+In conclusion, while our current work lays a strong foundation on which further works can be based, it also reveals a range of unexpected difficulties to be explored in the future..
 
+
+\begin{comment}
 
 \begin{itemize}
 	
@@ -78,3 +91,4 @@ As we only implemented a rudimentary locomotion controller capable of navigation
 	\item 
 	
 \end{itemize}
+\end{comment}

@@ -26,7 +26,7 @@ Overall, the behaviour of our robot model seems, to the best of our knowledge, b
 We attribute the unsatisfactory results \cite{thilderkvist2015motion} experienced from the spatial friction forces to be most likely linked to deciding on a step size too large for stable simulations.
 As they also work with an earlier MATLAB version, using Simscape's predecessor \textit{SimMechanics}, the problems might also have arisen from a possibly more primitive physics model.
 
-To summarize, we were able to create a well-functioning, virtual model of a hexapod robo in Simulink.
+To summarize, we were able to create a well-functioning, virtual model of a hexapod robot in Simulink.
 Simulations of the model are robust, physically accurate and performant.
 Utilizing a modular architecture, the model can easily be adapted to changing requirements.
  
@@ -103,7 +103,7 @@ As there exists a large set of parameter to be considered during setup, finding 
 This was reinforced by the fact that, to observe the performance of a set of parameters, we found an agent required at least 1-2 k episodes of training, equating to several hours of runtime given the hardware used.
 Additionally, as we ran experiments with two different RL algorithms, we were required to tune two separate sets of parameters.
 In total, we trained over 30 different agent configurations.
-As we are not able to present all the results obtained, a table providing information on all documented configurations is included in the appendix (\emph{\nolinkurl{RL_agent_configs.xlsx}}).\\
+As we are not able to present all the results obtained, a table providing information on all documented configurations is included in the appendix (\emph{\nolinkurl{RL_agent_configs.pdf}}).\\
 In the following sections, we will present the findings obtained from the performed RL training experiments, focusing on a selected subset of training runs.
 
 \subsection{Reward Exploitation}
@@ -112,7 +112,7 @@ This commonly leads to agents exhibiting undesirable behaviour, even though acco
 We experienced this exploitation behaviour during development as well.
 As our reward function initially did neither take into account the robots energy consumption ($W$) nor height differences of the thorax during movement ($ \Delta_h$), early RL agents exploited this simpler reward function by learning to jump.
 More specifically, we observed the robot to exhibit a behaviour consisting of small, abrupt hops, using it's hind legs to propel itself forward.
-We provide a recording of the observed behaviour in [\hyperref[vid: MK4]{MK4}], the training graph of the agent can be seen in \ref{}.
+We provide a recording of the observed behaviour in [\hyperref[vid: MK4]{MK4}], the training graph of the agent can be seen in \ref{figure: RL a}.
 In the graph, the occurrence of the exploit is clearly visible as a spike in the average reward that quickly breaks down again.
 
 In the further development process, we refined the reward function weights and included $W$ and $\Delta_h$ to encourage the RL agents to be more resourceful. 
@@ -121,18 +121,19 @@ Our final reward function weights, with which we obtained the most promising res
 
 \subsection{Learning Behaviour}
 The phenomenon of sharp spikes in the average reward as mentioned above, persisted throughout our training runs, repeating on several different agent configurations.
-A training graph depicting this behaviour can be seen in Fig. \ref{}.
+A training graph depicting this behaviour can be seen in Fig. \ref{figure: RL b}.
 We suspect these reward plunges to be related to the agent exploring too rapidly/ changing it's policy to fast, resulting in a loss of the already achieved progress \parencite{silver2015}.
 However, were cannot provide a definite prove of this cause, as we are not able to reliably prevent the behaviour from occurring.
 On the other hand, in stark contrast to the phenomenon just explained, we also observed "flatlining" of the average reward.
 An agent would often learn well initially, but after a certain number of episodes converge to an average reward well below that of individual episodes.
+We provide an example of this behaviour in \ref{figure: RL c}
 Interestingly, this behaviour could very well be attributed to the agent's policy updates not being large enough, such that it is unable to leave a locally optimal policy only based on a few episodes of high reward \parencite{silver2015}.
 Despite our efforts to find a middle ground between these two extremes by changing the agent's learning rate an introducing varying amounts of randomness into it's decision process, we were not able to find a well-working configuration.
 
 
 \subsection{Best Result}
 Given the reward function weights in table \ref{table: Reward weights}, a sample rate of 0.05 s and an episode length of 256 steps, the best result we were able to achieve with an RL agent was a maximum episodic reward of 310 units.
-In this training run, performed with a DDPG agent with parameters listed in \ref{table: DDPG parameters}, the average reward did neither spike nor converge to a suboptimal policy, as can be seen in \ref{}.
+In this training run, performed with a DDPG agent with parameters listed in \ref{table: DDPG parameters}, the average reward did neither spike nor converge to a suboptimal policy, as can be seen in \ref{figure: RL d}.
 Even though, the average reward does not seen to reliably increase.
 Observing the agent's performance in simulation, it's behaviour does not seem to constitute a stable gait pattern.
 The hexapod uses various legs to slowly push itself forward, seemingly uncoordinated.
@@ -257,18 +258,18 @@ We therefore abstain from comparing the algorithms separately.
 	\begin{subfigure}{\textwidth} % this sets the figure to be max half the width of the page
 		\centering
 		% include first image
-		\includegraphics[width=\linewidth]{graphs/cropped/exploitGraph_cropped.PNG}  % this sets the image to fill 90% of the available space -> 45% of the line width in total. 
+		\includegraphics[width=.9\linewidth]{graphs/cropped/exploitGraph_cropped.PNG}  % this sets the image to fill 90% of the available space -> 45% of the line width in total. 
 		\caption{}
 		\label{figure: RL a}
 	\end{subfigure}
 	\begin{subfigure}{\textwidth}
 		\centering
 		% include second image
-		\includegraphics[width=\linewidth]{graphs/cropped/firstSuccess_146reward_cropped.PNG}  
+		\includegraphics[width=.9\linewidth]{graphs/cropped/firstSuccess_146reward_cropped.PNG}  
 		\caption{}
 		\label{figure: RL b}
 	\end{subfigure} 
-		\caption[Training graphs (1)]{Training graphs (1): Each graph depicts the learning curve of a RL agent. The dark blue graph represents the average reward over a running average of 250 episodes, while each data point on the light blue graph represents the reward obtained during a specific episode. (a) Jumping exploit learning curve. (b) Reward spiking.
+		\caption[Training graphs (1)]{Training graphs (1): Each graph depicts the learning curve of a RL agent. The dark blue graph represents the average reward over a running average of 250 episodes, while each data point on the light blue graph represents the reward obtained during a specific episode. (a) Jumping exploit learning curve (DDPG). (b) Reward spiking (DDPG).
 		}
 	\label{figure: DDPG learning graphs 1}
 \end{figure}
@@ -277,18 +278,18 @@ We therefore abstain from comparing the algorithms separately.
 	\begin{subfigure}{\textwidth} % this sets the figure to be max half the width of the page
 		\centering
 		% include first image
-		\includegraphics[width=\linewidth]{graphs/cropped/flatlining_cropped.PNG}  % this sets the image to fill 90% of the available space -> 45% of the line width in total. 
+		\includegraphics[width=.9\linewidth]{graphs/cropped/flatlining_cropped.PNG}  % this sets the image to fill 90% of the available space -> 45% of the line width in total. 
 		\caption{}
 		\label{figure: RL c}
 	\end{subfigure}
 	\begin{subfigure}{\textwidth}
 		\centering
 		% include second image
-		\includegraphics[width=\linewidth]{graphs/cropped/lastAgent_graph_cropped.PNG}  
+		\includegraphics[width=.9\linewidth]{graphs/cropped/lastAgent_graph_cropped.PNG}  
 		\caption{}
 		\label{figure: RL d}
 	\end{subfigure} 
-	\caption[DDPG training graphs (2)]{DDPG training graphs (2):  (a) Reward flatlining (b) lastAgent.}
+	\caption[DDPG training graphs (2)]{DDPG training graphs (2):  (a) Reward flatlining (PPO). (b) Best-performing agent (DDPG).}
 	\label{figure: DDPG learning graphs 2}
 \end{figure}
 
