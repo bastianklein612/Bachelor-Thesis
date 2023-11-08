@@ -79,14 +79,14 @@ To visualize the systems dynamics, the balls velocity and speed are plotted on a
 		\caption{}
 		\label{figure: Simulink bouncing ball graphs}
 	\end{subfigure}
-	\caption[Simulink bouncing ball example]{(a) Simulink model of a bouncing ball created using standard library blocks. (b) Graphs depicting the balls velocity (orange) and position (blue).}
+	\caption[Simulink Bouncing Ball Example]{(a) Simulink model of a bouncing ball created using standard library blocks. (b) Graphs depicting the balls velocity (orange) and position (blue).}
 	\label{figure: Simulink bouncing ball example}
 \end{figure}
 
 
 \subsection{Simscape}
 The description of the Simscape library in this section follows the official documentation \parencite{matlabSimscapeDocumentation}.
-\textit{Simscape\textsuperscript{\texttrademark}} is a Simulink block library developed by \textit{MathWorks\textsuperscript{\textregistered}}., enabling the construction of physical systems within the Simulink environment.
+\textit{Simscape\textsuperscript{\texttrademark}} is a Simulink block library developed by \textit{MathWorks\textsuperscript{\textregistered}}, enabling the construction of physical systems within the Simulink environment.
 Utilizing Simscape, it is possible to simulate systems such as electric circuits, hydraulics or classical mechanics all within a unified simulation environment.
 The library offers a large variety of predefined components like resistors, capacitors, springs, dampers, etc.
 To better understand the model we develop in this thesis, Simscape's mechanical components are of the most interest, especially coordinate frames, rigid transforms, joints and rigid bodies.
@@ -94,10 +94,9 @@ To better understand the model we develop in this thesis, Simscape's mechanical 
 \begin{figure}[h!]
 	\centering
 	\centerline{\includesvg[scale=0.8]{Simulink/BouncingBallExample_Simscape.svg}}
-	\caption[Simscape bouncing ball example]{Simulink model of the same bouncing ball system as in \ref{figure: Simulink bouncing ball model}, but created using solely Simscape blocks. The simulation of this system is provided at \hyperref[vid: Simscape]{SBB}.} 
+	\caption[Simscape Bouncing Ball Example]{Simulink model of the same bouncing ball system as in \ref{figure: Simulink bouncing ball model}, but created using solely Simscape blocks. The simulation of this system is provided at [\hyperref[vid: Simscape]{SBB}].} 
 	\label{figure: Simscape Bouncing Ball Example}
 \end{figure}
-
 Coordinate frames are at the base of every Simscape model.
 They can be attached to each other using rigid transforms or joints.
 Edges similar to the basic Simulink signal lines are used to connect the individual blocks.
@@ -111,7 +110,6 @@ Rigid transforms, opposed to joints, translate and/or rotate coordinate frames w
 They are used to define the initial position and orientation of a frame.
 Rigid bodies can be attached to the already existing coordinate frames, providing shape, mass and inertia to the system.
 If multiple rigid bodies are present in a simulation, their shapes can also act as collision geometry, allowing for collisions/ interactions between them.
-
 As an example, the same bouncing ball system as shown in Fig. \ref{figure: Simulink bouncing ball model} can be seen in Fig. \ref{figure: Simscape Bouncing Ball Example} constructed using only blocks from the Simscape library. When running this model, a 3D simulation of the bouncing ball is generated which can be slowed down, replayed or saved for later analysis (\hyperref[vid: Simscape]{SBB}).
 
 \section{Insect Locomotion}
@@ -124,7 +122,7 @@ Together, they form what we will call the \emph{"Swing-Stance Cycle"}, which is 
 
 \begin{figure}[h]
 	\centerline{\includegraphics[scale=0.4]{morphologyOfStickInsect_sketch}}
-	\caption[Morphologic drawing of stick insect]{Morphologic drawing of a stick insect leg (\cite{schilling2013walknet} [Fig.1]).
+	\caption[Morphologic Drawing Of Stick Insect]{Morphologic drawing of a stick insect leg (\cite{schilling2013walknet} [Fig.1]).
 		 	Angles \textalpha, \textbeta \ and \textgamma \ represent the position of the thorax-coxa, coxa-femur and femur-tibia joint respectively.
 			These joints are actuated with three pairs of muscles, called protractor-retractor, levator-depressor and extensor-flexor.
 			Also depicted are the Anterior Extreme Position (AEP) and Posterior Extreme Position (PEP).
@@ -218,7 +216,7 @@ In the following section we will describe the operation of a (digital) PID contr
 
 \begin{figure}[h]
 	\centerline{\includegraphics[scale=0.05]{PID_Controller}}
-	\caption[PID controller illustration]{Illustration of a basic PID Controller}
+	\caption[PID Controller Illustration]{Illustration of a basic PID Controller}
 	\label{figure: PID Controller}
 \end{figure}
 
@@ -259,7 +257,6 @@ As an additional note, in real-world applications the derivative term is almost 
 Instead, a so called filter coefficient ($N$) is utilised in the derivative term to counteract this sensitivity.
 The modified term acts as a first-order, low pass filter, attenuating high frequency noise, preventing violent swings of the derivative.
 %This term acts equivalently to a derivative up to a given cutoff frequency[Hz] given by: $\frac{N}{2\pi}$ \todo{Not required}.
-
 The performance of a PID controller greatly depends on the values of its parameters $K_p$, $K_i$ and $K_d$ (and N).
 To achieve desired traits like a fast response time and minimal overshooting or oscillation, these parameters have to be carefully tuned. 
 This tuning process can be performed manually via trial-and-error or methodically using a tuning algorithm.
@@ -282,7 +279,7 @@ To gain a deeper understanding of RL, we will examine the three most important e
 
 \begin{figure}[h]
 	\centerline{\includegraphics[scale=0.075]{RL_Overview}}
-	\caption[RL concept illustration]{Sketch illustrating the basic concept of Reinforcement Learning}
+	\caption[RL Concept Illustration]{Sketch illustrating the basic concept of Reinforcement Learning}
 	\label{figure: RL Illustration}
 \end{figure}
 
@@ -349,7 +346,7 @@ Lastly, $\mathcal{\gamma}$ discounts the value of future reward due to it's unce
 More exactly: The value of  reward r after k+1 steps is given as $r\mathcal{\gamma}^k$.
 
 There exist various techniques for policy optimization.
-In MATLAB, the \emph{Reinforcement Learning} toolbox offers several different RL algorithms to choose from, including DDPG, TR3, PPO, SAC and TRPO.
+In MATLAB, the \emph{Reinforcement Learning} toolbox offers several different algorithms to choose from, including DDPG, TR3, PPO, SAC and TRPO.
 In the upcoming paragraph, a concentrated overview of the algorithms utilized in this thesis is given, namely DDPG (Deep Deterministic Policy Gradient) and PPO (Proximal Policy Optimization).
 This overview is based on the work of \cite{silver2015}, as well as MATLABs RL documentation and OpenAIs \textit{Spinning Up} documentation \parencite{matlabRLDocumentation, openAI_SpinningUp_Documentation}.
 Given the size limitations imposed on this thesis, focus lies on only the most essential elements.
@@ -360,12 +357,12 @@ In real applications this PG is often approximated, as a deterministic calculati
 \textbf{DDPG}, combining elements from deep learning and PG methods, employs a so called actor-critic architecture, consisting of two neural networks (NN).
 The actor is responsible for learning a deterministic policy, typically implemented as a deep NN (DNN).
 The critic, a DNN as well, evaluates the actions chosen by the actor. It estimates the expected cumulative reward (Q-value) of taking a specific action in a given state.
-This evaluation guides the actor towards better actions.\\
-To introduce noise into the actions taken during training, DDPG utilizes the so called Ornstein-Uhlenbeck(OU) noise model, which generates a stochastic variable randomly fluctuating around a mean value.
+This evaluation guides the actor towards better actions.
+To introduce noise into the actions taken during training, DDPG utilizes the so called Ornstein-Uhlenbeck (OU) noise model, which generates a stochastic variable randomly fluctuating around a mean value.
 The introduced noise promotes exploration, which is crucial for overcoming local optima during the learning process \parencite{openAI_DDPG}.\\
-As a PG method as well, \textbf{PPO} employs the actor-critic architecture to train a NN on finding an optimal policy.
+A PG method as well, \textbf{PPO} employs the actor-critic architecture to train a NN on finding an optimal policy.
 The main innovation PPO introduces, is a limit on the size of policy updates, preventing a policy from changing to rapidly during training.
-The policy always stays in "proximity" to its previous version, promoting learning stability and preventing sharp performance collapses \parencite{openAI_PPO}.\\
+The policy always stays in "proximity" to its previous version, promoting learning stability and preventing sharp performance collapses \parencite{openAI_PPO}.
 
 
 \begin{comment}

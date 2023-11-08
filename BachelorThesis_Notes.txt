@@ -930,16 +930,16 @@ Gespäch mit Malte und Julius:
 		---------------------------------------------------------------
 		---------------------------------------------------------------
 		=> NOCH ZU ERLEDIGEN (nach prio. sortiert):
-			- Results und Conclusions fertigstellen								x
+			- Results und Conclusions fertigstellen								X
 			- Methods-Teil final überarbeiten									X
-			- Alle TODOs lösen													
-			- Grafiken erstellen/ überarbeiten (Controller komplett-Übersicht)	
+			- Alle TODOs lösen													X
+			- Grafiken erstellen/ überarbeiten (Controller komplett-Übersicht)	X -
 			- Uni-Logo ändern													X
 			- DOI-Links hinzufügen/ Bibliographie checken						
 			- Simulink-Modell und Skripte Abgabe-fertig machen					X
-			- alle Links testen													
-			- RL-Configs.-Liste fertigstellen
-			- List of Figures fixen												
+			- alle Links testen													-
+			- RL-Configs.-Liste fertigstellen									X
+			- List of Figures fixen												-
 			- CD-Inhalte zusammenstellen										
 			- Titelseite für gebundene Fassung erstellen						
 			- alle Videos auf Youtube hochladen

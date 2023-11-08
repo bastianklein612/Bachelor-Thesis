@@ -14,7 +14,7 @@ The chapter concludes with an exploration of the RL setup we developed to train 
 Taking a top-down perspective on the Simulink model as depicted in Fig. \ref{figure: Simulink Model Overview}, it is distinctly divided into 3 separate components: The hexapod, the locomotion controller and the environment.
 \begin{figure}[h!]
 	\centerline{\includegraphics[scale=0.035]{HexapodModel_Overview}}
-	\caption[]{Overview of the complete Simulink model}
+	\caption[Simulink Model Overview]{Overview of the complete Simulink model}
 	\label{figure: Simulink Model Overview}
 \end{figure}
 
@@ -66,10 +66,9 @@ The representation solely consists of blocks from the Simscape library, more spe
 		\caption{}
 		\label{figure: PhantomX Top View}
 	\end{subfigure}
-	\caption[Trossen Robotics PhantomX MKIV]{3D model of Trossen Robotics PhantomX MK4. The central axis $\vec{x}$ can be seen in (a) and (c).}
+	\caption[Trossen Robotics PhantomX MKIV]{3D model of the Trossen Robotics PhantomX MK4. In the upper right corner of the figures, the hexapod's internal reference frame is indicated. We use this coordinate system throughout the thesis.}
 	\label{figure: PhantomX 3D model}
 \end{figure}
-\todo{get each image into list of figures, but exclude complete figure}
 
 To be able to use the imported hexapod as a development platform, we modify and expand the raw Simulink model as it does not provide any means to exert control over or receive feedback from it.
 We reorganise and encapsulate logical groups, specifically the thorax and the individual legs, into library subsystems.
@@ -84,17 +83,17 @@ A view inside of the leg subsystem is given in \ref{figure: Hexapod Leg}, the su
 
 \begin{figure}[h]
 	\centerline{\includesvg[scale=0.55]{Simulink/Simulink_PhysicalHexapodOverview}}
-	\caption[Simulink hexapod model overview]{Overview of the Simulink Hexapod Model}
+	\caption[Simulink Hexapod Model Overview]{Overview of the Simulink Hexapod Model}
 	\label{figure: Hexapod Model Overview}
 \end{figure}
 
 \begin{figure}
 	\centerline{\includesvg[scale=0.5]{Simulink/Simulink_HexapodLegOverview}}
-	\caption[Simulink leg subsystem]{Simulink model of the Hexapod Leg subsystem}
+	\caption[Simulink Leg Subsystem]{Simulink model of the Hexapod Leg subsystem}
 	\label{figure: Hexapod Leg}
 \end{figure}
 
-In Simscape, collision modelling involves establishing connections between a rigid body, and any other rigid body it should be able to interact with in a collision scenario, via Simscapes's \textit{Spatial friction force} block.
+In Simscape, collision modelling involves establishing connections between a rigid body, and any other rigid body it should be able to interact with in a collision scenario, via Simscapes's \textit{Spatial Friction Force} block.
 An example of how this block can be utilized has already been shown in \ref{figure: Simscape Bouncing Ball Example}.
 To enable the robot to physically interact with its surroundings, we therefore  enable the collision geometry on each of the models rigid bodies and connect them over said spatial friction force blocks.
 The block allows modifications to collision parameters such as the coefficients of static and dynamic friction, elasticity and dampening.
@@ -149,7 +148,7 @@ In the following, we will explain each of these components (and subcomponents) i
 
 \begin{figure}[h]
 	\centerline{\includegraphics[scale=0.03]{HexapodController}}
-	\caption[Controller Overview]{Overview of the Locomotion controller}
+	\caption[Locomotion Controller Overview]{Overview of the Locomotion controller}
 	\label{figure: Controller Overview}
 \end{figure}
 
@@ -173,7 +172,7 @@ We choose to use this initiation signal approach to provide the RL agent with a 
 The control units additionally receive a movement direction vector $\vec{v_\text{dir}}$ as input.
 The combined inputs can either be received from a \textit{Static Gait Definition}, in which the parameters are configured prior to simulation, or can be provided by a RL agent.
 
-The \textit{Simulink RL Agent}, a standard library block and separate component in the controller subsystem (\ref{figure: Controller Overview}), receives the observations $\vec{o_t}$ from the hexapod model as well as a reward signal $r(t)$ at each time step.\todo{Make distinction in graphic between observations an RL data, which also includes information about the reward}
+The \textit{Simulink RL Agent}, a standard library block and separate component in the controller subsystem (\ref{figure: Controller Overview}), receives the observations $\vec{o_t}$ from the hexapod model as well as a reward signal $r(t)$ at each time step.
 It outputs an action vector $\vec{a_t} = (s_1,...,s_6)$, which consists of the swing initiation signal for each leg.
 To reduce complexity, we restrict the RL agent to control over these $s_i \in \{0,1\},\ i \in \{1,...,6\}$, while all other parameters ($f_c, P_\text{swing},...$) remain fixed during a simulation run.
 The RL agent block is part of the \textit{Reinforcement Learning} library and represents an agent in the same sense as described in \ref{sec: Reinforcement Learning}.
@@ -181,7 +180,7 @@ Further and more detailed elaboration on both RL agent and reward function will 
 
 \begin{figure}
 	\centerline{\includesvg[scale=0.6]{Simulink/Simulink_LegControllerOverview}}
-	\caption[Single leg control unit]{Control unit for a single leg}
+	\caption[Leg Control Unit]{Control unit for a single leg}
 	\label{figure: Leg control unit}
 \end{figure}
 
@@ -201,13 +200,12 @@ The PID parameters $K_p$, $K_i$, $K_d$ (and $N$) are tuned via trial-and-error m
 Moving down another level of complexity, the leg trajectory generator consists of a \textit{Swing-Stance Signal Generator}, a \textit{Pattern Rotation} subsystem and an \textit{Analytical IK Solver}, as can be seen in Fig. \ref{figure: Leg trajectory generator}.
 The signal generator is responsible for the generation of a continuous leg trajectory in the form of 2-dimensional trajectory coordinates.
 We provide insights into the exact process of this signal generation in the upcoming section.
-As we intent the locomotion controller to allow for omnidirectional movement, the pattern rotation subsystems applies a simple mathematical rotation to the planar trajectory (x,z-plane) around the z-axis.\todo{Introduce coordinate system at the beginning of methods}
+As we intent the locomotion controller to allow for omnidirectional movement, the pattern rotation subsystems applies a simple mathematical rotation to the planar trajectory (x,z-plane) around the z-axis.
 The required rotation angle is determined as the angle between the default forward movement direction $\vec{v}_\text{default} = (1 \ 0 \ 0)^t$ and $\vec{v_\text{dir}}$.
 Finalizing the trajectory generator, the analytical IK solver receives the calculated trajectory coordinates and translates them into the \textalpha, \textbeta \ and \textgamma \ joint angles.
 A more detailed explanation of the solver is provided in \ref{subsubsec: IK Solver}.
 
 
-\todo{Redo section about Signal Generator after image is refreshed}
 The swing-stance signal generator, displayed in Fig. \ref{figure: Swing-Stance Signal Generator}, consists of two components, a subsystem responsible for calculating the frequencies $f_\text{sw}$ and $f_\text{st}$ (formulas below), as well as the actual \emph{swing-stance signal generation} subsystem \ref{figure: Swing-Stance Signal Generation}.
 The later of which contains a \textit{Swing Phase} subsystem and a \textit{Stance Phase} subsystem.
 Coordinating between each other, these provide the 2-dimensional trajectory coordinates (x,z) during their respective phases in the movement cycle.
@@ -237,24 +235,21 @@ Given $f_c$ and $P_{swing}$, we further define $f_{sw} = \frac{f_c}{P_{swing}}$ 
 $\vec{\Theta}_{sw}(t)$ and $\vec{\Theta}_{st}(t)$ are modelled accordingly inside of the swing and stance phase subsystems.
 The parameter $t$ is limited to the ranges $[0,T_\text{sw}]$ and $[0, T_\text{st}]$, as every time one of the subsystems reaches the end of its phase ($t=T_{sw}$ or $t=T_{st}$) or is interrupted, the subsystems internal clock is reset and upon it's next activation, the function evaluation starts at $t=0$ again.
 
-\todo{Redo Swing Stance Signal Generation section ?}
-\todo{Insert image of trajectory graphs/ create graphic depicting early swing initiation and resulting trajectory}
-
 \begin{figure}[!h]
-	\centerline{\includesvg[scale=0.9]{Simulink/Simulink_SwingStanceSignalGenerator.svg}}
+	\centerline{\includesvg[scale=0.8]{Simulink/Simulink_SwingStanceSignalGenerator.svg}}
 	\caption[Signal Generator]{Signal Generator: Left, the subsystem determining the frequencies $f_\text{sw}$ and $f_\text{st}$. Right, the actual signal generation subsystem.}
 	\label{figure: Swing-Stance Signal Generator}
 \end{figure}
 
 \begin{figure}[!h]
-	\centerline{\includesvg[scale=0.9]{Simulink/Simulink_SwingStanceSignalGeneration.svg}}
+	\centerline{\includesvg[scale=0.8]{Simulink/Simulink_SwingStanceSignalGeneration.svg}}
 	\caption[Signal Generation]{Swing-Stance Signal Generation subsystem.}
 	\label{figure: Swing-Stance Signal Generation}
 \end{figure}
 
 \begin{figure}[!h]
 	\centerline{\includegraphics[scale=0.2]{Simulink/SignalGenerator_Graph_0.5Hz.PNG}}
-	\caption[2D Trajectory Coordinates]{Trajectory coordinates generated by a swing-stance signal generator given $f_c=0.5$\ Hz, $P_{swing}=40\text{\%}$}
+	\caption[2D Trajectory Coordinates]{Trajectory coordinates generated by a swing-stance signal generator given $f_c=0.5$\ Hz, $P_{swing}=45\text{\%}$}
 	\label{figure: Trajectory graphs}
 \end{figure}
 
@@ -280,28 +275,8 @@ To drastically reduce the computation time a simulation step requires, we implem
 		\caption{}
 		\label{figure: IK Solver Beta/Gamma Angle}
 	\end{subfigure}
-	\caption[Angle derivation drawings]{(a) Angle derivation drawings: Top-down view of a hexapod leg, used to determine \textalpha. (b) Side-view, used to calculate \textbeta \ and \textgamma.}
+	\caption[Angle Derivation Drawings]{(a) Angle derivation drawings: Top-down view of a hexapod leg, used to determine \textalpha. (b) Side-view, used to calculate \textbeta \ and \textgamma.}
 	\label{figure: IK angle derivations}
-\end{figure}
-
-
-\begin{figure}[!h]
-	\begin{subfigure}{.5\textwidth}
-		\centering
-		% include second image
-		\includegraphics[width=\linewidth]{Hexapod_Offsets_Sketch.png}  
-		\caption{}
-		\label{figure: Hexapod thorax sketch}
-	\end{subfigure}
-	\begin{subfigure}{.5\textwidth} % this sets the figure to be max half the width of the page
-		\centering
-		% include first image
-		\includegraphics[angle=-90,width=0.8\linewidth]{HexapodLeg_Lengths.PNG}  % this sets the image to fill 90% of the available space -> 45% of the line width in total. 
-		\caption{}
-		\label{figure: Hexapod Leg proportions}
-	\end{subfigure}
-	\caption[Hexapod proportions]{(a) Drawing of the PhantomX MK4 thorax, annotated with proportions. (b)  Leg segment proportions of the PhantomX MK4 hexapod leg.}
-	\label{figure: Hexapod proportions}
 \end{figure}
 
 Our proposed solver sequentially calculates a leg's joint angles, starting at \textalpha, then \textbeta \ and \textgamma.
@@ -326,6 +301,25 @@ The block/ code receives both the trajectory coordinates and initial angle offse
 As the hexapods initial joint positions deviate from the ones displayed in Fig. \ref{figure: IK angle derivations} (see Fig. \ref{figure: Hexapod proportions} for details), we require these offsets to convert the angles calculated by the solver to  those matching the differing initial positions.
 The offsets are given in table \ref{table:Joint position offsets}.
 
+\begin{figure}[!h]
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		% include second image
+		\includegraphics[width=\linewidth]{Hexapod_Offsets_Sketch.png}  
+		\caption{}
+		\label{figure: Hexapod thorax sketch}
+	\end{subfigure}
+	\begin{subfigure}{.5\textwidth} % this sets the figure to be max half the width of the page
+		\centering
+		% include first image
+		\includegraphics[angle=-90,width=0.8\linewidth]{HexapodLeg_Lengths.PNG}  % this sets the image to fill 90% of the available space -> 45% of the line width in total. 
+		\caption{}
+		\label{figure: Hexapod Leg proportions}
+	\end{subfigure}
+	\caption[Hexapod Proportions]{(a) Drawing of the PhantomX MK4 thorax, annotated with proportions. (b)  Leg segment proportions of the PhantomX MK4 hexapod leg.}
+	\label{figure: Hexapod proportions}
+\end{figure}
+
 
 \section{Learning Leg Coordination} \label{sec: RL setup}
 From a RL point of view, the leg coordination problem can be considered a POMDP (\emph{Partially observable Markov decision process}).
@@ -346,7 +340,7 @@ For the problem we attempt to solve, this holds true as well.
 	\end{itemize}
 \end{definition}
 
-In the following, we will describe our RL setup in terms of a POMDP:\\ \\
+In the following, we will describe our RL setup in terms of a POMDP:\\ 
 Our state space $\mathcal{S}$ consists of all possible configurations of the hexapod robot and environment.
 The action space $\mathcal{A}$ is defined as the set of all possible actions the RL agent can take, namely the decisions on whether to initiate a legs swing phase or not.
 The observation space $\mathcal{O}$ consists of the position and acceleration reading om each of the robots 6 \textalpha-joints, totalling 12 observations.
@@ -417,7 +411,7 @@ We  therefore change the transition region width from  from 0.1° to 1°, sacrif
 			\hline
 		\end{tabular}
 		
-		\caption{Internal joint parameters}
+		\caption{Internal Joint Parameters}
 		\label{table: Joint parameters}
 	\end{table}
 }
@@ -445,19 +439,17 @@ We adopt the parameters of the \textit{Spatial Contact Force} block from \cite{t
 			Critical velocity & \num{1e-3} & $\frac{m}{s}$ \\
 			\hline
 		\end{tabular}
-		\caption[Spatial contact force parameters]{\textit{Spacial contact force} parameters similar to \cite{trotta2022walking}}
+		\caption[Spatial Contact Force Parameters]{\textit{Spacial contact force} parameters similar to \cite{trotta2022walking}}
 		\label{table: Spatial contact force}
 	\end{table}
 }
 
-
-The PID controllers all use the same set of gain parameters which are tuned over several trial-and-error iterations.
-{\def\arraystretch{1.4}\tabcolsep=5pt
-	\begin{table}
+The PID controllers all use the same set of gain parameters which are tuned over several trial-and-error iterations  (\ref{table: PID parameters}).
+	\begin{table}[h!]
 		\centering
 		\begin{tabular}{| c | c |}
 			\hline
-			parameter & value\\
+			Parameter & Value\\
 			\hline
 			\hline
 			$K_p$ & 600 \\		%3
@@ -469,20 +461,21 @@ The PID controllers all use the same set of gain parameters which are tuned over
 			$N$ & 1000 \\		%100
 			\hline
 		\end{tabular}
-		\caption[PID parameters]{PID gain parameters and filter coefficient}
+		\caption[PID Parameters]{PID gain parameters and filter coefficient}
 		\label{table: PID parameters}
 	\end{table}
-}
 
+\pagebreak
 Table \ref{table:Joint position offsets} contains the joint offsets required by the IK solver. 
- In addition to the \textbeta- and \textgamma-offset present in all joints, the front and back legs also have an offset applied to the \textalpha-joint, as these legs are connected to the thorax in a 45° angle.
-
+In addition to the \textbeta- and \textgamma-offset present in all joints, the front and back legs also have an offset applied to the \textalpha-joint, as these legs are connected to the thorax in a 45° angle.
 {\def\arraystretch{1.4}\tabcolsep=5pt
 	\begin{table}
+	
+		%\vspace{-2cm}%
 		\centering
 		\begin{tabular}{| c | c | c | c |} 
 			\hline
-			\textbf{legs}& \textbf{\textalpha} & \textbf{\textbeta} & \textbf{\textgamma} \\ [0.5ex] 
+			\textbf{Legs}& \textbf{\textalpha} & \textbf{\textbeta} & \textbf{\textgamma} \\ [0.5ex] 
 			\hline
 			\hline
 			left front, right back & 45 & 14.03624347 & 60.58440117  \\ 
@@ -492,7 +485,7 @@ Table \ref{table:Joint position offsets} contains the joint offsets required by 
 			right front, left back & -45 & 14.03624347 & 60.58440117 \\
 			\hline
 		\end{tabular}
-		\caption[Joint position offsets]{Joint angle offsets.}
+		\caption[Joint Position Offsets]{Joint angle offsets.}
 		\label{table:Joint position offsets}
 	\end{table}
 }

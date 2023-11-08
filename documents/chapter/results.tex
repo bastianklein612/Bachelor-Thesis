@@ -5,7 +5,7 @@
 In this chapter we present the results we compiled during the course of our work.
 This includes an evaluation of the developed hexapod model and its locomotion controller, as well as review of the RL training results obtained and lessons learned from observing the training process.
 
-\section{Evaluation: Hexapod model}
+\section{Evaluation: Hexapod Model}
 During the development process of the hexapod model and locomotion controller, we observed that the conceived modular architecture enabled us to quickly modify and/or add components.
 An example of this flexibility is provided by the retrospective addition of sensor readings for the rotational acceleration of the \textalpha-joints.
 As the hexapod leg is defined as a library component, it was only necessary to enable the respective sensor reading one the joint block and add the new signal to the already existing sensory information bus. 
@@ -73,7 +73,7 @@ A comparison of the thorax's height differences during movement, when under cont
 		\caption{}
 		\label{figure: Thorax height graph, re-tuning}
 	\end{subfigure}
-	\caption[Thorax height graphs]{(a) Thorax height graphs of hexapod robot controlled by (a) MK2 and (b) MK3 controller.}
+	\caption[Thorax Height Graphs]{(a) Thorax height graphs of hexapod robot controlled by (a) MK2 and (b) MK3 controller.}
 	\label{figure: Thorax height graphs}
 \end{figure}
 
@@ -96,7 +96,7 @@ Thus, when caught in from of the obstacle, they prevent the robot from moving fo
 Videos of the obstacle traversal simulations can be observed in [\hyperref[vid: MK1]{MK3}].
 
 
-\section{Evaluation: RL training}
+\section{Evaluation: RL Training}
 
 Implementing a RL agent yielding satisfying results proved to be more difficult than anticipated.
 As there exists a large set of parameter to be considered during setup, finding a well-performing set has shown to be a time-consuming task.
@@ -116,7 +116,7 @@ We provide a recording of the observed behaviour in [\hyperref[vid: MK4]{MK4}], 
 In the graph, the occurrence of the exploit is clearly visible as a spike in the average reward that quickly breaks down again.
 
 In the further development process, we refined the reward function weights and included $W$ and $\Delta_h$ to encourage the RL agents to be more resourceful. 
-Our final reward function weights, with which we obtained the most promising results, are displayed in table \ref{table: Reward weights}.
+Our final reward function weights, with which we obtained the most promising results, are displayed in table \ref{table: Reward Weights}.
 
 
 \subsection{Learning Behaviour}
@@ -131,9 +131,9 @@ Interestingly, this behaviour could very well be attributed to the agent's polic
 Despite our efforts to find a middle ground between these two extremes by changing the agent's learning rate an introducing varying amounts of randomness into it's decision process, we were not able to find a well-working configuration.
 
 
-\subsection{Best Result}
-Given the reward function weights in table \ref{table: Reward weights}, a sample rate of 0.05 s and an episode length of 256 steps, the best result we were able to achieve with an RL agent was a maximum episodic reward of 310 units.
-In this training run, performed with a DDPG agent with parameters listed in \ref{table: DDPG parameters}, the average reward did neither spike nor converge to a suboptimal policy, as can be seen in \ref{figure: RL d}.
+\subsection{Most Performant Policy}
+Given the reward function weights in table \ref{table: Reward Weights}, a sample rate of 0.05 s and an episode length of 256 steps, the best result we were able to achieve with an RL agent was a maximum episodic reward of 310 units.
+In this training run, performed with a DDPG agent with parameters listed in \ref{table: DDPG Parameters}, the average reward did neither spike nor converge to a suboptimal policy, as can be seen in \ref{figure: RL d}.
 Even though, the average reward does not seen to reliably increase.
 Observing the agent's performance in simulation, it's behaviour does not seem to constitute a stable gait pattern.
 The hexapod uses various legs to slowly push itself forward, seemingly uncoordinated.
@@ -145,7 +145,6 @@ Comparing this result with a hexapod walking in a statically defined tripod gait
 {\def\arraystretch{1.4}\tabcolsep=5pt
 	
 	\begin{table}[h!]
-		\parbox{.4\linewidth}{
 			\centering
 			\begin{tabular}{| c | c |} 
 				\hline
@@ -154,15 +153,15 @@ Comparing this result with a hexapod walking in a statically defined tripod gait
 				\hline
 				Sample time & 0.05 s \\ 
 				
-				Episode steps & 512 \\
+				Episode steps & 256 \\
 				
 				\hline
 				\textbf{Agent params.} &  \\ [0.5ex] 
 				\hline
 				
-				Learn Rate & $\num{3e-4}$ \\
+				Actor Learning Rate & $\num{3e-4}$ \\
 				
-				Episode steps & 512 \\
+				Critic Learning Rate & $\num{3e-4}$ \\
 				
 				Exp. Buf. length & $\num{1e6}$ \\
 				
@@ -170,21 +169,20 @@ Comparing this result with a hexapod walking in a statically defined tripod gait
 				
 				Mini-Batch size & 32 \\
 				
-				NN-width & 128 \\
+				NN-width & 100 \\
 				
 				\hline
-				\textbf{Noise params.} &  \\ [0.5ex] 
+				\textbf{Noise Params.} &  \\ [0.5ex] 
 				\hline
 				
-				\textsigma\footnote{\textsigma: Standard Deviation} & 0.05 \\
+				\textsigma (OU) & 0.05 \\
 				
-				\textsigma-decay\footnote{\textsigma-decay: Decay rate of \textsigma. Each sample time step k, \textsigma decays according to following formula: $\sigma_{k+1} = \sigma_k \cdot (1 - \textbf{\textsigma-decay})$} & 1e-6 \\
+				\textsigma-decay (OU) & 1e-6 \\
 				
 				\hline
 			\end{tabular}	
-			\caption[DDPG agent parameters]{}
+			\caption[DDPG Agent Parameters]{DDPG agent and training parameters. \textsigma: Standard deviation. \textsigma-decay: Decay rate of \textsigma. Each sample time step k, \textsigma \ decays according to following formula: $\sigma_{k+1} = \sigma_k \cdot (1 - \textbf{\textsigma-\text{decay}})$}
 			\label{table:DDPG parameters}
-		}
 	\end{table}
 }
 
@@ -203,14 +201,12 @@ Comparing this result with a hexapod walking in a statically defined tripod gait
 			$c_W$ 				&  0.025\\
 			\hline
 		\end{tabular}
-		\caption[Reward weights]{}
-		\label{table: Reward weights}
+		\caption[Reward Weights]{Reward Function Weights}
+		\label{table: Reward Weights}
 	\end{table}
 }
 
-
-
-\subsection{Further Remarks}
+\hiddensubsection{Further Remarks}
 As we changed the reward function several times in attempts to improve it's ability to accurately describe the performance of an agent, the individual training results can only be compared to a limited extend.
 Concerning the two policy optimization algorithms used, DDPG and PPO, there were no significant differences in their performance to be observed.
 We therefore abstain from comparing the algorithms separately.
@@ -230,29 +226,6 @@ We therefore abstain from comparing the algorithms separately.
 %The agents sample rate is set at 0.05, meaning the agent samples the environment and takes an action every 50 ms.
 %A more detailed summary of the RL parameters is given in table \ref{table: DDPG parameters}.
 
-{\def\arraystretch{1.4}\tabcolsep=5pt
-\begin{table}
-	\centering
-	\begin{tabular}{| l | c |}
-		\hline
-		\textbf{Parameter} & \textbf{Value}\\
-		\hline
-		\hline
-		Actor learn rate & $3e^{-4}$ \\
-		Critic learn rate & $1e^{-3}$ \\
-		Discount factor &  0.99 \\
-		Mini-Batch-Size & 16 \\
-		Experience buffer & $1e^6$\\
-		\textsigma \ (UB) & 0.2 \\
-		\textsigma-decay (UB) & $1e^{-6}$ \\
-		
-		\hline
-	\end{tabular}
-	\caption[DDPG parameters]{DDPG parameters. Uhlstein-Beck (UB) noise model is used to introduce noise into the agents exploration}
-	\label{table: DDPG parameters}
-\end{table}
-}
-
 
 \begin{figure}[h]
 	\begin{subfigure}{\textwidth} % this sets the figure to be max half the width of the page
@@ -269,7 +242,7 @@ We therefore abstain from comparing the algorithms separately.
 		\caption{}
 		\label{figure: RL b}
 	\end{subfigure} 
-		\caption[Training graphs (1)]{Training graphs (1): Each graph depicts the learning curve of a RL agent. The dark blue graph represents the average reward over a running average of 250 episodes, while each data point on the light blue graph represents the reward obtained during a specific episode. (a) Jumping exploit learning curve (DDPG). (b) Reward spiking (DDPG).
+		\caption[Training Graphs (1)]{Training graphs (1): Each graph depicts the learning curve of a RL agent. The dark blue graph represents the average reward over a running average of 250 episodes, while each data point on the light blue graph represents the reward obtained during a specific episode. (a) Jumping exploit learning curve (DDPG). (b) Reward spiking (DDPG).
 		}
 	\label{figure: DDPG learning graphs 1}
 \end{figure}
@@ -289,12 +262,12 @@ We therefore abstain from comparing the algorithms separately.
 		\caption{}
 		\label{figure: RL d}
 	\end{subfigure} 
-	\caption[DDPG training graphs (2)]{DDPG training graphs (2):  (a) Reward flatlining (PPO). (b) Best-performing agent (DDPG).}
+	\caption[Training Graphs (2)]{DDPG training graphs (2):  (a) Reward flatlining (PPO). (b) Best-performing agent (DDPG).}
 	\label{figure: DDPG learning graphs 2}
 \end{figure}
 
 
-\subsection{Hardware}
+\hiddensubsection{Hardware}
 The simulation studies and RL training runs were all performed on a desktop computer powered by an Intel i7-11700K CPU, 32 GB of RAM and a NVIDIA RTX 2060 GPU.
 Concerning MATLAB, we used version 2023a for all of our work.
 
