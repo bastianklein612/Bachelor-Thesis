@@ -935,7 +935,7 @@ Gespäch mit Malte und Julius:
 			- Alle TODOs lösen													X
 			- Grafiken erstellen/ überarbeiten (Controller komplett-Übersicht)	X -
 			- Uni-Logo ändern													X
-			- DOI-Links hinzufügen/ Bibliographie checken						
+			- DOI-Links hinzufügen/ Bibliographie checken						- x
 			- Simulink-Modell und Skripte Abgabe-fertig machen					X
 			- alle Links testen													-
 			- RL-Configs.-Liste fertigstellen									X
